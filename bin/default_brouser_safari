@@ -1,0 +1,19 @@
+# M.Ishikawa
+# デフォルトブラウザを変更する。
+# com.apple.LaunchServicesをすべて書き換えている
+
+#yy='com.google.com'
+#yy='org.mozilla.firefox'
+yy='com.apple.safari'
+
+xx=`defaults read com.apple.LaunchServices LSHandlers`
+xx=`echo $xx | sed "s/com\.apple\.safari/$yy/g" `
+xx=`echo $xx | sed "s/com\.google\.com/$yy/g" `
+xx=`echo $xx | sed "s/org\.mozilla\.firefox/$yy/g" `
+xx=`echo $xx | sed "s/com\.mozilla\.firefox/$yy/g" `
+
+defaults write com.apple.LaunchServices LSHandlers "$xx"
+
+echo
+echo change $yy
+echo

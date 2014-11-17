@@ -1,0 +1,7 @@
+#!/bin/bash
+# M.Ishikawa rdiff
+# リモートの同じ場所とのdiffを色付きで
+# rdiff file.txt remote-host-name
+# ToDo 相対パスにも対応したい
+
+ssh $2 cat $1  | diff - $1 | vim -R -

@@ -1,0 +1,3 @@
+set tab-size = 2
+set show-rev-graph = yes
+set line-number-interval = 5

@@ -1,0 +1,8 @@
+#!/bin/bash
+## mac_memclear for mac.
+## @author: M.Ishikawa
+
+# macのメモリを解放します。
+
+sudo diskutil repairPermissions / 
+

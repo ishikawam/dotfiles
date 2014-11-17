@@ -1,0 +1,24 @@
+# updatesは手動でじぶんのMacと会社のMacとroot@windに入れてる。手動で同期。
+
+sudo gem update --system
+sudo gem update
+
+brew update
+brew upgrade
+
+# sudo yum update
+
+# sudo apt-get update
+
+# sudo apt-get upgrade
+
+# pear upgrade-all
+
+if [ -f ~/.nvm/nvm.sh ]; then
+    cd ~/.nvm
+    git pull --rebase
+    cd -
+fi
+
+npm -g update
+

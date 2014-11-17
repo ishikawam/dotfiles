@@ -1,0 +1,51 @@
+## users generic .gitignore file for mac, fedora, and any linux.
+## @author: M.Ishikawa
+
+# すべてgit対象外
+/*
+/.*
+
+# git対象を指定
+!/.git
+!/.gitignore
+!/.gitmodules
+# gitconfigはユーザー名を切り替えるので。。。いや、ここはdotfilesだから固定でいいだろｊｋ
+#!/.gitconfig
+!/bin/
+
+!/.vimrc
+!/.vim/
+!/.bashrc
+!/.bash_profile
+!/.zshrc
+!/.screenrc
+!/.lv
+!/.emacs*
+!/.emacs.d/
+/.emacs.d/auto-save-list
+/.emacs.d/tramp
+/.emacs.d/*.dat
+!/.inputrc
+!/.tigrc
+!/.zsh-completions
+!/.zsh-syntax-highlighting
+!/installedtools/
+!/.tmux.conf
+!/tmux-powerline
+!/.tmux-powerlinerc/
+!/.npmrc
+
+# Github非公開リポジトリを
+!/private
+!/private/
+
+# 個別設定
+#!/this/
+
+
+# メモ：やめたもの
+# oh-my-zsh
+# z
+# mosh
+# textmate
+# 

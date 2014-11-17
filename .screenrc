@@ -1,0 +1,91 @@
+## users generic .screenrc file for mac, fedora, Debian, and any linux.
+## @author: M.Ishikawa
+
+
+# 可視ベル
+vbell off
+# 回線が切れた場合に自動的にデタッチ
+autodetach on
+# スプラッシュ不要
+startup_message off
+# スクロールバッファ
+defscrollback 10000
+# フッタ表示
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %100=%-8=%c:%s"
+
+# エスケープはCtrl+t
+escape ^t^t
+# 背景色消去
+defbce on
+# シェルタイトル
+shelltitle "$ | sh"
+# ターミナル 色
+term xterm-256color
+
+# フッタタイトル
+#defhstatus "^En:^EH"
+
+# 文字コード
+setenv LANG ja_JP.UTF-8
+defencoding utf8
+encoding utf8 utf8
+
+bind U eval "encoding utf8 utf8"
+bind E eval "encoding eucjp utf8"
+bind W eval "encoding sjis utf8"
+
+#bind 'U' eval "encoding utf8"
+#bind 'E' eval "defkanji eucJP" "defencoding eucJP" "encoding eucJP eucJP" "redisplay"
+
+
+# ログインシェル
+shell -$SHELL
+
+# screen の出力するメッセージを NetHack 風に?
+nethack on
+
+# マウスホイールの挙動:screen使用時にもスクロール有効にするには、iTerm2の場合は別途設定必要＞Save lines to scrollback when an app status bar is present
+termcapinfo xterm* ti@:te@
+
+# キャプションの表示形式
+#caption always "%?%F%{= wk}%:%{= ww}%?%-w%{=u Wk}%n %t%{-}%+w"
+
+# 現在のウィンドウを再描画
+redisplay
+# 編集後に画面をクリア
+altscreen on
+
+# ボールドのテキストに明るい色を使う
+attrcolor b ".I"
+
+
+# window list の表示方法を変更
+bind w windowlist -b
+
+
+bind ^x
+
+
+## emacsの操作方法とできる限り近づけるため
+bind -c REGION 3 split -v
+bind -c REGION 2 split
+bind -c REGION 1 only
+bind -c REGION 0 remove
+bind -c REGION o focus
+# リサイズ
+bind -c RESIZE = eval 'resize ='  'command -c RESIZE'
+bind -c RESIZE J eval 'resize +5' 'command -c RESIZE'
+bind -c RESIZE K eval 'resize -5' 'command -c RESIZE'
+bind -c RESIZE j eval 'resize +1' 'command -c RESIZE'
+bind -c RESIZE k eval 'resize -1' 'command -c RESIZE'
+bind -c REGION r eval 'echo "j: -1 / k: +1 / other: quit"' 'command -c RESIZE'
+bind x eval 'echo "1:only 2:split 3:split-v 0:remove o:focus r:resize"' 'command -c REGION'
+
+bind u copy
+bind ^u copy
+bind h help
+bind ^h help
+
+bind a title
+#bind \^ resize
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+## mac_hide_finder for mac.
+## @author: M.Ishikawa
+
+# macのファイダーで、不可視ファイルを見えなくします。
+
+defaults delete com.apple.finder AppleShowAllFiles
+killall Finder
+
