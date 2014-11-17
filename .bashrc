@@ -178,4 +178,6 @@ WATCHFMT="%(a:${fg[blue]}Hello %n [%m] [%t]:${fg[red]}Bye %n [%m] [%t])"
 ##################################################
 # private shell
 
-source ~/private/.shrc
+if [ -f ~/private/.shrc ]; then
+    source ~/private/.shrc
+fi

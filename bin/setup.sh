@@ -3,6 +3,8 @@
 # dotfilesのセットアップの直後に実施
 # http://ishikawam.github.com/dotfiles/
 # 定期的に実行することでインストールツールをログ記録＞yum apt-get homebrew gem npm
+# @todo; 自分じゃなくてcloneしても使えるようにしたい。それだとgit更新系を免除したい。
+# @todo; なんどもやらなくていいsetupと、更新とは別にしたい
 
 
 # シェルを設定
