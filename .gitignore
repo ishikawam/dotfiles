@@ -11,6 +11,7 @@
 !/.gitmodules
 # gitconfigはユーザー名を切り替えるので。。。いや、ここはdotfilesだから固定でいいだろｊｋ
 #!/.gitconfig
+!/README.md
 !/bin/
 
 !/.vimrc
@@ -32,7 +33,7 @@
 !/installedtools/
 !/.tmux.conf
 !/tmux-powerline
-!/.tmux-powerlinerc/
+!/.tmux-powerlinerc
 !/.npmrc
 
 # Github非公開リポジトリを
