@@ -35,6 +35,7 @@
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
+!/.nvm/
 
 # Github非公開リポジトリを
 !/private
@@ -43,6 +44,8 @@
 # 個別設定
 #!/this/
 
+# 共通
+!/common/
 
 # メモ：やめたもの
 # oh-my-zsh

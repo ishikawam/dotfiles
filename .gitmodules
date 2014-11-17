@@ -10,3 +10,6 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:ishikawam/private_dotfiles.git
+[submodule ".nvm"]
+	path = .nvm
+	url = git@github.com:creationix/nvm.git
