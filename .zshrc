@@ -125,7 +125,7 @@ setopt transient_rprompt
 fpath=(~/.zsh-completions/src $fpath)
 
 autoload -Uz compinit
-compinit
+compinit -u
 
 autoload colors
 colors
