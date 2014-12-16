@@ -10,8 +10,10 @@
 (setq auto-save-default nil)
 
 ;;; 矩形編集
+;;; cuaモードに入るには、C-x SPC. http://qiita.com/yyamamot/items/7efcbfdcccdb5fa45ebe
 (cua-mode t)
 (setq cua-enable-cua-keys nil)
+(define-key global-map (kbd "C-x SPC") 'cua-set-rectangle-mark)
 
 ;;; elファイルを読み込む
 (setq load-path
