@@ -68,7 +68,7 @@ esac
 alias rm='rm -i'
 alias cp='cp -iv'
 alias mv='mv -iv'
-alias ggrep="grep --exclude-dir='htdocs*' --exclude-dir='log' --exclude='*.json' --exclude-dir='node_modules'"
+alias ggrep="grep --exclude-dir='htdocs*' --exclude-dir='log' --exclude='*.json' --exclude-dir='node_modules' --exclude-dir='vendor' --exclude-dir='storage' "
 alias grep="grep --color --binary-files=without-match --exclude-dir='.svn' --exclude-dir='.git' --exclude='*.png' --exclude='*.jpg' --exclude='*.gif' --exclude='*.ico' --exclude-dir='tmp' "
 
 alias findname='find . -name $*'
