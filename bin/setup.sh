@@ -10,6 +10,8 @@
 # シェルを設定
 if [ -f /bin/zsh ]; then
     chsh -s /bin/zsh
+elif [ -f /usr/bin/zsh ]; then
+    chsh -s /usr/bin/zsh
 elif [ -f /usr/local/bin/zsh ]; then
     chsh -s /usr/local/bin/zsh
 else
