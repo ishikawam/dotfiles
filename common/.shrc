@@ -40,6 +40,8 @@ DOCKER_HOST=tcp://localhost:4243
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
+# node カレントディレクトリからローカルに入れられたのモジュールを実行
+PATH=$PATH:./node_modules/.bin
 
 ##################################################
 # aliases
@@ -97,6 +99,7 @@ alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_histo
 # node
 
 # nodeのバージョン決定
+# この運用は今後やめていきたい。＞nvm alias default v0.10.38 とか nvm alias default stable とかを実行すればバージョンが永久固定されるので
 if [ -f ~/.nvm/nvm.sh ]; then
     source ~/.nvm/nvm.sh
 
@@ -104,15 +107,14 @@ if [ -f ~/.nvm/nvm.sh ]; then
         nvm use v0.10.22 > /dev/null
     elif [ $(hostname) = "ishikawa-air2.local" ]; then
         nvm use v0.10.15 > /dev/null
-    elif [[ $(hostname) =~ "^g-pc-4529" ]]; then
-        nvm use v0.10.22 > /dev/null
-    elif [[ $(hostname) =~ "^g-pc-6376" ]]; then
-        nvm use v0.10.22 > /dev/null
     elif [ $(hostname) = "wind.windserver.jp" ]; then
         nvm use v0.6.13 > /dev/null
     elif [ $(hostname) = "fire" ]; then
         # fireでnodeのサービス動いているので合わせる。サービスは /etc/rc.d/rc.local
         nvm use v0.10.31 > /dev/null
+    else
+#        nvm use stable
+        nvm use default
     fi
 
     npm_dir=${NVM_PATH}_modules
