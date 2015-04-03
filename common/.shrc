@@ -5,11 +5,15 @@
 # path
 
 # Android SDK
-PATH=$PATH:/Applications/android-sdk-mac_x86/platform-tools
-PATH=$PATH:~/android-sdks/platform-tools
+if [ -d /Applications/android-sdk-mac_x86/platform-tools ]; then
+    PATH=$PATH:/Applications/android-sdk-mac_x86/platform-tools
+    PATH=$PATH:~/android-sdks/platform-tools
+fi
 
-PATH=$PATH:/Applications/android-sdk-mac_x86/tools
-PATH=$PATH:~/android-sdks/tools
+if [ -d /Applications/android-sdk-mac_x86/tools ]; then
+    PATH=$PATH:/Applications/android-sdk-mac_x86/tools
+    PATH=$PATH:~/android-sdks/tools
+fi
 
 # 個人bin
 PATH=~/bin:$PATH
@@ -37,8 +41,10 @@ fi
 DOCKER_HOST=tcp://localhost:4243
 
 # go
-export GOPATH=~/go
-export PATH=$PATH:$GOPATH/bin
+if [ -d ~/go/bin ]; then
+    export GOPATH=~/go
+    export PATH=$PATH:$GOPATH/bin
+fi
 
 # node カレントディレクトリからローカルに入れられたのモジュールを実行
 PATH=$PATH:./node_modules/.bin

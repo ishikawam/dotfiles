@@ -59,7 +59,9 @@ source ~/common/.shrc
 # 最後に重複PATHを掃除
 typeset -U path PATH
 # 存在しないPATHを排除
-path=(${^path}(N-/))
+#path=(${^path}(N-/))
+# やらない。 PATH=$PATH:./node_modules/.bin とか、カレントディレクトリから参照させたいやつはホームディレクトリにあると限らないから。
+
 
 
 ##################################################
