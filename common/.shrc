@@ -151,6 +151,9 @@ fi
 # crontab editor is emacs
 export EDITOR=/usr/bin/emacs
 
+# cask for emacs
+export PATH=$PATH:~/.cask/bin
+
 # for mosh, tmux
 if [ `uname` = "Darwin" ]; then
     # Mountain Lionの "dyld: DYLD_ environment variables being ignored because main executable (/usr/bin/sudo) is setuid or setgid" 問題対応

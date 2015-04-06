@@ -1,3 +1,11 @@
+;;; cask
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+(pallet-mode t) ;; pallet-modeを有効にする場合
+
+;;; helm
+(require 'helm-config)
 
 ;;; 高速化
 (setq linum-delay t)
@@ -25,16 +33,13 @@
 
 ;;; Auto Install
 ; 重いしつながらないのでコメントアウト。
-;(require 'auto-install)
+(require 'auto-install)
 ;(setq auto-install-directory "~/.emacs.d/auto-install/")
 ;(auto-install-update-emacswiki-package-name t)
 ;(auto-install-compatibility-setup)             ; 互換性確保
 
 ;;; カラースキーマ molokai
-(require 'color-theme)
-(color-theme-initialize)
-(load "~/.emacs.d/elisp/themes/color-theme-molokai.el")
-(color-theme-molokai)
+(require 'molokai-theme)
 
 ;;; folding.el コードの折りたたみ
 (autoload 'folding-mode          "folding" "Folding mode" t)
@@ -69,7 +74,6 @@
 
 
 ;;; php-mode
-(load-library "php-mode")
 (require 'php-mode)
 
 ;;; php hook
@@ -192,12 +196,25 @@
              '(buffer-file-name ("%f") ("%b")))
 
 ;;; Auto Complete
-(add-to-list 'load-path "~/.emacs.d/auto-complete/")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 
-;;; GNU GLOBAL
+;;; GNU GLOBAL for helm
+;(load "~/.emacs.d/emacs-helm-gtags/helm-gtags.el")
+(require 'helm-gtags)
+(add-hook 'go-mode-hook (lambda () (helm-gtags-mode)))
+(add-hook 'python-mode-hook (lambda () (helm-gtags-mode)))
+(add-hook 'ruby-mode-hook (lambda () (helm-gtags-mode)))
+(setq helm-gtags-path-style 'root)
+(setq helm-gtags-auto-update t)
+(add-hook 'helm-gtags-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "M-g") 'helm-gtags-dwim)
+             (local-set-key (kbd "M-s") 'helm-gtags-show-stack)
+             (local-set-key (kbd "M-p") 'helm-gtags-previous-history)
+             (local-set-key (kbd "M-n") 'helm-gtags-next-history)))
+
 (autoload 'gtags-mode "gtags" "" t)
 (setq gtags-mode-hook
       '(lambda ()
@@ -210,13 +227,12 @@
 (add-hook 'c-mode-common-hook
           '(lambda()
              (gtags-mode 1)
-;;             (gtags-make-complete-list)
+             (gtags-make-complete-list)
              ))
 
 ;;; zencoding
 (require 'zencoding-mode)
-;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; html-modeとかで自動的にzencodingできるようにする
-(add-hook 'sgml-mode-hook 'zencoding-mode ;; うーん、インデント文字数替えたいけど効かない
+(add-hook 'sgml-mode-hook 'zencoding-mode ;; html-modeとかで自動的にzencodingできるようにする うーん、インデント文字数替えたいけど効かない
           (lambda()
             (setq indent-tabs-mode nil)
             (setq tab-width 4) ; mon
@@ -226,7 +242,6 @@
             ))
 
 ;; js2-mode
-(autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 ; todo まだ使えていない↓
@@ -287,3 +302,4 @@
 (add-hook 'html-helper-mode-hook
           '(lambda ()
              (setq auto-coding-functions nil)))
+
