@@ -102,6 +102,15 @@ alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_histo
 
 
 ##################################################
+# python
+
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -n ${PYENV_ROOT} ]; then
+    path=(${PYENV_ROOT}/bin ${PYENV_ROOT}/shims ${path})
+fi
+eval "$(pyenv init -)"
+
+##################################################
 # node
 
 # nodeのバージョン決定

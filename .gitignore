@@ -37,6 +37,7 @@
 !/.tmux-powerlinerc
 !/.npmrc
 !/.nvm/
+!/.pyenv/
 
 # Github非公開リポジトリを
 !/private

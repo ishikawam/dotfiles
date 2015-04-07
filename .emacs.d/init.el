@@ -202,7 +202,6 @@
 (ac-config-default)
 
 ;;; GNU GLOBAL for helm
-;(load "~/.emacs.d/emacs-helm-gtags/helm-gtags.el")
 (require 'helm-gtags)
 (add-hook 'go-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'python-mode-hook (lambda () (helm-gtags-mode)))
@@ -211,10 +210,15 @@
 (setq helm-gtags-auto-update t)
 (add-hook 'helm-gtags-mode-hook
           '(lambda ()
-             (local-set-key (kbd "M-g") 'helm-gtags-dwim)
-             (local-set-key (kbd "M-s") 'helm-gtags-show-stack)
-             (local-set-key (kbd "M-p") 'helm-gtags-previous-history)
-             (local-set-key (kbd "M-n") 'helm-gtags-next-history)))
+             (local-set-key (kbd "M-t") 'helm-gtags-find-tag)
+             (local-set-key (kbd "M-r") 'helm-gtags-find-rtag)
+             (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
+             (local-set-key (kbd "M-e") 'helm-gtags-pop-stack)
+;             (local-set-key (kbd "M-g") 'helm-gtags-dwim)
+;             (local-set-key (kbd "M-s") 'helm-gtags-show-stack)
+;             (local-set-key (kbd "M-p") 'helm-gtags-previous-history)
+;             (local-set-key (kbd "M-n") 'helm-gtags-next-history)
+             ))
 
 (autoload 'gtags-mode "gtags" "" t)
 (setq gtags-mode-hook

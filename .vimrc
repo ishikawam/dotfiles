@@ -12,9 +12,9 @@ set autoindent
 filetype off		" ファイル形式の検出を無効にする
 
 " Vundle を初期化して Vundle 自身も Vundle で管理
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 
 " github にあるプラグイン
 
@@ -24,10 +24,10 @@ Bundle 'gmarik/vundle'
 
 
 "そのファイルタイプにあわせたインデントを利用する
-filetype indent on
+filetype plugin indent on
 "autocmd FileType conf set noautoindent
 "autocmd FileType conf set nosmartindent
-filetype plugin on
+"filetype plugin on
 
 
 "set backup		" keep a backup file
