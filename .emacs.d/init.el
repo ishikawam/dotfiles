@@ -1,4 +1,4 @@
-;;; cask
+;;; cask + pallet - package manager -
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 (require 'pallet)
@@ -38,8 +38,9 @@
 ;(auto-install-update-emacswiki-package-name t)
 ;(auto-install-compatibility-setup)             ; 互換性確保
 
-;;; カラースキーマ molokai
-(require 'molokai-theme)
+;;; カラースキーマ color
+;(require 'molokai-theme)
+(require 'monokai-theme)
 
 ;;; folding.el コードの折りたたみ
 (autoload 'folding-mode          "folding" "Folding mode" t)
