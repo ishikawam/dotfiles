@@ -10,11 +10,11 @@
 [submodule ".nvm"]
 	path = .nvm
 	url = git@github.com:creationix/nvm.git
-[submodule "/home/masayuki.ishikawa/.pyenv"]
-	path = /home/masayuki.ishikawa/.pyenv
+[submodule ".pyenv"]
+	path = .pyenv
 	url = git://github.com/yyuu/pyenv.git
-[submodule "/home/masayuki.ishikawa/.vim/bundle/Vundle.vim"]
-	path = /home/masayuki.ishikawa/.vim/bundle/Vundle.vim
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
 [submodule "tmux-powerline"]
 	path = tmux-powerline
