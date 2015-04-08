@@ -95,7 +95,8 @@ alias -- -='cd -'
 alias scl='screen -ls'
 alias scr='screen -xR'
 
-alias e='emacs'
+# emacs daemonを使用
+alias e='emacsclient -nw -a ""'
 alias em='emacs -q -l ~/.emacs_min'
 
 alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_history'

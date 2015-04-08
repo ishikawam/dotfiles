@@ -1,24 +1,38 @@
+#/bin/sh
+
 # updatesは手動でじぶんのMacと会社のMacとroot@windに入れてる。手動で同期。
 
+# gem
 sudo gem update --system
 sudo gem update
 
+# homebrew
 brew update
 brew upgrade
 
+# npm
+npm -g update
+
+# emacs cask
+cd ~/.emacs.d/ ; cask install ; cd -
+
+
+#######################################################
+# 以下はやるべきときに
+
+# yum
 # sudo yum update
 
+# apt
 # sudo apt-get update
-
 # sudo apt-get upgrade
 
+# pear
 # pear upgrade-all
 
-if [ -f ~/.nvm/nvm.sh ]; then
-    cd ~/.nvm
-    git pull --rebase
-    cd -
-fi
+# nvm バージョン上げたいとき
+# nvm install stable
 
-npm -g update
+# python2.6以上に依存＞cask
+# pyenv install 2.7.9 
 
