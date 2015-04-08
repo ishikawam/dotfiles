@@ -16,9 +16,6 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
-[submodule "tmux-powerline"]
-	path = tmux-powerline
-	url = git@github.com:erikw/tmux-powerline.git
 [submodule ".cask"]
 	path = .cask
 	url = git@github.com:cask/cask.git
