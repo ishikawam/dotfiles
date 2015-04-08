@@ -121,8 +121,6 @@ if [ -f ~/.nvm/nvm.sh ]; then
 
     if [ $(hostname) = "test-air2.local" ]; then
         nvm use v0.10.22 > /dev/null
-    elif [ $(hostname) = "ishikawa-air2.local" ]; then
-        nvm use v0.10.15 > /dev/null
     elif [ $(hostname) = "wind.windserver.jp" ]; then
         nvm use v0.6.13 > /dev/null
     elif [ $(hostname) = "fire" ]; then
