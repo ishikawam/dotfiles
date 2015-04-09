@@ -44,8 +44,9 @@ setopt nonomatch
 
 ##################################################
 # zsh-syntax-highlighting
-source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+if [ -z $ZSH_HIGHLIGHT_HIGHLIGHTERS ]; then
+    source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 ##################################################
 # zsh, bash, commons
