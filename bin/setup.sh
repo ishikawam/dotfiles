@@ -57,7 +57,9 @@ git pull --rebase
 git submodule update --init
 
 
-ln -s ~/.pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
+if [ -f ~/.pyenv/plugins/pyenv-virtualenv ]; then
+    ln -s ~/.pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
+fi
 
 
 ######## record ##################################################################
@@ -103,4 +105,6 @@ git stash pop
 
 ######## done ##################################################################
 
-source ~/.zshrc
+echo
+echo "please 'source ~/.zshrc'"
+echo
