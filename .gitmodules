@@ -19,3 +19,6 @@
 [submodule ".cask"]
 	path = .cask
 	url = git@github.com:cask/cask.git
+[submodule ".pyenv-virtualenv"]
+	path = .pyenv-virtualenv
+	url = git://github.com/yyuu/pyenv-virtualenv.git

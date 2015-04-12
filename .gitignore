@@ -38,6 +38,7 @@
 !/.npmrc
 !/.nvm/
 !/.pyenv/
+!/.pyenv-virtualenv/
 !/.cask/
 
 # Github非公開リポジトリを

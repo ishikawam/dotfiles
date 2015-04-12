@@ -57,6 +57,9 @@ git pull --rebase
 git submodule update --init
 
 
+ln -s ~/.pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
+
+
 ######## record ##################################################################
 
 # インストールしてあるツールを記録
