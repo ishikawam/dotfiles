@@ -98,6 +98,7 @@ alias scr='screen -xR'
 # emacs daemonを使用
 alias e='emacsclient -nw -a ""'
 alias em='emacs -q -l ~/.emacs.d/.emacs_min'
+alias e-kill='emacsclient -e "(kill-emacs)"'
 
 alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_history'
 
