@@ -2,6 +2,7 @@
 ;;; version 24, 23, 22 が共存している環境 = cask出し分け
 ;;; 例えばMacの場合 /usr/local/bin/emacs = 24, /usr/bin/emacs = 22
 ;;; emacs22はcaskが使えないので基本的に使わない。
+;;; emacs23はcask使えるはずだが全然うまくいかない。
 
 (setq preferences-directory "~/.emacs.d/")
 
@@ -11,8 +12,8 @@
 (cond
  ((string-match "^24\." emacs-version)
   (load-file-in-dir preferences-directory "init24.el"))
- ((string-match "^23\." emacs-version)
-  (load-file-in-dir preferences-directory "init24.el"))
+; ((string-match "^23\." emacs-version)
+;  (load-file-in-dir preferences-directory "init24.el"))
 ; ((string-match "^22\." emacs-version)
 ;  (load-file-in-dir preferences-directory "init22.el"))
  )
