@@ -21,12 +21,7 @@
 !/.zshrc
 !/.screenrc
 !/.lv
-!/.emacs*
 !/.emacs.d/
-/.emacs.d/auto-save-list
-/.emacs.d/tramp
-/.emacs.d/*.dat
-/.emacs.d/.cask
 !/.inputrc
 !/.tigrc
 !/.zsh-completions

@@ -12,8 +12,8 @@
 (cond
  ((string-match "^24\." emacs-version)
   (load-file-in-dir preferences-directory "init24.el"))
-; ((string-match "^23\." emacs-version)
-;  (load-file-in-dir preferences-directory "init24.el"))
+ ((string-match "^23\." emacs-version)
+  (load-file-in-dir preferences-directory "init23.el"))
 ; ((string-match "^22\." emacs-version)
 ;  (load-file-in-dir preferences-directory "init22.el"))
  )

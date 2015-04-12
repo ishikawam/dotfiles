@@ -1,0 +1,7 @@
+# for el-get(emacs23)
+
+/auto-save-list
+/*.dat
+/.cask
+/el-get/
+/elpa/
