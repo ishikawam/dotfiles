@@ -195,3 +195,8 @@
           '(lambda ()
              (setq auto-coding-functions nil)))
 
+;;; local varibales listの警告を出さない
+(custom-set-variables
+ '(safe-local-variable-values (quote (
+                                      (encoding . utf-8) ; * encoding : utf-8
+                                      ))))
