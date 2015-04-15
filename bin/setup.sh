@@ -10,7 +10,16 @@
 ######## setup ##################################################################
 
 # シェルを設定
-chsh -s `which zsh`
+# priority order
+if [ -f /bin/zsh ]; then
+    chsh -s /bin/zsh
+elif [ -f /usr/bin/zsh ]; then
+    chsh -s /usr/bin/zsh
+elif [ -f /usr/local/bin/zsh ]; then
+    chsh -s /usr/local/bin/zsh
+else
+    chsh -s `which zsh`
+fi
 
 # gitのユーザー設定 @todo; これ、将来廃止したい
 git config --global user.name "M_Ishikawa"
