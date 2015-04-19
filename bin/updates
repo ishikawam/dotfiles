@@ -3,27 +3,27 @@
 # updatesは手動でじぶんのMacと会社のMacとroot@windに入れてる。手動で同期。
 
 # gem
-if [ -x "`which gem`" ]; then
+if [ -x "`which gem 2>/dev/null`" ]; then
     echo gem
     sudo gem update --system
     sudo gem update
 fi
 
 # homebrew
-if [ -x "`which brew`" ]; then
+if [ -x "`which brew 2>/dev/null`" ]; then
     echo brew
     brew update
     brew upgrade
 fi
 
 # npm
-if [ -x "`which npm`" ]; then
+if [ -x "`which npm 2>/dev/null`" ]; then
     echo npm
     npm -g update
 fi
 
 # emacs cask
-if [ -x "`which cask`" ]; then
+if [ -x "`which cask 2>/dev/null`" ]; then
     echo emacs cask
     cd ~/.emacs.d/ ; cask install ; cd -
 fi
@@ -32,13 +32,13 @@ fi
 # 以下はやるべきときに
 
 # yum
-if [ -x "`which yum`" ]; then
+if [ -x "`which yum 2>/dev/null`" ]; then
     echo yum
     sudo yum update
 fi
 
 # apt
-if [ -x "`which apt-get`" ]; then
+if [ -x "`which apt-get 2>/dev/null`" ]; then
     echo apt
     sudo apt-get update
     sudo apt-get upgrade
