@@ -137,3 +137,17 @@
 (add-to-list 'auto-mode-alist '("\\.json$"     . js-mode))
 ;;;
 
+;;; jsx-mode
+(require 'jsx-mode)
+; You can edit user-customizable variables by typing the following command.
+;;     M-x customize-group [RET] jsx-mode
+(custom-set-variables
+ '(jsx-indent-level 4)
+ '(jsx-syntax-check-mode "compile"))
+
+(defun jsx-mode-init ()
+  (define-key jsx-mode-map (kbd "C-c d") 'jsx-display-popup-err-for-current-line)
+  (when (require 'auto-complete nil t)
+    (auto-complete-mode t)))
+
+(add-hook 'jsx-mode-hook 'jsx-mode-init)
