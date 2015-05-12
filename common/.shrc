@@ -126,7 +126,7 @@ if [ -f ~/.nvm/nvm.sh ]; then
     if [ $(hostname) = "test-air2.local" ]; then
         nvm use v0.10.22 > /dev/null
     elif [ $(hostname) = "wind.windserver.jp" ]; then
-        nvm use v0.6.13 > /dev/null
+        nvm use v0.10.24 > /dev/null
     elif [ $(hostname) = "fire" ]; then
         # fireでnodeのサービス動いているので合わせる。サービスは /etc/rc.d/rc.local
         nvm use v0.10.31 > /dev/null
