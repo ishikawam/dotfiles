@@ -16,8 +16,8 @@
 ;(auto-install-compatibility-setup)             ; 互換性確保
 
 ;;; カラースキーマ color
-;(require 'molokai-theme)
-(require 'monokai-theme)
+(require 'molokai-theme)
+;(require 'monokai-theme)
 
 ;;; PHP Xdebug デバッガ geben
 (require 'geben)
