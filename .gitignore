@@ -35,6 +35,7 @@
 !/.pyenv/
 !/.pyenv-virtualenv/
 !/.cask/
+!/.cask
 
 # Github非公開リポジトリを
 !/private
