@@ -3,6 +3,7 @@
 M_Ishikawa
 
 macでもFedoraでもCentOSでもDebianでもUbuntuでも。
+事前にzshは必須。
 
 
 * メモ：
@@ -11,11 +12,15 @@ macでもFedoraでもCentOSでもDebianでもUbuntuでも。
 
 ### bin/
 
+共通のコマンド
 
 ### private/bin/
 
+共通の秘密コマンド
 
 ### this/bin/
+
+リポジトリ管理しない個別のコマンド置き場
 
 
 http://ishikawam.github.com/dotfiles/
