@@ -2,8 +2,8 @@
 
 M_Ishikawa
 
-macでもFedoraでもCentOSでもDebianでも。
-ごちゃまぜ
+macでもFedoraでもCentOSでもDebianでもUbuntuでも。
+
 
 * メモ：
   * tmux-powerline はsubmodule化したかったけどmytheme.shを変えないといけないので取り込んだ
@@ -21,13 +21,12 @@ macでもFedoraでもCentOSでもDebianでも。
 http://ishikawam.github.com/dotfiles/
 
 
-<pre>
+```
 $ cd
-$ git clone git@github.com:ishikawam/dotfiles.git
-$ cd dotfiles
-$ \mv * ../
-$ \mv .* ../
-$ cd
+$ git clone -n git@github.com:ishikawam/dotfiles.git
+$ mv dotfiles/.git ../
+$ git reset
+$ git checkout .
 $ rm -rf dotfiles
 $ sh ~/bin/setup.sh
-</pre>
+```
