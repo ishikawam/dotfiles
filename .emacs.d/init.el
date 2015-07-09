@@ -135,9 +135,9 @@
                                 (font-lock-mode t))))
 
 
-;;; .tpl を html-mode で開く
+;;; .tpl, .volt を html-mode で開く
 (setq auto-mode-alist
-      (append '(("\\.tpl$" . html-mode))
+      (append '(("\\.\\(tpl\\|volt\\)$" . html-mode))
               auto-mode-alist))
 
 ;;; html-hook
@@ -200,3 +200,4 @@
  '(safe-local-variable-values (quote (
                                       (encoding . utf-8) ; * encoding : utf-8
                                       ))))
+(put 'downcase-region 'disabled nil)

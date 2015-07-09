@@ -36,7 +36,10 @@
             (c-set-offset 'case-label' 4)
             (c-set-offset 'arglist-intro' 4)
             (c-set-offset 'arglist-cont-nonempty' 4)
-            (c-set-offset 'arglist-close' 0)))
+            (c-set-offset 'arglist-close' 0)
+            (electric-indent-local-mode -1)
+            (c-toggle-electric-state -1)
+            ))
 
 
 ;;; php5
