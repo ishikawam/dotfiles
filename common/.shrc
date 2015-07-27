@@ -28,6 +28,9 @@ PATH=$PATH:/sbin:/usr/sbin
 # homebrewを優先。gitとか
 PATH=/usr/local/bin:$PATH
 
+# ~/local/bin/ に入れた個人使用のツール
+PATH=~/local/bin:$PATH
+
 # Terminalの色数
 TERM=xterm-256color
 
