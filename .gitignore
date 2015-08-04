@@ -13,6 +13,7 @@
 #!/.gitconfig
 !/README.md
 !/bin/
+!/local/.gitkeep
 
 !/.vimrc
 !/.vim/
