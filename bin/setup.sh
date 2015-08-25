@@ -43,7 +43,9 @@ git config --global alias.bd "diff --name-status"
 # ログをtreeで表示(簡易tig) via http://webtech-walker.com/archive/2010/03/04034601.html
 git config --global alias.lg "log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches"
 # git commit時の編集エディタをemacsに
-git config --global core.editor "/usr/bin/emacs"
+  # localのemacs等あるので、`emacs`指定したい。しかし以前それで問題があった気が。。。
+git config --global core.editor "emacs"
+#git config --global core.editor "/usr/bin/emacs"
 # pushするときに現在のブランチのみpush
 git config --global push.default tracking
 # 日本語ファイル名を表示できるようになる
