@@ -87,8 +87,7 @@
 (global-set-key "\M-e" 'gtags-pop-stack)
 (add-hook 'c-mode-common-hook
           '(lambda()
-             (gtags-mode 1)
-             (gtags-make-complete-list)
+             (helm-gtags-mode 1)
              ))
 
 ;;; zencoding
