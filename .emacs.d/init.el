@@ -140,6 +140,11 @@
       (append '(("\\.\\(tpl\\|volt\\|twig\\|blade\\.php\\)$" . html-mode))
               auto-mode-alist))
 
+;;; .scss を css-mode で開く
+(setq auto-mode-alist
+      (append '(("\\.\\(scss\\)$" . css-mode))
+              auto-mode-alist))
+
 ;;; html-hook
 (add-hook 'html-mode-hook
           (lambda ()
