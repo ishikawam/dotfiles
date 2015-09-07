@@ -38,6 +38,10 @@
 !/.pyenv-virtualenv/
 !/.cask/
 !/.cask
+!/.rbenv
+!/.rbenv/
+!/.rbenv-plugins
+!/.rbenv-plugins/
 
 # Github非公開リポジトリを
 !/private

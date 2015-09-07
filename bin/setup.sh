@@ -68,8 +68,15 @@ git pull --rebase
 git submodule update --init
 
 
-if [ -f ~/.pyenv/plugins/pyenv-virtualenv ]; then
+# pyenv
+if [ -d ~/.pyenv-virtualenv -a ! -d ~/.pyenv/plugins/pyenv-virtualenv ]; then
     ln -s ~/.pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
+fi
+
+
+# rbenv
+if [ -d ~/.rbenv-plugins/ruby-build -a ! -d ~/.rbenv/plugins/ruby-build ]; then
+    ln -s ~/.rbenv-plugins/ruby-build ~/.rbenv/plugins/ruby-build
 fi
 
 

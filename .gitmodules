@@ -22,3 +22,9 @@
 [submodule ".cask"]
 	path = .cask
 	url = https://github.com/cask/cask.git
+[submodule ".rbenv"]
+	path = .rbenv
+	url = https://github.com/sstephenson/rbenv.git
+[submodule ".rbenv-plugins/ruby-build"]
+	path = .rbenv-plugins/ruby-build
+	url = https://github.com/sstephenson/ruby-build.git
