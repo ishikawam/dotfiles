@@ -69,12 +69,14 @@ git submodule update --init
 
 
 # pyenv
+mkdir -p ~/.pyenv/plugins/
 if [ -d ~/.pyenv-virtualenv -a ! -d ~/.pyenv/plugins/pyenv-virtualenv ]; then
     ln -s ~/.pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
 fi
 
 
 # rbenv
+mkdir -p ~/.rbenv/plugins/
 if [ -d ~/.rbenv-plugins/ruby-build -a ! -d ~/.rbenv/plugins/ruby-build ]; then
     ln -s ~/.rbenv-plugins/ruby-build ~/.rbenv/plugins/ruby-build
 fi
