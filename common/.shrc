@@ -138,7 +138,7 @@ if [ -f ~/.nvm/nvm.sh ]; then
         nvm use v0.10.24 > /dev/null
     elif [ $(hostname) = "fire" ]; then
         # fireでnodeのサービス動いているので合わせる。サービスは /etc/rc.d/rc.local
-        nvm use v0.10.31 > /dev/null
+        nvm use default
     else
 #        nvm use stable
         nvm use default
