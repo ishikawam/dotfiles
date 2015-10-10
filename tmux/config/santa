@@ -1,0 +1,15 @@
+new-window -n santa
+source-file ~/tmux/config/4
+
+send-keys -t santa.0 'cd ~/tmp/charity-santa.com/public_html/m/ 2>/dev/null ; ~/git/charity-santa.com/public_html/m/ 2>/dev/null 2>/dev/null' C-m
+send-keys -t santa.1 'cd ~/tmp/charity-santa.com/public_html/m/ 2>/dev/null ; ~/git/charity-santa.com/public_html/m/ 2>/dev/null 2>/dev/null' C-m
+send-keys -t santa.2 'cd ~/tmp/charity-santa.com/public_html/m/ 2>/dev/null ; ~/git/charity-santa.com/public_html/m/ 2>/dev/null 2>/dev/null' C-m
+send-keys -t santa.3 'cd ~/tmp/charity-santa.com/public_html/m/ 2>/dev/null ; ~/git/charity-santa.com/public_html/m/ 2>/dev/null 2>/dev/null' C-m
+
+send-keys -t santa.0 'git fetch ; git st' C-m
+send-keys -t santa.1 'php artisan serve' C-m
+send-keys -t santa.3 'gulp watch' C-m
+
+# @todo;
+# php artisan serve --host charity-santa.osae.me
+# tail -f */log/*

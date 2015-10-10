@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# 引数があれば source-file ~/tmux/config/xxx を
+# 引数がなければ tmux a || tmux source-file ~/tmux/config/4 を
+# ex. tm santa
+
+if [ $@ ]; then
+    tmux source-file ~/tmux/config/$@
+else
+    tmux a || tmux new-session \; source-file ~/tmux/config/4
+fi

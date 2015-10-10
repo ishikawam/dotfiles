@@ -1,0 +1,39 @@
+# tmuxでこんな感じに4分割
+# +++++++++++++++++++
+# +        +        +
+# +        +        +
+# +        +        +
+# +++++++++++++++++++
+# +        +        +
+# +++++++++++++++++++
+
+# 縦割
+split-window -h -d
+
+# 横割り
+splitw -d
+# 下に行って
+select-pane -D
+# 横割り
+splitw -d
+# 上に戻って
+select-pane -U
+# 破棄
+kill-pane
+
+# 右に行って
+select-pane -R
+
+# 横割り
+splitw -d
+# 下に行って
+select-pane -D
+# 横割り
+splitw -d
+# 上に戻って
+select-pane -U
+# 破棄
+kill-pane
+
+# 戻る
+select-pane -L
