@@ -6,10 +6,10 @@ send-keys -t santa.1 'cd ~/santa 2>/dev/null' C-m C-l
 send-keys -t santa.2 'cd ~/santa 2>/dev/null' C-m C-l
 send-keys -t santa.3 'cd ~/santa 2>/dev/null' C-m C-l
 
-send-keys -t santa.0 'git fetch ; git st' C-m
-send-keys -t santa.1 'php artisan serve' C-m
-send-keys -t santa.3 'gulp watch' C-m
-send-keys -t santa.0 'open http://localhost:8000/' C-m
+#send-keys -t santa.0 'git fetch ; git st' C-m
+#send-keys -t santa.1 'php artisan serve' C-m
+#send-keys -t santa.3 'gulp watch' C-m
+#send-keys -t santa.0 'open http://localhost:8000/' C-m
 
 # @todo;
 # tail -f */log/*
