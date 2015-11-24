@@ -137,7 +137,7 @@
 
 ;;; .tpl, .volt を html-mode で開く
 (setq auto-mode-alist
-      (append '(("\\.\\(tpl\\|volt\\|twig\\|blade\\.php\\)$" . html-mode))
+      (append '(("\\.\\(tpl\\|volt\\|twig\\|blade\\.php\\|mustache\\)$" . html-mode))
               auto-mode-alist))
 
 ;;; .scss を css-mode で開く
