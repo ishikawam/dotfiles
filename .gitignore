@@ -43,6 +43,7 @@
 !/.rbenv-plugins
 !/.rbenv-plugins/
 !/tmux/
+!/.globalrc
 
 # Github非公開リポジトリを
 !/private
