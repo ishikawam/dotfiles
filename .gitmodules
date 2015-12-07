@@ -1,24 +1,24 @@
 [submodule ".zsh-completions"]
 	path = .zsh-completions
-	url = git://github.com/zsh-users/zsh-completions.git
+	url = https://github.com/zsh-users/zsh-completions.git
 [submodule ".zsh-syntax-highlighting"]
 	path = .zsh-syntax-highlighting
-	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "private"]
 	path = private
-	url = git@github.com:ishikawam/private_dotfiles.git
+	url = https://github.com/ishikawam/private_dotfiles.git
 [submodule ".nvm"]
 	path = .nvm
-	url = git@github.com:creationix/nvm.git
+	url = https://github.com/creationix/nvm.git
 [submodule ".pyenv"]
 	path = .pyenv
-	url = git://github.com/yyuu/pyenv.git
+	url = https://github.com/yyuu/pyenv.git
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
 [submodule ".pyenv-virtualenv"]
 	path = .pyenv-virtualenv
-	url = git://github.com/yyuu/pyenv-virtualenv.git
+	url = https://github.com/yyuu/pyenv-virtualenv.git
 [submodule ".cask"]
 	path = .cask
 	url = https://github.com/cask/cask.git
