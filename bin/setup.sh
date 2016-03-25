@@ -42,6 +42,8 @@ git config --global alias.wd "diff --word-diff"
 git config --global alias.bd "diff --name-status"
 # ログをtreeで表示(簡易tig) via http://webtech-walker.com/archive/2010/03/04034601.html
 git config --global alias.lg "log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches"
+# push -f で他人のコミットを改変する可能性がある場合にエラー出してくれる
+git config --global alias.pushf "push --force-with-lease"
 # git commit時の編集エディタをemacsに
   # localのemacs等あるので、`emacs`指定したい。しかし以前それで問題があった気が。。。
 git config --global core.editor "emacs"
