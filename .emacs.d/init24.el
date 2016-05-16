@@ -153,3 +153,8 @@
     (auto-complete-mode t)))
 
 (add-hook 'jsx-mode-hook 'jsx-mode-init)
+
+;;; editorconfig
+(when (locate-library "editorconfig")
+  (editorconfig-mode 1)
+  )
