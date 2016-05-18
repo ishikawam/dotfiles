@@ -23,3 +23,8 @@ source ~/common/.shrc
 # git completion
 source ~/bin/git-completion.bash
 
+
+##################################################
+# prompt PS1
+
+PS1="[\[\e[36m\]\u\[\e[0m\]@\[\e[32m\]\h \W\[\e[0m\]] \\$ "

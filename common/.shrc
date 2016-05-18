@@ -87,9 +87,7 @@ function findsedexec() { find . -type f -name "$1" -exec sed -i -e "$2" {} \;; }
 
 alias -- .='pwd -P'
 alias -- ..='cd ..'
-../() { cd ../; }
 alias -- ...='cd ../..'
-.../() { cd ../..; }
 alias -- -='cd -'
 
 alias scl='screen -ls'
