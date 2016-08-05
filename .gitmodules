@@ -6,7 +6,7 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "private"]
 	path = private
-	url = https://github.com/ishikawam/private_dotfiles.git
+	url = https://ishikawam@github.com/ishikawam/private_dotfiles.git
 [submodule ".nvm"]
 	path = .nvm
 	url = https://github.com/creationix/nvm.git
