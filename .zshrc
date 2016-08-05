@@ -32,7 +32,7 @@ PROMPT=$'%{\e[1;30m%}[%{\e[m%}%{\e[0;36m%}%n%{\e[m%}%{\e[0;37m%}@%{\e[m%}%{\e[0;
 # pre cmd
 function precmd_vcs() {
     if [[ $ZSH_VERSION == (<5->|4.<4->|4.3.<10->)* ]]; then
-        vcs_info
+        vcs_info  2> /dev/null
     fi
     RPROMPT=$'%{\e[32m%}%~'${vcs_info_msg_0_}$'%{\e[m%}'
 }
