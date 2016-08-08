@@ -5,6 +5,7 @@
 # 定期的に実行することでインストールツールをログ記録＞yum apt-get homebrew gem npm
 # @todo; 自分じゃなくてcloneしても使えるようにしたい。それだとgit更新系を免除したい。
 # @todo; なんどもやらなくていいsetupと、更新とは別にしたい
+# @todo; caskはemacs24じゃないと、の判定がいる。
 
 
 ######## setup ##################################################################
@@ -81,6 +82,13 @@ fi
 mkdir -p ~/.rbenv/plugins/
 if [ -d ~/.rbenv-plugins/ruby-build -a ! -d ~/.rbenv/plugins/ruby-build ]; then
     ln -s ~/.rbenv-plugins/ruby-build ~/.rbenv/plugins/ruby-build
+fi
+
+# emacs cask
+if [ -x "`which cask 2>/dev/null`" ]; then
+    # python2.6以上に依存＞cask
+    # pyenv install 2.7.9
+    cd ~/.emacs.d/ ; cask install ; cd -
 fi
 
 
