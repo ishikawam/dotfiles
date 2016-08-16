@@ -18,6 +18,11 @@
 ;;; カラースキーマ color
 ;(require 'molokai-theme)
 (require 'monokai-theme)
+(custom-theme-set-faces
+ 'monokai
+ ;; メニューバー = header-line
+ '(menu ((t (:foreground "#111111" :background "#CCCCCC")))))
+
 
 ;;; PHP Xdebug デバッガ geben
 (require 'geben)
