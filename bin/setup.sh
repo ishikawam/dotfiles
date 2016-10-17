@@ -22,7 +22,7 @@ else
     chsh -s `which zsh`
 fi
 
-# gitのユーザー設定 @todo; これ、将来廃止したい
+# gitのユーザー設定
 git config --global user.name "M_Ishikawa"
 git config --global user.email "ishikawam@nifty.com"
 # gitの設定
@@ -50,7 +50,7 @@ git config --global alias.pushf "push --force-with-lease"
 git config --global core.editor "emacs"
 #git config --global core.editor "/usr/bin/emacs"
 # pushするときに現在のブランチのみpush
-git config --global push.default tracking
+git config --global push.default upstream
 # 日本語ファイル名を表示できるようになる
 git config --global core.quotepath false
 
@@ -88,6 +88,7 @@ fi
 if [ -x "`which cask 2>/dev/null`" ]; then
     # python2.6以上に依存＞cask
     # pyenv install 2.7.9
+    echo "cask install."
     cd ~/.emacs.d/ ; cask install ; cd -
 fi
 
