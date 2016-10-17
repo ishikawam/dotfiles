@@ -22,6 +22,9 @@ else
     chsh -s `which zsh`
 fi
 
+
+# git
+
 # gitのユーザー設定
 git config --global user.name "M_Ishikawa"
 git config --global user.email "ishikawam@nifty.com"
@@ -48,12 +51,10 @@ git config --global alias.pushf "push --force-with-lease"
 # git commit時の編集エディタをemacsに
   # localのemacs等あるので、`emacs`指定したい。しかし以前それで問題があった気が。。。
 git config --global core.editor "emacs"
-#git config --global core.editor "/usr/bin/emacs"
 # pushするときに現在のブランチのみpush
 git config --global push.default upstream
 # 日本語ファイル名を表示できるようになる
 git config --global core.quotepath false
-
 
 
 # スクリプト等インストール yum apt homebrew
