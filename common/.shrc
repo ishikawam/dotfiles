@@ -192,6 +192,11 @@ export GIT_SSL_NO_VERIFY=true
 
 
 ##################################################
+# ansible
+export ANSIBLE_COW_SELECTION=random
+
+
+##################################################
 # login check
 watch=(notme)
 LOGCHECK=10
