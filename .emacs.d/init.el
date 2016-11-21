@@ -210,3 +210,8 @@
 (prefer-coding-system 'utf-8-unix)
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
+
+;; exec-pathリストにshellのPATHを追加する for gnu global
+(loop for x in (reverse
+                (split-string (substring (shell-command-to-string "echo $PATH") 0 -1) ":"))
+      do (add-to-list 'exec-path x))
