@@ -15,6 +15,8 @@ if ($remote_addr == $output[1]) exit;
 mb_internal_encoding('UTF-8');
 mb_send_mail('masayuki_ishikawa@softbank.ne.jp, ishikawam@nifty.com', 'IPが変わった！', $output[1]);
 file_put_contents($file, $output[1]);
+exec(sprintf('dropbox-api put %s dropbox:/IP_Address/', $file));
+echo(sprintf('dropbox-api put %s dropbox:/IP_Address/', $file));
 
 // DynamicDNS MyDNSへ送信
 $mydns_list = array(
@@ -30,3 +32,5 @@ foreach ($mydns_list as $mydns) {
 $log .= "\n";
 $file = '/home/m_ishikawa/Dropbox/IP_Address/mydns.log';
 file_put_contents($file, $log);
+exec(sprintf('dropbox-api put %s dropbox:/IP_Address/', $file));
+echo(sprintf('dropbox-api put %s dropbox:/IP_Address/', $file));
