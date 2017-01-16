@@ -11,11 +11,7 @@ if [ -x "`which gem 2>/dev/null`" ]; then
 fi
 
 # homebrew
-if [ -x "`which brew 2>/dev/null`" ]; then
-    echo brew
-    brew update
-    brew upgrade
-fi
+# setup.shへ
 
 # npm
 if [ -x "`which npm 2>/dev/null`" ]; then

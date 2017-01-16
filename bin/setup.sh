@@ -60,24 +60,27 @@ git config --global core.quotepath false
 # スクリプト等インストール yum apt homebrew
 # ToDo
 
+# homebrew
+if [ `uname` = "Darwin" ]; then
+    if [ ! -x "`which brew 2>/dev/null`" ]; then
+        # http://brew.sh/index_ja.html
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        brew update
+        brew upgrade
+    fi
+fi
+
 if [ -f /usr/libexec/locate.updatedb ]; then
     # エイリアスにしていないのは、sudoで使いたいから
     ln -s /usr/libexec/locate.updatedb ~/this/bin/updatedb
 fi
-
-
-cd
-git stash
-git pull --rebase
-git submodule update --init
-
 
 # pyenv
 mkdir -p ~/.pyenv/plugins/
 if [ -d ~/.pyenv-virtualenv -a ! -d ~/.pyenv/plugins/pyenv-virtualenv ]; then
     ln -s ~/.pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
 fi
-
 
 # rbenv
 mkdir -p ~/.rbenv/plugins/
@@ -97,34 +100,45 @@ fi
 ######## record ##################################################################
 
 # インストールしてあるツールを記録
+
+cd
+git stash
+git pull --rebase
+git submodule update --init
+
 cd ~/private/
 git stash
 git checkout master
 git pull --rebase
 
-mkdir -p installedtools/`hostname`/`whoami`
+hostname=`hostname`
+if [ `uname` = "Darwin" ]; then
+    hostname=`scutil --get ComputerName`
+fi
+
+mkdir -p installedtools/$hostname/`whoami`
 if [ -f /usr/bin/apt-get ]; then
-    dpkg -l > installedtools/`hostname`/`whoami`/apt
-    git add installedtools/`hostname`/`whoami`/apt
+    dpkg -l > installedtools/$hostname/`whoami`/apt
+    git add installedtools/$hostname/`whoami`/apt
 fi
 if [ -f /usr/bin/yum ]; then
     yum list installed > installedtools/`hostname`/`whoami`/yum
-    git add installedtools/`hostname`/`whoami`/yum
+    git add installedtools/$hostname/`whoami`/yum
 fi
 if [ -f /usr/local/bin/brew ]; then
-    brew ls -la > installedtools/`hostname`/`whoami`/brew
-    git add installedtools/`hostname`/`whoami`/brew
+    brew ls > installedtools/$hostname/`whoami`/brew
+    git add installedtools/$hostname/`whoami`/brew
 fi
 if [ -f /usr/bin/gem ]; then
-    gem list > installedtools/`hostname`/`whoami`/gem
-    git add installedtools/`hostname`/`whoami`/gem
+    gem list > installedtools/$hostname/`whoami`/gem
+    git add installedtools/$hostname/`whoami`/gem
 fi
 if [ -f ~/.nvm/nvm.sh -o -f /usr/local/bin/npm ]; then
-    npm -g ls > installedtools/`hostname`/`whoami`/npm
-    git add installedtools/`hostname`/`whoami`/npm
+    npm -g ls > installedtools/$hostname/`whoami`/npm
+    git add installedtools/$hostname/`whoami`/npm
 fi
 
-git commit -m "update installedtools/`hostname`/`whoami`"
+git commit -m "update installedtools/$hostname/`whoami`"
 git push
 git stash pop
 
