@@ -11,15 +11,22 @@
 ######## setup ##################################################################
 
 # シェルを設定
-# priority order
-if [ -f /bin/zsh ]; then
-    chsh -s /bin/zsh
-elif [ -f /usr/bin/zsh ]; then
-    chsh -s /usr/bin/zsh
-elif [ -f /usr/local/bin/zsh ]; then
-    chsh -s /usr/local/bin/zsh
+if [ `uname` = "Darwin" ]; then
+    loginshell=`dscl localhost -read Local/Default/Users/$USER UserShell | cut -d' ' -f2 | sed -e 's/^.*\///'`
 else
-    chsh -s `which zsh`
+    loginshell=`grep $USER /etc/passwd | cut -d: -f7 | sed -e 's/^.*\///'`
+fi
+# priority order
+if [ ! $loginshell = 'zsh' ]; then
+    if [ -f /bin/zsh ]; then
+        chsh -s /bin/zsh
+    elif [ -f /usr/bin/zsh ]; then
+        chsh -s /usr/bin/zsh
+    elif [ -f /usr/local/bin/zsh ]; then
+        chsh -s /usr/local/bin/zsh
+    else
+        chsh -s `which zsh`
+    fi
 fi
 
 
