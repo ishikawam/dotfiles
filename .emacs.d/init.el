@@ -4,12 +4,21 @@
 ;;; emacs22はcaskが使えないので基本的に使わない。
 ;;; emacs23はcask使えるはずだが全然うまくいかない。
 
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq preferences-directory "~/.emacs.d/")
 
 (defun load-file-in-dir (dir file)
   (load (concat dir file)))
 
 (cond
+; ((string-match "^25\." emacs-version)
+;  (load-file-in-dir preferences-directory "init24.el"))
  ((string-match "^24\." emacs-version)
   (load-file-in-dir preferences-directory "init24.el"))
  ((string-match "^23\." emacs-version)
