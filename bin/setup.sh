@@ -71,7 +71,7 @@ if [ `uname` = "Darwin" ]; then
     fi
 fi
 
-if [ -f /usr/libexec/locate.updatedb ]; then
+if [ -f /usr/libexec/locate.updatedb -a ! -f ~/this/bin/updatedb ]; then
     # エイリアスにしていないのは、sudoで使いたいから
     ln -s /usr/libexec/locate.updatedb ~/this/bin/updatedb
 fi
