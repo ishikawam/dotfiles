@@ -45,7 +45,7 @@ fi
 DOCKER_HOST=tcp://localhost:4243
 
 # go
-if [ -d ~/go/bin ]; then
+if [ -d ~/go ]; then
     export GOPATH=~/go
     export PATH=$PATH:$GOPATH/bin
 fi
