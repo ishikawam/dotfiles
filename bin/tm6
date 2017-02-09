@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tmux a || tmux new-session \; source-file ~/tmux/config/6
