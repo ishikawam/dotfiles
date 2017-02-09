@@ -1,0 +1,50 @@
+# tmuxでこんな感じに6分割
+# ++++++++++++++++++++++++++++
+# +        +        +        +
+# +        +        +        +
+# +        +        +        +
+# ++++++++++++++++++++++++++++
+# +        +        +        +
+# ++++++++++++++++++++++++++++
+
+# 3つに縦割
+splitw -h
+splitw -h
+# 整列
+select-layout even-horizontal
+
+# 横割り
+splitw -v
+# 横割り
+splitw -v
+# いちばん上に戻って
+select-pane -D
+# 破棄
+kill-pane
+
+# 左に行って
+select-pane -L
+
+# 横割り
+splitw -v
+# 横割り
+splitw -v
+# いちばん上に戻って
+select-pane -D
+# 破棄
+kill-pane
+
+# 左に行って
+select-pane -L
+
+# 横割り
+splitw -v
+# 横割り
+splitw -v
+# いちばん上に戻って
+select-pane -D
+# 破棄
+kill-pane
+
+# 戻る
+select-pane -D

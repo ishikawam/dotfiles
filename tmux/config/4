@@ -8,7 +8,7 @@
 # +++++++++++++++++++
 
 # 縦割
-split-window -h -d
+splitw -h -d
 
 # 横割り
 splitw -d
