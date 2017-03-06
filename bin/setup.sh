@@ -78,10 +78,13 @@ if [ `uname` = "Darwin" ]; then
     fi
 fi
 
+# mlocate
 if [ -f /usr/libexec/locate.updatedb -a ! -f ~/this/bin/updatedb ]; then
     # エイリアスにしていないのは、sudoで使いたいから
     ln -s /usr/libexec/locate.updatedb ~/this/bin/updatedb
 fi
+# for mac
+chmod go+rx Desktop Documents Downloads Movies Music Pictures Dropbox Google\ Drive OneDrive
 
 # pyenv
 mkdir -p ~/.pyenv/plugins/
