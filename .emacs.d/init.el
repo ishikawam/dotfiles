@@ -1,8 +1,7 @@
 ;;; .emacs 改め .emacs.d/init.el
-;;; version 24, 23, 22 が共存している環境 = cask出し分け
-;;; 例えばMacの場合 /usr/local/bin/emacs = 24, /usr/bin/emacs = 22
-;;; emacs22はcaskが使えないので基本的に使わない。
-;;; emacs23はcask使えるはずだが全然うまくいかない。
+;;; version 25. 24, 23, が共存している環境 = cask出し分け
+;;; emacs24はこのままではエラー。。caskのバージョン上げたらうまく動かなくなった。
+;;; emacs25に最適化。
 
 
 ;; Added by Package.el.  This must come before configurations of
