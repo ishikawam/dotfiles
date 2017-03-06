@@ -53,6 +53,21 @@
               auto-mode-alist))
 
 
+;;; swift-mode
+(require 'swift-mode)
+(add-hook 'swift-mode-hook
+          '(lambda()
+             (local-set-key "\C-c\C-c" 'quickrun)
+             (local-set-key "\C-c\C-a" 'quickrun-with-arg)
+             )
+          )
+; これ効かないけど
+(custom-set-variables
+ '(swift-indent-offset 2)
+ '(swift-indent-multiline-statement-offset 1)
+ )
+
+
 ;;; モードラインにファイルのフルパス表示
 (set-default 'mode-line-buffer-identification
              '(buffer-file-name ("%f") ("%b")))

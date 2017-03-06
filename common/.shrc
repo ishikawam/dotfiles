@@ -107,36 +107,39 @@ alias sb='ssh-add'
 ##################################################
 # python
 
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -n ${PYENV_ROOT} ]; then
-    export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
-#    path=(${PYENV_ROOT}/bin ${PYENV_ROOT}/shims ${path})
+if [ ! -x "`which pyenv 2>/dev/null`" ]; then
+    # pyenvが存在しない場合だけ
+    export PYENV_ROOT="${HOME}/.pyenv"
+    if [ -n ${PYENV_ROOT} ]; then
+	export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
+	# path=(${PYENV_ROOT}/bin ${PYENV_ROOT}/shims ${path})
+    fi
+    eval "$(pyenv init -)"
 fi
-eval "$(pyenv init -)"
 
 ##################################################
 # ruby
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [ ! -x "`which rbenv 2>/dev/null`" ]; then
+    # rbenvが存在しない場合だけ
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
 
 ##################################################
 # node
 
-# nodeのバージョン決定
+# nvmでnodeのバージョン決定
 # この運用は今後やめていきたい。＞nvm alias default v0.10.38 とか nvm alias default stable とかを実行すればバージョンが永久固定されるので
 if [ -f ~/.nvm/nvm.sh ]; then
     source ~/.nvm/nvm.sh
 
-    if [ $(hostname) = "test-air2.local" ]; then
-        nvm use v0.10.22 > /dev/null
-    elif [ $(hostname) = "wind.windserver.jp" ]; then
+    if [ $(hostname) = "wind.windserver.jp" ]; then
         nvm use v0.10.24 > /dev/null
     elif [ $(hostname) = "fire" ]; then
         # fireでnodeのサービス動いているので合わせる。サービスは /etc/rc.d/rc.local
         nvm use default
     else
-#        nvm use stable
         nvm use default
     fi
 
