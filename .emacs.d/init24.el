@@ -54,11 +54,15 @@
 
 
 ;;; swift-mode
+; インデントが効かない。。editorconfigもindent_sizeだけが無視される。。
 (require 'swift-mode)
 (add-hook 'swift-mode-hook
           '(lambda()
              (local-set-key "\C-c\C-c" 'quickrun)
              (local-set-key "\C-c\C-a" 'quickrun-with-arg)
+             (setq-local tab-width 2)
+             (defvar swift-indent-offset)
+             (setq-local swift-indent-offset 2)
              )
           )
 ; これ効かないけど
