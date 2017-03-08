@@ -40,15 +40,15 @@ fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-		"earthquake 3 0" \
-#		"pwd 89 211" \
-		"mailcount 9 255" \
-		"now_playing 234 37" \
-		"cpu 240 136" \
-		"load 237 167" \
-		"tmux_mem_cpu_load 234 136" \
+#		"earthquake 3 0" \
+		"pwd 89 211" \
+#		"mailcount 9 255" \
+#		"now_playing 234 37" \
+#		"cpu 240 136" \
+#		"load 237 167" \
+#		"tmux_mem_cpu_load 234 136" \
 		"battery 137 127" \
-		"weather 37 255" \
+#		"weather 37 255" \
 		#"rainbarf 0 0" \
 		#"xkb_layout 125 117" \
 		"date_day 235 136" \
@@ -57,3 +57,6 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 		#"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 	)
 fi
+
+# earthquake, cpu, load, tmux_mem_cpu_load, weather はCPU食うのでやめた
+# pwd はtmux起動時のパスで、新規パネル開いたらそこになるっていうだけ。
