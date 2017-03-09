@@ -18,10 +18,16 @@ HISTSIZE=100000
 SAVEHIST=100000
 # historyに時刻を残す
 setopt extended_history
+
 # 途中まで打ってから上下で関連履歴に
-autoload history-search-end
+autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+# カーソル上下でも
+bindkey "\e[A" history-beginning-search-backward-end
+bindkey "\e[B" history-beginning-search-forward-end
 
 # 3秒以上かかった処理は詳細表示
 REPORTTIME=3
@@ -107,10 +113,6 @@ bindkey "^[f" emacs-forward-word
 bindkey "^[b" emacs-backward-word
 # M-f/M-b/M-dなどでの単語境界の基準をemacsライクに
 export WORDCHARS=""
-
-# 途中まで打ってから上下で関連履歴に
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
 
 
 ##################################################
