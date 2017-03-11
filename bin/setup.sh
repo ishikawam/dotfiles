@@ -132,7 +132,7 @@ if [ -x "`which apt-get 2>/dev/null`" ]; then
     git add installedtools/$hostname/`whoami`/apt
 fi
 if [ -x "`which yum 2>/dev/null`" ]; then
-    yum list installed > installedtools/`hostname`/`whoami`/yum
+    yum list installed | sed '/期限切れ/d' > installedtools/`hostname`/`whoami`/yum
     git add installedtools/$hostname/`whoami`/yum
 fi
 if [ -x "`which brew 2>/dev/null`" ]; then
