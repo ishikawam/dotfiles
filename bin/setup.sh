@@ -110,14 +110,24 @@ fi
 ######## record ##################################################################
 
 # インストールしてあるツールを記録
+# @todo; git操作が甘い
 
 cd
-git stash
+if [ "`git status -s --untracked-files=no`" ]; then
+    echo "~/ にgit-changingがあるので記録できません。"
+    exit 1
+fi
+cd ~/private/
+if [ "`git status -s --untracked-files=no`" ]; then
+    echo "~/private/ にgit-changingがあるので記録できません。"
+    exit 1
+fi
+
+cd
 git pull --rebase
 git submodule update --init
 
 cd ~/private/
-git stash
 git checkout master
 git pull --rebase
 
@@ -150,13 +160,11 @@ fi
 
 git commit -m "update installedtools/$hostname/`whoami`"
 git push
-git stash pop
 
-cd -
+cd
 git add private
 git commit -m "update private"
 git push
-git stash pop
 
 
 ######## setup for private ##################################################################
