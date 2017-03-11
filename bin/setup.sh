@@ -84,7 +84,7 @@ if [ -f /usr/libexec/locate.updatedb -a ! -f ~/this/bin/updatedb ]; then
     ln -s /usr/libexec/locate.updatedb ~/this/bin/updatedb
 fi
 # for mac
-chmod go+rx Desktop Documents Downloads Movies Music Pictures Dropbox Google\ Drive OneDrive
+chmod go+rx Desktop Documents Downloads Movies Music Pictures Dropbox Google\ Drive OneDrive 2>/dev/null
 
 # pyenv
 mkdir -p ~/.pyenv/plugins/
@@ -127,23 +127,23 @@ if [ `uname` = "Darwin" ]; then
 fi
 
 mkdir -p installedtools/$hostname/`whoami`
-if [ -f /usr/bin/apt-get ]; then
+if [ -x "`which apt-get 2>/dev/null`" ]; then
     dpkg -l > installedtools/$hostname/`whoami`/apt
     git add installedtools/$hostname/`whoami`/apt
 fi
-if [ -f /usr/bin/yum ]; then
+if [ -x "`which yum 2>/dev/null`" ]; then
     yum list installed > installedtools/`hostname`/`whoami`/yum
     git add installedtools/$hostname/`whoami`/yum
 fi
-if [ -f /usr/local/bin/brew ]; then
+if [ -x "`which brew 2>/dev/null`" ]; then
     brew ls > installedtools/$hostname/`whoami`/brew
     git add installedtools/$hostname/`whoami`/brew
 fi
-if [ -f /usr/bin/gem ]; then
+if [ -x "`which gem 2>/dev/null`" ]; then
     gem list > installedtools/$hostname/`whoami`/gem
     git add installedtools/$hostname/`whoami`/gem
 fi
-if [ -f ~/.nvm/nvm.sh -o -f /usr/local/bin/npm ]; then
+if [ -x "`which npm 2>/dev/null`" ]; then
     npm -g ls > installedtools/$hostname/`whoami`/npm
     git add installedtools/$hostname/`whoami`/npm
 fi
