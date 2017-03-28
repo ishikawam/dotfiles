@@ -107,8 +107,8 @@ alias sb='ssh-add'
 ##################################################
 # python
 
-if [ ! -x "`which pyenv 2>/dev/null`" ]; then
-    # pyenvが存在しない場合だけ
+if [ -x "`which pyenv 2>/dev/null`" ]; then
+    # pyenvが存在したら
     export PYENV_ROOT="${HOME}/.pyenv"
     if [ -n ${PYENV_ROOT} ]; then
 	export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
@@ -120,8 +120,8 @@ fi
 ##################################################
 # ruby
 
-if [ ! -x "`which rbenv 2>/dev/null`" ]; then
-    # rbenvが存在しない場合だけ
+if [ -x "`which rbenv 2>/dev/null`" ]; then
+    # rbenvが存在したら
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
