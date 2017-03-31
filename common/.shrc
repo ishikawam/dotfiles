@@ -111,8 +111,8 @@ if [ -x "`which pyenv 2>/dev/null`" ]; then
     # pyenvが存在したら
     export PYENV_ROOT="${HOME}/.pyenv"
     if [ -n ${PYENV_ROOT} ]; then
-	export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
-	# path=(${PYENV_ROOT}/bin ${PYENV_ROOT}/shims ${path})
+        export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
+        # path=(${PYENV_ROOT}/bin ${PYENV_ROOT}/shims ${path})
     fi
     eval "$(pyenv init -)"
 fi
@@ -154,6 +154,15 @@ PATH=./node_modules/.bin:$PATH
 # npmgls, npmgls
 alias npmls='npm ls | grep -v "^ \|│" | sed -e "s/^.* //g"'
 alias npmgls='npm ls -g | grep -v "^ \|│" | sed -e "s/^.* //g"'
+
+##################################################
+# xcode
+
+# Xcode821.app とか複数バージョン入れている場合にはそのなかでれを見に行く
+xcode=`ls /Applications/ | grep "Xcode[0-9]" | tail -1`
+if [ ! -d /Applications/Xcode.app -a $xcode ]; then
+    export DEVELOPER_DIR=/Applications/$xcode/Contents/Developer
+fi
 
 
 ##################################################
