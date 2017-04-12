@@ -114,6 +114,8 @@
 (global-set-key "\M-n" 'scroll-down-in-place)
 (global-set-key [M-down] 'scroll-down-in-place)
 
+;;; M-c(先頭大文字変換)無効にする
+(global-unset-key "\M-c")
 
 ;====================================
 ;;全角スペースとかに色を付ける
