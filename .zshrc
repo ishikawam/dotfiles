@@ -19,15 +19,19 @@ SAVEHIST=100000
 # historyに時刻を残す
 setopt extended_history
 
-# 途中まで打ってから上下で関連履歴に
+# 途中まで打ってから上下(C-p, C-n)で関連履歴に
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
-# カーソル上下でも
+# カーソル上下でも。効かない場合がある(Mac Sierra)その場合はM-p, M-nで。
 bindkey "\e[A" history-beginning-search-backward-end
 bindkey "\e[B" history-beginning-search-forward-end
+# M-p, M-nで。
+bindkey "^[p" history-beginning-search-backward-end
+bindkey "^[n" history-beginning-search-forward-end
+
 
 # 3秒以上かかった処理は詳細表示
 REPORTTIME=3
