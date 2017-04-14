@@ -78,24 +78,26 @@
 (defun delete-backword (arg)
   (interactive "p")
   (delete-region (point) (progn (backward-word arg) (point))))
+
+; タブは4space
+(setq tab-width 4)
+
+
+;====================================
+;;; キーバインド bind-key
+;====================================
+
+;;; delete word
 (global-set-key (kbd "M-d") 'delete-word)
 (global-set-key [(meta backspace)] 'backward-delete-word)
-;(global-set-key [C-backspace] 'backward-delete-word)
 
-;;; tab文字を普通に入力
-;(add-hook 'text-mode-hook
-;          (lambda ()
-;            (local-set-key "\t" 'self-insert-command)))
-(setq tab-width 4)
-;(setq indent-tabs-mode t)    ; インデント：タブ文字
-;(setq indent-tabs-mode nil)    ; インデント：空白スペース
 
 ;;; C-hでヘルプではなく、バックスペース
 (global-set-key "\C-h" 'backward-delete-char)
 
-;;; 段落飛ばし ＞ M-{、M-}でもできるので別のを割り当てる↓
-;(global-set-key "\M-p" 'backward-paragraph)
-;(global-set-key "\M-n" 'forward-paragraph)
+;;; 段落飛ばし  M-{、M-} 使いにくいので
+(global-set-key "\M-[" 'backward-paragraph)
+(global-set-key "\M-]" 'forward-paragraph)
 
 ;;; スクロールを1行ずつ
 (setq scroll-step 1)
@@ -103,11 +105,9 @@
 ;;; スクロールのみ
 (defun scroll-up-in-place (n)
   (interactive "p")
-;  (previous-line n)
   (scroll-down n))
 (defun scroll-down-in-place (n)
   (interactive "p")
-;  (next-line n)
   (scroll-up n))
 (global-set-key "\M-p" 'scroll-up-in-place)
 (global-set-key [M-up] 'scroll-up-in-place)
@@ -116,6 +116,7 @@
 
 ;;; M-c(先頭大文字変換)無効にする
 (global-unset-key "\M-c")
+
 
 ;====================================
 ;;全角スペースとかに色を付ける

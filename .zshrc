@@ -25,9 +25,17 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
-# カーソル上下でも。効かない場合がある(Mac Sierra)その場合はM-p, M-nで。
-bindkey "\e[A" history-beginning-search-backward-end
-bindkey "\e[B" history-beginning-search-forward-end
+
+# x カーソル上下でも。環境でカーソルが'^[A'だったり'^[OA'だったりなので。
+# itermでkey見直したので不要かもなのでコメントアウト。もうitermではカーソル信号が来ることはない。
+#bindkey "\e[A" history-beginning-search-backward-end
+#bindkey "\e[B" history-beginning-search-forward-end
+#bindkey "^[OA" history-beginning-search-backward-end
+#bindkey "^[OB" history-beginning-search-forward-end
+#bindkey "\e[C" forward-char
+#bindkey "\e[D" backward-char
+#bindkey "^[OC" forward-char
+#bindkey "^[OD" backward-char
 # M-p, M-nで。
 bindkey "^[p" history-beginning-search-backward-end
 bindkey "^[n" history-beginning-search-forward-end
