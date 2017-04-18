@@ -95,9 +95,9 @@
 ;;; C-hでヘルプではなく、バックスペース
 (global-set-key "\C-h" 'backward-delete-char)
 
-;;; 段落飛ばし  M-{、M-} 使いにくいので
-(global-set-key "\M-[" 'backward-paragraph)
-(global-set-key "\M-]" 'forward-paragraph)
+;;; 段落飛ばし  M-{、M-} 使いにくいので > やめた。なぜかCommand+Vで制御文字混入するようになった。
+;(global-set-key "\M-[" 'backward-paragraph)
+;(global-set-key "\M-]" 'forward-paragraph)
 
 ;;; スクロールを1行ずつ
 (setq scroll-step 1)
