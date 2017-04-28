@@ -63,13 +63,13 @@ setopt nonomatch
 ##################################################
 # zsh-syntax-highlighting
 if [ -z $ZSH_HIGHLIGHT_HIGHLIGHTERS ]; then
-    source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source `dirname $0`/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 ##################################################
 # zsh, bash, commons
 
-source ~/common/.shrc
+source `dirname $0`/common/.shrc
 
 
 ##################################################
@@ -153,7 +153,7 @@ colors
 # git completion
 autoload -U bashcompinit
 bashcompinit
-source ~/bin/git-completion.bash
+source `dirname $0`/bin/git-completion.bash
 
 
 zstyle ':completion:*' group-name ''
