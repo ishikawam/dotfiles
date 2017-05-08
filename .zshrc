@@ -4,6 +4,16 @@
 # 注意：ここでechoしてメッセージを出すとsftpで接続した時にエラーになってしまうので出しちゃだめ
 
 
+# このディレクトリパス
+if [ -e $0 ]; then
+    DIR=`dirname $0`
+else
+    # $0はこのファイル自身のパスだが、zshの初期起動時は正確に取れないのでその場合は$HOMEを。
+    DIR=$HOME
+fi
+echo $DIR
+
+
 ##################################################
 # shell variables
 
@@ -63,13 +73,13 @@ setopt nonomatch
 ##################################################
 # zsh-syntax-highlighting
 if [ -z $ZSH_HIGHLIGHT_HIGHLIGHTERS ]; then
-    source `dirname $0`/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source $DIR/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 ##################################################
 # zsh, bash, commons
 
-source `dirname $0`/common/.shrc
+source $DIR/common/.shrc
 
 
 ##################################################
@@ -153,7 +163,7 @@ colors
 # git completion
 autoload -U bashcompinit
 bashcompinit
-source `dirname $0`/bin/git-completion.bash
+source $DIR/bin/git-completion.bash
 
 
 zstyle ':completion:*' group-name ''
