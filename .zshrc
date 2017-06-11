@@ -72,7 +72,7 @@ setopt nonomatch
 
 ##################################################
 # zsh-syntax-highlighting
-if [ -z $ZSH_HIGHLIGHT_HIGHLIGHTERS ]; then
+if [ -z $ZSH_HIGHLIGHT_HIGHLIGHTERS ] && [ -f $DIR/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source $DIR/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
