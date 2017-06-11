@@ -107,6 +107,14 @@ if [ -x "`which cask 2>/dev/null`" ]; then
 fi
 
 
+######## ssh config ##################################################################
+
+mkdir -p -m 700 ~/.ssh
+if [ ! -f ~/.ssh/config ]; then
+    echo "ForwardAgent yes\nServerAliveInterval 60\nForwardAgent yes" >> ~/.ssh/config
+fi
+
+
 ######## record ##################################################################
 
 # インストールしてあるツールを記録
