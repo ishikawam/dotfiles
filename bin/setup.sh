@@ -110,10 +110,7 @@ fi
 ######## ssh config ##################################################################
 
 mkdir -p -m 700 ~/.ssh
-if [ ! -f ~/.ssh/config ]; then
-    echo -e "ForwardAgent yes\nServerAliveInterval 60\nForwardAgent yes" >> ~/.ssh/config
-    chmod 600 ~/.ssh/config
-fi
+chmod 600 ~/.ssh/config
 
 
 ######## record ##################################################################
