@@ -25,6 +25,10 @@ macでもFedoraでもCentOSでもDebianでもUbuntuでも。
 
 http://ishikawam.github.com/dotfiles/
 
+```
+curl -fsSL https://raw.githubusercontent.com/ishikawam/dotfiles/master/scripts/install.sh | sh
+```
+
 
 ```
 $ cd
