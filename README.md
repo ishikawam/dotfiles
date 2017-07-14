@@ -34,7 +34,9 @@ $ mv dotfiles/.git ./
 $ git reset
 $ git checkout .
 $ rm -rf dotfiles
-$ sh ~/bin/setup.sh
-$ # logout & login
+$ git submodule update --init
+$ sh ~/scripts/setup.sh
+
+# logout & login
 $ updates
 ```

@@ -14,6 +14,7 @@
 !/README.md
 !/bin/
 !/local/.gitkeep
+!/scripts/
 
 !/.vimrc
 !/.vim/
