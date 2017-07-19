@@ -25,22 +25,11 @@ macでもFedoraでもCentOSでもDebianでもUbuntuでも。
 
 http://ishikawam.github.com/dotfiles/
 
+
+## setup
+
 ```
 curl -fsSL https://raw.githubusercontent.com/ishikawam/dotfiles/master/scripts/install.sh | sh
 ```
 
-
-```
-$ cd
-$ cp .bashrc .bashrc_
-$ git clone -n git@github.com:ishikawam/dotfiles.git
-$ mv dotfiles/.git ./
-$ git reset
-$ git checkout .
-$ rm -rf dotfiles
-$ git submodule update --init
-$ sh ~/scripts/setup.sh
-
-# logout & login
-$ updates
-```
+see https://raw.githubusercontent.com/ishikawam/dotfiles/master/scripts/install.sh
