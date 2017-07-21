@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 # dotfilesのセットアップの直後に実施
 # http://ishikawam.github.com/dotfiles/
