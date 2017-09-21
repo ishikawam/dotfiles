@@ -4,10 +4,10 @@
  * ホームディレクトリの容量チェック
  */
 
-echo "\n### du -sm ~/* ###\n";
+echo "\n### du -sm ./* ###\n";
 $output = array();
 $directories = array();
-exec('sudo du -sm * | sort -nr | head -10', $output);
+exec('sudo du -sm ./* | sort -nr | head -10', $output);
 foreach($output as $val) {
     $val = split("\t", $val);
     if ($val[0] < 100) {
@@ -23,7 +23,7 @@ foreach($output as $val) {
 
 for ($i=1; $i<=3; $i++) {
     $directories = array_slice($directories, 0, 10);
-    echo "\n### du -sm ~" . str_repeat('/*', $i) . " ###\n";
+    echo "\n### du -sm ." . str_repeat('/*', $i) . " ###\n";
     $output = array();
     $home = array();
     foreach($directories as $val) {
