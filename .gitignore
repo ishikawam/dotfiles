@@ -45,9 +45,6 @@
 !/.rbenv-plugins/
 !/tmux/
 !/.globalrc
-!/.ssh
-/.ssh/*
-!/.ssh/config
 
 # Github非公開リポジトリを
 !/private
