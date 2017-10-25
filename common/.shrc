@@ -94,6 +94,11 @@ alias -- -='cd -'
 alias scl='screen -ls'
 alias scr='screen -xR'
 
+# オレが考えた最強locate
+function loc() { locate "$1" | grep -o ".*$1[^/]*" | sort | uniq ; }
+function loci() { locate -i "$1" | grep -oi ".*$1[^/]*" | sort | uniq ; }
+
+
 # emacs daemonを使用
 alias e='emacsclient -nw -a ""'
 alias em='emacs -q -l ~/.emacs.d/.emacs_min'
