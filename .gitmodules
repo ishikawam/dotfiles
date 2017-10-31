@@ -1,30 +1,30 @@
 [submodule ".zsh-completions"]
 	path = .zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
+	url = git@github.com:zsh-users/zsh-completions.git
 [submodule ".zsh-syntax-highlighting"]
 	path = .zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
 [submodule ".cask"]
 	path = .cask
-	url = https://github.com/cask/cask.git
+	url = git@github.com:cask/cask.git
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
-	url = https://github.com/gmarik/Vundle.vim.git
+	url = git@github.com:VundleVim/Vundle.vim.git
 [submodule ".nvm"]
 	path = .nvm
-	url = https://github.com/creationix/nvm.git
+	url = git@github.com:creationix/nvm.git
 [submodule ".pyenv"]
 	path = .pyenv
-	url = https://github.com/yyuu/pyenv.git
+	url = git@github.com:pyenv/pyenv.git
 [submodule ".pyenv-virtualenv"]
 	path = .pyenv-virtualenv
-	url = https://github.com/yyuu/pyenv-virtualenv.git
+	url = git@github.com:pyenv/pyenv-virtualenv.git
 [submodule ".rbenv"]
 	path = .rbenv
-	url = https://github.com/sstephenson/rbenv.git
+	url = git@github.com:rbenv/rbenv.git
 [submodule ".rbenv-plugins/ruby-build"]
 	path = .rbenv-plugins/ruby-build
-	url = https://github.com/sstephenson/ruby-build.git
+	url = git@github.com:rbenv/ruby-build.git
 [submodule "private"]
 	path = private
 	url = git@github.com:ishikawam/private_dotfiles.git
