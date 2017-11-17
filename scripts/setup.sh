@@ -113,69 +113,11 @@ mkdir -p -m 700 ~/.ssh
 chmod 600 ~/.ssh/config
 
 
-######## record ##################################################################
+######## private ##################################################################
 
-# インストールしてあるツールを記録
-# @todo; git操作が甘い
-
-cd
-if [ "`git status -s --untracked-files=no`" ]; then
-    echo "~/ にgit-changingがあるので記録できません。"
-    exit 1
+if [ -f ~/private/scripts/setup_private.sh ]; then
+    sh ~/private/scripts/setup_private.sh
 fi
-cd ~/private/
-if [ "`git status -s --untracked-files=no`" ]; then
-    echo "~/private/ にgit-changingがあるので記録できません。"
-    exit 1
-fi
-
-cd
-git pull --rebase
-git submodule update --init
-
-cd ~/private/
-git checkout master
-git pull --rebase
-
-hostname=`hostname`
-if [ `uname` = "Darwin" ]; then
-    hostname=`scutil --get ComputerName`
-fi
-
-mkdir -p installedtools/$hostname/`whoami`
-if [ -x "`which apt-get 2>/dev/null`" ]; then
-    dpkg -l > installedtools/$hostname/`whoami`/apt
-    git add installedtools/$hostname/`whoami`/apt
-fi
-if [ -x "`which yum 2>/dev/null`" ]; then
-    yum list installed | sed '/期限切れ/d' > installedtools/`hostname`/`whoami`/yum
-    git add installedtools/$hostname/`whoami`/yum
-fi
-if [ -x "`which brew 2>/dev/null`" ]; then
-    brew ls > installedtools/$hostname/`whoami`/brew
-    git add installedtools/$hostname/`whoami`/brew
-fi
-if [ -x "`which gem 2>/dev/null`" ]; then
-    gem list > installedtools/$hostname/`whoami`/gem
-    git add installedtools/$hostname/`whoami`/gem
-fi
-if [ -x "`which npm 2>/dev/null`" ]; then
-    npm -g ls > installedtools/$hostname/`whoami`/npm
-    git add installedtools/$hostname/`whoami`/npm
-fi
-
-git commit -m "update installedtools/$hostname/`whoami`"
-git push
-
-cd
-git add private
-git commit -m "update private"
-git push
-
-
-######## setup for private ##################################################################
-
-sh ~/private/bin/setup_private.sh
 
 
 ######## done ##################################################################

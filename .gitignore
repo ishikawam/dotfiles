@@ -29,7 +29,6 @@
 !/.tigrc
 !/.zsh-completions
 !/.zsh-syntax-highlighting
-!/installedtools/
 !/.tmux.conf
 !/tmux-powerline
 !/.tmux-powerlinerc
@@ -47,8 +46,8 @@
 !/.globalrc
 
 # Github非公開リポジトリを
-!/private
-!/private/
+# !/private/
+# あれ、消していいよね？
 
 # 個別設定
 #!/this/

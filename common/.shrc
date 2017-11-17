@@ -19,8 +19,6 @@ fi
 PATH=~/bin:$PATH
 # this 個別設定
 PATH=~/this/bin:$PATH
-# 非公開の
-PATH=~/private/bin:$PATH
 
 # sbin
 PATH=$PATH:/sbin:/usr/sbin
