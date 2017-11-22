@@ -26,9 +26,12 @@ PATH=$PATH:/sbin:/usr/sbin
 # homebrewを優先。gitとか
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-# ~/local/bin/, ~/opt/bin/ に入れた個人使用のツール(どちらかに統一したい
+# ~/local/bin/, ~/opt/bin/ に入れた個人使用のツール(optに統一したい
 PATH=~/local/bin:$PATH
 PATH=~/opt/bin:$PATH
+
+LD_LIBRARY_PATH=~/local/lib:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=~/opt/lib:$LD_LIBRARY_PATH
 
 # Terminalの色数
 TERM=xterm-256color
@@ -45,7 +48,16 @@ DOCKER_HOST=tcp://localhost:4243
 # go
 if [ -d ~/go ]; then
     export GOPATH=~/go
-    export PATH=$PATH:$GOPATH/bin
+    PATH=$PATH:$GOPATH/bin
+fi
+
+# for mosh, tmux
+if [ `uname` = "Darwin" ]; then
+    # Mountain Lionの "dyld: DYLD_ environment variables being ignored because main executable (/usr/bin/sudo) is setuid or setgid" 問題対応
+    unset LD_LIBRARY_PATH
+    unset DYLD_LIBRARY_PATH
+else
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 fi
 
 ##################################################
@@ -111,7 +123,7 @@ if [ -x "`which pyenv 2>/dev/null`" ]; then
     # pyenvが存在したら
     export PYENV_ROOT="${HOME}/.pyenv"
     if [ -n ${PYENV_ROOT} ]; then
-        export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
+        PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
         # path=(${PYENV_ROOT}/bin ${PYENV_ROOT}/shims ${path})
     fi
     eval "$(pyenv init -)"
@@ -122,7 +134,7 @@ fi
 
 if [ -x "`which rbenv 2>/dev/null`" ]; then
     # rbenvが存在したら
-    export PATH="$HOME/.rbenv/bin:$PATH"
+    PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
 
@@ -187,18 +199,6 @@ fi
 # crontab editor is emacs
 export EDITOR=/usr/bin/emacs
 
-# cask for emacs
-export PATH=$PATH:~/.cask/bin
-
-# for mosh, tmux
-if [ `uname` = "Darwin" ]; then
-    # Mountain Lionの "dyld: DYLD_ environment variables being ignored because main executable (/usr/bin/sudo) is setuid or setgid" 問題対応
-    unset LD_LIBRARY_PATH
-    unset DYLD_LIBRARY_PATH
-else
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-fi
-
 # tmux show git branch 効いてない
 PS1="$PS1"$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")
 
@@ -243,3 +243,9 @@ elif [ -S $agent ]; then
 else
     echo "no ssh-agent"
 fi
+
+##################################################
+# 最後にPATHを永続化
+
+export PATH
+export LD_LIBRARY_PATH

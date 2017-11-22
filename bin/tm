@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # 引数があれば source-file ~/tmux/config/xxx を
 # 引数がなければ tmux a || tmux source-file ~/tmux/config/4 を
