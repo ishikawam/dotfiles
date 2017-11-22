@@ -63,6 +63,9 @@ fi
 ##################################################
 # aliases
 
+alias grep="grep --color --binary-files=without-match --exclude-dir='.svn' --exclude-dir='.git' --exclude='*.png' --exclude='*.jpg' --exclude='*.gif' --exclude='*.ico' --exclude-dir='tmp' "
+alias ggrep="grep --exclude-dir='htdocs' --exclude-dir='htdocs_*' --exclude-dir='log' --exclude-dir='log_*' --exclude='*.json' --exclude-dir='node_modules' --exclude-dir='vendor' --exclude-dir='storage' --exclude='*.css.map' --exclude='*.min.css' "
+
 # Macと場合分け。lsが異なるので。
 case "$OSTYPE" in
     darwin*)
@@ -81,14 +84,15 @@ case "$OSTYPE" in
         alias ll='ls -lahF'
         # zshにメールチェックをさせない
         export MAILCHECK=0
+        # --exclude-dir使えないので
+        alias grep="grep --color --binary-files=without-match --exclude='.svn' --exclude='.git' --exclude='*.png' --exclude='*.jpg' --exclude='*.gif' --exclude='*.ico' --exclude='tmp' "
+        alias ggrep="grep --exclude='htdocs' --exclude='htdocs_*' --exclude='log' --exclude='log_*' --exclude='*.json' --exclude='node_modules' --exclude='vendor' --exclude='storage' --exclude='*.css.map' --exclude='*.min.css' "
         ;;
 esac
 
 alias rm='rm -i'
 alias cp='cp -iv'
 alias mv='mv -iv'
-alias ggrep="grep --exclude-dir='htdocs' --exclude-dir='htdocs_*' --exclude-dir='log' --exclude-dir='log_*' --exclude='*.json' --exclude-dir='node_modules' --exclude-dir='vendor' --exclude-dir='storage' --exclude='*.css.map' --exclude='*.min.css' "
-alias grep="grep --color --binary-files=without-match --exclude-dir='.svn' --exclude-dir='.git' --exclude='*.png' --exclude='*.jpg' --exclude='*.gif' --exclude='*.ico' --exclude-dir='tmp' "
 
 alias findname='find . -name $*'
 function findgrep() { find . -type f -name "$1" -exec grep -lHn "$2" {} \;; }
