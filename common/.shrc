@@ -172,6 +172,10 @@ alias npmls='npm ls | grep -v "^ \|│" | sed -e "s/^.* //g"'
 alias npmgls='npm ls -g | grep -v "^ \|│" | sed -e "s/^.* //g"'
 
 ##################################################
+# php composer
+PATH=~/.composer/vendor/bin:$PATH
+
+##################################################
 # xcode
 
 # Xcode821.app とか複数バージョン入れている場合にはそのなかで最新のを見に行く

@@ -9,7 +9,7 @@ $output = array();
 $directories = array();
 exec('sudo du -sm ./* | sort -nr | head -10', $output);
 foreach($output as $val) {
-    $val = split("\t", $val);
+    $val = explode("\t", $val);
     if ($val[0] < 100) {
         continue;
     }
@@ -37,7 +37,7 @@ for ($i=1; $i<=3; $i++) {
     $directories = array();
     exec('sudo du -sm {' . $home . '}/* | sort -nr | head -30', $output);
     foreach($output as $val) {
-        $val = split("\t", $val);
+        $val = explode("\t", $val);
         if ($val[0] < 100) {
             continue;
         }
