@@ -151,7 +151,9 @@ if [ -f ~/.nvm/nvm.sh -a ! -x "`which node 2>/dev/null`" ]; then
     # homebrew等で既にnode入れている場合はnvmは使用しない
     source ~/.nvm/nvm.sh
 
-    if [ $(hostname) = "wind.windserver.jp" ]; then
+    if [ ! -x "`which node 2>/dev/null`" ]; then
+        # nvmでもinstallされていなければスルー
+    elif [ $(hostname) = "wind.windserver.jp" ]; then
         nvm use v0.10.24 > /dev/null
     elif [ $(hostname) = "fire" ]; then
         # fireでnodeのサービス動いているので合わせる。サービスは /etc/rc.d/rc.local
