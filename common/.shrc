@@ -153,6 +153,7 @@ if [ -f ~/.nvm/nvm.sh -a ! -x "`which node 2>/dev/null`" ]; then
 
     if [ ! -x "`which node 2>/dev/null`" ]; then
         # nvmでもinstallされていなければスルー
+        echo
     elif [ $(hostname) = "wind.windserver.jp" ]; then
         nvm use v0.10.24 > /dev/null
     elif [ $(hostname) = "fire" ]; then
