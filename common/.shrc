@@ -160,7 +160,8 @@ if [ -f ~/.nvm/nvm.sh -a ! -x "`which node 2>/dev/null`" ]; then
         # fireでnodeのサービス動いているので合わせる。サービスは /etc/rc.d/rc.local
         nvm use default
     else
-        nvm use default
+        :
+#        nvm use default
     fi
 
     npm_dir=${NVM_PATH}_modules
