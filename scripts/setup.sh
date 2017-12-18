@@ -31,6 +31,7 @@ fi
 
 
 # git
+# .gitconfigをaddしたのでいらなくなるかも。
 
 # gitのユーザー設定
 git config --global user.name "M_Ishikawa"

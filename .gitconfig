@@ -1,0 +1,24 @@
+[user]
+	name = M_Ishikawa
+	email = ishikawam@nifty.com
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	st = status -sb
+	pr = pull --rebase
+	br = branch
+	fo = fetch origin
+	ro = rebase origin
+	rc = rebase --continue
+	wd = diff --word-diff
+	bd = diff --name-status
+	lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches
+	pushf = push --force-with-lease
+	gr = "!git grep $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' "
+	gri = "!git grep -i $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' "
+[core]
+	editor = emacs
+	quotepath = false
+[push]
+	default = upstream

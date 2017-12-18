@@ -10,7 +10,8 @@
 !/.gitignore
 !/.gitmodules
 # gitconfigはユーザー名を切り替えるので。。。いや、ここはdotfilesだから固定でいいだろｊｋ
-#!/.gitconfig
+# そろそろいけるかもなので試用
+!/.gitconfig
 !/README.md
 !/bin/
 !/local/.gitkeep
