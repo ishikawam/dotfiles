@@ -4,6 +4,7 @@
 # すべてgit対象外
 /*
 /.*
+.DS_Store
 
 # git対象を指定
 !/.git
