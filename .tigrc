@@ -1,8 +1,10 @@
-set blame-view = date:local author:full id line-number:true,interval=1 text
-set main-view = line-number:true,interval=1 date:local author:full id commit-title:true,graph=true,refs=true
-set refs-view = date:local author:full id ref:true commit-title:true
+# tig for 2.3
+
+set blame-view = date:default author:full id line-number:true,interval=1 text
+set main-view = line-number:true,interval=1 date:default author:full id commit-title:true,graph=true,refs=true
+set refs-view = date:default author:full id ref:true commit-title:true
 set status-view = file-name status:long
-set tree-view = date:local author:full id mode file-name
+set tree-view = date:default author:full id mode file-name
 
 set line-graphics = ascii
 set horizontal-scroll = 20%
