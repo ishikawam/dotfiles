@@ -1,9 +1,10 @@
 #!/bin/sh
 
 # emacsをローカル環境にインストール
+# bc, wget, gcc, ncurses6 が必要
 
 # http://ftp.gnu.org/pub/gnu/emacs/ で最新バージョンを確認、更新。
-version=25.2
+version=25.3
 
 ###########################################################
 
@@ -13,7 +14,7 @@ if [ $installed == $version ]; then
     echo already installed.
     exit
 elif [ `echo "$installed > $version" | bc` == 1 ]; then
-    echo ばーじょんおおきいnoga
+    echo ばーじょんおおきいのが入っている
     exit
 fi
 
@@ -27,6 +28,7 @@ fi
 
 tar zxvf emacs-$version.tar.gz
 cd emacs-$version
+mkdir -p ~/opt
 LDFLAGS="-L$HOME/opt/lib" ./configure --prefix=$HOME/opt --without-x
 make
 make install
