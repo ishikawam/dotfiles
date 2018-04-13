@@ -13,7 +13,7 @@ if ($remote_addr == $output[1]) exit;
 
 // IPが更新されたら通知＆保存
 mb_internal_encoding('UTF-8');
-mb_send_mail('masayuki_ishikawa@softbank.ne.jp, ishikawam@nifty.com', 'IPが変わった！', $output[1]);
+mb_send_mail('masayuki_ishikawa@softbank.ne.jp, ishikawam@nifty.com', 'jitaku のIPが変わった！', $output[1]);
 file_put_contents($file, $output[1]);
 exec(sprintf('dropbox-api put %s dropbox:/IP_Address/', $file));
 echo(sprintf('dropbox-api put %s dropbox:/IP_Address/', $file));
