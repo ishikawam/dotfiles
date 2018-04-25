@@ -180,6 +180,10 @@ alias npmgls='npm ls -g | grep -v "^ \|│" | sed -e "s/^.* //g"'
 # php composer
 PATH=~/.composer/vendor/bin:$PATH
 
+# mac homebrewでhomebrew/phpがdeprecatedになってしまってbrew link php71とかで切り替えられなくなったし一手間かかるようになったので
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
 ##################################################
 # xcode
 
