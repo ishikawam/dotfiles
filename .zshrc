@@ -194,6 +194,10 @@ select-word-style default
 zstyle ':zle:*' word-chars " _-./;:@"
 zstyle ':zle:*' word-style unspecified
 
+# ⌘Vでヤンクされないように
+unset zle_bracketed_paste
+
+
 #Default
 #
 #zstyle ':completion:*' auto-description 'specify: %d'
