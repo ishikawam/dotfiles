@@ -214,7 +214,8 @@ fi
 ##################################################
 
 # crontab editor is emacs
-export EDITOR=/usr/bin/emacs
+export EDITOR=emacs
+#export EDITOR=/usr/bin/emacs  # 様子見
 
 # tmux show git branch 効いてない
 PS1="$PS1"$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")
