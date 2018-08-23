@@ -7,10 +7,10 @@
 echo "\n### du -sm ./* ###\n";
 $output = array();
 $directories = array();
-exec('sudo du -sm ./* | sort -nr | head -10', $output);
+exec('sudo du -sm ./* | sort -nr | head -20', $output);  // top 20
 foreach($output as $val) {
     $val = explode("\t", $val);
-    if ($val[0] < 100) {
+    if ($val[0] < 100) {  // 100MB以上
         continue;
     }
     $directories[] = $val;
@@ -22,7 +22,7 @@ foreach($output as $val) {
 
 
 for ($i=1; $i<=3; $i++) {
-    $directories = array_slice($directories, 0, 10);
+    $directories = array_slice($directories, 0, 20);  // top 20
     echo "\n### du -sm ." . str_repeat('/*', $i) . " ###\n";
     $output = array();
     $home = array();
@@ -33,12 +33,13 @@ for ($i=1; $i<=3; $i++) {
     }
     $home = implode(',', $home);
 
-    echo("\n" . 'sudo du -sm {' . $home . '}/* | sort -nr | head -30' . "\n");
+    $cmd = 'sudo find {' . $home . '} -maxdepth 1 -mindepth 1 -exec du -sm {} \; | sort -nr | head -50';  // top 50
+    echo("\n" . $cmd . "\n");
     $directories = array();
-    exec('sudo du -sm {' . $home . '}/* | sort -nr | head -30', $output);
+    exec($cmd, $output);
     foreach($output as $val) {
         $val = explode("\t", $val);
-        if ($val[0] < 100) {
+        if ($val[0] < 100) {  // 100MB以上
             continue;
         }
         $directories[] = $val;
