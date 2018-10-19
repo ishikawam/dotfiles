@@ -17,6 +17,8 @@
 
 (cond
 ;; 26はcaskがうまく動かないので保留。
+ ((string-match "^26\." emacs-version)
+  (load-file-in-dir preferences-directory "init26.el"))
  ((string-match "^25\." emacs-version)
   (load-file-in-dir preferences-directory "init24.el"))
  ((string-match "^24\." emacs-version)

@@ -6,3 +6,7 @@
 /el-get/
 /elpa/
 /tramp
+
+# for straight.el(emacs26)
+
+/straight/
