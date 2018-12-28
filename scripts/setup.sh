@@ -72,6 +72,7 @@ git config --global core.quotepath false
 if [ `uname` = "Darwin" ]; then
     if [ ! -x "`which brew 2>/dev/null`" ]; then
         # http://brew.sh/index_ja.html
+        echo Install Homebrew.
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
         brew update
