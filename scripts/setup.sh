@@ -74,6 +74,7 @@ if [ `uname` = "Darwin" ]; then
         # http://brew.sh/index_ja.html
         echo Install Homebrew.
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet
     else
         brew update
         brew upgrade
