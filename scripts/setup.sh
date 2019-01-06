@@ -7,10 +7,14 @@
 # @todo; なんどもやらなくていいsetupと、更新とは別にしたい
 # @todo; caskはemacs24じゃないと、の判定がいる。
 
+head () {
+    printf "\n\e[35m$1\e[m\n\n"
+}
 
 ######## setup ##################################################################
 
 # シェルを設定
+head "1. Setup shell"
 if [ `uname` = "Darwin" ]; then
     loginshell=`dscl localhost -read Local/Default/Users/$USER UserShell | cut -d' ' -f2 | sed -e 's/^.*\///'`
 else
@@ -30,56 +34,27 @@ if [ ! $loginshell = 'zsh' ]; then
 fi
 
 
-# git
-# .gitconfigをaddしたのでいらなくなるかも。
-
-# gitのユーザー設定
-git config --global user.name "M_Ishikawa"
-git config --global user.email "ishikawam@nifty.com"
-# gitの設定
-git config --global color.ui auto
-git config --global alias.co "checkout"
-# シンプルなstatus
-git config --global alias.st "status -sb"
-# pull するときにmergeコミットを作らない
-git config --global alias.pr "pull --rebase"
-git config --global alias.br "branch"
-git config --global alias.fo "fetch origin"
-# branchでfoしてroすればmasterにrebaseできる
-git config --global alias.ro "rebase origin"
-git config --global alias.rc "rebase --continue"
-# 単語単位のdiff
-git config --global alias.wd "diff --word-diff"
-# ブランチ間のdiff
-git config --global alias.bd "diff --name-status"
-# ログをtreeで表示(簡易tig) via http://webtech-walker.com/archive/2010/03/04034601.html
-git config --global alias.lg "log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches"
-# push -f で他人のコミットを改変する可能性がある場合にエラー出してくれる
-git config --global alias.pushf "push --force-with-lease"
-# git commit時の編集エディタをemacsに
-  # localのemacs等あるので、`emacs`指定したい。しかし以前それで問題があった気が。。。
-git config --global core.editor "emacs"
-# pushするときに現在のブランチのみpush
-git config --global push.default upstream
-# 日本語ファイル名を表示できるようになる
-git config --global core.quotepath false
-
-
 # スクリプト等インストール yum apt homebrew
 # ToDo
 
-# homebrew
+
+# mac homebrew
+head "2. Homebrew"
 if [ `uname` = "Darwin" ]; then
     if [ ! -x "`which brew 2>/dev/null`" ]; then
         # http://brew.sh/index_ja.html
         echo Install Homebrew.
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet
-    else
-        brew update
-        brew upgrade
+        brew doctor
+# チャレンジしたい
+#        brew cask install firefox vagrant virtualbox mysqlworkbench skitch evernote google-japanese-ime
     fi
+    brew update
+    brew upgrade
+    brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq
+    brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
 fi
+
 
 # mlocate
 if [ -f /usr/libexec/locate.updatedb -a ! -f ~/this/bin/updatedb ]; then

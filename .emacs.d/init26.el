@@ -153,3 +153,7 @@
     :config
     (global-company-mode))
 
+;;; editorconfig
+(use-package editorconfig
+  :config
+  (editorconfig-mode 1))
