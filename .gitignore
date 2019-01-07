@@ -10,10 +10,9 @@
 !/.git
 !/.gitignore
 !/.gitmodules
-# gitconfigはユーザー名を切り替えるので。。。いや、ここはdotfilesだから固定でいいだろｊｋ
-# そろそろいけるかもなので試用
 !/.gitconfig
 !/README.md
+!/Makefile
 !/bin/
 !/local/.gitkeep
 !/scripts/
@@ -46,10 +45,6 @@
 !/.rbenv-plugins/
 !/tmux/
 !/.globalrc
-
-# Github非公開リポジトリを
-# !/private/
-# あれ、消していいよね？
 
 # 個別設定
 #!/this/

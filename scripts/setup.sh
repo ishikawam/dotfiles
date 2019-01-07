@@ -51,7 +51,7 @@ if [ `uname` = "Darwin" ]; then
     fi
     brew update
     brew upgrade
-    brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq
+    brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm
     brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
 fi
 
