@@ -1,5 +1,4 @@
 # for el-get(emacs23)
-
 /auto-save-list
 /*.dat
 /.cask
@@ -8,5 +7,7 @@
 /tramp
 
 # for straight.el(emacs26)
-
 /straight/
+
+# others
+/recentf
