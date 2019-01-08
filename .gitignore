@@ -34,6 +34,7 @@
 !/.tmux.conf
 !/.config/
 /.config/configstore
+/.config/filezilla/filezilla.xml
 /.config/filezilla/layout.xml
 /.config/filezilla/lockfile
 /.config/filezilla/queue.sqlite3
