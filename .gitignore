@@ -34,6 +34,10 @@
 !/.tmux.conf
 !/.config/
 /.config/configstore
+/.config/filezilla/layout.xml
+/.config/filezilla/lockfile
+/.config/filezilla/queue.sqlite3
+/.config/Steinberg\ Installation\ Updater
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
