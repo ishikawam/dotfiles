@@ -1,0 +1,30 @@
+# .gitignore_checker
+# local保存ファイルを確認するための.gitignore。確認が終わったら戻すこと。
+
+.localized
+.DS_Store
+
+/.CFUserTextEncoding
+/.Trash
+/.aws
+/.bash_history
+/.bash_sessions
+/.config/configstore/update-notifier-npm.json
+/.docker
+/.dropbox
+/.local/share/karabiner
+/.gitignore_checker
+/.node_repl_history
+/.npm
+/.ssh
+/.tig_history
+/.viminfo
+/.zcompdump
+/.zsh_history
+/Applications/Chrome\ Apps.localized
+/Applications/.localized
+/Creative\ Cloud\ Files
+
+/Dropbox
+/OneDrive/
+/this/bin/updatedb

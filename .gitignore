@@ -9,6 +9,7 @@
 # git対象を指定
 !/.git
 !/.gitignore
+!/.gitignore_checker
 !/.gitmodules
 !/.gitconfig
 !/README.md
