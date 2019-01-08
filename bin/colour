@@ -1,6 +1,6 @@
 #!/bin/sh
 for i in {0..255} ; do
-    printf "\x1b[38;5;${i}mcolour${i}  "
+    printf "\x1b[38;5;${i}m色${i}  "
     j=`expr $i % 6`
     if [ $j -eq 0 ]; then
         echo
