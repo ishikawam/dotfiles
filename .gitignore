@@ -31,6 +31,8 @@
 !/.zsh-completions
 !/.zsh-syntax-highlighting
 !/.tmux.conf
+!/.config/
+/.config/configstore
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
