@@ -1,22 +1,129 @@
-
-exit
+<?php
 
 ### https://qiita.com/djmonta/items/17531dde1e82d9786816
 
+$arr = [
+    'com.apple.dock' => [
+        'autohide' => [
+            // Automatically hide or show the Dock （Dock を自動的に隠す）
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'magnification' => [
+            // Magnificate the Dock （Dock の拡大機能を入にする）
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        // Hot corners （Mission Control のホットコーナーの設定）
+        // Possible values:
+        //  0: no-op
+        //  2: Mission Control
+        //  3: Show application windows
+        //  4: Desktop
+        //  5: Start screen saver
+        //  6: Disable screen saver
+        //  7: Dashboard
+        // 10: Put display to sleep
+        // 11: Launchpad
+        // 12: Notification Center
+        'wvous-bl-corner' => [
+            // 下左
+            'read' => 5,
+            'write' => '-int 5',
+        ],
+        'wvous-br-corner' => [
+            // 下右
+            'read' => 10,
+            'write' => '-int 10',
+        ],
+        'tilesize' => [
+            // Set the icon size of Dock items to 36 pixels
+//            'read' => 49, // 会社
+//            'write' => '-int 49',
+        ],
+        'mineffect' => [
+        ],
+        'minimize-to-application' => [
+        ],
+        'enable-spring-load-actions-on-all-items' => [
+        ],
+        'show-process-indicators' => [
+        ],
+        'persistent-apps' => [
+        ],
+        'static-only' => [
+        ],
+/*
 
+# Change minimize/maximize window effect
+defaults write com.apple.dock mineffect -string "scale"
 
-# Automatically hide or show the Dock （Dock を自動的に隠す）
+# Minimize windows into their application’s icon
+defaults write com.apple.dock minimize-to-application -bool true
+
+# Enable spring loading for all Dock items
+defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
+
+# Show indicator lights for open applications in the Dock
+defaults write com.apple.dock show-process-indicators -bool true
+
+# Wipe all (default) app icons from the Dock
+# This is only really useful when setting up a new Mac, or if you don’t use
+# the Dock to launch apps.
+#defaults write com.apple.dock persistent-apps -array
+
+# Show only open applications in the Dock
+#defaults write com.apple.dock static-only -bool true
+
+# Don’t animate opening applications from the Dock
+defaults write com.apple.dock launchanim -bool false
+
+# Speed up Mission Control animations
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Don’t group windows by application in Mission Control
+# (i.e. use the old Exposé behavior instead)
+defaults write com.apple.dock expose-group-by-app -bool false
+
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -bool true
+
+# Don’t show Dashboard as a Space
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+# Don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Remove the auto-hiding Dock delay
+defaults write com.apple.dock autohide-delay -float 0
+# Remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
-# Wipe all app icons from the Dock （Dock に標準で入っている全てのアプリを消す、Finder とごみ箱は消えない）
-defaults write com.apple.dock persistent-apps -array
-# Set the icon size （アイコンサイズの設定）
-defaults write com.apple.dock tilesize -int 55
-# Magnificate the Dock （Dock の拡大機能を入にする）
-defaults write com.apple.dock magnification -bool true
 
+# Make Dock icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
 
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
 
-# Hot corners （Mission Control のホットコーナーの設定）
+# Disable the Launchpad gesture (pinch with thumb and three fingers)
+#defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
+
+# Reset Launchpad, but keep the desktop wallpaper intact
+find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
+
+# Add iOS & Watch Simulator to Launchpad
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
+sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
+
+# Add a spacer to the left side of the Dock (where the applications are)
+#defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+# Add a spacer to the right side of the Dock (where the Trash is)
+#defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
+
+# Hot corners
 # Possible values:
 #  0: no-op
 #  2: Mission Control
@@ -28,18 +135,50 @@ defaults write com.apple.dock magnification -bool true
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
-# Top left screen corner → Put display to sleep （左上 → ディスプレイをスリープ）
-defaults write com.apple.dock wvous-tl-corner -int 10
+# Top left screen corner → Mission Control
+defaults write com.apple.dock wvous-tl-corner -int 2
 defaults write com.apple.dock wvous-tl-modifier -int 0
-# Top right screen corner → Desktop （右上 → デスクトップを表示）
+# Top right screen corner → Desktop
 defaults write com.apple.dock wvous-tr-corner -int 4
 defaults write com.apple.dock wvous-tr-modifier -int 0
-# Bottom left screen corner → Mission Control （左下 → Mission Control）
-defaults write com.apple.dock wvous-bl-corner -int 2
+# Bottom left screen corner → Start screen saver
+defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
-# Bottom right screen corner → Show application windows （右下 → アプリケーションウィンドウ）
-defaults write com.apple.dock wvous-br-corner -int 3
-defaults write com.apple.dock wvous-br-modifier -int 0
+*/
+    ],
+];
+
+foreach ($arr as $com => $tmp) {
+    foreach ($tmp as $attr => $val) {
+        $read = exec('defaults read ' . $com . ' ' . $attr);
+        if (! isset($val['write']) || $read == $val['read']) {
+            echo "$com $attr : $read\n";
+            continue;
+        }
+
+        exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
+        $readAfter = exec('defaults read ' . $com . ' ' . $attr);
+        echo "$com $attr : \033[32m$read -> $readAfter\033[0m\n";
+    }
+}
+/*
+
+# Wipe all app icons from the Dock （Dock に標準で入っている全てのアプリを消す、Finder とごみ箱は消えない）
+#defaults write com.apple.dock persistent-apps -array
+# Set the icon size （アイコンサイズの設定）
+#defaults write com.apple.dock tilesize -int 55
+
+
+
+
+
+
+
+
+
+############################################################################################################
+
+
 
 
 
@@ -146,7 +285,6 @@ done
 
 
 
-#!/usr/bin/env bash
 
 # ~/.macos — https://mths.be/macos
 
@@ -482,105 +620,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	OpenWith -bool true \
 	Privileges -bool true
 
-###############################################################################
-# Dock, Dashboard, and hot corners                                            #
-###############################################################################
 
-# Enable highlight hover effect for the grid view of a stack (Dock)
-defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-# Set the icon size of Dock items to 36 pixels
-defaults write com.apple.dock tilesize -int 36
-
-# Change minimize/maximize window effect
-defaults write com.apple.dock mineffect -string "scale"
-
-# Minimize windows into their application’s icon
-defaults write com.apple.dock minimize-to-application -bool true
-
-# Enable spring loading for all Dock items
-defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
-
-# Show indicator lights for open applications in the Dock
-defaults write com.apple.dock show-process-indicators -bool true
-
-# Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
-# the Dock to launch apps.
-#defaults write com.apple.dock persistent-apps -array
-
-# Show only open applications in the Dock
-#defaults write com.apple.dock static-only -bool true
-
-# Don’t animate opening applications from the Dock
-defaults write com.apple.dock launchanim -bool false
-
-# Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
-
-# Don’t group windows by application in Mission Control
-# (i.e. use the old Exposé behavior instead)
-defaults write com.apple.dock expose-group-by-app -bool false
-
-# Disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -bool true
-
-# Don’t show Dashboard as a Space
-defaults write com.apple.dock dashboard-in-overlay -bool true
-
-# Don’t automatically rearrange Spaces based on most recent use
-defaults write com.apple.dock mru-spaces -bool false
-
-# Remove the auto-hiding Dock delay
-defaults write com.apple.dock autohide-delay -float 0
-# Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
-
-# Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
-
-# Make Dock icons of hidden applications translucent
-defaults write com.apple.dock showhidden -bool true
-
-# Don’t show recent applications in Dock
-defaults write com.apple.dock show-recents -bool false
-
-# Disable the Launchpad gesture (pinch with thumb and three fingers)
-#defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
-
-# Reset Launchpad, but keep the desktop wallpaper intact
-find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
-
-# Add iOS & Watch Simulator to Launchpad
-sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
-sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
-
-# Add a spacer to the left side of the Dock (where the applications are)
-#defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
-# Add a spacer to the right side of the Dock (where the Trash is)
-#defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
-
-# Hot corners
-# Possible values:
-#  0: no-op
-#  2: Mission Control
-#  3: Show application windows
-#  4: Desktop
-#  5: Start screen saver
-#  6: Disable screen saver
-#  7: Dashboard
-# 10: Put display to sleep
-# 11: Launchpad
-# 12: Notification Center
-# Top left screen corner → Mission Control
-defaults write com.apple.dock wvous-tl-corner -int 2
-defaults write com.apple.dock wvous-tl-modifier -int 0
-# Top right screen corner → Desktop
-defaults write com.apple.dock wvous-tr-corner -int 4
-defaults write com.apple.dock wvous-tr-modifier -int 0
-# Bottom left screen corner → Start screen saver
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
 
 ###############################################################################
 # Safari & WebKit                                                             #
@@ -956,7 +997,7 @@ defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 ###############################################################################
 
 # Install Sublime Text settings
-cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
+cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings 2> /dev/null
 
 ###############################################################################
 # Spectacle.app                                                               #
@@ -1175,3 +1216,9 @@ defaults write com.apple.helpviewer DevMode -bool true
 # Adobe Illustrator CS5 :(
 #echo "0x08000100:0" > ~/.CFUserTextEncoding
 ### (略)
+
+
+*/
+
+
+
