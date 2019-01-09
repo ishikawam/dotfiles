@@ -52,7 +52,7 @@ if [ `uname` = "Darwin" ]; then
     brew upgrade
     brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas
     brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-    brew cask install firefox mysqlworkbench google-japanese-ime
+    brew cask install firefox mysqlworkbench google-japanese-ime iterm2
     # skitch evernote はapp storeかな
 # チャレンジしたい
 #        brew cask install vagrant virtualbox
