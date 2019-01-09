@@ -73,15 +73,15 @@ else
 fi
 
 
-######## mac homebrew ##################################################################
+######## hostname mac ##################################################################
 
 head "3. hostname (mac)"
 if [ `uname` = "Darwin" ]; then
     HOSTNAME=`scutil --get ComputerName`
-    echo ComputerName: $HOSTNAME
-    echo HostName: `scutil --get HostName` -> $HOSTNAME
+    echo "ComputerName: $HOSTNAME"
+    echo "HostName: `scutil --get HostName` -> $HOSTNAME"
     sudo scutil --set HostName "$HOSTNAME"
-    echo LocalHostName: `scutil --get LocalHostName` -> $HOSTNAME
+    echo "LocalHostName: `scutil --get LocalHostName` -> $HOSTNAME"
     sudo scutil --set LocalHostName "$HOSTNAME"
 else
     echo Do nothing.
