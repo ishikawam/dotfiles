@@ -68,7 +68,7 @@ if [ `uname` = "Darwin" ]; then
 #    open /Applications/Firefox.app
 #    open /Applications/MySQLWorkbench.app
 #    open /Applications/Skitch.app
-    open /Applications/Evernote.app
+#    open /Applications/Evernote.app
 else
     echo Do nothing.
 fi
