@@ -87,6 +87,11 @@ $arr = [
             'read' => 'true',
             'write' => 'true',
         ],
+        'AppleShowAllFiles' => [
+            // 不可視ファイルを可視化
+            'read' => 1,
+            'write' => '-bool true',
+        ],
 /*
 # Allow you to select and copy string in QuickLook （QuickLook で文字の選択、コピーを出来るようにする）
 defaults write com.apple.finder QLEnableTextSelection -bool true
