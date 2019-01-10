@@ -207,12 +207,30 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     'com.apple.LaunchServices' => [
         // git addした。 デフォルトでどのアプリを開くかを定義。ex. デフォルトブラウザ=Chrome
     ],
+
+    // sequel pro
+    'com.sequelpro.SequelPro' => [
+        'SUEnableAutomaticChecks' => [
+            // automatic update check.
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
+
+    // Language Switcher
+    'com.TJ-HD.Language_Switcher' => [
+        'SUEnableAutomaticChecks' => [
+            // automatic update check.
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
 ];
 
 foreach ($arr as $com => $tmp) {
     foreach ($tmp as $attr => $val) {
         if (strpos($attr, ':')) {
-            $read = exec('/usr/libexec/PlistBuddy -c "print ' . $attr . '" ~/Library/Preferences/' . $com . '.plist');
+            $read = exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist');
         } else {
             $read = exec('defaults read ' . $com . ' ' . $attr);
         }
@@ -231,8 +249,8 @@ foreach ($arr as $com => $tmp) {
         }
 
         if (strpos($attr, ':')) {
-            exec('/usr/libexec/PlistBuddy -c "set ' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-            $readAfter = exec('/usr/libexec/PlistBuddy -c "print ' . $attr . '" ~/Library/Preferences/' . $com . '.plist');
+            exec('/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
+            $readAfter = exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist');
         } else {
             exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
             $readAfter = exec('defaults read ' . $com . ' ' . $attr);
