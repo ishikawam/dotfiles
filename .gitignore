@@ -63,6 +63,14 @@
 /Library/Preferences/com.apple.LaunchServices/*
 !/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
 
+!/Library/Application\ Support/
+/Library/Application\ Support/*
+!/Library/Application\ Support/Google/
+/Library/Application\ Support/Google/*
+!/Library/Application\ Support/Google/JapaneseInput/
+/Library/Application\ Support/Google/JapaneseInput/*
+!/Library/Application\ Support/Google/JapaneseInput/user_dictionary.db
+
 # 個別設定
 #!/this/
 
