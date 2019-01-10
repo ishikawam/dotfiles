@@ -17,3 +17,6 @@ mas-list:
 
 agree-apps:
 	yes | sh ~/scripts/agreeApps.sh
+
+record-installed-tools:
+	sh ~/private/scripts/recordInstalledTools.sh
