@@ -119,7 +119,7 @@ array=(
 
 for i in "${array[@]}"
 do
-    read -p "Open app? y or n (n): \"$i\"" ans
+    read -p "Open app \"$i\"  y or n (n): " ans
 
     if [ "$ans" = "y" ]; then
         open "$i"

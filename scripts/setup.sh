@@ -162,14 +162,6 @@ mkdir -p -m 700 ~/.ssh
 chmod 600 ~/.ssh/config
 
 
-######## private ##################################################################
-
-head "7. private setup"
-if [ -f ~/private/scripts/setup_private.sh ]; then
-    sh ~/private/scripts/setup_private.sh
-fi
-
-
 ######## done ##################################################################
 
 head "Finished."
