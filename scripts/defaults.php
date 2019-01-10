@@ -243,6 +243,92 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 0.1,
             'write' => '-float 0.1',
         ],
+        // ショートカットキー
+        'registeredHotkeys' => [
+            'read' => '{
+}',
+            'write' => '-dict',
+        ],
+        'registeredHotkeys:0:keyCode' => [
+            'read' => 35,
+            'write' => 'integer 35',
+        ],
+        'registeredHotkeys:0:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
+        'registeredHotkeys:2:keyCode' => [
+            'read' => 33,
+            'write' => 'integer 33',
+        ],
+        'registeredHotkeys:2:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
+        'registeredHotkeys:4:keyCode' => [
+            'read' => 30,
+            'write' => 'integer 30',
+        ],
+        'registeredHotkeys:4:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
+        'registeredHotkeys:8:keyCode' => [
+            'read' => 124,
+            'write' => 'integer 124',
+        ],
+        'registeredHotkeys:8:modifiers' => [
+            'read' => 8390912,
+            'write' => 'integer 8390912',
+        ],
+        'registeredHotkeys:10:keyCode' => [
+            'read' => 45,
+            'write' => 'integer 45',
+        ],
+        'registeredHotkeys:10:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
+        'registeredHotkeys:13:keyCode' => [
+            'read' => 47,
+            'write' => 'integer 47',
+        ],
+        'registeredHotkeys:13:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
+        'registeredHotkeys:14:keyCode' => [
+            'read' => 44,
+            'write' => 'integer 44',
+        ],
+        'registeredHotkeys:14:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
+        'registeredHotkeys:17:keyCode' => [
+            'read' => 123,
+            'write' => 'integer 123',
+        ],
+        'registeredHotkeys:17:modifiers' => [
+            'read' => 8390912,
+            'write' => 'integer 8390912',
+        ],
+        'registeredHotkeys:105:keyCode' => [
+            'read' => 41,
+            'write' => 'integer 41',
+        ],
+        'registeredHotkeys:105:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
+        'registeredHotkeys:106:keyCode' => [
+            'read' => 39,
+            'write' => 'integer 39',
+        ],
+        'registeredHotkeys:106:modifiers' => [
+            'read' => 2304,
+            'write' => 'integer 2304',
+        ],
     ],
 
     // Apple Global Domain
@@ -323,7 +409,9 @@ foreach ($arr as $com => $tmp) {
 
         $out = null;
         if (strpos($attr, ':')) {
+            // setかaddで。ちゃんと判定したい。@todo;
             exec('/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
+            exec('/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
             exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
             exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
