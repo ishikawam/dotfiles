@@ -226,6 +226,15 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+    // iterm
+    'com.googlecode.iterm2' => [
+        'PrefsCustomFolder' => [
+            // automatic update check.
+            'read' => '~/Dropbox/settings/iterm_for_karabinerelements',
+            'write' => '-string "~/Dropbox/settings/iterm_for_karabinerelements"',
+        ],
+    ],
+
     // Better Snap Tool
     'com.hegenberg.BetterSnapTool' => [
         'launchOnStartup' => [
@@ -246,6 +255,46 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         // ショートカットキー
         'registeredHotkeys' => [
             'read' => '{
+    0 =     {
+        keyCode = 35;
+        modifiers = 2304;
+    };
+    10 =     {
+        keyCode = 45;
+        modifiers = 2304;
+    };
+    105 =     {
+        keyCode = 41;
+        modifiers = 2304;
+    };
+    106 =     {
+        keyCode = 39;
+        modifiers = 2304;
+    };
+    13 =     {
+        keyCode = 47;
+        modifiers = 2304;
+    };
+    14 =     {
+        keyCode = 44;
+        modifiers = 2304;
+    };
+    17 =     {
+        keyCode = 123;
+        modifiers = 8390912;
+    };
+    2 =     {
+        keyCode = 33;
+        modifiers = 2304;
+    };
+    4 =     {
+        keyCode = 30;
+        modifiers = 2304;
+    };
+    8 =     {
+        keyCode = 124;
+        modifiers = 8390912;
+    };
 }',
             'write' => '-dict',
         ],
@@ -907,11 +956,6 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 # Disable the annoying line marks
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
-# Install the Solarized Dark theme for iTerm
-open "${HOME}/init/Solarized Dark.itermcolors"
-
-# Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 ###############################################################################
 # Time Machine                                                                #
