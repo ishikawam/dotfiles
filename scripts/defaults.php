@@ -225,6 +225,46 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'write' => '-bool true',
         ],
     ],
+
+    // Apple Global Domain
+    '-g' => [
+        // Language and Region
+        'NSLinguisticDataAssetsRequested' => [
+            'read' => '(
+    en,
+    "en_JP",
+    ja,
+    "ja_JP"
+)',
+            'write' => '-array en "en_JP" ja "ja_JP"',
+        ],
+        'AppleLanguages' => [
+            'read' => '(
+    "en-JP",
+    "ja-JP"
+)',
+            'write' => '-array "en-JP" "ja-JP"',
+        ],
+        'AppleMeasurementUnits' => [
+            'read' => 'Centimeters',
+            'write' => '-string Centimeters',
+        ],
+        'AppleMetricUnits' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'AppleTemperatureUnit' => [
+            'read' => 'Celsius',
+            'write' => '-string Celsius',
+        ],
+    ],
+    'com.apple.systemuiserver' => [
+        // menuExtras もやりたいけど、、array_pushがわからないので。
+        '"NSStatusItem Visible com.apple.menuextra.textinput"' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
 ];
 
 foreach ($arr as $com => $tmp) {
