@@ -99,7 +99,13 @@ if [ `uname` = "Darwin" ]; then
     # 入れない
 # 405843582 Alfred (1.2)  brew cask版が新しいので
 
-#    sudo xcodebuild -license
+    #    sudo xcodebuild -license
+
+    # chrome backup setting
+    cd ~/Library/Application\ Support/Google/Chrome/Default/
+    ln -sf ~/common/Chrome/Default/.gitignore ./
+    git init
+    cd -
 else
     echo Do nothing.
 fi

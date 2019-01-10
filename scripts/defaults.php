@@ -1,5 +1,7 @@
 <?php
 
+# defaultsを使うのとPlistBuddyを使うのとをいまは混在させているけど、たぶんPlistBuddyに統一したほうがスマートになる
+
 ### https://qiita.com/djmonta/items/17531dde1e82d9786816
 
 $arr = [
@@ -234,6 +236,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 
 */
     ],
+    'com.apple.LaunchServices' => [
+        // git addした。 デフォルトでどのアプリを開くかを定義。ex. デフォルトブラウザ=Chrome
+    ],
 ];
 
 foreach ($arr as $com => $tmp) {
@@ -300,9 +305,6 @@ defaults write com.apple.menuextra.battery ShowPercent -string "NO"
 # Date options: Show the day of the week: on （日付表示設定、曜日を表示）
 defaults write com.apple.menuextra.clock 'DateFormat' -string 'EEE H:mm'
 
-# Disable the "Are you sure you want to open this application?" dialog
-# 未確認のアプリケーションを実行する際のダイアログを無効にする
-defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Automatically quit the printer app once the print jobs are completed
 # 印刷が終了したら、自動的にプリンターアプリを終了する
@@ -407,11 +409,6 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
@@ -1120,10 +1117,6 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 ### (略)
 
-# Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-### (無; "... 開いてもよろしいですか" を表示する)
-### -> false (表示しない)
 
 # Display ASCII control characters using caret notation in standard text views
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`

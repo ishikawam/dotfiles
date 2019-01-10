@@ -54,6 +54,15 @@
 !/tmux/
 !/.globalrc
 
+# for mac Library/Preferences
+!/Library/
+/Library/*
+!/Library/Preferences/
+/Library/Preferences/*
+!/Library/Preferences/com.apple.LaunchServices/
+/Library/Preferences/com.apple.LaunchServices/*
+!/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
+
 # 個別設定
 #!/this/
 
