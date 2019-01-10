@@ -226,6 +226,25 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+    // Better Snap Tool
+    'com.hegenberg.BetterSnapTool' => [
+        'launchOnStartup' => [
+            // 自動起動
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'showMenubarIcon' => [
+            // メニューアイコンは非表示
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'previewAnimationDuration' => [
+            // メニューアイコンは非表示
+            'read' => 0.1,
+            'write' => '-float 0.1',
+        ],
+    ],
+
     // Apple Global Domain
     '-g' => [
         // Language and Region
