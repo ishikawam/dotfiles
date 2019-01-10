@@ -52,23 +52,33 @@ if [ `uname` = "Darwin" ]; then
     brew upgrade
     brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas
     brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-    brew cask install firefox mysqlworkbench google-japanese-ime iterm2
+    brew cask install firefox mysqlworkbench google-japanese-ime iterm2 charles
     # skitch evernote はapp storeかな
 # チャレンジしたい
 #        brew cask install vagrant virtualbox
-    # 途中karabiner-elementsでFumihiko Takayamaを許可するかどうか出てくるので許可を。
-    # 全部開いてダイアログでagreeを @todo; agreeないのだけにしたい
-    open /Applications/Docker.app
-#    open /Applications/Sublime\ Text.app
-#    open /Applications/MacDown.app
-    open /Applications/Alfred\ 3.app
-    open /Applications/Dropbox.app
-    open /Applications/Karabiner-Elements.app
-#    open /Applications/Google\ Chrome.app
-#    open /Applications/Firefox.app
-#    open /Applications/MySQLWorkbench.app
-#    open /Applications/Skitch.app
-#    open /Applications/Evernote.app
+    mas install 539883307 421131143 417375580 409183694 406056744 425955336 557168941 880001334 497799835 409203825 409201541 408981434 803453959 504544917 452695239 1295203466 568494494
+#    mas install 539883307   # LINE (5.12.0)
+#    mas install 421131143   # MPlayerX (1.0.14)
+#    mas install 417375580   # BetterSnapTool (1.9)
+#    mas install 409183694   # Keynote (8.3)
+#    mas install 406056744   # Evernote (7.6)
+#    mas install 425955336   # Skitch (2.8.2)
+#    mas install 557168941   # Tweetbot (2.5.8)
+#    mas install 880001334   # Reeder (3.2.1)
+#    mas install 497799835   # Xcode (10.1)
+#    mas install 409203825   # Numbers (5.3)
+#    mas install 409201541   # Pages (7.3)
+#    mas install 408981434   # iMovie (10.1.10)
+#    mas install 803453959   # Slack (3.3.3)
+#    mas install 504544917   # Clear (1.1.7)
+#    mas install 452695239   # QREncoder (1.5)
+#    mas install 1295203466   # Microsoft Remote Desktop (10.2.4)
+#    mas install 568494494   # Pocket (1.8.1)
+    # optional
+#    mas install 682658836  # GarageBand (10.3.2)
+#    mas install 634148309  # Logic Pro X (10.4.3)
+#    mas install 405843582  # Alfred (1.2)  tashika irenaihazu
+#    sudo xcodebuild -license
 else
     echo Do nothing.
 fi
@@ -80,10 +90,14 @@ head "3. hostname (mac)"
 if [ `uname` = "Darwin" ]; then
     HOSTNAME=`scutil --get ComputerName`
     echo "ComputerName: $HOSTNAME"
-    echo "HostName: `scutil --get HostName` -> $HOSTNAME"
-    sudo scutil --set HostName "$HOSTNAME"
-    echo "LocalHostName: `scutil --get LocalHostName` -> $HOSTNAME"
-    sudo scutil --set LocalHostName "$HOSTNAME"
+    if [ `scutil --get HostName` != $HOSTNAME ]; then
+        echo "HostName: `scutil --get HostName` -> $HOSTNAME"
+        sudo scutil --set HostName "$HOSTNAME"
+    fi
+    if [ `scutil --get LocalHostName` != $HOSTNAME ]; then
+        echo "LocalHostName: `scutil --get LocalHostName` -> $HOSTNAME"
+        sudo scutil --set LocalHostName "$HOSTNAME"
+    fi
 else
     echo Do nothing.
 fi
