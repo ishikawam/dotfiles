@@ -2,6 +2,7 @@ setup:
 	sh ~/scripts/setup.sh
 	php ~/scripts/defaults.php
 	killall Finder
+	killall Dock
 	if [ -f ~/private/scripts/setup_private.sh ]; then sh ~/private/scripts/setup_private.sh ; fi
 
 install:

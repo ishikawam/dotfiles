@@ -19,6 +19,7 @@ array=(
     "/Applications/Language Switcher.app"
     "/Applications/Sequel Pro.app"
     "/Applications/iTerm.app"
+    "/Applications/GoogleJapaneseInput.localized/ConfigDialog.app"
 
     # adobe ha installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
@@ -80,7 +81,6 @@ array=(
 
 # Font Book.app/
 # GlobalProtect.app/
-# GoogleJapaneseInput.localized/
 # Gyazo.app/
 
 # Microsoft Excel.app/

@@ -92,9 +92,9 @@ $arr = [
             'write' => 'true',
         ],
         'AppleShowAllFiles' => [
-            // 不可視ファイルを可視化
-            'read' => 1,
-            'write' => '-bool true',
+            // 不可視ファイルを可視化shinai
+            'read' => 0,
+            'write' => '-bool false',
         ],
         'NewWindowTarget' => [
             // 新しいウィンドウでデフォルトでホームフォルダを開く
