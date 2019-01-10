@@ -52,8 +52,8 @@ if [ `uname` = "Darwin" ]; then
     brew upgrade
     brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas
     brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-    brew cask install firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher
-    # ためしたい adobe-creative-cloud adobe-creative-cloud-cleaner-tool
+    brew cask install firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher adobe-creative-cloud sequel-pro
+    # ためしたい adobe-creative-cloud-cleaner-tool
 
     # skitch evernote はapp store版で。
 
@@ -61,7 +61,7 @@ if [ `uname` = "Darwin" ]; then
     # brew cask install vagrant virtualbox
 
     # mas = mac app store
-    mas install 405399194 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 497799835 504544917 513610341 539883307 557168941 568494494 803453959 823766827 880001334 1295203466
+    mas install 405399194 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 497799835 504544917 513610341 539883307 557168941 568494494 592704001 803453959 823766827 880001334 1295203466
 # 405399194 Kindle
 # 406056744 Evernote (7.7)
 # 408981434 iMovie (10.1.10)
@@ -79,6 +79,7 @@ if [ `uname` = "Darwin" ]; then
 # 539883307 LINE (5.12.0)
 # 557168941 Tweetbot (2.5.8)
 # 568494494 Pocket (1.8.1)
+# 592704001 Photos Duplicate Cleaner
 # 803453959 Slack (3.3.3)
 # 823766827 OneDrive (18.214.1021)
 # 880001334 Reeder (3.2.1)

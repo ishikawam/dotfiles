@@ -16,6 +16,12 @@ array=(
     "/Applications/Charles.app"
     "/Applications/Clipy.app"
     "/Applications/HandBrake.app"
+    "/Applications/Language Switcher.app"
+    "/Applications/Sequel Pro.app"
+    "/Applications/iTerm.app"
+
+    # adobe ha installer
+    "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
 
     # mac標準
     "/Applications/iTunes.app"
@@ -23,6 +29,10 @@ array=(
     "/Applications/Books.app"
     "/Applications/Calendar.app"
     "/Applications/Contacts.app"
+    "/Applications/Notes.app"
+    "/Applications/Photos.app"
+    "/Applications/Safari.app"
+    "/Applications/VoiceMemos.app"
 
     # mas = mac app store
     "/Applications/BetterSnapTool.app"
@@ -30,11 +40,31 @@ array=(
     "/Applications/Keynote.app"
     "/Applications/Kindle.app"
     "/Applications/LINE.app"
+    "/Applications/MPlayerX.app"
+    "/Applications/Numbers.app"
+    "/Applications/OneDrive.app"
+    "/Applications/Pages.app"
+    "/Applications/Photos Duplicate Cleaner.app"
+    "/Applications/QREncoder.app"
+    "/Applications/Reeder.app"
+    "/Applications/Slack.app"
+    "/Applications/Tweetbot.app"
+    "/Applications/Xcode.app"
+    "/Applications/iMovie.app"
+
+    # are?
+#    "/Applications/Twitter.app"
 
     # 手動？
     "/Applications/FileZilla.app"
+    "/Applications/Picasa.app"
+    "/Applications/RICOH THETA.app"
 
 
+    # "/Applications/"
+    # "/Applications/"
+    # "/Applications/"
+    # "/Applications/"
     # "/Applications/"
     # "/Applications/"
     # "/Applications/"
@@ -53,87 +83,24 @@ array=(
 # GoogleJapaneseInput.localized/
 # Gyazo.app/
 
-# Language Switcher.app/
-# Launchpad.app/
-# LimeChat.app/
-# LiveReload.app/
-# Logi Options.app/
-# Logic Pro X.app/
-# MPlayerX.app/
-# MacDown.app/
-# Mail.app/
-# Maps.app/
-# Messages.app/
 # Microsoft Excel.app/
 # Microsoft OneNote.app/
 # Microsoft Outlook.app/
 # Microsoft PowerPoint.app/
 # Microsoft Word.app/
-# Mission Control.app/
-# MySQLWorkbench.app/
-# News.app/
-# Notes.app/
-# Numbers.app/
-# OneDrive.app/
-# Pages.app/
-# Photo Booth.app/
-# Photos Duplicate Cleaner.app/
-# Photos.app/
-# Picasa Web Albums Uploader.app/
-# Picasa.app/
-# Preview.app/
 # QBlocker.app/
-# QREncoder.app/
-# QuickTime Player.app/
-# RICOH THETA.app/
-# Reeder.app/
-# Reminders.app/
-# Safari.app/
-# Self Service.app/
-# Sequel Pro.app/
+
 # ShareMouse.app/
-# Siri.app/
-# Skitch.app/
-# Slack.app/
-# Stickies.app/
-# Stocks.app/
-# Sublime Text.app/
-# Symantec Solutions/
-# System Preferences.app/
-# TextEdit.app/
-# The Unarchiver.app/
-# Time Machine.app/
-# Tweetbot.app/
-# Twitter.app/
-# Utilities/
-# VirtualBox.app/
-# VoiceMemos.app/
-# Xcode.appdownload/
-# Xcode1010.app/
-# greppy.app/
-# iMovie.app/
-# iTerm.app/
-# 
 
 )
 
 for i in "${array[@]}"
 do
     read -p "Open app \"$i\"  y or n (n): " ans
-
     if [ "$ans" = "y" ]; then
         open "$i"
     fi
-
 done
-
-
-
-
-
-exit
 
 # 途中karabiner-elementsでFumihiko Takayamaを許可するかどうか出てくるので許可を。
 # 全部開いてダイアログでagreeを @todo; agreeないのだけにしたい
-
-
