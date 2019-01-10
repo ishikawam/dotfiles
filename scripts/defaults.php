@@ -444,11 +444,13 @@ foreach ($arr as $com => $tmp) {
         $read = implode("\n", $out);
         if ($read == '') {
             echo "\033[31mError. $com $attr\033[0m\n";
+/*
             echo 'regist? y or n (n): ';
             $input = trim(fgets(STDIN));
             if ($input != 'y') {
                 continue;
             }
+*/
         }
 
         if (! isset($val['write']) || $read === (string)$val['read']) {
