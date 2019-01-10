@@ -257,6 +257,17 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 'Celsius',
             'write' => '-string Celsius',
         ],
+        'AppleFirstWeekday' => [
+            // 先頭を月曜日に
+            'read' => '{
+    gregorian = 2;
+}',
+            'write' => '-dict gregorian 2',
+        ],
+        'NSAutomaticCapitalizationEnabled' => [
+            'read' => 0,
+            'write' => '-bool false',
+        ],
     ],
     'com.apple.systemuiserver' => [
         // menuExtras もやりたいけど、、array_pushがわからないので。
@@ -267,13 +278,16 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     ],
 ];
 
+
 foreach ($arr as $com => $tmp) {
     foreach ($tmp as $attr => $val) {
+        $out = null;
         if (strpos($attr, ':')) {
-            $read = exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist');
+            exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
-            $read = exec('defaults read ' . $com . ' ' . $attr);
+            exec('defaults read ' . $com . ' ' . $attr, $out);
         }
+        $read = implode("\n", $out);
         if ($read == '') {
             echo "\033[31mError. $com $attr\033[0m\n";
             echo 'regist? y or n (n): ';
@@ -288,13 +302,15 @@ foreach ($arr as $com => $tmp) {
             continue;
         }
 
+        $out = null;
         if (strpos($attr, ':')) {
             exec('/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-            $readAfter = exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist');
+            exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
             exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
-            $readAfter = exec('defaults read ' . $com . ' ' . $attr);
+            exec('defaults read ' . $com . ' ' . $attr, $out);
         }
+        $readAfter = implode("\n", $out);
         echo "$com $attr : \033[32m$read -> $readAfter\033[0m\n";
     }
 }
