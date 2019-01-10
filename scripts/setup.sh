@@ -53,31 +53,48 @@ if [ `uname` = "Darwin" ]; then
     brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas
     brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
     brew cask install firefox mysqlworkbench google-japanese-ime iterm2 charles
-    # skitch evernote はapp storeかな
-# チャレンジしたい
-#        brew cask install vagrant virtualbox
-    mas install 539883307 421131143 417375580 409183694 406056744 425955336 557168941 880001334 497799835 409203825 409201541 408981434 803453959 504544917 452695239 1295203466 568494494
-#    mas install 539883307   # LINE (5.12.0)
-#    mas install 421131143   # MPlayerX (1.0.14)
-#    mas install 417375580   # BetterSnapTool (1.9)
-#    mas install 409183694   # Keynote (8.3)
-#    mas install 406056744   # Evernote (7.6)
-#    mas install 425955336   # Skitch (2.8.2)
-#    mas install 557168941   # Tweetbot (2.5.8)
-#    mas install 880001334   # Reeder (3.2.1)
-#    mas install 497799835   # Xcode (10.1)
-#    mas install 409203825   # Numbers (5.3)
-#    mas install 409201541   # Pages (7.3)
-#    mas install 408981434   # iMovie (10.1.10)
-#    mas install 803453959   # Slack (3.3.3)
-#    mas install 504544917   # Clear (1.1.7)
-#    mas install 452695239   # QREncoder (1.5)
-#    mas install 1295203466   # Microsoft Remote Desktop (10.2.4)
-#    mas install 568494494   # Pocket (1.8.1)
-    # optional
-#    mas install 682658836  # GarageBand (10.3.2)
-#    mas install 634148309  # Logic Pro X (10.4.3)
-#    mas install 405843582  # Alfred (1.2)  tashika irenaihazu
+    # skitch evernote はapp store版で。
+
+    # 必須ではない
+    # brew cask install vagrant virtualbox
+
+    # mas = mac app store
+    mas install 405843582 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 497799835 504544917 513610341 539883307 557168941 568494494 803453959 823766827 880001334 1295203466
+# 406056744 Evernote (7.7)
+# 408981434 iMovie (10.1.10)
+# 409183694 Keynote (8.3)
+# 409201541 Pages (7.3)
+# 409203825 Numbers (5.3)
+# 417375580 BetterSnapTool (1.9)
+# 421131143 MPlayerX (1.0.14)
+# 425424353 The Unarchiver (4.0.0)
+# 425955336 Skitch (2.8.2)
+# 452695239 QREncoder (1.5)
+# 497799835 Xcode (10.1)
+# 504544917 Clear (1.1.7)
+# 513610341 Integrity (8.1.19)  QAリンクチェッカー
+# 539883307 LINE (5.12.0)
+# 557168941 Tweetbot (2.5.8)
+# 568494494 Pocket (1.8.1)
+# 803453959 Slack (3.3.3)
+# 823766827 OneDrive (18.214.1021)
+# 880001334 Reeder (3.2.1)
+# 1295203466 Microsoft Remote Desktop (10.2.4)
+
+    # なくなった
+# 409789998 Twitter (4.3.2)
+# 562172072 SongTweeter (2.0)
+# 715768417 Microsoft Remote Desktop (8.0.30030)
+
+    # 必須ではない
+# 414030210 LimeChat (2.43)
+# 482898991 LiveReload (2.3.81)
+# 634148309 Logic Pro X (10.4.3)
+# 682658836 GarageBand (10.3.2)
+
+    # 入れない
+# 405843582 Alfred (1.2)  brew cask版が新しいので
+
 #    sudo xcodebuild -license
 else
     echo Do nothing.

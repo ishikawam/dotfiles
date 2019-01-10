@@ -9,3 +9,6 @@ chrome:
 
 gitignore_checker:
 	ln -sf ~/.gitignore_checker ~/.gitignore
+
+mas-list:
+	cat ~/private/installedtools/*/*/mas | sort -n | uniq
