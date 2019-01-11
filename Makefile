@@ -1,8 +1,6 @@
 setup:
 	sh ~/scripts/setup.sh
-	php ~/scripts/defaults.php
-	killall Finder
-	killall Dock
+	make defaults
 	if [ -f ~/private/scripts/setup_private.sh ]; then sh ~/private/scripts/setup_private.sh ; fi
 
 install:
@@ -21,4 +19,4 @@ record-installed-tools:
 	sh ~/private/scripts/recordInstalledTools.sh
 
 defaults:
-	php ~/scripts/defaults.php
+	if [ -x "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php ; killall Finder ; killall Dock ; fi
