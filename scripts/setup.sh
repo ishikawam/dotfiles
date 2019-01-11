@@ -53,7 +53,7 @@ if [ `uname` = "Darwin" ]; then
     brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas
     brew install carthage git-lfs swiftlint ruby rbenv ruby-build
     brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-    brew cask install firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher adobe-creative-cloud sequel-pro
+    brew cask install firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher adobe-creative-cloud sequel-pro google-backup-and-sync
     # ためしたい adobe-creative-cloud-cleaner-tool
 
     # skitch evernote はapp store版で。

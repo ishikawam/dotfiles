@@ -20,6 +20,7 @@ array=(
     "/Applications/Sequel Pro.app"
     "/Applications/iTerm.app"
     "/Applications/GoogleJapaneseInput.localized/ConfigDialog.app"
+    "/Applications/Backup and Sync.app"
 
     # adobe ha installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"

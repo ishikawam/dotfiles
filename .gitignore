@@ -76,6 +76,9 @@
 /Library/Application\ Support/Sequel\ Pro/*
 !/Library/Application\ Support/Sequel\ Pro/Data/
 
+# Google Drive
+!/Library/Preferences/com.google.GoogleDrive.plist
+
 
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
