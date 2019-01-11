@@ -8,6 +8,7 @@ if [ -x "`which gem 2>/dev/null`" ]; then
     echo gem
     sudo gem update --system
     sudo gem update
+    sudo gem install bundler xcpretty
 fi
 
 # homebrew

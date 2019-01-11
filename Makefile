@@ -20,3 +20,6 @@ record-installed-tools:
 
 defaults:
 	if [ -x "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php ; killall Finder ; killall Dock ; fi
+
+updates:
+	sh bin/updates
