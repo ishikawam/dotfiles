@@ -71,6 +71,8 @@
 /Library/Application\ Support/Google/JapaneseInput/*
 !/Library/Application\ Support/Google/JapaneseInput/user_dictionary.db
 
+# Chromeの.gitignoreは登録できない。> .gitあるから。
+
 # 個別設定
 #!/this/
 

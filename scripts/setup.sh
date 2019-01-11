@@ -102,8 +102,9 @@ if [ `uname` = "Darwin" ]; then
     #    sudo xcodebuild -license
 
     # chrome backup setting
+    # この.gitignoreはgit addできない。 > ここでgit initするから
     cd ~/Library/Application\ Support/Google/Chrome/Default/
-    ln -sf ~/common/Chrome/Default/.gitignore ./
+    ln -sf ~/common/Chrome/Default/gitignore ./.gitignore
     git init
     cd -
 else
@@ -139,6 +140,7 @@ if [ -f /usr/libexec/locate.updatedb -a ! -f ~/this/bin/updatedb ]; then
     # エイリアスにしていないのは、sudoで使いたいから
     ln -s /usr/libexec/locate.updatedb ~/this/bin/updatedb
 fi
+# locateしたいため権限を緩める
 chmod go+rx Desktop Documents Downloads Movies Music Pictures Dropbox Google\ Drive OneDrive 2>/dev/null
 
 # pyenv
