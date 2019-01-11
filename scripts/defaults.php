@@ -174,8 +174,9 @@ $arr = [
         'FXPreferredViewStyle' => [
             // Use list view in all Finder windows by default
             // Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-            'read' => 1,
-            'write' => '-bool true',
+            // 「Nlsv」リストビュー 「icnv」（アイコンビュー）、「clmv」（カラムビュー）、「Flwv」（カバーフロービュー）
+            'read' => 'Nlsv',
+            'write' => '-string Nlsv',
         ],
 
 /*
