@@ -61,6 +61,9 @@ array=(
     "/Applications/Picasa.app"
     "/Applications/RICOH THETA.app"
 
+    # font
+    "~/Dropbox/Fonts/SourceCodePro-Reguslar-Powerline.otf"
+
 
     # "/Applications/"
     # "/Applications/"
