@@ -205,9 +205,57 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'write' => '-bool true',
         ],
     ],
+
     'com.apple.LaunchServices' => [
         // git addした。 デフォルトでどのアプリを開くかを定義。ex. デフォルトブラウザ=Chrome
     ],
+
+    'com.apple.iCal' => [
+        // カレンダー
+        // デフォルトカレンダー CalDefaultCalendar は「予定表」にしたいが、デバイスごとでハッシュが異なるのでできない。
+        // 通知もできない。結構手動でやるしかない。
+        '"first day of week"' => [
+            // 先頭を月曜日に AppleFirstWeekdayでやってるけども。
+            'read' => 1,
+            'write' => '-int 1',
+        ],
+        '"first minute of work hours"' => [
+            // 1日の開始時間 8:00
+            'read' => 480,
+            'write' => '-int 480',
+        ],
+        '"last minute of work hours"' => [
+            // 1日の終了時間 20:00
+            'read' => 1200,
+            'write' => '-int 1200',
+        ],
+    ],
+
+    // Keyboard shotcuts
+    'com.apple.symbolichotkeys' => [
+        // Input Sources > Select the previous input source = ⌘Space
+        'AppleSymbolicHotKeys:60:enabled' => [
+            'read' => 'true',
+            'write' => 'true',
+        ],
+        'AppleSymbolicHotKeys:60:value:parameters:0' => [
+            'read' => 32,
+            'write' => 32,
+        ],
+        'AppleSymbolicHotKeys:60:value:parameters:1' => [
+            'read' => 49,
+            'write' => 49,
+        ],
+        'AppleSymbolicHotKeys:60:value:parameters:2' => [
+            'read' => 1048576,
+            'write' => 1048576,
+        ],
+    ],
+
+
+    /**
+     * apps
+     */
 
     // sequel pro
     'com.sequelpro.SequelPro' => [
@@ -423,6 +471,25 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 0,
             'write' => '-bool false',
         ],
+
+        // Keyboard
+        'KeyRepeat' => [
+            // default 2
+            'read' => 1,
+            'write' => '-int 1',
+        ],
+        'InitialKeyRepeat' => [
+            // default 15
+            'read' => 10,
+            'write' => '-int 10',
+        ],
+        'com.apple.keyboard.fnState' => [
+            // Use F1, F2, etc. keys as standard function keys.
+            // 本当はデフォルトのfalseにしたいけど、karabiner-elementsのoption+numberが対応していないので、、
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+
     ],
     'com.apple.systemuiserver' => [
         // menuExtras もやりたいけど、、array_pushがわからないので。
@@ -698,9 +765,6 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Set language and text formats
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
@@ -997,8 +1061,6 @@ defaults write com.apple.addressbook ABShowDebugMenu -bool true
 # Enable Dashboard dev mode (allows keeping widgets on the desktop)
 defaults write com.apple.dashboard devmode -bool true
 
-# Enable the debug menu in iCal (pre-10.8)
-defaults write com.apple.iCal IncludeDebugMenu -bool true
 
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
