@@ -284,6 +284,32 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+    // Evernote
+    'com.evernote.Evernote' => [
+        'WebAutomaticSpellingCorrectionEnabled' => [
+            // 自動校正しない
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'WebContinuousSpellCheckingEnabled' => [
+            // スペルチェックしない
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'runHelperAtLogin' => [
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'runHelperWithoutMainApp' => [
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'showsStatusBarItem' => [
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+    ],
+
     // Better Snap Tool
     'com.hegenberg.BetterSnapTool' => [
         'launchOnStartup' => [
@@ -429,7 +455,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
-    // Apple Global Domain
+    /**
+     * Apple Global Domain
+     */
     '-g' => [
         // Language and Region
         'NSLinguisticDataAssetsRequested' => [
@@ -475,8 +503,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         // Keyboard
         'KeyRepeat' => [
             // default 2
-            'read' => 1,
-            'write' => '-int 1',
+            'read' => 1.2,
+            'write' => '-float 1.2',
         ],
         'InitialKeyRepeat' => [
             // default 15
