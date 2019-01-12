@@ -123,12 +123,11 @@ alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_histo
 ##################################################
 # python
 
-if [ -x "`which pyenv 2>/dev/null`" ]; then
-    # pyenvが存在したら
+if [ -f ~/.pyenv/bin/pyenv -a ! "`pyenv 2>/dev/null`" ]; then
+    # use local pyenv
     export PYENV_ROOT="${HOME}/.pyenv"
     if [ -n ${PYENV_ROOT} ]; then
         PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
-        # path=(${PYENV_ROOT}/bin ${PYENV_ROOT}/shims ${path})
     fi
     eval "$(pyenv init -)"
 fi
