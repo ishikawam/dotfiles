@@ -5,6 +5,10 @@ setup:
 #	make agree-apps
 	if [ -f ~/private/scripts/setup_private.sh ]; then sh ~/private/scripts/setup_private.sh ; fi
 
+setup-private:
+# installedを保存するくらい
+	sh ~/private/scripts/setup_private.sh
+
 install:
 	make setup
 
@@ -22,6 +26,9 @@ record-installed-tools:
 
 defaults:
 	if [ -x "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php ; killall Finder ; killall Dock ; fi
+
+defaults-dryrun:
+	if [ -x "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php --dry-run ; fi
 
 updates:
 	sh bin/updates

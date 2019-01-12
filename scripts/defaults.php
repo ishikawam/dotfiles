@@ -604,14 +604,18 @@ foreach ($arr as $com => $tmp) {
         }
 
         $out = null;
-        if (strpos($attr, ':')) {
-            // setかaddで。ちゃんと判定したい。@todo;
-            exec('/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-            exec('/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-            exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
+        if (($argv[1] ?? null) != '--dry-run') {
+            if (strpos($attr, ':')) {
+                // setかaddで。ちゃんと判定したい。@todo;
+                exec('/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
+                exec('/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
+                exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
+            } else {
+                exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
+                exec('defaults read ' . $com . ' ' . $attr, $out);
+            }
         } else {
-            exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
-            exec('defaults read ' . $com . ' ' . $attr, $out);
+            echo "\033[32m(dry-run)\033[0m";
         }
         $readAfter = implode("\n", $out);
         echo "$com $attr : \033[32m$read -> $readAfter\033[0m\n";
