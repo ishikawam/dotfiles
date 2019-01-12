@@ -54,15 +54,10 @@
 !/tmux/
 !/.globalrc
 
-# for mac Library/Preferences
+# for mac Library
+# /Library/Preferences/ はaddは絶対ダメ！
 !/Library/
 /Library/*
-!/Library/Preferences/
-/Library/Preferences/*
-!/Library/Preferences/com.apple.LaunchServices/
-/Library/Preferences/com.apple.LaunchServices/*
-!/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
-
 !/Library/Application\ Support/
 /Library/Application\ Support/*
 !/Library/Application\ Support/Google/
@@ -75,9 +70,6 @@
 !/Library/Application\ Support/Sequel\ Pro/
 /Library/Application\ Support/Sequel\ Pro/*
 !/Library/Application\ Support/Sequel\ Pro/Data/
-
-# Google Drive
-!/Library/Preferences/com.google.GoogleDrive.plist
 
 
 
