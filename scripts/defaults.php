@@ -518,7 +518,56 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'write' => '-bool true',
         ],
 
+        // Trackpad
+        'com.apple.trackpad.forceClick' => [
+            // 新Trackpadの強く押し込む を無効に Look up & data detectors ; Force click with one finger
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'com.apple.trackpad.scaling' => [
+            // Tracking speed
+            'read' => 1.5,
+            'write' => '-float 1.5',
+        ],
     ],
+
+    // Trackpad
+    'com.apple.AppleMultitouchTrackpad' => [
+        'ActuateDetents' => [
+            // 新Trackpadの強く押し込む を無効に Force Click and haptic feedback
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'Clicking' => [
+            // Tap to click
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'ForceSuppressed' => [
+            // 新Trackpadの強く押し込む を無効に Force Click and haptic feedback
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'TrackpadThreeFingerHorizSwipeGesture' => [
+            // 4本指に
+            'read' => 0,
+            'write' => '-int 0',
+        ],
+        'TrackpadThreeFingerVertSwipeGesture' => [
+            // 4本指に
+            'read' => 0,
+            'write' => '-int 0',
+        ],
+    ],
+    'com.apple.preference.trackpad' => [
+        'ForceClickSavedState' => [
+            // 新Trackpadの強く押し込む を無効に Force Click and haptic feedback
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+    ],
+
+    // Language and Region
     'com.apple.systemuiserver' => [
         // menuExtras もやりたいけど、、array_pushがわからないので。
         '"NSStatusItem Visible com.apple.menuextra.textinput"' => [
