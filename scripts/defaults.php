@@ -543,6 +543,16 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 1,
             'write' => '-bool true',
         ],
+        'Dragging' => [
+            // ダブルタップでドラッグ開始
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'DragLock' => [
+            // その場合、タップしないとドラッグ解除しない
+            'read' => 1,
+            'write' => '-bool true',
+        ],
         'ForceSuppressed' => [
             // 新Trackpadの強く押し込む を無効に Force Click and haptic feedback
             'read' => 1,
@@ -557,6 +567,43 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             // 4本指に
             'read' => 0,
             'write' => '-int 0',
+        ],
+        'TrackpadThreeFingerDrag' => [
+            // 3本指ドラッグ
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
+    'com.apple.driver.AppleBluetoothMultitouch.trackpad' => [
+        'Clicking' => [
+            // Tap to click
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'Dragging' => [
+            // ダブルタップでドラッグ開始
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'DragLock' => [
+            // その場合、タップしないとドラッグ解除しない
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'TrackpadThreeFingerHorizSwipeGesture' => [
+            // 4本指に
+            'read' => 0,
+            'write' => '-int 0',
+        ],
+        'TrackpadThreeFingerVertSwipeGesture' => [
+            // 4本指に
+            'read' => 0,
+            'write' => '-int 0',
+        ],
+        'TrackpadThreeFingerDrag' => [
+            // 3本指ドラッグ
+            'read' => 1,
+            'write' => '-bool true',
         ],
     ],
     'com.apple.preference.trackpad' => [
@@ -625,13 +672,10 @@ foreach ($arr as $com => $tmp) {
 /*
 
 # Enable `Tap to click` （タップでクリックを有効にする）
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Map bottom right Trackpad corner to right-click （右下をクリックで、副クリックに割り当てる）
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
@@ -817,13 +861,10 @@ sudo pmset -a hibernatemode 0
 ###############################################################################
 
 # Trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Trackpad: map bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
