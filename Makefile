@@ -1,3 +1,5 @@
+# shellじゃないのでifをやめないと。
+
 setup:
 	sh ~/scripts/setup.sh
 	sh ~/scripts/setup_mac.sh
