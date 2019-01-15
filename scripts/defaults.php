@@ -628,7 +628,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         'orderedItems' => [
             'read' => '(
         {
-        enabled = 0;
+        enabled = 1;
         name = APPLICATIONS;
     },
         {
@@ -713,7 +713,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     }
 )',
             'write' => '-array \
-	\'{"enabled" = 0;"name" = "APPLICATIONS";}\' \
+	\'{"enabled" = 1;"name" = "APPLICATIONS";}\' \
 	\'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}\' \
 	\'{"enabled" = 0;"name" = "MENU_CONVERSION";}\' \
 	\'{"enabled" = 0;"name" = "MENU_EXPRESSION";}\' \
