@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # M.Ishikawa rdiff
 # リモートの同じ場所とのdiffを色付きで
 # rdiff file.txt remote-host-name
