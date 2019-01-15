@@ -14,6 +14,12 @@ head "### Setup Mac ###"
 
 ######## mac homebrew ##################################################################
 
+head "0. xcode"
+
+xcode-select --install 2>/dev/null
+
+######## mac homebrew ##################################################################
+
 head "1. homebrew"
 
 if [ ! -x "`which brew 2>/dev/null`" ]; then
@@ -26,8 +32,15 @@ brew update
 brew upgrade
 brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas
 brew install carthage git-lfs swiftlint ruby rbenv ruby-build
-brew cask install docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-brew cask install firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher adobe-creative-cloud sequel-pro google-backup-and-sync
+# brew caskは途中でエラーあるとそこで止まるので、どうせ非同期してくれないのでarray()に入れてループで1つずつインストールする
+array=(
+    docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
+    firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher adobe-creative-cloud sequel-pro google-backup-and-sync
+)
+for i in "${array[@]}"
+do
+    brew cask install $i
+done
 # ためしたい adobe-creative-cloud-cleaner-tool
 # skitch evernote はapp store版で。
 # 必須ではない
