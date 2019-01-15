@@ -7,7 +7,7 @@ head () {
 # mac only
 if [ `uname` != "Darwin" ]; then
     echo Do nothing.
-    return
+    exit
 fi
 
 head "### Setup Mac ###"

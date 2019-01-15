@@ -25,10 +25,10 @@ record-installed-tools:
 	sh ~/private/scripts/recordInstalledTools.sh
 
 defaults:
-	if [ -x "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php ; killall Finder ; killall Dock ; fi
+	if [ "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php ; killall Finder ; killall Dock ; fi
 
 defaults-dryrun:
-	if [ -x "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php --dry-run ; fi
+	if [ "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php --dry-run ; fi
 
 updates:
 	sh bin/updates
