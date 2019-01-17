@@ -12,11 +12,15 @@ fi
 
 head "### Setup Mac ###"
 
-######## mac homebrew ##################################################################
+######## mac xcode ##################################################################
 
 head "0. xcode"
 
-xcode-select --install 2>/dev/null
+if [ ! $SSH_CLIENT ]; then
+    # mac端末上なら実行
+    # @todo; caskも？masは？
+    xcode-select --install 2>/dev/null
+fi
 
 ######## mac homebrew ##################################################################
 
@@ -30,16 +34,22 @@ if [ ! -x "`which brew 2>/dev/null`" ]; then
 fi
 brew update
 brew upgrade
-brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas
-brew install carthage git-lfs swiftlint ruby rbenv ruby-build
+brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build
+# homebrew cask
+brew cask upgrade
 # brew caskは途中でエラーあるとそこで止まるので、どうせ非同期してくれないのでarray()に入れてループで1つずつインストールする
 array=(
     docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
     firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher adobe-creative-cloud sequel-pro google-backup-and-sync
+    gyazo
 )
+brewcaskls=`brew cask ls`
 for i in "${array[@]}"
 do
-    brew cask install $i
+    if [ ! `echo $brewcaskls | grep -o "\b$i\b"` ]; then
+        brew cask install $i
+        # open /Applications/$i  これじゃだめ
+    fi
 done
 # ためしたい adobe-creative-cloud-cleaner-tool
 # skitch evernote はapp store版で。
@@ -53,6 +63,7 @@ brew cleanup
 head "2. mas = mac app store"
 
 # mas = mac app store
+mas upgrade
 mas install 405399194 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 497799835 504544917 513610341 539883307 557168941 568494494 592704001 803453959 823766827 880001334 1295203466
 # 405399194 Kindle
 # 406056744 Evernote (7.7)

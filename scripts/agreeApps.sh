@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# アクセス許可を出させたり初回起動をどうしてもやりたいもののみに絞ろう。
+# SSH_CLIENTみてmac上でかどうか判定、、でも、それならリモートで入れる、あとで端末で同意、とかができないし、、
+
 array=(
     # brew cask
     "/Applications/Docker.app"
@@ -21,8 +24,9 @@ array=(
     "/Applications/iTerm.app"
     "/Applications/GoogleJapaneseInput.localized/ConfigDialog.app"
     "/Applications/Backup and Sync.app"
+    "/Applications/Gyazo.app"
 
-    # adobe ha installer
+    # adobe は installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
 
     # mac標準
@@ -54,16 +58,10 @@ array=(
     "/Applications/Xcode.app"
     "/Applications/iMovie.app"
 
-    # are?
-#    "/Applications/Twitter.app"
-
-    # 手動？
+    # 手動
     "/Applications/FileZilla.app"
     "/Applications/Picasa.app"
     "/Applications/RICOH THETA.app"
-
-    # font
-    "~/Dropbox/Fonts/SourceCodePro-Reguslar-Powerline.otf"
 
 
     # "/Applications/"
@@ -83,9 +81,7 @@ array=(
 # Box Sync.app/
 # FaceTime.app/
 
-# Font Book.app/
-# GlobalProtect.app/
-# Gyazo.app/
+
 
 # Microsoft Excel.app/
 # Microsoft OneNote.app/
