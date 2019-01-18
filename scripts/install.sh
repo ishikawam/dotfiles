@@ -29,8 +29,6 @@ if [ `uname` = "Darwin" ]; then
         git checkout .
         cd -
     fi
-#else
-#    rm -r ~/Library/
 fi
 git submodule update --init
 
