@@ -334,6 +334,25 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+    // Clipy
+    'com.clipy-app.Clipy' => [
+        'kCPYHotKeyHistoryKeyCombo' => [
+            // ⌥ ⌘ V で起動
+            'read' => '<62706c69 73743030 d4010203 04050618 19582476 65727369 6f6e5824 6f626a65 63747359 24617263 68697665 72542474 6f701200 0186a0a3 07081155 246e756c 6cd4090a 0b0c0d0e 0f105624 636c6173 73596d6f 64696669 65727357 6b657943 6f64655f 1010646f 75626c65 644d6f64 69666965 72738002 11090010 0908d212 1314155a 24636c61 73736e61 6d655824 636c6173 7365735f 100f4d61 676e6574 2e4b6579 436f6d62 6fa21617 5f100f4d 61676e65 742e4b65 79436f6d 626f584e 534f626a 6563745f 100f4e53 4b657965 64417263 68697665 72d11a1b 54726f6f 74800108 111a232d 32373b41 4a515b63 76787b7d 7e838e97 a9acbec7 d9dce100 00000000 00010100 00000000 00001c00 00000000 00000000 00000000 0000e3>',
+            'write' => '-data 62706c6973743030d40102030405061819582476657273696f6e58246f626a65637473592461726368697665725424746f7012000186a0a307081155246e756c6cd4090a0b0c0d0e0f105624636c617373596d6f64696669657273576b6579436f64655f1010646f75626c65644d6f646966696572738002110900100908d2121314155a24636c6173736e616d655824636c61737365735f100f4d61676e65742e4b6579436f6d626fa216175f100f4d61676e65742e4b6579436f6d626f584e534f626a6563745f100f4e534b657965644172636869766572d11a1b54726f6f74800108111a232d32373b414a515b6376787b7d7e838e97a9acbec7d9dce10000000000000101000000000000001c000000000000000000000000000000e3',
+        ],
+        'kCPYHotKeySnippetKeyCombo' => [
+            // 他は不要
+            'read' => null,
+            'write' => null,
+        ],
+        'kCPYHotKeyMainKeyCombo' => [
+            // 他は不要
+            'read' => null,
+            'write' => null,
+        ],
+    ],
+
     // Better Snap Tool
     'com.hegenberg.BetterSnapTool' => [
         'launchOnStartup' => [
@@ -772,23 +791,25 @@ foreach ($arr as $com => $tmp) {
         if (strpos($attr, ':')) {
             exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
-            exec('defaults read ' . $com . ' ' . $attr, $out);
+            exec('defaults read ' . $com . ' ' . $attr . ($val['read'] === null ? ' 2>/dev/null' : '') , $out);
         }
         $read = implode("\n", $out);
-        if ($read == '') {
+        if ($read == '' && $val['read'] !== null) {
             echo "\033[31mError. $com $attr\033[0m\n";
-/*
-            echo 'regist? y or n (n): ';
-            $input = trim(fgets(STDIN));
-            if ($input != 'y') {
-                continue;
-            }
-*/
         }
 
-        if (! isset($val['write']) || $read === (string)$val['read']) {
-            echo "$com $attr : $read\n";
-            continue;
+        if ($val['read'] === null) {
+            // delete
+            if ($read == '') {
+                // skip delete
+                echo "skip deleting... $com $attr : $read\n";
+                continue;
+            }
+        } else {
+            if (! isset($val['write']) || $read === (string)$val['read']) {
+                echo "skip... $com $attr : $read\n";
+                continue;
+            }
         }
 
         $out = null;
@@ -799,16 +820,29 @@ foreach ($arr as $com => $tmp) {
                 exec('/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
                 exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
             } else {
-                exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
-                exec('defaults read ' . $com . ' ' . $attr, $out);
+                if ($val['read'] === null) {
+                    // $val['read'] = null は削除
+                    exec('defaults delete ' . $com . ' ' . $attr);
+                } else {
+                    exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
+                    exec('defaults read ' . $com . ' ' . $attr, $out);
+                }
             }
         } else {
             echo "\033[32m(dry-run)\033[0m";
         }
-        $readAfter = implode("\n", $out);
-        echo "$com $attr : \033[32m$read -> $readAfter\033[0m\n";
+
+        if ($val['read'] === null) {
+            echo "$com $attr : \033[32mDeleted.\033[0m\n";
+        } else {
+            $readAfter = implode("\n", $out);
+            echo "$com $attr : \033[32m$read -> $readAfter\033[0m\n";
+        }
     }
 }
+
+echo "\n\nDONE. plaese restart mac.";
+
 
 /*
 
