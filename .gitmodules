@@ -28,3 +28,6 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:ishikawam/private_dotfiles.git
+[submodule "Library"]
+	path = Library
+	url = git@github.com:ishikawam/library_dotfiles.git

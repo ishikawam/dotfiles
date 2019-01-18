@@ -62,6 +62,10 @@
 # 共通
 !/common/
 
+# submodules
+!/Library/
+!/private/
+
 # メモ：やめたもの
 # oh-my-zsh
 # z
