@@ -19,9 +19,14 @@ chmod 600 ~/.ssh/config
 
 # submodule
 if [ `uname` = "Darwin" ]; then
-    echo > .git/info/exclude
+    if [ ! -d ~/Library/.git ]; then
+        git clone git@github.com:ishikawam/library_dotfiles.git
+        mv library_dotfiles/.git ~/Library/
+        rm -rf library_dotfiles
+        cd Library ; git reset ; cd -
+    fi
 else
-    echo /Library/ > .git/info/exclude
+    rm -r ~/Library/
 fi
 git submodule update --init
 
