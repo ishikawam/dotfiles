@@ -231,9 +231,11 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
-    // Keyboard shotcuts
+// @todo; AppleSavedCurrentInputSource やりたい。
+
+    // Keyboard shortcuts
     'com.apple.symbolichotkeys' => [
-        // Input Sources > Select the previous input source = ⌘Space
+        // 60: Keyborad > Shortcuts > Input Sources > Select the previous input source = ⌘ Space
         'AppleSymbolicHotKeys:60:enabled' => [
             'read' => 'true',
             'write' => 'true',
@@ -249,6 +251,28 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         'AppleSymbolicHotKeys:60:value:parameters:2' => [
             'read' => 1048576,
             'write' => 1048576,
+        ],
+        // 64: Keyborad > Shortcuts > Spotlight > Show Spotlight search = OFF
+        'AppleSymbolicHotKeys:64:enabled' => [
+            'read' => 'false',
+            'write' => 'false',
+        ],
+        // 27: Keyborad > Shortcuts > Keyboard > Move focus to next window = ⌘ F1
+        'AppleSymbolicHotKeys:27:enabled' => [
+            'read' => 'true',
+            'write' => 'true',
+        ],
+        'AppleSymbolicHotKeys:27:value:parameters:0' => [
+            'read' => 65535,
+            'write' => 65535,
+        ],
+        'AppleSymbolicHotKeys:27:value:parameters:1' => [
+            'read' => 122,
+            'write' => 122,
+        ],
+        'AppleSymbolicHotKeys:27:value:parameters:2' => [
+            'read' => 9437184,
+            'write' => 9437184,
         ],
     ],
 
