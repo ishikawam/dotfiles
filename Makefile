@@ -1,4 +1,3 @@
-# shellじゃないのでifをやめないと。
 
 setup:
 	sh ~/scripts/setup.sh
@@ -27,10 +26,10 @@ record-installed-tools:
 	sh ~/private/scripts/recordInstalledTools.sh
 
 defaults:
-	if [ "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php ; killall Finder ; killall Dock ; fi
+	php ~/scripts/defaults.php
 
 defaults-dryrun:
-	if [ "`which defaults 2>/dev/null`" ]; then php ~/scripts/defaults.php --dry-run ; fi
+	php ~/scripts/defaults.php --dry-run
 
 updates:
 	sh bin/updates
