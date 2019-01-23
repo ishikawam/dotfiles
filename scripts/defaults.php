@@ -580,6 +580,13 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 1.5,
             'write' => '-float 1.5',
         ],
+
+        // Finder
+        'NSTableViewDefaultSizeMode' => [
+            // ### [システム環境設定]，[一般] の pmn[サイドバーのアイコンサイズ] デフォルト2
+//            'read' => 2,
+//            'write' => '-int 2',
+        ],
     ],
 
     // Trackpad
@@ -785,7 +792,6 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	\'{"enabled" = 0;"name" = "FONTS";}\' \
 	\'{"enabled" = 0;"name" = "MENU_OTHER";}\' \
 	\'{"enabled" = 0;"name" = "SOURCE";}\' \
-
 ',
 //	\'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}\' \
         ],
@@ -943,9 +949,6 @@ defaults write com.apple.universalaccess reduceTransparency -bool true
 
 # Set highlight color to green
 defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
-
-# Set sidebar icon size to medium
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
@@ -1597,10 +1600,6 @@ defaults write NSGlobalDomain AppleHighlightColor -string '0.764700 0.976500 0.5
 ### [システム環境設定]，[一般] の pmn[強調表示色]
 ### -> [グリーン]
 
-# Set sidebar icon size to medium
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
-### [システム環境設定]，[一般] の pmn[サイドバーのアイコンサイズ]
-### -> [中]
 
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
