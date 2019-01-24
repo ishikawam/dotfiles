@@ -708,39 +708,15 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'write' => '-bool false',
         ],
     ],
-/*
+
     // Activity Monitor
     'com.apple.ActivityMonitor' => [
-        'DateFormat' => [
-            // Date options: Show the day of the week: on （日付表示設定、曜日を表示）
-            'read' => 'EEE H:mm',
-            'write' => '-string "EEE H:mm"',
-        ],
-        'FlashDateSeparators' => [
-            // Flash the time separators
-            'read' => 1,
-            'write' => '-bool true',
-        ],
-        'IsAnalog' => [
-            // Digital or Analog
-            'read' => 0,
-            'write' => '-bool false',
+        'IconType' => [
+            // Visualize CPU usage in the Activity Monitor Dock icon
+            'read' => '6',
+            'write' => '-int 6',
         ],
     ],
-
-# Show the main window when launching Activity Monitor
-defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-
-# Visualize CPU usage in the Activity Monitor Dock icon
-defaults write com.apple.ActivityMonitor IconType -int 5
-
-# Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-# Sort Activity Monitor results by CPU usage
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-defaults write com.apple.ActivityMonitor SortDirection -int 0
-*/
 
     // Spotlight
     'com.apple.Spotlight' => [
