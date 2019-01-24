@@ -681,6 +681,67 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+    // menuextra : show percentage
+    'com.apple.menuextra.battery' => [
+        'ShowPercent' => [
+            // バッテリーのパーセントを表示
+            'read' => 'YES',
+            'write' => '-string YES',
+        ],
+    ],
+
+    // Date & Time > Clock
+    'com.apple.menuextra.clock' => [
+        'DateFormat' => [
+            // Date options: Show the day of the week: on （日付表示設定、曜日を表示）
+            'read' => 'EEE H:mm',
+            'write' => '-string "EEE H:mm"',
+        ],
+        'FlashDateSeparators' => [
+            // Flash the time separators
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'IsAnalog' => [
+            // Digital or Analog
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+    ],
+/*
+    // Activity Monitor
+    'com.apple.ActivityMonitor' => [
+        'DateFormat' => [
+            // Date options: Show the day of the week: on （日付表示設定、曜日を表示）
+            'read' => 'EEE H:mm',
+            'write' => '-string "EEE H:mm"',
+        ],
+        'FlashDateSeparators' => [
+            // Flash the time separators
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'IsAnalog' => [
+            // Digital or Analog
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+    ],
+
+# Show the main window when launching Activity Monitor
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Visualize CPU usage in the Activity Monitor Dock icon
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Sort Activity Monitor results by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+*/
+
     // Spotlight
     'com.apple.Spotlight' => [
         'orderedItems' => [
@@ -871,11 +932,7 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 
 
 
-# Hide the battery percentage from the menu bar （バッテリーのパーセントを非表示にする）
-defaults write com.apple.menuextra.battery ShowPercent -string "NO"
 
-# Date options: Show the day of the week: on （日付表示設定、曜日を表示）
-defaults write com.apple.menuextra.clock 'DateFormat' -string 'EEE H:mm'
 
 
 # Automatically quit the printer app once the print jobs are completed
@@ -1319,22 +1376,6 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable local Time Machine backups
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
-###############################################################################
-# Activity Monitor                                                            #
-###############################################################################
-
-# Show the main window when launching Activity Monitor
-defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-
-# Visualize CPU usage in the Activity Monitor Dock icon
-defaults write com.apple.ActivityMonitor IconType -int 5
-
-# Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
-
-# Sort Activity Monitor results by CPU usage
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
-defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 ###############################################################################
 # Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
@@ -1585,15 +1626,7 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 ### [システム環境]，[デスクトップとスクリーンセーバ] のchb[半透明メニューバー]
 ### -> "オフ" (半透明にしない)
 
-# Menu bar: show remaining battery time (on pre-10.8); hide percentage
-defaults write com.apple.menuextra.battery ShowPercent -string "NO"
-defaults write com.apple.menuextra.battery ShowTime -string "YES"
-### (略)
 
-# Menu bar: hide the useless Time Machine and Volume icons
-defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
-### (略; Bluetooth，Wifi，バッテリー，そして時計は，それぞれ [システム環境設定] の [Bluetooth]，[ネットワーク]，[省エネルギー]，そして [日付と時刻] で．他もある)
-### -> メニューバーに Bluetooth，Wifi，バッテリー，そして時計を表示．
 
 # Set highlight color to green
 defaults write NSGlobalDomain AppleHighlightColor -string '0.764700 0.976500 0.568600'
@@ -1686,5 +1719,15 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0
 
 */
 
+
+
+/* コントロールしないと決めているもの
+
+# Menu bar: hide the useless Time Machine and Volume icons
+com.apple.systemuiserver menuExtras
+
+
+
+*/
 
 
