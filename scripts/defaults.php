@@ -222,17 +222,17 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         // カレンダー
         // デフォルトカレンダー CalDefaultCalendar は「予定表」にしたいが、デバイスごとでハッシュが異なるのでできない。
         // 通知もできない。結構手動でやるしかない。
-        '"first day of week"' => [
+        'first day of week' => [
             // 先頭を月曜日に AppleFirstWeekdayでやってるけども。
             'read' => 1,
             'write' => '-int 1',
         ],
-        '"first minute of work hours"' => [
+        'first minute of work hours' => [
             // 1日の開始時間 8:00
             'read' => 480,
             'write' => '-int 480',
         ],
-        '"last minute of work hours"' => [
+        'last minute of work hours' => [
             // 1日の終了時間 20:00
             'read' => 1200,
             'write' => '-int 1200',
@@ -339,6 +339,29 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         'showsStatusBarItem' => [
             'read' => 0,
             'write' => '-bool false',
+        ],
+    ],
+    'com.evernote.EvernoteHelper' => [
+        // ショートカットをすべて削除
+        'ShortcutRecorder newnote' => [
+            'read' => "{\n}",
+            'write' => '-dict',
+        ],
+        'ShortcutRecorder newnotewindow' => [
+            'read' => "{\n}",
+            'write' => '-dict',
+        ],
+        'ShortcutRecorder pasteboard' => [
+            'read' => "{\n}",
+            'write' => '-dict',
+        ],
+        'ShortcutRecorder screenshot' => [
+            'read' => "{\n}",
+            'write' => '-dict',
+        ],
+        'ShortcutRecorder search' => [
+            'read' => "{\n}",
+            'write' => '-dict',
         ],
     ],
 
@@ -675,7 +698,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     // Language and Region
     'com.apple.systemuiserver' => [
         // menuExtras もやりたいけど、、array_pushがわからないので。
-        '"NSStatusItem Visible com.apple.menuextra.textinput"' => [
+        'NSStatusItem Visible com.apple.menuextra.textinput' => [
             'read' => 1,
             'write' => '-bool true',
         ],
@@ -842,7 +865,7 @@ foreach ($arr as $com => $tmp) {
         if (strpos($attr, ':')) {
             exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
-            exec('defaults read ' . $com . ' ' . $attr . ($val['read'] === null ? ' 2>/dev/null' : '') , $out);
+            exec('defaults read ' . $com . ' "' . $attr . '"' . ($val['read'] === null ? ' 2>/dev/null' : '') , $out);
         }
         $read = implode("\n", $out);
         if ($read == '' && $val['read'] !== null) {
@@ -873,10 +896,10 @@ foreach ($arr as $com => $tmp) {
             } else {
                 if ($val['read'] === null) {
                     // $val['read'] = null は削除
-                    exec('defaults delete ' . $com . ' ' . $attr);
+                    exec('defaults delete ' . $com . ' "' . $attr . '"');
                 } else {
-                    exec('defaults write ' . $com . ' ' . $attr . ' ' . $val['write']);
-                    exec('defaults read ' . $com . ' ' . $attr, $out);
+                    exec('defaults write ' . $com . ' "' . $attr . '" ' . $val['write']);
+                    exec('defaults read ' . $com . ' "' . $attr . '"', $out);
                 }
             }
         } else {
