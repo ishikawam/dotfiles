@@ -18,7 +18,7 @@ $arr = [
     // sudo user
     '/Library/Preferences/com.apple.loginwindow' => [
         'LoginwindowText' => [
-            // Automatically hide or show the Dock （Dock を自動的に隠す）
+            // ロックスクリーンメッセージ 紛失時用
             'read' => "\u77f3\u5ddd\u5c06\u884c\n090-2442-9581\nishikawam@nifty.com",
             'write' => "-string \"石川将行\n090-2442-9581\nishikawam@nifty.com\"",
             'sudo' => true,
@@ -294,7 +294,14 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'write' => 9437184,
         ],
     ],
-
+    // Accessibility
+    'com.apple.universalaccess' => [
+        // Use scroll gesture with the Ctrl (^) modifier key to zoom
+        'closeViewScrollWheelToggle' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
 
     /**
      * apps
@@ -665,6 +672,11 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 1,
             'write' => '-bool true',
         ],
+        'HIDScrollZoomModifierMask' => [
+            // Ctrol+Trackpad = zoom
+            'read' => 262144,
+            'write' => '-int 262144',
+        ],
     ],
     'com.apple.driver.AppleBluetoothMultitouch.trackpad' => [
         'Clicking' => [
@@ -696,6 +708,11 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             // 3本指ドラッグ
             'read' => 1,
             'write' => '-bool true',
+        ],
+        'HIDScrollZoomModifierMask' => [
+            // Ctrol+Trackpad = zoom
+            'read' => 262144,
+            'write' => '-int 262144',
         ],
     ],
     'com.apple.preference.trackpad' => [
@@ -1133,9 +1150,6 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# Use scroll gesture with the Ctrl (^) modifier key to zoom
-defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 # Follow the keyboard focus while zoomed in
 defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
