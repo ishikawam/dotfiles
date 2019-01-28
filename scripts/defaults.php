@@ -892,6 +892,7 @@ foreach ($arr as $com => $tmp) {
         $sudo = $val['sudo'] ?? false;
         $sudoCommand = $sudo ? 'sudo ' : '';
         $out = null;
+        $val['read'] = $val['read'] ?? null;
         if (strpos($attr, ':')) {
             exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
@@ -899,19 +900,21 @@ foreach ($arr as $com => $tmp) {
         }
         $read = implode("\n", $out);
         if ($read == '' && $val['read'] !== null) {
-            echo "\033[31mError. $com $attr\033[0m\n";
+            echo "\n\033[31mError. $com $attr\033[0m\n";
         }
 
         if ($val['read'] === null) {
             // delete
             if ($read == '') {
                 // skip delete
-                echo "skip deleting... $com $attr : $read\n";
+//                echo "skip deleting... $com $attr : $read\n";
+                echo '.';
                 continue;
             }
         } else {
             if (! isset($val['write']) || $read === (string)$val['read']) {
-                echo "skip... $com $attr : $read\n";
+//                echo "skip... $com $attr : $read\n";
+                echo '.';
                 continue;
             }
         }
@@ -933,14 +936,14 @@ foreach ($arr as $com => $tmp) {
                 }
             }
         } else {
-            echo "\033[32m(dry-run)\033[0m";
+            echo "\n\033[32m(dry-run)\033[0m";
         }
 
         if ($val['read'] === null) {
-            echo "$com $attr : \033[32mDeleted.\033[0m\n";
+            echo "\n$com $attr : \033[32mDeleted.\033[0m\n";
         } else {
             $readAfter = implode("\n", $out);
-            echo "$com $attr : \033[32m$read -> $readAfter\033[0m\n";
+            echo "\n$com $attr : \033[32m$read -> $readAfter\033[0m\n";
         }
     }
 }
