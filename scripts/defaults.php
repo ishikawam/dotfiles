@@ -15,6 +15,17 @@ if (exec('which defaults 2>/dev/null') == '') {
 $HOME = exec('echo $HOME');
 
 $arr = [
+    // sudo user
+    '/Library/Preferences/com.apple.loginwindow' => [
+        'LoginwindowText' => [
+            // Automatically hide or show the Dock （Dock を自動的に隠す）
+            'read' => "\u77f3\u5ddd\u5c06\u884c\n090-2442-9581\nishikawam@nifty.com",
+            'write' => "-string \"石川将行\n090-2442-9581\nishikawam@nifty.com\"",
+            'sudo' => true,
+        ],
+    ],
+
+    // general user
     'com.apple.dock' => [
         'autohide' => [
             // Automatically hide or show the Dock （Dock を自動的に隠す）
@@ -861,11 +872,13 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 
 foreach ($arr as $com => $tmp) {
     foreach ($tmp as $attr => $val) {
+        $sudo = $val['sudo'] ?? false;
+        $sudoCommand = $sudo ? 'sudo ' : '';
         $out = null;
         if (strpos($attr, ':')) {
-            exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
+            exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
-            exec('defaults read ' . $com . ' "' . $attr . '"' . ($val['read'] === null ? ' 2>/dev/null' : '') , $out);
+            exec($sudoCommand . 'defaults read ' . $com . ' "' . $attr . '"' . ($val['read'] === null ? ' 2>/dev/null' : '') , $out);
         }
         $read = implode("\n", $out);
         if ($read == '' && $val['read'] !== null) {
@@ -890,16 +903,16 @@ foreach ($arr as $com => $tmp) {
         if (($argv[1] ?? null) != '--dry-run') {
             if (strpos($attr, ':')) {
                 // setかaddで。ちゃんと判定したい。@todo;
-                exec('/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-                exec('/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-                exec('/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
+                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
+                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
+                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
             } else {
                 if ($val['read'] === null) {
                     // $val['read'] = null は削除
-                    exec('defaults delete ' . $com . ' "' . $attr . '"');
+                    exec($sudoCommand . 'defaults delete ' . $com . ' "' . $attr . '"');
                 } else {
-                    exec('defaults write ' . $com . ' "' . $attr . '" ' . $val['write']);
-                    exec('defaults read ' . $com . ' "' . $attr . '"', $out);
+                    exec($sudoCommand . 'defaults write ' . $com . ' "' . $attr . '" ' . $val['write']);
+                    exec($sudoCommand . 'defaults read ' . $com . ' "' . $attr . '"', $out);
                 }
             }
         } else {
