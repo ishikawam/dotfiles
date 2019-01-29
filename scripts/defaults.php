@@ -546,6 +546,12 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        //
+        'nextMonitorMoveWarningShowed' => [
+            // next monitor move の警告を出さない
+            'read' => 1,
+            'write' => '-bool true',
+        ],
     ],
 
     /**
