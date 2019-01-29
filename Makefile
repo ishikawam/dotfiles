@@ -4,11 +4,11 @@ setup:
 	sh ~/scripts/setup_mac.sh
 	make defaults
 #	make agree-apps
-	if [ -f ~/private/scripts/setup_private.sh ]; then sh ~/private/scripts/setup_private.sh ; fi
+	if [ -f ~/private/scripts/setup_private.sh ]; then bash ~/private/scripts/setup_private.sh ; fi
 
 setup-private:
 # installedを保存するくらい
-	sh ~/private/scripts/setup_private.sh
+	bash ~/private/scripts/setup_private.sh
 
 install:
 	make setup
@@ -23,7 +23,7 @@ agree-apps:
 	yes | sh ~/scripts/agreeApps.sh
 
 record-installed-tools:
-	sh ~/private/scripts/recordInstalledTools.sh
+	bash ~/private/scripts/recordInstalledTools.sh
 
 defaults:
 	php ~/scripts/defaults.php
