@@ -1,8 +1,9 @@
 <?php
 
-# defaultsを使うのとPlistBuddyを使うのとをいまは混在させているけど、たぶんPlistBuddyに統一したほうがスマートになる
-
-### https://qiita.com/djmonta/items/17531dde1e82d9786816
+/**
+ * defaultsを使うのとPlistBuddyを使うのとをいまは混在させているけど、たぶんPlistBuddyに統一したほうがスマートになる
+ * https://qiita.com/djmonta/items/17531dde1e82d9786816
+ */
 
 echo "\n\n### defaults.php ###\n\n";
 

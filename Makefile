@@ -27,6 +27,7 @@ record-installed-tools:
 
 defaults:
 	php ~/scripts/defaults.php
+	php ~/scripts/ini.php
 
 defaults-dryrun:
 	php ~/scripts/defaults.php --dry-run
