@@ -107,6 +107,7 @@ $arr = [
     ],
     'com.apple.finder' => [
         'ComputerViewSettings:WindowState:ContainerShowSidebar' => [
+            // なんだっけ？
             'read' => 'true',
             'write' => 'true',
         ],
