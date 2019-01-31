@@ -120,11 +120,11 @@ head "3. set hostname"
 
 HOSTNAME=`scutil --get ComputerName`
 echo "ComputerName: $HOSTNAME"
-if [ `scutil --get HostName` != $HOSTNAME ]; then
+if [ "`scutil --get HostName`" != $HOSTNAME ]; then
     echo "HostName: `scutil --get HostName` -> $HOSTNAME"
     sudo scutil --set HostName "$HOSTNAME"
 fi
-if [ `scutil --get LocalHostName` != $HOSTNAME ]; then
+if [ "`scutil --get LocalHostName`" != $HOSTNAME ]; then
     echo "LocalHostName: `scutil --get LocalHostName` -> $HOSTNAME"
     sudo scutil --set LocalHostName "$HOSTNAME"
 fi
