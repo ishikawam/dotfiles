@@ -1,5 +1,5 @@
 {
-  "title": "Emacs key bindings (rev 12) fix. Sublimeで効かなかったので。by Ishikawa",
+  "title": "Emacs key bindings (rev 12) fix. Sublime,itermで効かなかったので。by Ishikawa",
   "rules": [
     {
       "description": "Emacs key bindings [option+keys] (rev 5) fix. Sublimeで効かなかったので。by Ishikawa",
@@ -45,7 +45,6 @@
                 "^com\\.vmware\\.horizon$",
                 "^com\\.2X\\.Client\\.Mac$",
                 "^com\\.apple\\.Terminal$",
-                "^com\\.googlecode\\.iterm2$",
                 "^co\\.zeit\\.hyperterm$",
                 "^co\\.zeit\\.hyper$",
                 "^io\\.alacritty$",
@@ -114,7 +113,6 @@
                 "^com\\.vmware\\.horizon$",
                 "^com\\.2X\\.Client\\.Mac$",
                 "^com\\.apple\\.Terminal$",
-                "^com\\.googlecode\\.iterm2$",
                 "^co\\.zeit\\.hyperterm$",
                 "^co\\.zeit\\.hyper$",
                 "^io\\.alacritty$",
@@ -183,7 +181,6 @@
                 "^com\\.vmware\\.horizon$",
                 "^com\\.2X\\.Client\\.Mac$",
                 "^com\\.apple\\.Terminal$",
-                "^com\\.googlecode\\.iterm2$",
                 "^co\\.zeit\\.hyperterm$",
                 "^co\\.zeit\\.hyper$",
                 "^io\\.alacritty$",
@@ -251,7 +248,6 @@
                 "^com\\.vmware\\.horizon$",
                 "^com\\.2X\\.Client\\.Mac$",
                 "^com\\.apple\\.Terminal$",
-                "^com\\.googlecode\\.iterm2$",
                 "^co\\.zeit\\.hyperterm$",
                 "^co\\.zeit\\.hyper$",
                 "^io\\.alacritty$",
