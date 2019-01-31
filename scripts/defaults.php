@@ -252,8 +252,6 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
-// @todo; AppleSavedCurrentInputSource やりたい。
-
     // Keyboard shortcuts
     'com.apple.symbolichotkeys' => [
         // 60: Keyborad > Shortcuts > Input Sources > Select the previous input source = ⌘ Space
@@ -296,6 +294,25 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'write' => 9437184,
         ],
     ],
+    // Keyborad - Input Source
+    'com.apple.HIToolbox' => [
+        // Google日本語入力
+        'AppleSelectedInputSources' => [
+            'read' => '(
+        {
+        "Bundle ID" = "com.apple.inputmethod.EmojiFunctionRowItem";
+        InputSourceKind = "Non Keyboard Input Method";
+    },
+        {
+        "Bundle ID" = "com.google.inputmethod.Japanese";
+        "Input Mode" = "com.apple.inputmethod.Japanese";
+        InputSourceKind = "Input Mode";
+    }
+)',
+            'write' => '-array \'{"Bundle ID" = "com.apple.inputmethod.EmojiFunctionRowItem"; InputSourceKind = "Non Keyboard Input Method";}\' \'{"Bundle ID" = "com.google.inputmethod.Japanese"; "Input Mode" = "com.apple.inputmethod.Japanese"; InputSourceKind = "Input Mode";}\'',
+        ],
+    ],
+
     // Accessibility
     'com.apple.universalaccess' => [
         // Use scroll gesture with the Ctrl (^) modifier key to zoom
@@ -359,6 +376,11 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         'showsStatusBarItem' => [
             'read' => 0,
             'write' => '-bool false',
+        ],
+        'NSTableView Supports v2 listView' => [
+            // リストビュー
+            'read' => 1,
+            'write' => '-bool true',
         ],
     ],
     'com.evernote.EvernoteHelper' => [
