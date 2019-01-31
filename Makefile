@@ -1,7 +1,7 @@
 
 setup:
 	sh ~/scripts/setup.sh
-	sh ~/scripts/setup_mac.sh
+	bash ~/scripts/setup_mac.sh
 	make defaults
 #	make agree-apps
 	if [ -f ~/private/scripts/setup_private.sh ]; then bash ~/private/scripts/setup_private.sh ; fi

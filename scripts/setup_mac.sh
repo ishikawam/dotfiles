@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 head () {
     printf "\n\e[32m$1\e[m\n"
@@ -26,7 +26,7 @@ fi
 
 head "1. homebrew"
 
-if [ ! -x "`which brew 2>/dev/null`" ]; then
+if ! type brew >/dev/null ; then
     # http://brew.sh/index_ja.html
     echo Install Homebrew.
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -106,10 +106,12 @@ mas install 405399194 406056744 408981434 409183694 409201541 409203825 41737558
 
 # chrome backup setting
 # この.gitignoreはgit addできない。 > ここでgit initするから
-cd ~/Library/Application\ Support/Google/Chrome/Default/
-ln -sf ~/common/Chrome/Default/gitignore ./.gitignore
-git init
-cd -
+if [ -d ~/Library/Application\ Support/Google/Chrome/Default/ ]; then
+    cd ~/Library/Application\ Support/Google/Chrome/Default/
+    ln -sf ~/common/Chrome/Default/gitignore ./.gitignore
+    git init
+    cd -
+fi
 
 
 ######## hostname mac ##################################################################
