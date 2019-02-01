@@ -149,6 +149,7 @@ fi
 ######## hostname mac ##################################################################
 
 head "5. install font"
+
 if [ ! -f ~/Library/Fonts/SourceCodePro-Regular-Powerline.otf -a -f ~/Dropbox/Fonts/SourceCodePro-Regular-Powerline.otf ]; then
     cp -n ~/Dropbox/Fonts/SourceCodePro-Regular-Powerline.otf ~/Library/Fonts/
 fi
@@ -157,6 +158,17 @@ if [ -d ~/Dropbox/Fonts/Microsoft ]; then
 fi
 if [ -d ~/Dropbox/Fonts/kawaii手書き文字 ]; then
     cp -n ~/Dropbox/Fonts/kawaii手書き文字/*.ttf ~/Library/Fonts/
+fi
+
+
+######## install picasa ##################################################################
+# 廃盤なので、扱いが特殊
+
+head "6. install picasa"
+
+if [ ! -d /Applications/Picasa.app/ ]; then
+    open ~/Dropbox/【圧縮】/mac/picasamac39.dmg
+    open /Applications/Picasa.app
 fi
 
 
