@@ -277,8 +277,18 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 1048576,
             'write' => 1048576,
         ],
+        // 61: Keyborad > Shortcuts > Input Sources > Select next soruce in Input menu = OFF
+        'AppleSymbolicHotKeys:64:enabled' => [
+            'read' => 'false',
+            'write' => 'false',
+        ],
         // 64: Keyborad > Shortcuts > Spotlight > Show Spotlight search = OFF
         'AppleSymbolicHotKeys:64:enabled' => [
+            'read' => 'false',
+            'write' => 'false',
+        ],
+        // 65: Keyborad > Shortcuts > Spotlight > Show Finder search window = OFF
+        'AppleSymbolicHotKeys:65:enabled' => [
             'read' => 'false',
             'write' => 'false',
         ],
@@ -757,6 +767,12 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 1,
             'write' => '-bool true',
         ],
+        'NSQuitAlwaysKeepsWindows' => [
+            // General > Close windows when quitting an app = off
+            // アプリケーションを終了して再度開くときにウィンドウを復元
+            'read' => 1,
+            'write' => '-bool true',
+        ],
     ],
 
     // Trackpad
@@ -1201,8 +1217,6 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
 defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 
-# Disable Resume system-wide
-defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 # Disable automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
@@ -1828,10 +1842,6 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 ### (無; ascii 制御文字の表示)
 ### -> true (表示する)
 
-# Disable Resume system-wide
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
-### [システム環境設定]，[一般] の chb[アプリケーションを終了して再度開くときにウィンドウを復元]
-### -> "オフ" (復元しない)
 
 # Disable automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
