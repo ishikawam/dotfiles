@@ -199,6 +199,12 @@ $arr = [
             'read' => 'Nlsv',
             'write' => '-string Nlsv',
         ],
+        'FXRemoveOldTrashItems' => [
+            // Remove items from the Trash after 30 days
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+
 
 /*
 # やってもいいかも
@@ -327,6 +333,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
      * Apple Apps
      */
 
+     // Safari
     'com.apple.SafariCloudHistoryPushAgent' => [
         // Push通知を拒否
         'UnacknowledgedPushNotifications' => [
@@ -339,6 +346,22 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+    // Xcode
+    'com.apple.dt.Xcode' => [
+        // Push通知を拒否
+        'DVTTextIndentTabWidth' => [
+            'read' => 2,
+            'write' => '-int 2',
+        ],
+        'DVTTextIndentWidth' => [
+            'read' => 2,
+            'write' => '-int 2',
+        ],
+        'DVTTextTabKeyIndentBehavior' => [
+            'read' => 'Always',
+            'write' => '-string Always',
+        ],
+    ],
 
     /**
      * Non-Apple Apps
@@ -355,6 +378,15 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 
     // Language Switcher
     'com.TJ-HD.Language_Switcher' => [
+        'SUEnableAutomaticChecks' => [
+            // automatic update check.
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
+
+    // MacDown
+    'com.uranusjr.macdown' => [
         'SUEnableAutomaticChecks' => [
             // automatic update check.
             'read' => 1,
@@ -719,6 +751,11 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             // ### [システム環境設定]，[一般] の pmn[サイドバーのアイコンサイズ] デフォルト2
 //            'read' => 2,
 //            'write' => '-int 2',
+        ],
+        'AppleShowAllExtensions' => [
+            // Finder: show all filename extensions
+            'read' => 1,
+            'write' => '-bool true',
         ],
     ],
 
@@ -1817,9 +1854,6 @@ defaults write com.apple.helpviewer DevMode -bool true
 #echo "0x08000100:0" > ~/.CFUserTextEncoding
 ### (略)
 
-
-# Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 
 # Enable spring loading for directories

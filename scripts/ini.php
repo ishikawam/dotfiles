@@ -15,6 +15,7 @@ if (! file_exists($HOME . '/Library/')) {
 
 $arr = [
     // LINE
+    // これだめ。初期ではそもそも項目がないからデフォルトがtrueに。置換ではだめ。
     'Library/Containers/jp.naver.line.mac/Data/Library/Containers/jp.naver.line/Data/LINE.ini' => [
         // サウンド通知しない
         '/alarm_sound=true/' => 'alarm_sound=false',

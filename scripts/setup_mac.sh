@@ -166,7 +166,7 @@ fi
 
 head "6. install picasa"
 
-if [ ! -d /Applications/Picasa.app/ ]; then
+if [ ! -d /Applications/Picasa.app/ -a -e ~/Dropbox/【圧縮】/mac/picasamac39.dmg ]; then
     open ~/Dropbox/【圧縮】/mac/picasamac39.dmg
     open /Applications/Picasa.app
 fi
