@@ -40,8 +40,9 @@ brew cask upgrade
 # brew caskは途中でエラーあるとそこで止まるので、どうせ非同期してくれないのでarray()に入れてループで1つずつインストールする
 array=(
     docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-    firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake language-switcher adobe-creative-cloud sequel-pro google-backup-and-sync
+    firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud sequel-pro google-backup-and-sync
     gyazo
+#    language-switcher  # ダウンロードできない？
 )
 brewcaskls=`brew cask ls`
 for i in "${array[@]}"
@@ -104,6 +105,10 @@ mas install 405399194 406056744 408981434 409183694 409201541 409203825 41737558
 
 #    sudo xcodebuild -license
 
+######## Chrome backup ##################################################################
+
+head "3. Chrome backup"
+
 # chrome backup setting
 # この.gitignoreはgit addできない。 > ここでgit initするから
 if [ -d ~/Library/Application\ Support/Google/Chrome/Default/ ]; then
@@ -111,12 +116,23 @@ if [ -d ~/Library/Application\ Support/Google/Chrome/Default/ ]; then
     ln -sf ~/common/Chrome/Default/gitignore ./.gitignore
     git init
     cd -
+    if [ ! "`crontab -l 2>/dev/null`" ]; then
+        echo "\nNo crontab. Please set."
+        echo "\`\`\`"
+        echo '*/22 * * * * cd ~/Library/Application\ Support/Google/Chrome/Default ; git add . ; git add -u ; git commit -m "`date`" > /dev/null 2>&1'
+        echo "\`\`\`"
+        echo "crontab -eで'Operation not permitted'といわれたら、System PreferencesのSecurity&PrivacyのPrivacyにiTermを追加。"
+        read -p "Edit now? y or n (n): " ans
+        if [ "$ans" = "y" ]; then
+            crontab -e
+        fi
+    fi
 fi
 
 
 ######## hostname mac ##################################################################
 
-head "3. set hostname"
+head "4. set hostname"
 
 HOSTNAME=`scutil --get ComputerName`
 echo "ComputerName: $HOSTNAME"
@@ -132,7 +148,7 @@ fi
 
 ######## hostname mac ##################################################################
 
-head "4. install font"
+head "5. install font"
 if [ ! -f ~/Library/Fonts/SourceCodePro-Regular-Powerline.otf -a -f ~/Dropbox/Fonts/SourceCodePro-Regular-Powerline.otf ]; then
     cp -n ~/Dropbox/Fonts/SourceCodePro-Regular-Powerline.otf ~/Library/Fonts/
 fi

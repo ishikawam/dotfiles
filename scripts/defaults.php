@@ -322,8 +322,26 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+
     /**
-     * apps
+     * Apple Apps
+     */
+
+    'com.apple.SafariCloudHistoryPushAgent' => [
+        // Push通知を拒否
+        'UnacknowledgedPushNotifications' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+        'AcknowledgedPushNotifications' => [
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+    ],
+
+
+    /**
+     * Non-Apple Apps
      */
 
     // sequel pro
@@ -362,6 +380,21 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
         'WebContinuousSpellCheckingEnabled' => [
             // スペルチェックしない
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'WebAutomaticDashSubstitutionEnabled' => [
+            // その他、自動校正とことんOff
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'WebAutomaticQuoteSubstitutionEnabled' => [
+            // その他、自動校正とことんOff
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'WebAutomaticTextReplacementEnabled' => [
+            // その他、自動校正とことんOff
             'read' => 0,
             'write' => '-bool false',
         ],
@@ -580,7 +613,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     /**
      * Apple Global Domain
      */
-    '-g' => [
+    '-g' => [  // = NSGlobalDomain
         // Language and Region
         'NSLinguisticDataAssetsRequested' => [
             'read' => '(
@@ -617,7 +650,36 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 }',
             'write' => '-dict gregorian 2',
         ],
+        // Keyboard 自動構成 全てOff
         'NSAutomaticCapitalizationEnabled' => [
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'NSAutomaticSpellingCorrectionEnabled' => [
+            // Disable auto-correct
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'NSAutomaticDashSubstitutionEnabled' => [
+            // Disable smart dashes as they’re annoying when typing code
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'NSAutomaticQuoteSubstitutionEnabled' => [
+            // Disable smart quotes as they’re annoying when typing code
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'NSAutomaticPeriodSubstitutionEnabled' => [
+            // Disable automatic period substitution as it’s annoying when typing code
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'NSAutomaticTextCompletionEnabled' => [
+            'read' => 0,
+            'write' => '-bool false',
+        ],
+        'WebAutomaticSpellingCorrectionEnabled' => [
             'read' => 0,
             'write' => '-bool false',
         ],
@@ -1132,20 +1194,10 @@ sudo systemsetup -setcomputersleep Off > /dev/null
 # Disable Notification Center and remove the menu bar icon
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
-# Disable automatic capitalization as it’s annoying when typing code
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
-# Disable smart dashes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-# Disable automatic period substitution as it’s annoying when typing code
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
-# Disable smart quotes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-# Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
