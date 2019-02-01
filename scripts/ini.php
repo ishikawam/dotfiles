@@ -21,6 +21,13 @@ $arr = [
         // メッセージの内容表示しない
         '/alarm_toast_preview=true/' => 'alarm_toast_preview=false',
     ],
+    // Slack
+    'Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack/storage/slack-settings' => [
+        // ズームレベルを-2
+        // ~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application\ Support/Slack/Preferences
+        // も触らないといけないかも？partition.per_host_zoom_levels
+        '/,"zoomLevel":[0-9\-\.]+,/' => ',"zoomLevel":-2,',
+    ],
 ];
 
 foreach ($arr as $file => $val) {
