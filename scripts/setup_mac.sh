@@ -42,7 +42,9 @@ array=(
     docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
     firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud sequel-pro google-backup-and-sync
     gyazo
-#    language-switcher  # ダウンロードできない？
+    # language-switcher  # ダウンロードできない？
+    # 任意
+    # android-studio
 )
 brewcaskls=`brew cask ls`
 for i in "${array[@]}"
