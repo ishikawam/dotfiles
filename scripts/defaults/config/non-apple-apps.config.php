@@ -26,6 +26,11 @@ return [
             'read' => 1,
             'write' => '-bool true',
         ],
+        'GrowlEnabled' => [
+            // Notification(通知)はオフ
+            'read' => 0,
+            'write' => '-bool false',
+        ],
     ],
 
     // Language Switcher
