@@ -11,6 +11,21 @@ return [
             'read' => 1,
             'write' => '-bool true',
         ],
+        'CustomQueryMaxHistoryItems' => [
+            // 履歴は100まで
+            'read' => 100,
+            'write' => '-int 100',
+        ],
+        'DefaultEncodingTag' => [
+            // エンコーディングをUTF8に＞文字化け対策
+            'read' => 190,
+            'write' => '-int 190',
+        ],
+        'DisplayTableViewVerticalGridlines' => [
+            // グリッドラインを表示
+            'read' => 1,
+            'write' => '-bool true',
+        ],
     ],
 
     // Language Switcher
