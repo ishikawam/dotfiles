@@ -26,11 +26,11 @@ record-installed-tools:
 	bash ~/private/scripts/recordInstalledTools.sh
 
 defaults:
-	php ~/scripts/defaults.php
-	php ~/scripts/ini.php
+	php ~/scripts/defaults/defaults.php
+	php ~/scripts/defaults/ini.php
 
 defaults-dryrun:
-	php ~/scripts/defaults.php --dry-run
+	php ~/scripts/defaults/defaults.php --dry-run
 
 updates:
 	sh bin/updates
