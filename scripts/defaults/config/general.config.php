@@ -445,6 +445,13 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 1,
             'write' => '-bool true',
         ],
+        'AppleAquaColorVariant' => [
+            // General > Accent color = Blue (1)
+            // 1: blue
+            // 6: gray
+            'read' => 1,
+            'write' => '-int 1',
+        ],
     ],
 
     // Trackpad

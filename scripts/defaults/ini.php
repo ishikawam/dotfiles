@@ -2,6 +2,15 @@
 
 /**
  * defaults.phpではできない、iniの管理
+ * @todo;
+ * 
+evernoteの "NSOutlineView Items ENExpandedLeftNavItems.*" を
+(
+    recents,
+    shortcuts,
+    notes
+);
+にしたい。慎重に。
  */
 
 echo "\n\n### ini.php ###\n\n";
