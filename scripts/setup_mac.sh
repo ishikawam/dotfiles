@@ -5,7 +5,7 @@ head () {
 }
 
 # mac only
-if [ `uname` != "Darwin" ]; then
+if [ "`uname`" != "Darwin" ]; then
     echo Do nothing.
     exit
 fi
@@ -16,7 +16,7 @@ head "### Setup Mac ###"
 
 head "0. xcode"
 
-if [ ! $SSH_CLIENT ]; then
+if [ ! "$SSH_CLIENT" ]; then
     # mac端末上なら実行
     # @todo; caskも？masは？
     xcode-select --install 2>/dev/null
