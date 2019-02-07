@@ -44,7 +44,7 @@ array=(
     gyazo
     # language-switcher  # ダウンロードできない？
     # 任意
-    # android-studio
+    # android-studio dnsmasq java
 )
 brewcaskls=`brew cask ls`
 for i in "${array[@]}"
