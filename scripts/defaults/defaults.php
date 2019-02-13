@@ -100,6 +100,17 @@ function defaults($com, $attr, $val)
         }
 }
 
+/*
+@todo; やりたい
+
+自動更新のダイアログ出し済みに
+    "com.apple.systempreferences" =     {
+        AttentionPrefBundleIDs =         {
+            "com.apple.preferences.softwareupdate" = 1;
+        };
+
+
+*/
 
 /*
 

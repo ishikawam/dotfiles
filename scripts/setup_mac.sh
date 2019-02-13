@@ -58,7 +58,9 @@ done
 # skitch evernote はapp store版で。
 # 必須ではない
 # brew cask install vagrant virtualbox
-brew cleanup
+
+# cleanupはたまにやるようにしたい
+#brew cleanup
 
 
 ######## mas ##################################################################
