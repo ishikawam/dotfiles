@@ -42,10 +42,10 @@ echo "\n\nDONE. plaese restart mac.\n\n";
 
 function defaults($com, $attr, $val)
 {
-        $sudo = $val['sudo'] ?? false;
+        $sudo = isset($val['sudo']) ? $val['sudo'] : false;
         $sudoCommand = $sudo ? 'sudo ' : '';
         $out = null;
-        $val['read'] = $val['read'] ?? null;
+        $val['read'] = isset($val['read']) ? $val['read'] : null;
         if (strpos($attr, ':')) {
             exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
         } else {
@@ -73,7 +73,7 @@ function defaults($com, $attr, $val)
         }
 
         $out = null;
-        if (($argv[1] ?? null) != '--dry-run') {
+        if ((isset($argv[1]) ? $argv[1] : null) != '--dry-run') {
             if (strpos($attr, ':')) {
                 // setかaddで。ちゃんと判定したい。@todo;
                 exec($sudoCommand . '/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
@@ -100,6 +100,17 @@ function defaults($com, $attr, $val)
         }
 }
 
+/*
+@todo; やりたい
+
+自動更新のダイアログ出し済みに
+    "com.apple.systempreferences" =     {
+        AttentionPrefBundleIDs =         {
+            "com.apple.preferences.softwareupdate" = 1;
+        };
+
+
+*/
 
 /*
 

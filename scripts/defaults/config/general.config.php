@@ -298,6 +298,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     // Keyborad - Input Source
     'com.apple.HIToolbox' => [
         // Google日本語入力
+        // うまくいっていない
+/*
         'AppleSelectedInputSources' => [
             'read' => '(
         {
@@ -312,6 +314,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 )',
             'write' => '-array \'{"Bundle ID" = "com.apple.inputmethod.EmojiFunctionRowItem"; InputSourceKind = "Non Keyboard Input Method";}\' \'{"Bundle ID" = "com.google.inputmethod.Japanese"; "Input Mode" = "com.apple.inputmethod.Japanese"; InputSourceKind = "Input Mode";}\'',
         ],
+*/
     ],
 
     // Accessibility

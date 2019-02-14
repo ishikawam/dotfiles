@@ -39,6 +39,7 @@
 /.config/filezilla/lockfile
 /.config/filezilla/queue.sqlite3
 /.config/Steinberg\ Installation\ Updater
+/.config/karabiner/automatic_backups/
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
