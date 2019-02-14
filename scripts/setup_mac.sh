@@ -6,7 +6,15 @@ head () {
 
 # mac only
 if [ "`uname`" != "Darwin" ]; then
-    echo Do nothing.
+    echo "Do nothing."
+    exit
+fi
+
+if [[ $hostname =~ ^ishikawa- || -e ~/this/.ignore-sparse ]]; then
+    # 自分の所有、か、~/this/.ignore-sparseがあったら実行。
+    echo
+else
+    echo "exit."
     exit
 fi
 
