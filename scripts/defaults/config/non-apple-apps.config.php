@@ -146,6 +146,11 @@ return [
             'read' => null,
             'write' => null,
         ],
+        'kCPYPrefShowStatusItemKey' => [
+            // ステータスバーに表示しない
+            'read' => 0,
+            'write' => '-int 0',
+        ],
     ],
 
     // Better Snap Tool
