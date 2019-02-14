@@ -34,6 +34,7 @@ defaults-dryrun:
 
 updates:
 	sh bin/updates
+	git submodule foreach git pull origin master
 
 chrome-reset:
 	-killall Google\ Chrome ; sleep 10
@@ -46,3 +47,9 @@ chrome-rollback:
 	cd ~/Library/Application\ Support/Google/Chrome/Default/ ; git checkout . ; git reset HEAD^ ; git checkout . ; git status -sb ; git log | head -12
 	sleep 1
 	open /Applications/Google\ Chrome.app
+
+ruby-install-latest:
+	rbenv install -s `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
+	rbenv global `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
+	sudo gem update --system
+	sudo gem update

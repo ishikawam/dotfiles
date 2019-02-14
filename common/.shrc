@@ -144,11 +144,12 @@ fi
 ##################################################
 # ruby
 
-if [ -f ~/.rbenv/bin/rbenv -a ! -x "`which rbenv 2>/dev/null`" ]; then
+if [ -f ~/.rbenv/bin/rbenv -a ! "`which rbenv 2>/dev/null`" ]; then
     # homebrew等で既にrbenv入れている場合はそっちを優先
     PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
 fi
+
+eval "$(rbenv init -)"
 
 
 ##################################################
