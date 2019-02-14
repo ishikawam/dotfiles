@@ -1,0 +1,72 @@
+{
+  "title": "For Japanese （日本語環境向けの設定） (rev 3) fix. ⌘+クリックが効かなかったので。 by Ishikawa",
+  "rules": [
+    {
+      "description": "コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (rev 2) fix. ⌘+クリックが効かなかったので。 by Ishikawa",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_command",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command",
+              "lazy": true
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "japanese_eisuu"
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "left_command"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200,
+            "basic.to_if_held_down_threshold_milliseconds": 200
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_command",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_command",
+              "lazy": true
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "japanese_kana"
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "right_command"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200,
+            "basic.to_if_held_down_threshold_milliseconds": 200
+          }
+        }
+      ]
+    }
+  ]
+}
