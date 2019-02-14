@@ -1,5 +1,11 @@
 # common shell
 
+##################################################
+# path
+
+# 諸事情で毎回チェック
+chmod 600 ~/.ssh/config
+
 
 ##################################################
 # path
@@ -59,6 +65,7 @@ if [ `uname` = "Darwin" ]; then
 else
     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 fi
+
 
 ##################################################
 # aliases
@@ -120,6 +127,7 @@ alias e-kill='emacsclient -e "(kill-emacs)"'
 
 alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_history'
 
+
 ##################################################
 # python
 
@@ -132,6 +140,7 @@ if [ -f ~/.pyenv/bin/pyenv -a ! "`pyenv 2>/dev/null`" ]; then
     eval "$(pyenv init -)"
 fi
 
+
 ##################################################
 # ruby
 
@@ -140,6 +149,7 @@ if [ -f ~/.rbenv/bin/rbenv -a ! -x "`which rbenv 2>/dev/null`" ]; then
     PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
+
 
 ##################################################
 # node
@@ -175,6 +185,7 @@ PATH=./node_modules/.bin:$PATH
 alias npmls='npm ls | grep -v "^ \|│" | sed -e "s/^.* //g"'
 alias npmgls='npm ls -g | grep -v "^ \|│" | sed -e "s/^.* //g"'
 
+
 ##################################################
 # php composer
 PATH=~/.composer/vendor/bin:$PATH
@@ -182,6 +193,7 @@ PATH=~/.composer/vendor/bin:$PATH
 # mac homebrewでhomebrew/phpがdeprecatedになってしまってbrew link php71とかで切り替えられなくなったし一手間かかるようになったので
 export PATH="/usr/local/opt/php@7.1/bin:$PATH"
 export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
 
 ##################################################
 # xcode
@@ -260,6 +272,7 @@ elif [ -S $agent ]; then
 else
     echo "no ssh-agent"
 fi
+
 
 ##################################################
 # 最後にPATHを永続化
