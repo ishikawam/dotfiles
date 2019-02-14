@@ -712,3 +712,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 ];
+
+/*
+todo
+AttentionPrefBundleIDs で "com.apple.preferences.icloud" = 1; とかしたいけど互換性が不安
+*/
