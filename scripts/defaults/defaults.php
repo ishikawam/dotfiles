@@ -15,7 +15,7 @@ if (exec('which defaults 2>/dev/null') == '') {
 $HOSTNAME = exec('hostname');
 $HOME = exec('echo $HOME');
 
-if (preg_match('/^ishikawa-/', $HOSTNAME) || file_exists($HOME . '/this/.ignore-sparse')) {
+if (preg_match('/^ishikawa-/', $HOSTNAME) || file_exists($HOME . '/this/.force-defaults')) {
     echo "run.\n\n";
 } else {
     echo "not run.\n\n";

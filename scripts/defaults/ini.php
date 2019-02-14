@@ -23,7 +23,7 @@ if (! file_exists($HOME . '/Library/')) {
     return;
 }
 
-if (preg_match('/^ishikawa-/', $HOSTNAME) || file_exists($HOME . '/this/.ignore-sparse')) {
+if (preg_match('/^ishikawa-/', $HOSTNAME) || file_exists($HOME . '/this/.force-defaults')) {
     echo "run.\n\n";
 } else {
     echo "not run.\n\n";

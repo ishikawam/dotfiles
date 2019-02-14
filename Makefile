@@ -53,3 +53,27 @@ ruby-install-latest:
 	rbenv global `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
 	sudo gem update --system
 	sudo gem update
+
+# private/installedtoolsに全部置く場合
+set-ignore-sparse:
+	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
+	touch ~/this/.ignore-sparse
+	@test -f ~/this/.ignore-sparse && echo "to exits." || echo "to not exists."
+
+# private/installedtoolsに自分のしか置かない場合 (デフォルト)
+remove-ignore-sparse:
+	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
+	rm -f ~/this/.ignore-sparse
+	@test -f ~/this/.ignore-sparse && echo "to exits." || echo "to not exists."
+
+# defaultsを実行 & アップデート する場合
+set-force-defaults:
+	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
+	touch ~/this/.force-defaults
+	@test -f ~/this/.force-defaults && echo "to exits." || echo "to not exists."
+
+# defaultsを実行 & アップデート しない場合 (デフォルト)
+remove-force-defaults:
+	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
+	rm -f ~/this/.force-defaults
+	@test -f ~/this/.force-defaults && echo "to exits." || echo "to not exists."

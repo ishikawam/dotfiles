@@ -12,8 +12,8 @@ fi
 
 hostname=`hostname`
 
-if [[ $hostname =~ ^ishikawa- || -e ~/this/.ignore-sparse ]]; then
-    # 自分の所有、か、~/this/.ignore-sparseがあったら実行。
+if [[ $hostname =~ ^ishikawa- || -e ~/this/.force-defaults ]]; then
+    # 自分の所有、か、~/this/.force-defaults があったら実行。
     echo
 else
     echo "exit."
