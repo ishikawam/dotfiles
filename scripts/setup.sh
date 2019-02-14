@@ -17,13 +17,13 @@ head "### Setup ###"
 
 head "1. shell to zsh"
 
-if [ `uname` = "Darwin" ]; then
+if [ "`uname`" = "Darwin" ]; then
     loginshell=`dscl localhost -read Local/Default/Users/$USER UserShell | cut -d' ' -f2 | sed -e 's/^.*\///'`
 else
     loginshell=`grep $USER /etc/passwd | cut -d: -f7 | sed -e 's/^.*\///'`
 fi
 # priority order
-if [ ! $loginshell = 'zsh' ]; then
+if [ ! "$loginshell" = 'zsh' ]; then
     if [ -f /bin/zsh ]; then
         chsh -s /bin/zsh
     elif [ -f /usr/bin/zsh ]; then
@@ -34,9 +34,9 @@ if [ ! $loginshell = 'zsh' ]; then
         chsh -s `which zsh`
     fi
 
-    echo $loginshell -> `which zsh`
+    echo "$loginshell -> `which zsh`"
 else
-    echo Do nothing.
+    echo "Do nothing."
 fi
 
 
@@ -47,7 +47,7 @@ head "2. symbolic links"
 # mlocate for mac
 if [ -f /usr/libexec/locate.updatedb -a ! -f ~/this/bin/updatedb ]; then
     # エイリアスにしていないのは、sudoで使いたいから
-    echo set updatedb
+    echo "set updatedb"
     ln -s /usr/libexec/locate.updatedb ~/this/bin/updatedb
 fi
 # locateしたいため権限を緩める
@@ -56,14 +56,14 @@ cd ~ ; chmod go+rx Desktop Documents Downloads Movies Music Pictures Dropbox Goo
 # pyenv
 mkdir -p ~/.pyenv/plugins/
 if [ -d ~/.pyenv-virtualenv -a ! -d ~/.pyenv/plugins/pyenv-virtualenv ]; then
-    echo set virtualenv to pyenv
+    echo "set virtualenv to pyenv"
     ln -s ~/.pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
 fi
 
 # rbenv
 mkdir -p ~/.rbenv/plugins/
 if [ -d ~/.rbenv-plugins/ruby-build -a ! -d ~/.rbenv/plugins/ruby-build ]; then
-    echo set ruby-build to rbenv
+    echo "set ruby-build to rbenv"
     ln -s ~/.rbenv-plugins/ruby-build ~/.rbenv/plugins/ruby-build
 fi
 
@@ -78,7 +78,7 @@ head "3. cask install"
 if [ "`cask --version 2>/dev/null`" ]; then
     # emacsのメジャーバージョンを調べる
     EMACS_VERSION=`emacs --version | grep -o '^GNU Emacs [0-9]\+' | grep -o '[0-9]\+'`
-    echo Emacs $EMACS_VERSION.
+    echo "Emacs $EMACS_VERSION."
     if [ $EMACS_VERSION != 26 ]; then
         # emacs 26ではcask使わない
         cd ~/.emacs.d/ ; cask install ; cd -
@@ -86,7 +86,7 @@ if [ "`cask --version 2>/dev/null`" ]; then
         echo Do nothing.
     fi
 else
-    echo No cask.
+    echo "No cask."
 fi
 
 
