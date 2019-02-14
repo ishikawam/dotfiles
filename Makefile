@@ -1,6 +1,6 @@
 
 setup:
-	sh ~/scripts/setup.sh
+	bash ~/scripts/setup.sh
 	bash ~/scripts/setup_mac.sh
 	make defaults
 #	make agree-apps
@@ -20,7 +20,7 @@ mas-list:
 	cat ~/private/installedtools/*/*/mas | sort -n | uniq
 
 agree-apps:
-	yes | sh ~/scripts/agreeApps.sh
+	yes | bash ~/scripts/agreeApps.sh
 
 record-installed-tools:
 	bash ~/private/scripts/recordInstalledTools.sh
