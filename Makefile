@@ -58,22 +58,22 @@ ruby-install-latest:
 set-ignore-sparse:
 	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 	touch ~/this/.ignore-sparse
-	@test -f ~/this/.ignore-sparse && echo "to exits." || echo "to not exists."
+	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 
 # private/installedtoolsに自分のしか置かない場合 (デフォルト)
 remove-ignore-sparse:
 	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 	rm -f ~/this/.ignore-sparse
-	@test -f ~/this/.ignore-sparse && echo "to exits." || echo "to not exists."
+	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 
 # defaultsを実行 & アップデート する場合
 set-force-defaults:
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 	touch ~/this/.force-defaults
-	@test -f ~/this/.force-defaults && echo "to exits." || echo "to not exists."
+	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 
 # defaultsを実行 & アップデート しない場合 (デフォルト)
 remove-force-defaults:
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 	rm -f ~/this/.force-defaults
-	@test -f ~/this/.force-defaults && echo "to exits." || echo "to not exists."
+	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
