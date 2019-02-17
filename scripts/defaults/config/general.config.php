@@ -565,6 +565,21 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
+    // Network
+    'com.apple.networkConnect' => [
+        'VPNShowTime' => [
+            // Show Time Connected
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+
+        // Network
+        'NSStatusItem Visible com.apple.menuextra.vpn' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
+
     // menuextra : show percentage
     'com.apple.menuextra.battery' => [
         'ShowPercent' => [
