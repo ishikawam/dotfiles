@@ -109,6 +109,14 @@
 ;;; php hook
 (add-hook 'php-mode-hook
           (lambda ()
+
+            ; ac-php
+            (auto-complete-mode t)
+            (require 'ac-php)
+            (setq ac-sources  '(ac-source-php ) )
+            (yas-global-mode 1)
+;            (ac-php-core-eldoc-setup ) ;; enable eldoc
+
             (c-set-style "stroustrup")
             (setq tab-width 4)
             (setq c-basic-offset 4)
@@ -132,7 +140,26 @@
 
 (use-package swift-mode)
 
+
+;;; auto-complete
+(require 'package)
+;; MELPAを追加
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; MELPA-stableを追加
+;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; Marmaladeを追加
+;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; Orgを追加
+;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;; 初期化
+(package-initialize)
+
+;(use-package auto-complete)
+(use-package ac-php)  ; php補完 auto-complete, company
+;(use-package ac-php-core)
 ;(use-package auto-complete-config) ; できない
+;(require 'auto-complete)
+;(require 'auto-complete-config)
 
 
 (use-package zencoding-mode)
@@ -149,6 +176,7 @@
         ("M-p" . nil)
         ("C-n" . company-select-next)
         ("C-p" . company-select-previous)
+;        ([tab] . company-complete-select)
         ("C-h" . nil))
     :config
     (global-company-mode))
