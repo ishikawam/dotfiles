@@ -150,9 +150,9 @@
                                 (font-lock-mode t))))
 
 
-;;; .tpl, .volt を html-mode で開く
+;;; .tpl, .volt を web-mode で開く
 (setq auto-mode-alist
-      (append '(("\\.\\(tpl\\|volt\\|twig\\|blade\\.php\\|mustache\\)$" . html-mode))
+      (append '(("\\.\\(tpl\\|volt\\|twig\\|blade\\.php\\|mustache\\)$" . web-mode))
               auto-mode-alist))
 
 ;;; .scss を css-mode で開く
