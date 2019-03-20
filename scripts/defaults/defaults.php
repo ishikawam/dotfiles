@@ -12,7 +12,16 @@ if (exec('which defaults 2>/dev/null') == '') {
     return;
 }
 
+$HOSTNAME = exec('hostname');
 $HOME = exec('echo $HOME');
+
+if (preg_match('/^ishikawa-/', $HOSTNAME) || file_exists($HOME . '/this/.force-defaults')) {
+    echo "run.\n\n";
+} else {
+    echo "not run.\n\n";
+    return;
+}
+
 
 /**
  * 強引なとこある。PlistBuddyとdefaultsを両方使っているため。PlistBuddyに統一したい。

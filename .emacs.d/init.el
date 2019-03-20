@@ -20,7 +20,8 @@
  ((string-match "^26\." emacs-version)
   (load-file-in-dir preferences-directory "init26.el"))
  ((string-match "^25\." emacs-version)
-  (load-file-in-dir preferences-directory "init24.el"))
+  (load-file-in-dir preferences-directory "init26.el"))
+;  (load-file-in-dir preferences-directory "init24.el"))
  ((string-match "^24\." emacs-version)
   (load-file-in-dir preferences-directory "init24.el"))
  ((string-match "^23\." emacs-version)
@@ -149,9 +150,9 @@
                                 (font-lock-mode t))))
 
 
-;;; .tpl, .volt を html-mode で開く
+;;; .tpl, .volt を web-mode で開く
 (setq auto-mode-alist
-      (append '(("\\.\\(tpl\\|volt\\|twig\\|blade\\.php\\|mustache\\)$" . html-mode))
+      (append '(("\\.\\(tpl\\|volt\\|twig\\|blade\\.php\\|mustache\\)$" . web-mode))
               auto-mode-alist))
 
 ;;; .scss を css-mode で開く

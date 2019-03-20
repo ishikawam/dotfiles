@@ -550,10 +550,31 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 
-    // Language and Region
     'com.apple.systemuiserver' => [
+        // Language and Region
         // menuExtras もやりたいけど、、array_pushがわからないので。
         'NSStatusItem Visible com.apple.menuextra.textinput' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+
+        // Network
+        'NSStatusItem Visible com.apple.menuextra.vpn' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
+
+    // Network
+    'com.apple.networkConnect' => [
+        'VPNShowTime' => [
+            // Show Time Connected
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+
+        // Network
+        'NSStatusItem Visible com.apple.menuextra.vpn' => [
             'read' => 1,
             'write' => '-bool true',
         ],
@@ -712,3 +733,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         ],
     ],
 ];
+
+/*
+todo
+AttentionPrefBundleIDs で "com.apple.preferences.icloud" = 1; とかしたいけど互換性が不安
+*/

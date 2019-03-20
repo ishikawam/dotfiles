@@ -6,7 +6,17 @@ head () {
 
 # mac only
 if [ "`uname`" != "Darwin" ]; then
-    echo Do nothing.
+    echo "Do nothing."
+    exit
+fi
+
+hostname=`hostname`
+
+if [[ $hostname =~ ^ishikawa- || -e ~/this/.force-defaults ]]; then
+    # 自分の所有、か、~/this/.force-defaults があったら実行。
+    echo
+else
+    echo "exit."
     exit
 fi
 
@@ -34,7 +44,7 @@ if ! type brew >/dev/null ; then
 fi
 brew update
 brew upgrade
-brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash
+brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash coreutils
 # homebrew cask
 brew cask upgrade
 # brew caskは途中でエラーあるとそこで止まるので、どうせ非同期してくれないのでarray()に入れてループで1つずつインストールする
@@ -68,7 +78,7 @@ done
 head "2. mas = mac app store"
 
 # mas = mac app store
-mas upgrade
+timeout 300 mas upgrade
 mas install 405399194 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 497799835 504544917 513610341 539883307 557168941 568494494 592704001 803453959 823766827 880001334 1295203466
 # 405399194 Kindle
 # 406056744 Evernote (7.7)

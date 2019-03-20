@@ -15,10 +15,18 @@ evernoteの "NSOutlineView Items ENExpandedLeftNavItems.*" を
 
 echo "\n\n### ini.php ###\n\n";
 
+$HOSTNAME = exec('hostname');
 $HOME = exec('echo $HOME');
 
 if (! file_exists($HOME . '/Library/')) {
     echo "No ~/Library/. Do nothing.\n\n";
+    return;
+}
+
+if (preg_match('/^ishikawa-/', $HOSTNAME) || file_exists($HOME . '/this/.force-defaults')) {
+    echo "run.\n\n";
+} else {
+    echo "not run.\n\n";
     return;
 }
 
