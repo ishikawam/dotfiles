@@ -11,14 +11,15 @@ chmod 600 ~/.ssh/config
 # path
 
 # Android SDK
-if [ -d /Applications/android-sdk-mac_x86/platform-tools ]; then
-    PATH=$PATH:/Applications/android-sdk-mac_x86/platform-tools
-    PATH=$PATH:~/android-sdks/platform-tools
+if [ -d /Applications/android-sdk-mac_x86 ]; then
+    PATH=/Applications/android-sdk-mac_x86/platform-tools:$PATH
+    PATH=~/android-sdks/platform-tools:$PATH
+    PATH=/Applications/android-sdk-mac_x86/tools:$PATH
+    PATH=~/android-sdks/tools:$PATH
 fi
-
-if [ -d /Applications/android-sdk-mac_x86/tools ]; then
-    PATH=$PATH:/Applications/android-sdk-mac_x86/tools
-    PATH=$PATH:~/android-sdks/tools
+if [ -d ~/Library/Android/sdk ]; then
+    PATH=~/Library/Android/sdk/platform-tools:$PATH
+    PATH=~/Library/Android/sdk/tools:$PATH
 fi
 
 # 個人bin
@@ -195,8 +196,8 @@ alias npmgls='npm ls -g | grep -v "^ \|│" | sed -e "s/^.* //g"'
 PATH=~/.composer/vendor/bin:$PATH
 
 # mac homebrewでhomebrew/phpがdeprecatedになってしまってbrew link php71とかで切り替えられなくなったし一手間かかるようになったので
-export PATH="/usr/local/opt/php@7.1/bin:$PATH"
-export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+PATH="/usr/local/opt/php@7.1/bin:$PATH"
+PATH="/usr/local/opt/php@7.1/sbin:$PATH"
 
 
 ##################################################
