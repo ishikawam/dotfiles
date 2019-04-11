@@ -34,12 +34,8 @@
 !/.tmux.conf
 !/.config/
 /.config/configstore
-/.config/filezilla/filezilla.xml
-/.config/filezilla/layout.xml
-/.config/filezilla/lockfile
-/.config/filezilla/queue.sqlite3
-/.config/filezilla/recentservers.xml
-/.config/filezilla/trustedcerts.xml
+/.config/filezilla
+!/.config/filezilla/sitemanager.xml
 /.config/Steinberg\ Installation\ Updater
 /.config/karabiner/automatic_backups/
 !/tmux-powerline
