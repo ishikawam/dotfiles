@@ -9,6 +9,7 @@ array=(
     "/Applications/Sublime Text.app"
     "/Applications/MacDown.app"
     "/Applications/Alfred 3.app"
+    "/Applications/Alfred 4.app"
     "/Applications/Dropbox.app"
     "/Applications/Karabiner-Elements.app"
     "/Applications/Google Chrome.app"
