@@ -16,7 +16,7 @@
   (load (concat dir file)))
 
 (cond
-;; 26はcaskがうまく動かないので保留。
+;; 26はcaskが動かないのでstraight.el
  ((string-match "^26\." emacs-version)
   (load-file-in-dir preferences-directory "init26.el"))
  ((string-match "^25\." emacs-version)
