@@ -139,7 +139,7 @@
              (local-set-key (kbd "M-r") 'helm-gtags-find-rtag)
              (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
              (local-set-key (kbd "M-e") 'helm-gtags-pop-stack)
-             (local-set-key (kbd "M-g") 'helm-gtags-dwim)
+;             (local-set-key (kbd "M-g") 'helm-gtags-dwim)
 ;             (local-set-key (kbd "M-s") 'helm-gtags-show-stack)
 ;             (local-set-key (kbd "M-p") 'helm-gtags-previous-history)
 ;             (local-set-key (kbd "M-n") 'helm-gtags-next-history)
