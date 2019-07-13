@@ -92,6 +92,19 @@
 ;;; zencoding
 (use-package zencoding-mode)
 
+;;; その他
+(use-package yaml-mode)
+(use-package coffee-mode)
+(use-package haskell-mode)
+(use-package idle-highlight-mode)
+(use-package js2-mode)
+(use-package json-mode)
+(use-package jsx-mode)
+(use-package markdown-mode)
+(use-package nyan-mode)
+(use-package scala-mode)
+(use-package typescript-mode)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
