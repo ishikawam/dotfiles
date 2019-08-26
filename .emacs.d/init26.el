@@ -89,6 +89,9 @@
 ;;; swift
 (use-package swift-mode)
 
+;;; kotlin
+(use-package kotlin-mode)
+
 ;;; zencoding
 (use-package zencoding-mode)
 
@@ -141,6 +144,7 @@
 (add-hook 'php-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'web-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'swift-mode-hook (lambda () (helm-gtags-mode)))
+(add-hook 'kotlin-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'go-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'python-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'ruby-mode-hook (lambda () (helm-gtags-mode)))
