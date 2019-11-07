@@ -158,15 +158,12 @@ eval "$(rbenv init -)"
 
 # nvmでnodeのバージョン決定
 # この運用は今後やめていきたい。＞nvm alias default v0.10.38 とか nvm alias default stable とかを実行すればバージョンが永久固定されるので
-if [ -f ~/.nvm/nvm.sh -a ! "`node --version 2>/dev/null`" ]; then
-    # homebrew等で既にnode入れている場合はnvmは使用しない
+if [ -f ~/.nvm/nvm.sh ]; then
     source ~/.nvm/nvm.sh
 
     if [ ! "`node --version 2>/dev/null`" ]; then
-
-
-
-	# nvmでもinstallされていなければスルー
+        # homebrew等で既にnode入れている場合はnvmは使用しない
+        # nvmでもinstallされていなければスルー
         :
     elif [ $(hostname) = "wind.windserver.jp" ]; then
         nvm use v0.10.24 > /dev/null

@@ -42,6 +42,7 @@
 !/.tmux-powerlinerc
 !/.npmrc
 !/.nvm/
+!/.nodebrew/
 !/.pyenv/
 !/.pyenv-virtualenv/
 !/.cask/
