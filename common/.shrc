@@ -179,6 +179,9 @@ if [ -f ~/.nvm/nvm.sh ]; then
     NODE_PATH=$npm_dir
 fi
 
+# nvmよりnodebrewを優先
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
 #  カレントディレクトリからローカルに入れられたモジュールbinを実行。グローバル、ユーザーのローカル、よりも優先する
 PATH=./node_modules/.bin:$PATH
 
