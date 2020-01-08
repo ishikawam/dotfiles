@@ -49,7 +49,7 @@
 
 ;;; php5
 (setq auto-mode-alist
-      (append '(("\\.\\(php5\\)$" . php-mode))
+      (append '(("\\.\\(php5?\\)$" . php-mode))
               auto-mode-alist))
 
 
