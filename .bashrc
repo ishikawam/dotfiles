@@ -28,3 +28,11 @@ source ~/bin/git-completion.bash
 # prompt PS1
 
 PS1="[\[\e[36m\]\u\[\e[0m\]@\[\e[32m\]\h \W\[\e[0m\]] \\$ "
+
+
+##################################################
+# direnv
+
+if type 'direnv' > /dev/null 2>&1; then
+    eval "$(direnv hook bash)"
+fi

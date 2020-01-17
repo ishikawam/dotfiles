@@ -38,6 +38,7 @@
 !/.config/filezilla/sitemanager.xml
 /.config/Steinberg\ Installation\ Updater
 /.config/karabiner/automatic_backups/
+/.config/direnv
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
