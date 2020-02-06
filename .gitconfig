@@ -20,6 +20,7 @@
 [core]
 	editor = emacs
 	quotepath = false
+	excludesfile = /Users/masayuki.ishikawa/.gitignore_global
 [push]
 	default = upstream
 [filter "lfs"]
