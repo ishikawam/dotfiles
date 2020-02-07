@@ -54,9 +54,9 @@
           (lambda ()
 
             ; ac-php
-            (auto-complete-mode t)
-            (require 'ac-php)
-            (setq ac-sources  '(ac-source-php ) )
+;;            (auto-complete-mode t)
+;;            (require 'ac-php)
+;;            (setq ac-sources  '(ac-source-php ) )
             (yas-global-mode 1)
 ;            (ac-php-core-eldoc-setup ) ;; enable eldoc
 
@@ -204,7 +204,7 @@
 ;(require 'auto-complete-config)
 
 
-;;; 補完？
+;;; company-mode
 (use-package company
     :init
     (setq company-selection-wrap-around t)
@@ -218,6 +218,8 @@
         ("C-h" . nil))
     :config
     (global-company-mode))
+
+(global-company-mode +1)
 
 ;;; editorconfig
 (use-package editorconfig
