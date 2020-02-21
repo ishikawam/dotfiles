@@ -133,7 +133,7 @@ if [ -d ~/Library/Application\ Support/Google/Chrome/Default/ ]; then
     if [ ! "`crontab -l 2>/dev/null`" ]; then
         echo "\nNo crontab. Please set."
         echo "\`\`\`"
-        echo '*/22 * * * * cd ~/Library/Application\ Support/Google/Chrome/Default ; git add . ; git add -u ; git commit -m "`date`" > /dev/null 2>&1'
+        echo '*/22 * * * * cd ~/Library/Application\ Support/Google/Chrome/Default ; rm -rf .git/index.lock ; git add . ; git add -A ; git commit -m "`date`" > /dev/null 2>&1'
         echo "\`\`\`"
         echo "crontab -eで'Operation not permitted'といわれたら、System PreferencesのSecurity&PrivacyのPrivacyにiTermを追加。"
         read -p "Edit now? y or n (n): " ans
