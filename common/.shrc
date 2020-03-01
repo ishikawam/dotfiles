@@ -182,6 +182,10 @@ fi
 # nvmよりnodebrewを優先
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
+# nodebrewよりnodenvを優先
+export PATH=$HOME/.nodenv/bin:$PATH
+eval "$(nodenv init -)"
+
 #  カレントディレクトリからローカルに入れられたモジュールbinを実行。グローバル、ユーザーのローカル、よりも優先する
 PATH=./node_modules/.bin:$PATH
 
