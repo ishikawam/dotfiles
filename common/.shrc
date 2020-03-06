@@ -145,12 +145,17 @@ fi
 ##################################################
 # ruby
 
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
 if [ -f ~/.rbenv/bin/rbenv -a ! "`rbenv --version 2>/dev/null`" ]; then
     # homebrew等で既にrbenv入れている場合はそっちを優先
     PATH="$HOME/.rbenv/bin:$PATH"
 fi
 
 eval "$(rbenv init -)"
+
+# gem
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 
 ##################################################
