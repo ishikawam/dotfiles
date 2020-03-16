@@ -188,8 +188,10 @@ fi
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # nodebrewよりnodenvを優先
-export PATH=$HOME/.nodenv/bin:$PATH
-eval "$(nodenv init -)"
+if type "nodenv" > /dev/null 2>&1; then
+    export PATH=~/.nodenv/bin:$PATH
+    eval "$(nodenv init -)"
+fi
 
 #  カレントディレクトリからローカルに入れられたモジュールbinを実行。グローバル、ユーザーのローカル、よりも優先する
 PATH=./node_modules/.bin:$PATH
