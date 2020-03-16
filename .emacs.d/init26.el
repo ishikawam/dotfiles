@@ -109,6 +109,10 @@
 (use-package typescript-mode)
 
 
+;;; Syntax Checker
+(use-package flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(flycheck-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -225,3 +229,4 @@
 (use-package editorconfig
   :config
   (editorconfig-mode 1))
+
