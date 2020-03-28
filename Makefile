@@ -33,7 +33,7 @@ defaults-dryrun:
 	php ~/scripts/defaults/defaults.php --dry-run
 
 updates:
-	sh bin/updates
+	sh ~/bin/updates
 	git submodule foreach git pull origin master
 
 chrome-reset:
