@@ -108,6 +108,7 @@
 (use-package scala-mode)
 (use-package typescript-mode)
 (use-package dockerfile-mode)
+(use-package protobuf-mode)
 
 
 ;;; Syntax Checker
