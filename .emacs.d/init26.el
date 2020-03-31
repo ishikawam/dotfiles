@@ -107,6 +107,7 @@
 (use-package nyan-mode)
 (use-package scala-mode)
 (use-package typescript-mode)
+(use-package dockerfile-mode)
 
 
 ;;; Syntax Checker
