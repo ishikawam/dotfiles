@@ -294,6 +294,67 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 9437184,
             'write' => 9437184,
         ],
+        // 160: show launchpad = F2
+        'AppleSymbolicHotKeys:160:enabled' => [
+            'read' => 'true',
+            'write' => 'true',
+        ],
+        'AppleSymbolicHotKeys:160:value:parameters:0' => [
+            'read' => 65535,
+            'write' => 65535,
+        ],
+        'AppleSymbolicHotKeys:160:value:parameters:1' => [
+            'read' => 120,
+            'write' => 120,
+        ],
+        'AppleSymbolicHotKeys:160:value:parameters:2' => [
+            'read' => 8388608,
+            'write' => 8388608,
+        ],
+/* だめだ、めんどくさい。諦めた。
+        // 33: mission control = option F5
+        'AppleSymbolicHotKeys:33:enabled' => [
+            'read' => 'true',
+            'write' => 'true',
+        ],
+        'AppleSymbolicHotKeys:33:value:parameters:0' => [
+            'read' => 65535,
+            'write' => 65535,
+        ],
+        'AppleSymbolicHotKeys:33:value:parameters:1' => [
+            'read' => 118,
+            'write' => 118,
+        ],
+        'AppleSymbolicHotKeys:33:value:parameters:2' => [
+            'read' => 524288,
+            'write' => 524288,
+        ],
+        'AppleSymbolicHotKeys:33:value:type' => [
+            'read' => 'standard',
+            'write' => 'standard',
+        ],
+        // 35: application windows = option F4
+        'AppleSymbolicHotKeys:35:enabled' => [
+            'read' => 'true',
+            'write' => 'true',
+        ],
+        'AppleSymbolicHotKeys:35:value:parameters:0' => [
+            'read' => 65535,
+            'write' => 65535,
+        ],
+        'AppleSymbolicHotKeys:35:value:parameters:1' => [
+            'read' => 118,
+            'write' => 118,
+        ],
+        'AppleSymbolicHotKeys:35:value:parameters:2' => [
+            'read' => 655360,
+            'write' => 655360,
+        ],
+        'AppleSymbolicHotKeys:35:value:type' => [
+            'read' => 'standard',
+            'write' => 'standard',
+        ],
+*/
     ],
     // Keyborad - Input Source
     'com.apple.HIToolbox' => [
