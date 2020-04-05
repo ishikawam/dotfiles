@@ -138,9 +138,10 @@ if [ -f ~/.pyenv/bin/pyenv -a ! "`pyenv --version 2>/dev/null`" ]; then
     if [ -n ${PYENV_ROOT} ]; then
         PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:$PATH"
     fi
+fi
+if [ "`pyenv --version 2>/dev/null`" ]; then
     eval "$(pyenv init -)"
 fi
-
 
 ##################################################
 # ruby
