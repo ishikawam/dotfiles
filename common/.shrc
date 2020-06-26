@@ -228,6 +228,16 @@ fi
 
 
 ##################################################
+# android java
+
+export ANDROID_HOME=~/Library/Android/sdk
+if [ -f /usr/libexec/java_home ]; then
+    export JAVA_HOME=`/usr/libexec/java_home`
+    export PATH=$JAVA_HOME/bin:$PATH
+fi
+
+
+##################################################
 # lang
 
 # 言語、デフォルトはUTF-8
