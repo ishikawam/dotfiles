@@ -30,6 +30,8 @@
 (use-package auto-install)
 
 (use-package monokai-theme)
+(load-theme 'monokai t)
+
 (custom-theme-set-faces
  'monokai
  ;; メニューバー = header-line
@@ -40,6 +42,7 @@
 ;   ;; メニューバー = header-line
 ;   '(menu ((t (:foreground "#111111" :background "#CCCCCC")))))
 ;  )
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -154,6 +157,7 @@
 (add-hook 'go-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'python-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'ruby-mode-hook (lambda () (helm-gtags-mode)))
+(add-hook 'js-mode-hook (lambda () (helm-gtags-mode)))
 (setq helm-gtags-path-style 'root)
 (setq helm-gtags-auto-update t)
 (add-hook 'helm-gtags-mode-hook
