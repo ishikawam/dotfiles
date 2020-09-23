@@ -28,6 +28,7 @@
 !/.lv
 !/.emacs
 !/.emacs.d/
+/.emacs.d/async-bytecomp.log
 !/.inputrc
 !/.tigrc
 !/.zsh-completions
