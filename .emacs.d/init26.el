@@ -105,7 +105,7 @@
 (use-package idle-highlight-mode)
 (use-package js2-mode)
 (use-package json-mode)
-(use-package jsx-mode)
+;(use-package jsx-mode)
 (use-package markdown-mode)
 (use-package nyan-mode)
 (use-package scala-mode)
