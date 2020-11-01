@@ -1,8 +1,8 @@
 {
-    "title": "Mapping [left_option-{1-0,-,=} to {F1-F10,F11,F12} by Ishikawa",
+    "title": "Mapping [option-{1-0,-,=} to {F1-F10,F11,F12} by Ishikawa",
     "rules": [
         {
-            "description": "Mapping [left_option-{1-0,-,=} to {F1-F10,F11,F12} by Ishikawa",
+            "description": "Mapping [option-{1-0,-,=} to {F1-F10,F11,F12} by Ishikawa",
             "manipulators": [
                 {
                     "type": "basic",
@@ -105,7 +105,7 @@
                         "key_code": "6",
                         "modifiers": {
                             "mandatory": [
-                                "left_option"
+                                "option"
                             ],
                             "optional": [
                                 "any"
@@ -124,7 +124,7 @@
                         "key_code": "7",
                         "modifiers": {
                             "mandatory": [
-                                "left_option"
+                                "option"
                             ],
                             "optional": [
                                 "any"
@@ -143,7 +143,7 @@
                         "key_code": "8",
                         "modifiers": {
                             "mandatory": [
-                                "left_option"
+                                "option"
                             ],
                             "optional": [
                                 "any"
@@ -162,7 +162,7 @@
                         "key_code": "9",
                         "modifiers": {
                             "mandatory": [
-                                "left_option"
+                                "option"
                             ],
                             "optional": [
                                 "any"
@@ -181,7 +181,7 @@
                         "key_code": "0",
                         "modifiers": {
                             "mandatory": [
-                                "left_option"
+                                "option"
                             ],
                             "optional": [
                                 "any"
@@ -200,7 +200,7 @@
                         "key_code": "hyphen",
                         "modifiers": {
                             "mandatory": [
-                                "left_option"
+                                "option"
                             ],
                             "optional": [
                                 "any"
@@ -219,7 +219,7 @@
                         "key_code": "equal_sign",
                         "modifiers": {
                             "mandatory": [
-                                "left_option"
+                                "option"
                             ],
                             "optional": [
                                 "any"
