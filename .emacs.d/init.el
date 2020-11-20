@@ -205,6 +205,9 @@
 (message "Minibuffer depth is %d."
          (minibuffer-depth))
 
+;;; tramp(ssh)mode
+(setf tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+
 
 ;;; 最後に、強制タブ
 ;;;(setq-default tab-width 4)
