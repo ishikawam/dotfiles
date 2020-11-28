@@ -1,12 +1,25 @@
 #!/bin/sh
 # 前提：githubへ接続できる(git cloneできる)
 
-if [ -d ~/.git ]; then
-    echo "Cannot install dotfiles..." 1>&2
-    exit;
+if [ -d .git ]; then
+    echo ".gitがすでに存在します" 1>&2
+    exit
 fi
 
-cd
+if [ `pwd` != $HOME ]; then
+    # install other
+    echo "ここにdotfilesをインストールします"
+    git clone git@github.com:ishikawam/dotfiles.git .
+    git submodule update --init
+
+    echo "ログインし直してmake setupを実行してください"
+
+    exit
+fi
+
+# install home
+echo "homeにdotfilesをインストールします"
+
 git clone -n git@github.com:ishikawam/dotfiles.git
 mv dotfiles/.git ./
 rm -r dotfiles
