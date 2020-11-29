@@ -30,7 +30,8 @@ git submodule update --init
 mkdir ~/tmp/ ; git status | grep modified: | grep -o "[^ ]*$" | xargs -n 1 -I{} cp {} ~/tmp/
 
 git checkout .
-chmod 600 ~/.ssh/config
+#chmod 600 ~/.ssh/config
+# ↑消せるはず。様子見。
 
 # submodule
 if [ `uname` = "Darwin" ]; then

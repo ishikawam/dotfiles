@@ -95,7 +95,13 @@ fi
 head "4. ssh config"
 
 mkdir -p -m 700 ~/.ssh
-chmod 600 ~/.ssh/config
+if  [ ! -e ~/.ssh/config ]; then
+    cd ~/.ssh/
+    chmod 600 ../common/.ssh/config
+    ln -s ../common/.ssh/config ./
+    chmod 600 ./config
+    cd -
+fi
 
 
 ######## done ##################################################################
