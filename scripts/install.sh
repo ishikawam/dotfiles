@@ -13,6 +13,7 @@ if [ `pwd` != $HOME ]; then
     git submodule update --init
 
     echo "ログインし直してmake setupを実行してください"
+    echo "env HOME=`pwd` zsh"
 
     exit
 fi

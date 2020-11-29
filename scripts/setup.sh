@@ -24,6 +24,8 @@ else
 fi
 # priority order
 if [ ! "$loginshell" = 'zsh' ]; then
+    echo "shellを変更したい場合のみ返事してください"
+
     if [ -f /bin/zsh ]; then
         chsh -s /bin/zsh
     elif [ -f /usr/bin/zsh ]; then
