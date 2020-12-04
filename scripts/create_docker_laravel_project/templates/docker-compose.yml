@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+
+  php:
+    container_name: "PROJECT_NAME-php"
+    build: docker/php
+    volumes:
+      - .:/var/www/PROJECT_NAME:cached
+    working_dir: /var/www/PROJECT_NAME
+    mem_limit: 32m
+#    mem_limit: "33554432"  # 32MB. local dockerではm, gが使用できない。
+#    tty: true
+#    stdin_open: true
+#    privileged: true
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=1
+      - APP_URL=http://localhost:NGINX_PORT
+      - SESSION_LIFETIME=1
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=PROJECT_NAME
+      - DB_USERNAME=root
+      - DB_PASSWORD=password
+
+  nginx:
+    container_name: "PROJECT_NAME-nginx"
+    build: docker/nginx
+    ports:
+      - "NGINX_PORT:80"
+    volumes:
+      - ./public:/var/www/PROJECT_NAME/public:cached
+      - ./node_modules:/var/www/PROJECT_NAME/node_modules:cached
+    working_dir: /var/www/PROJECT_NAME
+    mem_limit: 64m
+#    mem_limit: "67108864"  # 64MB ギリギリ
+    depends_on:
+      - php
+#    stdin_open: true
+#    privileged: true
+
+  mysql:
+    container_name: "PROJECT_NAME-mysql"
+    image: mysql:MYSQL_VERSION
+    ports:
+      - "MYSQL_PORT:3306" # sequel用
+    volumes:
+      - "./storage/tmp/local-mysql/data:/var/lib/mysql:cached"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: PROJECT_NAME
+#    privileged: true
