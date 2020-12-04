@@ -233,13 +233,17 @@ git commit -m "second commit (install docker)"
 # setup
 # APP_KEY
 make install
-
+make up
+make migrate
 
 # others
 
 # helper
 npm install json
 npm run json -o json-4 -I -f composer.json -e 'this.autoload.files=["app/Helper/helpers.php"]'
+
+# php-cs-fixer
+composer require friendsofphp/php-cs-fixer
 
 git add -A
 git commit -m "second commit (install others)"
@@ -256,8 +260,40 @@ if [[ $install_adminlte = "yes" ]]; then
     sed -i -e 's/"plugins\//"\/admin-lte\/plugins\//g' resources/views/index.blade.php
 
     # vuejs & auth
-    composer require laravel/ui
-    docker-compose exec php php artisan ui vue --auth
+    # jetstreamとどっちか選ばないとなので、これはなしに。
+#    composer require laravel/ui
+#    docker-compose exec php php artisan ui vue --auth
+
+    # socialite & jetstream
+    composer require laravel/socialite
+    # composer require socialiteproviders/facebook
+    # いるか不明
+    composer require laravel/jetstream
+    docker-compose exec php php artisan jetstream:install livewire
+
+    # config
+    # すごく中途半端。@todo;
+    text <<EOF
+        Laravel\Socialite\SocialiteServiceProvider::class,
+EOF
+    docker-compose exec php php -r 'file_put_contents("config/app.php_", preg_replace("/(\bproviders\b.*?)(    ],)/s", "\\1$text\n\\2", file_get_contents("config/app.php")));'
+    text <<EOF
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+EOF
+    docker-compose exec php php -r 'file_put_contents("config/app.php", preg_replace("/(\baliases\b.*?)(    ],)/s", "\\1$text\n\\2", file_get_contents("config/app.php_")));'
+    rm -f config/app.php_
+    text <<EOF
+    'facebook' => [
+        'client_id' => 'app id',
+        'client_secret' => 'add secret',
+        'redirect' => 'http://localhost:$nginx_port/auth/facebook/callback',
+    ],
+EOF
+    sed -i -e 's/(\];)/$text$1/g'
+
+
+    make migrate
+
     npm install
     npm run dev
 
