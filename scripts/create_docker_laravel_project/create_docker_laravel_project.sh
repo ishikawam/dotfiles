@@ -25,8 +25,8 @@ abs_dirname() {
   pwd -P
   cd "$cwd"
 }
-current_dir="$(abs_dirname "$0")"
-echo $current_dir
+script_dir="$(abs_dirname "$0")"
+echo $script_dir
 
 # プロジェクト名
 dir=`pwd`
@@ -117,7 +117,7 @@ done
 
 # nginx port
 
-port=`cat $current_dir/storage/latest_port_nginx 2>/dev/null`
+port=`cat $script_dir/storage/latest_port_nginx 2>/dev/null`
 
 if [ -z $port ]; then
     port=10080
@@ -140,7 +140,7 @@ nginx_port=$port
 
 # mysql port
 
-port=`cat $current_dir/storage/latest_port_mysql 2>/dev/null`
+port=`cat $script_dir/storage/latest_port_mysql 2>/dev/null`
 if [ -z $port ]; then
     port=13306
 else
@@ -215,8 +215,8 @@ git add -A
 git commit -m "first commit (install laravel)"
 
 # docker
-cp -a $current_dir/templates/* ./
-cp -a $current_dir/templates/.* ./
+cp -a $script_dir/templates/* ./
+cp -a $script_dir/templates/.* ./
 mkdir -p storage/tmp/local-mysql/data
 
 # 書き換え
@@ -234,13 +234,22 @@ git commit -m "second commit (install docker)"
 # APP_KEY
 make install
 make up
+# mysql立ち上がるのを待つ
+echo
+echo wating...
+until docker-compose exec mysql sh -c "MYSQL_PWD=password mysqladmin ping --silent"; do
+    echo .
+    sleep 2
+done
+sleep 2
+echo
 make migrate
 
 # others
 
 # helper
 npm install json
-npm run json -o json-4 -I -f composer.json -e 'this.autoload.files=["app/Helper/helpers.php"]'
+`npm bin`/json -o json-4 -I -f composer.json -e 'this.autoload.files=["app/Helper/helpers.php"]'
 
 # php-cs-fixer
 composer require friendsofphp/php-cs-fixer
@@ -252,12 +261,6 @@ git commit -m "second commit (install others)"
 # adminlte and auth
 if [[ $install_adminlte = "yes" ]]; then
     npm install admin-lte --save
-    cp node_modules/admin-lte/index.html resources/views/index.blade.php
-    sed -i -e "s/welcome/index/g" routes/web.php
-    mkdir public/adminlte
-    ln -s ../node_modules/admin-lte/ public/
-    sed -i -e 's/"dist\//"\/admin-lte\/dist\//g' resources/views/index.blade.php
-    sed -i -e 's/"plugins\//"\/admin-lte\/plugins\//g' resources/views/index.blade.php
 
     # vuejs & auth
     # jetstreamとどっちか選ばないとなので、これはなしに。
@@ -271,26 +274,7 @@ if [[ $install_adminlte = "yes" ]]; then
     composer require laravel/jetstream
     docker-compose exec php php artisan jetstream:install livewire
 
-    # config
-    # すごく中途半端。@todo;
-    text <<EOF
-        Laravel\Socialite\SocialiteServiceProvider::class,
-EOF
-    docker-compose exec php php -r 'file_put_contents("config/app.php_", preg_replace("/(\bproviders\b.*?)(    ],)/s", "\\1$text\n\\2", file_get_contents("config/app.php")));'
-    text <<EOF
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-EOF
-    docker-compose exec php php -r 'file_put_contents("config/app.php", preg_replace("/(\baliases\b.*?)(    ],)/s", "\\1$text\n\\2", file_get_contents("config/app.php_")));'
-    rm -f config/app.php_
-    text <<EOF
-    'facebook' => [
-        'client_id' => 'app id',
-        'client_secret' => 'add secret',
-        'redirect' => 'http://localhost:$nginx_port/auth/facebook/callback',
-    ],
-EOF
-    sed -i -e 's/(\];)/$text$1/g'
-
+    HTTP_PORT=$nginx_port php $script_dir/install_adminlte.php
 
     make migrate
 
@@ -312,8 +296,8 @@ git checkout $master
 
 
 # save latest port
-echo $nginx_port > $current_dir/storage/latest_port_nginx
-echo $mysql_port > $current_dir/storage/latest_port_mysql
+echo $nginx_port > $script_dir/storage/latest_port_nginx
+echo $mysql_port > $script_dir/storage/latest_port_mysql
 
 
 echo
