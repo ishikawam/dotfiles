@@ -14,21 +14,23 @@ $toFile = $argv[2] ?? $file;
 
 if (! file_exists($file)) {
     echo "\nfile not exists.\n";
-    exit;
+    exit(1);
 }
 
-if (! preg_match('/\.blade\.php$/', $file)) {
+if (! preg_match('/\.blade\.php$/', $toFile)) {
     echo "\nonly blade file.\n";
-    exit;
+    exit(1);
 }
 
 $str = file_get_contents($file);
 
 // サイトルート相対パスに置き換え
-$str = preg_replace('/ (href|src)="(#.*?)"/', ' \\1_="\\2"', $str);
-$str = preg_replace('/ (href|src)="(https?:\/\/.*?)"/', ' \\1_="\\2"', $str);
-$str = preg_replace('/ (href|src)="(.*?)"/', ' \\1_="/admin-lte/\\2"', $str);
-$str = preg_replace('/ (href|src)_=/', ' \\1=', $str);
+$str = preg_replace('/ (href|src|action)="(#.*?)"/', ' \\1_="\\2"', $str);  // "#" を避ける
+$str = preg_replace('/ (href|src|action)="(https?:\/\/.*?)"/', ' \\1_="\\2"', $str);  // https?://を避ける
+$str = preg_replace('/ (href|src|action)="(\/\/.*?)"/', ' \\1_="\\2"', $str);  // //を避ける
+$str = preg_replace('/ (href|src|action)="\.[\.\/]*\//', ' \\1="', $str);  // 階層移動は無視
+$str = preg_replace('/ (href|src|action)="(.*?)"/', ' \\1_="/admin-lte/\\2"', $str);
+$str = preg_replace('/ (href|src|action)_=/', ' \\1=', $str);
 
 // html lang
 $str = preg_replace('/<html lang=".*?">/', '<html lang="{{ str_replace(\'_\', \'-\', app()->getLocale()) }}">', $str);

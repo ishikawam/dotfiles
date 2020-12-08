@@ -2,7 +2,7 @@
 
 # 前提
 # dockerが動いている
-# docker-compose composer npm
+# docker-compose composer php npm
 
 echo
 
@@ -215,8 +215,8 @@ git add -A
 git commit -m "first commit (install laravel)"
 
 # docker
-cp -a $script_dir/templates/* ./
-cp -a $script_dir/templates/.* ./
+\cp -a $script_dir/templates/* ./
+\cp -a $script_dir/templates/.[a-z]* ./
 mkdir -p storage/tmp/local-mysql/data
 
 # 書き換え
@@ -227,7 +227,7 @@ find {docker*,Makefile} -type f -exec sed -i -e "s/MYSQL_VERSION/${mysql_version
 find {docker*,Makefile} -type f -exec sed -i -e "s/MYSQL_PORT/${mysql_port}/g" {} \;
 
 git add -A
-git commit -m "second commit (install docker)"
+git commit -m "auto commit (install docker)"
 
 
 # setup
@@ -238,12 +238,11 @@ make up
 echo
 echo wating...
 until docker-compose exec mysql sh -c "MYSQL_PWD=password mysqladmin ping --silent"; do
-    echo .
     sleep 2
+    echo .
 done
-sleep 2
+sleep 5
 echo
-make migrate
 
 # others
 
@@ -252,10 +251,18 @@ npm install json
 `npm bin`/json -o json-4 -I -f composer.json -e 'this.autoload.files=["app/Helper/helpers.php"]'
 
 # php-cs-fixer
-composer require friendsofphp/php-cs-fixer
+composer require --dev friendsofphp/php-cs-fixer
+
+# debugbar
+composer require --dev barryvdh/laravel-debugbar
+php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+
+# 日本語化
+curl https://readouble.com/laravel/8.x/ja/install-ja-lang-files.php | php
+
 
 git add -A
-git commit -m "second commit (install others)"
+git commit -m "auto commit (install others)"
 
 
 # adminlte and auth
@@ -270,20 +277,26 @@ if [[ $install_adminlte = "yes" ]]; then
     # socialite & jetstream
     composer require laravel/socialite
     # composer require socialiteproviders/facebook
-    # いるか不明
+    # いるか不明＞いるね＞app/Providers/EventServiceProvider.phpの更新も
+    # https://blog.capilano-fw.com/?p=7862
+
     composer require laravel/jetstream
-    docker-compose exec php php artisan jetstream:install livewire
+    php artisan jetstream:install livewire
+    # jetstreamのviewsファイルをコピー。これも選択式のほうが良いかも？でもAdminLTEなら必須かと。
+    php artisan vendor:publish --tag=jetstream-views
 
     HTTP_PORT=$nginx_port php $script_dir/install_adminlte.php
-
-    make migrate
 
     npm install
     npm run dev
 
     git add -A
-    git commit -m "second commit (install admin-lte)"
+    git commit -m "auto commit (install admin-lte)"
 fi
+
+
+# migrate
+make migrate
 
 
 # ここでブランチ切っておく

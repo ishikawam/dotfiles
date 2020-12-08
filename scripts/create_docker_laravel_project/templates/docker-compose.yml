@@ -14,9 +14,12 @@ services:
 #    stdin_open: true
 #    privileged: true
     environment:
+# Laravelの.envはAPP_KEYのみにして、他はここで指定する
+      - APP_NAME=PROJECT_NAME (local)
       - APP_ENV=local
-      - APP_DEBUG=1
+      - APP_DEBUG=true
       - APP_URL=http://localhost:NGINX_PORT
+      - CACHE_DRIVER=file
       - SESSION_LIFETIME=1
       - DB_CONNECTION=mysql
       - DB_HOST=mysql
