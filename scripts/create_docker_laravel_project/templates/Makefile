@@ -1,22 +1,31 @@
 # PROJECT_NAME
+# for local development.
 
 dummy:
 	@echo PROJECT_NAME Makefile.
+
+setup:
+	@if [ -e .env ]; then echo ; echo Error! .env is exists. ; echo ; exit 1 ; fi
+	echo 'APP_KEY=' > .env
+	php artisan key:generate
+	@echo
+	@echo done.
 
 install:
 	git submodule update --init
 	composer install
 	docker-compose build
-	docker-compose run php php artisan clear-compiled
+	php artisan clear-compiled
 	npm install
 
 clear:
-	docker-compose exec php php composer.phar dump-autoload --optimize
-	docker-compose exec php php artisan clear-compiled
-	docker-compose exec php php artisan view:clear
+	composer dump-autoload --optimize
+	php artisan clear-compiled
+	php artisan view:clear
 	rm -rf storage/app/*
 	rm -rf storage/logs/*
 	rm -rf storage/debugbar/*
+	git checkout storage
 
 up:
 	docker-compose up -d --build
