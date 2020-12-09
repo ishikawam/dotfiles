@@ -43,6 +43,7 @@ $str = preg_replace('/(\baliases\b.*?)(    ],)/s', "\\1$text\n\\2", $str);
 $str = preg_replace('/\'en\'/', '\'ja\'', $str);
 $str = preg_replace('/\'en_US\'/', '\'ja_JP\'', $str);
 $str = preg_replace('/\'UTC\'/', '\'Asia/Tokyo\'', $str);
+$str = preg_replace('/(\'APP_NAME\', )(\'.*?\')/', '\\1\'' . getenv('PROJECT_NAME') . '\'', $str);
 
 file_put_contents('config/app.php', $str);
 

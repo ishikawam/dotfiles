@@ -276,8 +276,20 @@ if [[ $install_adminlte = "yes" ]]; then
 
     # socialite & jetstream
     composer require laravel/socialite
-    # composer require socialiteproviders/facebook
-    # いるか不明＞いるね＞app/Providers/EventServiceProvider.phpの更新も
+    composer require socialiteproviders/facebook
+    # app/Providers/EventServiceProvider.phpの更新も @todo;
+    #// Socialite
+    #\SocialiteProviders\Manager\SocialiteWasCalled::class => [
+    #// facebook
+    #'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+    #],
+    #// routes/web.php も
+    #// Social Login
+    #Route::prefix('login/{provider}')->where(['provider' => '(facebook)'])->group(function(){
+    #Route::get('/', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')->name('social_login.redirect');
+    #Route::get('/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')->name('social_login.callback');
+    #});
+
     # https://blog.capilano-fw.com/?p=7862
 
     composer require laravel/jetstream
@@ -285,7 +297,7 @@ if [[ $install_adminlte = "yes" ]]; then
     # jetstreamのviewsファイルをコピー。これも選択式のほうが良いかも？でもAdminLTEなら必須かと。
     php artisan vendor:publish --tag=jetstream-views
 
-    HTTP_PORT=$nginx_port php $script_dir/install_adminlte.php
+    HTTP_PORT=$nginx_port PROJECT_NAME=$project php $script_dir/install_adminlte.php
 
     npm install
     npm run dev
