@@ -257,6 +257,9 @@ composer require --dev friendsofphp/php-cs-fixer
 composer require --dev barryvdh/laravel-debugbar
 php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 
+# migration カラム変更 メモリ喰うので対応 `PHP Fatal error:  Allowed memory size of 1610612736 bytes exhausted (tried to allocate 4096 bytes)`
+COMPOSER_MEMORY_LIMIT=-1 composer require doctrine/dbal
+
 # 日本語化
 curl https://readouble.com/laravel/8.x/ja/install-ja-lang-files.php | php
 
