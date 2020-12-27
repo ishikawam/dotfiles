@@ -34,14 +34,9 @@
 
 (custom-theme-set-faces
  'monokai
- ;; メニューバー = header-line
- '(menu ((t (:foreground "#111111" :background "#CCCCCC")))))
-;  :init
-;  (custom-theme-set-faces
-;   'monokai
-;   ;; メニューバー = header-line
-;   '(menu ((t (:foreground "#111111" :background "#CCCCCC")))))
-;  )
+ '(menu ((t (:foreground "#111111" :background "#F8F8F0"))))  ; メニューバー=header-lineを monokai-line-number
+ '(web-mode-html-tag-bracket-face ((t (:foreground "#ABB2BF"))))  ; HTMLタグブラケットを monokai-foreground
+ )
 
 
 
