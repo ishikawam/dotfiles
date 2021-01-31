@@ -48,11 +48,13 @@ $str = preg_replace('/(\'APP_NAME\', )(\'.*?\')/', '\\1\'' . getenv('PROJECT_NAM
 file_put_contents('config/app.php', $str);
 
 
-// これはAdminLTEじゃなくてもならないと
+// これはAdminLTEじゃなくてもならないと @todo;
 // .env
 $str = file_get_contents('.env');
 $str = preg_match('/^APP_KEY=.*$/', $str, $out) ? $out[0] : '';
-file_put_contents('.env', $str);
+if ($str) {
+    file_put_contents('.env', $str);
+}
 
 
 // これはSocialiteでやること

@@ -5,7 +5,7 @@ dummy:
 	@echo PROJECT_NAME Makefile.
 
 setup:
-	@if [ -e .env ]; then echo ; echo Error! .env is exists. ; echo ; exit 1 ; fi
+	@if [ -s .env ]; then echo ; echo Error! .env is exists. ; echo ; exit 1 ; fi
 	echo 'APP_KEY=' > .env
 	php artisan key:generate
 	@echo
