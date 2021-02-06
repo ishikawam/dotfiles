@@ -51,6 +51,7 @@ services:
       - "MYSQL_PORT:3306" # sequel用
     volumes:
       - "./storage/tmp/local-mysql/data:/var/lib/mysql:cached"
+      - ./docker/mysql/default.cnf:/etc/mysql/conf.d/default.cnf:cached
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: laravel

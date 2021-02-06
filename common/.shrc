@@ -144,7 +144,7 @@ if [ "`pyenv --version 2>/dev/null`" ]; then
 fi
 
 ##################################################
-# ruby
+# ruby, gem
 
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
@@ -154,9 +154,6 @@ if [ -f ~/.rbenv/bin/rbenv -a ! "`rbenv --version 2>/dev/null`" ]; then
 fi
 
 eval "$(rbenv init -)"
-
-# gem
-export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 
 ##################################################

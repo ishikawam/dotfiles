@@ -16,3 +16,13 @@ create_docker_laravel_project
 * bootstrap
   * admin-lte
 
+## commit
+
+1. install laravel
+2. install templates & docker
+3. install others
+4. install admin-lte
+  * socialite(facebook), jetstream, livewire
+  * setup views
+
+> admin-lteのセットアップに他の色々も混ざっているのでリファクタしないと @todo;

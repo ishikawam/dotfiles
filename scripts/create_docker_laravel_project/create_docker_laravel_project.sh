@@ -227,7 +227,7 @@ find {docker*,Makefile} -type f -exec sed -i -e "s/MYSQL_VERSION/${mysql_version
 find {docker*,Makefile} -type f -exec sed -i -e "s/MYSQL_PORT/${mysql_port}/g" {} \;
 
 git add -A
-git commit -m "auto commit (install docker)"
+git commit -m "auto commit (install templates & docker)"
 
 
 # setup

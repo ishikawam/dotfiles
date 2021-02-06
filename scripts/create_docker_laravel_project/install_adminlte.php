@@ -39,7 +39,7 @@ $text = '
 ';
 $str = preg_replace('/(\baliases\b.*?)(    ],)/s', "\\1$text\n\\2", $str);
 
-# AdminLTEじゃなくても
+# AdminLTEじゃなくても @todo;
 $str = preg_replace('/\'en\'/', '\'ja\'', $str);
 $str = preg_replace('/\'en_US\'/', '\'ja_JP\'', $str);
 $str = preg_replace('/\'UTC\'/', '\'Asia/Tokyo\'', $str);
