@@ -4,6 +4,12 @@
 # dockerが動いている
 # docker-compose composer php npm
 
+# laravel/sailは使わない＞なんか違った。でも参考にしたい。
+# 選択によってはsocialite, debugbar強制。
+
+# @todo;
+# slack, mailhog, gtags, とか絶対使うの入れたい
+
 echo
 
 # 空のディレクトリかチェック
@@ -175,6 +181,26 @@ do
     fi
 done
 
+# 認証パッケージ
+# jetstream:livewire, jetstream:inertia(vuejs), ui(bootstrap), breeze(simple)
+
+while :
+do
+    echo "Install Auth Package ..."
+    echo
+    echo "1: jetstream:livewire"
+    echo "2: jetstream:inertia(vuejs)"
+    echo "3: ui(bootstrap)"
+    echo "4: breeze(simple)"
+    echo "5: none"
+    echo
+    read -n1 -p "? : " -a install_auth
+    echo
+    if [[ "$install_auth" = [12345] ]]; then
+        break
+    fi
+done
+
 
 # 最終確認
 
@@ -186,6 +212,7 @@ echo MySQL version: $mysql_version
 echo nginx port: $nginx_port
 echo MySQL port: $mysql_port
 echo Install AdminLTE: $install_adminlte
+echo Install Auth Package: $install_auth
 echo "-----------------"
 echo
 
@@ -236,7 +263,7 @@ make install
 make up
 # mysql立ち上がるのを待つ
 echo
-echo wating...
+echo waiting...
 until docker-compose exec mysql sh -c "MYSQL_PWD=password mysqladmin ping --silent"; do
     sleep 2
     echo .
@@ -272,12 +299,7 @@ git commit -m "auto commit (install others)"
 if [[ $install_adminlte = "yes" ]]; then
     npm install admin-lte --save
 
-    # vuejs & auth
-    # jetstreamとどっちか選ばないとなので、これはなしに。
-#    composer require laravel/ui
-#    docker-compose exec php php artisan ui vue --auth
-
-    # socialite & jetstream
+    # socialite
     composer require laravel/socialite
     composer require socialiteproviders/facebook
     # app/Providers/EventServiceProvider.phpの更新も @todo;
@@ -295,11 +317,6 @@ if [[ $install_adminlte = "yes" ]]; then
 
     # https://blog.capilano-fw.com/?p=7862
 
-    composer require laravel/jetstream
-    php artisan jetstream:install livewire
-    # jetstreamのviewsファイルをコピー。これも選択式のほうが良いかも？でもAdminLTEなら必須かと。
-    php artisan vendor:publish --tag=jetstream-views
-
     HTTP_PORT=$nginx_port PROJECT_NAME=$project php $script_dir/install_adminlte.php
 
     npm install
@@ -309,6 +326,36 @@ if [[ $install_adminlte = "yes" ]]; then
     git commit -m "auto commit (install admin-lte)"
 fi
 
+# install auth package
+case "$install_auth" in
+    1)
+        echo "1: jetstream:livewire"
+        composer require laravel/jetstream
+        php artisan jetstream:install livewire
+        # jetstreamのviewsファイルをコピー。これも選択式のほうが良いかも？でもAdminLTEなら必須かと。
+        php artisan vendor:publish --tag=jetstream-views
+        ;;
+    2)
+        echo "2: jetstream:inertia(vuejs)"
+        composer require laravel/jetstream
+        php artisan jetstream:install inertia
+        ;;
+    3)
+        echo "3: ui(bootstrap)"
+        composer require laravel/ui
+        php artisan ui vue --auth
+#        php artisan ui bootstrap --auth
+#        php artisan ui react --auth
+        ;;
+    4)
+        echo "4: breeze(simple)"
+        composer require laravel/breeze --dev
+        php artisan breeze:install
+        ;;
+    5)
+        echo "5: none"
+        ;;
+esac
 
 # migrate
 make migrate
