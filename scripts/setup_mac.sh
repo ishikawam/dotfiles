@@ -46,7 +46,8 @@ brew update
 brew upgrade
 brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash coreutils direnv
 # homebrew cask
-brew cask upgrade
+# brew caskはなくなった。2021
+#brew cask upgrade
 # brew caskは途中でエラーあるとそこで止まるので、どうせ非同期してくれないのでarray()に入れてループで1つずつインストールする
 array=(
     docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
@@ -61,7 +62,8 @@ brewcaskls=`brew cask ls`
 for i in "${array[@]}"
 do
     if [ ! `echo $brewcaskls | grep -o "\b$i\b"` ]; then
-        brew cask install $i
+        brew install $i
+#        brew cask install $i
         # open /Applications/$i  これじゃだめ
     fi
 done
