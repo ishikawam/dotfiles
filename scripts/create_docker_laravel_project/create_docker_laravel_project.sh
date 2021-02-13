@@ -12,6 +12,13 @@
 
 echo
 
+# docker起動確認
+docker ps 1>/dev/null
+if [ $? != 0 ]; then
+    echo "Please run docker app."
+    exit;
+fi
+
 # 空のディレクトリかチェック
 if [ -n "`ls -A`" ]; then
     echo "Please select an empty directory."
@@ -295,8 +302,11 @@ git add -A
 git commit -m "auto commit (install others)"
 
 
-# adminlte and auth
+# adminlte and socialite
 if [[ $install_adminlte = "yes" ]]; then
+    echo
+    echo "Install AdminLTE"
+    echo
     npm install admin-lte --save
 
     # socialite
@@ -327,35 +337,50 @@ if [[ $install_adminlte = "yes" ]]; then
 fi
 
 # install auth package
+echo
+echo "Install Auth Package"
+echo
 case "$install_auth" in
     1)
-        echo "1: jetstream:livewire"
+        install_auth_name="jetstream:livewire"
+        echo $install_auth_name
         composer require laravel/jetstream
         php artisan jetstream:install livewire
         # jetstreamのviewsファイルをコピー。これも選択式のほうが良いかも？でもAdminLTEなら必須かと。
         php artisan vendor:publish --tag=jetstream-views
         ;;
     2)
-        echo "2: jetstream:inertia(vuejs)"
+        install_auth_name="jetstream:inertia(vuejs)"
+        echo $install_auth_name
         composer require laravel/jetstream
         php artisan jetstream:install inertia
         ;;
     3)
-        echo "3: ui(bootstrap)"
+        install_auth_name="ui(bootstrap)"
+        echo $install_auth_name
         composer require laravel/ui
         php artisan ui vue --auth
 #        php artisan ui bootstrap --auth
 #        php artisan ui react --auth
         ;;
     4)
-        echo "4: breeze(simple)"
+        install_auth_name="breeze(simple)"
+        echo $install_auth_name
         composer require laravel/breeze --dev
         php artisan breeze:install
         ;;
     5)
-        echo "5: none"
+        install_auth_name="none"
+        echo $install_auth_name
         ;;
 esac
+
+if [[ "$install_auth" = [1234] ]]; then
+    npm install
+    npm run dev
+    git add -A
+    git commit -m "auto commit (install auth) $install_auth_name"
+fi
 
 # migrate
 make migrate
