@@ -58,7 +58,8 @@ array=(
     # 任意
     # android-studio dnsmasq java
 )
-brewcaskls=`brew cask ls`
+brewcaskls=`brew ls`
+#brewcaskls=`brew cask ls`
 for i in "${array[@]}"
 do
     if [ ! `echo $brewcaskls | grep -o "\b$i\b"` ]; then
