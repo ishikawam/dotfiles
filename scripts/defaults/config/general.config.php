@@ -237,9 +237,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'write' => '-int 480',
         ],
         'last minute of work hours' => [
-            // 1日の終了時間 20:00
-            'read' => 1200,
-            'write' => '-int 1200',
+            // 1日の終了時間 22:00
+            'read' => 1320,
+            'write' => '-int 1320',
         ],
     ],
 
