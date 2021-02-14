@@ -22,6 +22,10 @@ if (! preg_match('/\.blade\.php$/', $toFile)) {
     exit(1);
 }
 
+if (! is_dir(dirname($toFile))) {
+    mkdir(dirname($toFile), 0755, true);
+}
+
 $str = file_get_contents($file);
 
 // サイトルート相対パスに置き換え

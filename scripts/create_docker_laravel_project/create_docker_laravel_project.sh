@@ -173,11 +173,33 @@ do
 done
 mysql_port=$port
 
+# 認証パッケージ
+# jetstream:livewire, jetstream:inertia(vuejs), ui(bootstrap), breeze(simple)
+
+while :
+do
+    echo "Install Auth Package ..."
+    echo
+    echo "1: jetstream:livewire"
+    echo "2: jetstream:inertia(vuejs)"
+    echo "3: breeze(simple)"
+    echo "4: ui(vuejs)"
+    echo "5: ui(bootstrap)"
+    echo "6: ui(react)"
+    echo "0: none"
+    echo
+    read -n1 -p "? : " -a install_auth
+    echo
+    if [[ "$install_auth" = [0123456] ]]; then
+        break
+    fi
+done
+
 # admin-lte
 
 while :
 do
-    read -n1 -p "Install AdminLTE ? (y/n) : " -a yn
+    read -n1 -p "Install AdminLTE & Socialite ? (y/n) : " -a yn
     echo
     if [[ "$yn" = [yY] ]]; then
         install_adminlte="yes"
@@ -188,38 +210,18 @@ do
     fi
 done
 
-# 認証パッケージ
-# jetstream:livewire, jetstream:inertia(vuejs), ui(bootstrap), breeze(simple)
-
-while :
-do
-    echo "Install Auth Package ..."
-    echo
-    echo "1: jetstream:livewire"
-    echo "2: jetstream:inertia(vuejs)"
-    echo "3: ui(bootstrap)"
-    echo "4: breeze(simple)"
-    echo "5: none"
-    echo
-    read -n1 -p "? : " -a install_auth
-    echo
-    if [[ "$install_auth" = [12345] ]]; then
-        break
-    fi
-done
-
 
 # 最終確認
 
 echo
 echo "-----------------"
-echo Project name: $project
-echo php version: $php_version
-echo MySQL version: $mysql_version
-echo nginx port: $nginx_port
-echo MySQL port: $mysql_port
-echo Install AdminLTE: $install_adminlte
-echo Install Auth Package: $install_auth
+echo "Project name: $project"
+echo "php version: $php_version"
+echo "MySQL version: $mysql_version"
+echo "nginx port: $nginx_port"
+echo "MySQL port: $mysql_port"
+echo "Install Auth Package: $install_auth"
+echo "Install AdminLTE & Socialite: $install_adminlte"
 echo "-----------------"
 echo
 
@@ -254,7 +256,7 @@ git commit -m "first commit (install laravel)"
 mkdir -p storage/tmp/local-mysql/data
 
 # 書き換え
-find {docker*,Makefile} -type f -exec sed -i -e "s/PROJECT_NAME/${project}/g" {} \;
+find {docker*,Makefile,README.md} -type f -exec sed -i -e "s/PROJECT_NAME/${project}/g" {} \;
 find {docker*,Makefile} -type f -exec sed -i -e "s/PHP_VERSION/${php_version}/g" {} \;
 find {docker*,Makefile} -type f -exec sed -i -e "s/NGINX_PORT/${nginx_port}/g" {} \;
 find {docker*,Makefile} -type f -exec sed -i -e "s/MYSQL_VERSION/${mysql_version}/g" {} \;
@@ -302,45 +304,20 @@ git add -A
 git commit -m "auto commit (install others)"
 
 
-# adminlte and socialite
-if [[ $install_adminlte = "yes" ]]; then
-    echo
-    echo "Install AdminLTE"
-    echo
-    npm install admin-lte --save
-
-    # socialite
-    composer require laravel/socialite
-    composer require socialiteproviders/facebook
-    # app/Providers/EventServiceProvider.phpの更新も @todo;
-    #// Socialite
-    #\SocialiteProviders\Manager\SocialiteWasCalled::class => [
-    #// facebook
-    #'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
-    #],
-    #// routes/web.php も
-    #// Social Login
-    #Route::prefix('login/{provider}')->where(['provider' => '(facebook)'])->group(function(){
-    #Route::get('/', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')->name('social_login.redirect');
-    #Route::get('/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')->name('social_login.callback');
-    #});
-
-    # https://blog.capilano-fw.com/?p=7862
-
-    HTTP_PORT=$nginx_port PROJECT_NAME=$project php $script_dir/install_adminlte.php
-
-    npm install
-    npm run dev
-
-    git add -A
-    git commit -m "auto commit (install admin-lte)"
-fi
+# settings
+PROJECT_NAME=$project php $script_dir/settings.php
+git add -A
+git commit -m "auto commit (settings)"
 
 # install auth package
 echo
 echo "Install Auth Package"
 echo
 case "$install_auth" in
+    0)
+        install_auth_name="none"
+        echo $install_auth_name
+        ;;
     1)
         install_auth_name="jetstream:livewire"
         echo $install_auth_name
@@ -356,31 +333,83 @@ case "$install_auth" in
         php artisan jetstream:install inertia
         ;;
     3)
-        install_auth_name="ui(bootstrap)"
-        echo $install_auth_name
-        composer require laravel/ui
-        php artisan ui vue --auth
-#        php artisan ui bootstrap --auth
-#        php artisan ui react --auth
-        ;;
-    4)
         install_auth_name="breeze(simple)"
         echo $install_auth_name
         composer require laravel/breeze --dev
         php artisan breeze:install
         ;;
-    5)
-        install_auth_name="none"
+    4)
+        install_auth_name="ui(vuejs)"
         echo $install_auth_name
+        composer require laravel/ui
+        php artisan ui vue --auth
+        ;;
+    5)
+        install_auth_name="ui(bootstrap)"
+        echo $install_auth_name
+        composer require laravel/ui
+        php artisan ui bootstrap --auth
+        ;;
+    6)
+        install_auth_name="ui(react)"
+        echo $install_auth_name
+        composer require laravel/ui
+        php artisan ui react --auth
         ;;
 esac
 
-if [[ "$install_auth" = [1234] ]]; then
+if [ "$install_auth" != 0 ]; then
     npm install
     npm run dev
     git add -A
     git commit -m "auto commit (install auth) $install_auth_name"
 fi
+
+
+# adminlte & socialite
+if [[ $install_adminlte = "yes" ]]; then
+    echo
+    echo "Install AdminLTE & Socialite"
+    echo
+
+    # socialite
+    composer require laravel/socialite
+    composer require socialiteproviders/facebook
+
+    # socialite 設定
+    HTTP_PORT=$nginx_port php $script_dir/configure_socialite.php
+
+    # AdminLTE
+    npm install admin-lte --save
+
+    # index.blade.php
+    php $script_dir/convert_html_to_blade.php 'node_modules/admin-lte/index.html' 'resources/views/admin/index.blade.php'
+
+    # v2よりv1のほうがいいかも
+    # cp resources/views/auth/login.blade.php resources/views/auth/login_.blade.php
+    # php ~/scripts/create_docker_laravel_project/convert_html_to_blade.php node_modules/admin-lte/pages/examples/login.html resources/views/auth/login.blade.php
+    # cp resources/views/auth/forgot-password.blade.php resources/views/auth/forgot-password_.blade.php
+    # php ~/scripts/create_docker_laravel_project/convert_html_to_blade.php node_modules/admin-lte/pages/examples/forgot-password.html resources/views/auth/forgot-password.blade.php
+    # cp resources/views/auth/register.blade.php resources/views/auth/register_.blade.php
+    # php ~/scripts/create_docker_laravel_project/convert_html_to_blade.php node_modules/admin-lte/pages/examples/register.html resources/views/auth/register.blade.php
+    # やっぱloginだけで、、Facebookしか使わないので
+
+    # routes
+    echo "
+Route::get('/admin', function () {
+    return view('admin/index');
+});" >> routes/web.php
+
+    #  public
+    ln -s ../node_modules/admin-lte/ public/
+
+    npm install
+    npm run dev
+
+    git add -A
+    git commit -m "auto commit (install admin-lte & socialite)"
+fi
+
 
 # migrate
 make migrate
@@ -392,7 +421,8 @@ git checkout -b first
 git checkout $master
 
 
-# gtags @todo;
+# gtags
+gtags -v
 
 
 # save latest port
