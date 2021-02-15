@@ -25,4 +25,21 @@ create_docker_laravel_project
   * socialite(facebook), jetstream, livewire
   * setup views
 
-> admin-lteのセットアップに他の色々も混ざっているのでリファクタしないと @todo;
+## このあとにやることは
+
+* .env
+  * なぜかうまくいってない @todo;
+  * 本来はAPP_KEYのみなるはず。
+* Githubへpush
+  * master, first, develop
+* Sequel Ace
+* MySQL Workbench
+  * Models > Create EER Model from Database
+  * 必要なテーブルに絞る
+* Swagger
+  * composer require zircote/swagger-php
+  * npm install swagger-ui --save-dev
+  * https://www.zu-min.com/archives/1098
+* サーバ環境構築とCIセットアップ
+* Issue作成
+  * @todo; 一覧

@@ -34,13 +34,13 @@ services:
     ports:
       - "NGINX_PORT:80"
     volumes:
-      - ./public:/var/www/PROJECT_NAME/public:cached
-      - ./node_modules:/var/www/PROJECT_NAME/node_modules:cached
+      - .:/var/www/PROJECT_NAME:cached
     working_dir: /var/www/PROJECT_NAME
     mem_limit: 64m
 #    mem_limit: "67108864"  # 64MB ギリギリ
     depends_on:
       - php
+      - mysql
 #    stdin_open: true
 #    privileged: true
 
