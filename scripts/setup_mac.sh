@@ -123,30 +123,6 @@ mas install 405399194 406056744 408981434 409183694 409201541 409203825 41737558
 
 #    sudo xcodebuild -license
 
-######## Chrome backup ##################################################################
-
-head "3. Chrome backup"
-
-# chrome backup setting
-# この.gitignoreはgit addできない。 > ここでgit initするから
-if [ -d ~/Library/Application\ Support/Google/Chrome/Default/ ]; then
-    cd ~/Library/Application\ Support/Google/Chrome/Default/
-    ln -sf ~/common/Chrome/Default/gitignore ./.gitignore
-    git init
-    cd -
-    if [ ! "`crontab -l 2>/dev/null`" ]; then
-        echo "\nNo crontab. Please set."
-        echo "\`\`\`"
-        echo '*/22 * * * * cd ~/Library/Application\ Support/Google/Chrome/Default ; rm -rf .git/index.lock ; git add . ; git add -A ; git commit -m "`date`" > /dev/null 2>&1'
-        echo "\`\`\`"
-        echo "crontab -eで'Operation not permitted'といわれたら、System PreferencesのSecurity&PrivacyのPrivacyにiTermを追加。"
-        read -p "Edit now? y or n (n): " ans
-        if [ "$ans" = "y" ]; then
-            crontab -e
-        fi
-    fi
-fi
-
 
 ######## hostname mac ##################################################################
 
