@@ -8,6 +8,7 @@ PROJECT_NAME
 * npm
 * php
 * composer
+* docker
 
 ## Usage
 
