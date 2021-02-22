@@ -107,6 +107,7 @@
 (use-package typescript-mode)
 (use-package dockerfile-mode)
 (use-package protobuf-mode)
+(use-package terraform-mode)
 
 
 ;;; Syntax Checker
