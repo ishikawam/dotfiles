@@ -41,6 +41,15 @@ create_docker_laravel_project
   * npm install swagger-ui --save-dev
   * https://www.zu-min.com/archives/1098
 * サーバ環境構築とCIセットアップ
+  * awsの場合はSSL (app/Providers/AppServiceProvider.php に forceScheme()とか)
 * Issue作成
   * @todo; 一覧
   * @todo; Github CLI？
+
+## todo
+
+* Makefileは一部 CACHE_DRIVER=array でartisan, composer
+* templatesにfacebookが入ってたりして、最小構成で作ったときがおかしい
+* memcachedも選択肢に
+* mysql外す選択肢も
+* cliのみに対応。nginx外してcontroller, viewをリセットする選択肢も
