@@ -6,6 +6,7 @@ dummy:
 
 setup:
 	@if [ -s .env ]; then echo ; echo Error! .env is exists. ; echo ; exit 1 ; fi
+	make install
 	echo 'APP_KEY=' > .env
 	php artisan key:generate
 	@echo

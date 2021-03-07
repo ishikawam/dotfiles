@@ -29,9 +29,21 @@ file_put_contents('config/app.php', $str);
 $str = file_get_contents('config/services.php');
 $text = sprintf("
     'facebook' => [
-        'client_id' => 'app id',
-        'client_secret' => 'add secret',
-        'redirect' => 'http://localhost:%s/auth/facebook/callback',
+        'client_id' =>  env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' =>  env('APP_URL') . '/login/facebook/callback',
+    ],
+
+    'instagram' => [
+        'client_id' =>  env('INSTAGRAM_CLIENT_ID'),
+        'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
+        'redirect' =>  env('APP_URL') . '/login/instagram/callback',
+    ],
+
+    'instagrambasic' => [
+        'client_id' =>  env('INSTAGRAM_CLIENT_ID'),
+        'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
+        'redirect' =>  env('APP_URL') . '/login/instagrambasic/callback',
     ],
 ", getenv('HTTP_PORT'));
 $str = preg_replace('/(];)/', "$text\\1", $str);

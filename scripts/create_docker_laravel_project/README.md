@@ -53,3 +53,4 @@ create_docker_laravel_project
 * memcachedも選択肢に
 * mysql外す選択肢も
 * cliのみに対応。nginx外してcontroller, viewをリセットする選択肢も
+* migrationにsocial_accountsを
