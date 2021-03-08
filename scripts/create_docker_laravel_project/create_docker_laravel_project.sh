@@ -422,7 +422,7 @@ git checkout $master
 
 
 # gtags
-gtags -v
+gtags -v 2>/dev/null
 
 
 # save latest port
