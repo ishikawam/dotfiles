@@ -26,6 +26,7 @@ array=(
     "/Applications/GoogleJapaneseInput.localized/ConfigDialog.app"
     "/Applications/Backup and Sync.app"
     "/Applications/Gyazo.app"
+    "/Applications/Box Sync.app"
 
     # adobe は installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
