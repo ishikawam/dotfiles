@@ -54,6 +54,7 @@ array=(
     firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud google-backup-and-sync
     gyazo chatwork
     homebrew/cask-versions/sequel-pro-nightly
+    sequel-ace
     box-sync
     # language-switcher  # ダウンロードできない？
     # 任意

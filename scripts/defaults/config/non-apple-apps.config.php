@@ -4,7 +4,7 @@
  * Non-Apple Apps
  */
 return [
-    // sequel pro
+    // sequel pro  @todo; sequel-aceは？
     'com.sequelpro.SequelPro' => [
         'SUEnableAutomaticChecks' => [
             // automatic update check.
