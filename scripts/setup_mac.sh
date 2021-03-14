@@ -52,11 +52,11 @@ brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagema
 array=(
     docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
     firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud google-backup-and-sync
-    gyazo chatwork
+    gyazo chatwork sharemouse
     homebrew/cask-versions/sequel-pro-nightly
     sequel-ace
     box-sync
-    # language-switcher  # ダウンロードできない？
+    # language-switcher  # ダウンロードできない？もう不要になった（OS標準で言語をアプリごとに変えれるようになった）
     # 任意
     # android-studio dnsmasq java
 )

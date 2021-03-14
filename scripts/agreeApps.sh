@@ -8,7 +8,6 @@ array=(
     "/Applications/Docker.app"
     "/Applications/Sublime Text.app"
     "/Applications/MacDown.app"
-    "/Applications/Alfred 3.app"
     "/Applications/Alfred 4.app"
     "/Applications/Dropbox.app"
     "/Applications/Karabiner-Elements.app"
@@ -16,33 +15,35 @@ array=(
     "/Applications/Firefox.app"
     "/Applications/MySQLWorkbench.app"
     "/Applications/Skitch.app"
-    "/Applications/Evernote.app"
+    "/Applications/Evernote.app"  # でも当分はEvernote Legacy
     "/Applications/Charles.app"
     "/Applications/Clipy.app"
     "/Applications/HandBrake.app"
-    "/Applications/Language Switcher.app"
     "/Applications/Sequel Pro.app"
     "/Applications/iTerm.app"
     "/Applications/GoogleJapaneseInput.localized/ConfigDialog.app"
     "/Applications/Backup and Sync.app"
     "/Applications/Gyazo.app"
     "/Applications/Box Sync.app"
+    "/Applications/ShareMouse.app"
 
     # adobe は installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
 
     # mac標準
-    "/Applications/iTunes.app"
+    "/System/Applications/Music.app"
     "/Applications/App Store.app"
-    "/Applications/Books.app"
-    "/Applications/Calendar.app"
-    "/Applications/Contacts.app"
-    "/Applications/Notes.app"
-    "/Applications/Photos.app"
+    "/System/Applications/App\ Store.app"
+    "/System/Applications/Books.app"
+    "/System/Applications/Calendar.app"
+    "/System/Applications/Contacts.app"
+    "/System/Applications/Notes.app"
+    "/System/Applications/Photos.app"
     "/Applications/Safari.app"
-    "/Applications/VoiceMemos.app"
+    "/System/Applications/VoiceMemos.app"
 
     # mas = mac app store
+    "/Applications/Adobe\ Creative\ Cloud/Adobe\ Creative\ Cloud"
     "/Applications/BetterSnapTool.app"
     "/Applications/Clear.app"
     "/Applications/Keynote.app"
@@ -62,27 +63,18 @@ array=(
 
     # 手動
     "/Applications/FileZilla.app"
+    # https://filezilla-project.org/download.php?type=client
     "/Applications/Picasa.app"
     "/Applications/RICOH THETA.app"
-
-
-    # "/Applications/"
-    # "/Applications/"
-    # "/Applications/"
-    # "/Applications/"
-    # "/Applications/"
-    # "/Applications/"
-    # "/Applications/"
+    # https://support.theta360.com/ja/download/pcmac/
 
 
 # Adobe Lightroom Classic CC/
 # Adobe Photoshop CC 2018/
 # Adobe XD CC/
 # Automator.app/
-# Backup and Sync.app/
 # Box Sync.app/
 # FaceTime.app/
-
 
 
 # Microsoft Excel.app/
@@ -90,9 +82,9 @@ array=(
 # Microsoft Outlook.app/
 # Microsoft PowerPoint.app/
 # Microsoft Word.app/
-# QBlocker.app/
 
-# ShareMouse.app/
+# QBlocker.app/  # あれ？もう不要？
+
 
 )
 
