@@ -4,7 +4,15 @@
 # bc, wget, gcc, ncurses6 が必要
 
 # http://ftp.gnu.org/pub/gnu/emacs/ で最新バージョンを確認、更新。
-version=25.3
+
+version=27.1
+
+echo "Check latest version."
+echo "> http://zsh.sourceforge.net/Arc/source.html"
+echo
+echo "$version : ok?"
+echo
+read
 
 ###########################################################
 
@@ -14,7 +22,7 @@ if [ $installed == $version ]; then
     echo already installed.
     exit
 elif [ `echo "$installed > $version" | bc` == 1 ]; then
-    echo ばーじょんおおきいのが入っている
+    echo "Version Error. $installed > $version"
     exit
 fi
 
@@ -29,7 +37,7 @@ fi
 tar zxvf emacs-$version.tar.gz
 cd emacs-$version
 mkdir -p ~/opt
-LDFLAGS="-L$HOME/opt/lib" ./configure --prefix=$HOME/opt --without-x
+PKG_CONFIG_PATH="$HOME/opt/lib/pkgconfig:$HOME/opt/lib64/pkgconfig:$PKG_CONFIG_PATH" LDFLAGS="-L$HOME/opt/lib" ./configure --prefix=$HOME/opt --without-x
 make
 make install
 

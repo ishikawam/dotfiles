@@ -108,6 +108,7 @@
 (use-package dockerfile-mode)
 (use-package protobuf-mode)
 (use-package terraform-mode)
+(use-package vue-mode)
 
 
 ;;; Syntax Checker
@@ -154,6 +155,7 @@
 (add-hook 'python-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'ruby-mode-hook (lambda () (helm-gtags-mode)))
 (add-hook 'js-mode-hook (lambda () (helm-gtags-mode)))
+(add-hook 'vue-mode-hook (lambda () (helm-gtags-mode)))
 (setq helm-gtags-path-style 'root)
 (setq helm-gtags-auto-update t)
 (add-hook 'helm-gtags-mode-hook
