@@ -9,6 +9,10 @@
 
 # @todo;
 # slack, mailhog, gtags, とか絶対使うの入れたい
+# slack:
+# php artisan make:notification Slack
+# composer require laravel/slack-notification-channel
+
 
 echo
 
