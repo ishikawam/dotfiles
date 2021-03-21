@@ -44,7 +44,7 @@ if ! type brew >/dev/null ; then
 fi
 brew update
 brew upgrade
-brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash coreutils direnv
+brew install tmux gnu-sed mysql tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash coreutils direnv composer
 # homebrew cask
 # brew caskはなくなった。2021
 #brew cask upgrade
