@@ -16,7 +16,6 @@
 !/README.md
 !/Makefile
 !/bin/
-!/local/.gitkeep
 !/scripts/
 
 !/.vimrc
