@@ -241,6 +241,10 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
             'read' => 1320,
             'write' => '-int 1320',
         ],
+        "number of hours displayed" => [
+            'read' => 24,
+            'write' => '-int 24',
+        ],
     ],
 
     // Keyboard shortcuts
