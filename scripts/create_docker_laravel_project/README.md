@@ -54,3 +54,4 @@ create_docker_laravel_project
 * mysql外す選択肢も
 * cliのみに対応。nginx外してcontroller, viewをリセットする選択肢も
 * migrationにsocial_accountsを
+* app/Exceptions/Handler.php 絶対書き換えるのでコメント入れておくとか
