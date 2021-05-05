@@ -21,6 +21,7 @@
 	editor = emacs
 	quotepath = false
 	excludesfile = ~/.gitignore_global
+	autoCRLF = false
 [push]
 	default = upstream
 [filter "lfs"]

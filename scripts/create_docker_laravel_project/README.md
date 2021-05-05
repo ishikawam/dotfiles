@@ -56,3 +56,7 @@ create_docker_laravel_project
 * migrationにsocial_accountsを
 * app/Exceptions/Handler.php 絶対書き換えるのでコメント入れておくとか
 * laravel/slack-notification-channel と Exception通知
+* version_hash
+* 外部からのPOST禁止 app/Http/Kernel.php
+* https強制
+  * このあたりはコメントアウトで入れておいて、@todo; 入れたい。
