@@ -67,7 +67,7 @@ brewcaskls=`brew ls`
 for i in "${array[@]}"
 do
     if [ ! `echo $brewcaskls | grep -o "\b$i\b"` ]; then
-        brew install $i
+        brew install --cask $i
 #        brew cask install $i
         # open /Applications/$i  これじゃだめ
     fi
@@ -123,10 +123,15 @@ mas install 405399194 406056744 408981434 409183694 409201541 409203825 41737558
 
 # 入れない
 # 405843582 Alfred (1.2)  brew cask版が新しいので
-# 497799835 Xcode (10.1)  自分で管理
+# 497799835 Xcode 自分で管理
 
 #    sudo xcodebuild -license
 
+# xcode
+# @todo; もっと早く入れたい
+if [ ! -e /Applications/Xcode* ]; then
+    mas install 497799835
+fi
 
 ######## hostname mac ##################################################################
 
