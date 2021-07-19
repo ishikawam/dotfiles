@@ -58,6 +58,7 @@ array=(
     homebrew/cask-versions/sequel-pro-nightly
     sequel-ace
     box-sync
+    drawio
     # language-switcher  # ダウンロードできない？もう不要になった（OS標準で言語をアプリごとに変えれるようになった）
     # 任意
     # android-studio dnsmasq java
