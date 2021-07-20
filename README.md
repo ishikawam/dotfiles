@@ -4,7 +4,13 @@ M_Ishikawa
 
 macでもFedoraでもCentOSでもDebianでもUbuntuでも。
 事前にzshは必須。
+ツールはphp, php-mbstring, が必要なものも。
 
+```
+sudo localedef -f UTF-8 -i ja_JP ja_JP
+```
+
+も。
 
 * メモ：
   * tmux-powerline はsubmodule化したかったけどmytheme.shを変えないといけないので取り込んだ
