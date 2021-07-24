@@ -32,7 +32,9 @@ PATH=$PATH:/sbin:/usr/sbin
 
 # homebrewを優先。gitとか
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-eval "$(/opt/homebrew/bin/brew shellenv)"  # M1
+if [ -e /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"  # M1
+fi
 
 # ~/local/bin/, ~/opt/bin/ に入れた個人使用のツール(optに統一したい
 PATH=~/local/bin:$PATH
