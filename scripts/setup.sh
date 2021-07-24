@@ -105,6 +105,14 @@ if  [ ! -e ~/.ssh/config ]; then
     cd -
 fi
 
+# warning
+# @todo PasswordAuthentication no も強制するか検討。
+# AllowUsers m_ishikawaを免除できるようにもしたい
+# その上で、停止するなどしてAlertしたい
+if [ ! "`grep 'AllowUsers m_ishikawa' /etc/ssh/sshd_config`" ]; then
+    echo "!!!warning!!! 'AllowUsers m_ishikawa' not yet set."
+fi
+
 
 ######## done ##################################################################
 
