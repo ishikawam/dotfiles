@@ -62,3 +62,4 @@ create_docker_laravel_project
 * https強制
   * このあたりはコメントアウトで入れておいて、@todo; 入れたい。
 * flash message
+* nodenv入れるべき
