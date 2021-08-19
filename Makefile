@@ -32,10 +32,17 @@ defaults:
 defaults-dryrun:
 	php ~/scripts/defaults/defaults.php --dry-run
 
+# privatee ,Libraryが直書きなの @todo;
 fetch:
 	git -C ~/ fetch ; git -C ~/ st
 	git -C ~/private fetch ; git -C ~/private st
 	git -C ~/Library fetch ; git -C ~/Library st
+
+replace:
+	if [ ! -e /Users/m_ishikawa ]; then sudo mkdir -m 777 /Users/m_ishikawa ; ln -s /Users/masayuki.ishikawa/Dropbox /Users/m_ishikawa/ ; fi
+	gsed -i -e "s/\/Users\/masayuki\.ishikawa\//\/Users\/m_ishikawa\//g" \
+		~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
+	git -C ~/Library diff
 
 pr:
 	git -C ~/ pr ; git -C ~/ st
