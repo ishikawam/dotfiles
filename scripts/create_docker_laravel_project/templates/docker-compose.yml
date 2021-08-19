@@ -3,7 +3,6 @@ version: "3.8"
 services:
 
   php:
-    container_name: "PROJECT_NAME-php"
     build: docker/php
     volumes:
       - .:/var/www/laravel:cached
@@ -21,15 +20,14 @@ services:
       - APP_URL=http://localhost:NGINX_PORT
       - CACHE_DRIVER=file
       - SESSION_LIFETIME=1
-      - DB_CONNECTION=mysql
-      - DB_HOST=mysql
-      - DB_PORT=3306
+      - DB_CONNECTION=DATABASE_NAME
+      - DB_HOST=DATABASE_IMAGE
+      - DB_PORT=DATABASE_INTERNAL_PORT
       - DB_DATABASE=laravel
       - DB_USERNAME=root
       - DB_PASSWORD=password
 
   nginx:
-    container_name: "PROJECT_NAME-nginx"
     build: docker/nginx
     ports:
       - "NGINX_PORT:80"
@@ -40,19 +38,21 @@ services:
 #    mem_limit: "67108864"  # 64MB ギリギリ
     depends_on:
       - php
-      - mysql
+      - DATABASE_IMAGE
 #    stdin_open: true
 #    privileged: true
 
-  mysql:
-    container_name: "PROJECT_NAME-mysql"
-    image: mysql:MYSQL_VERSION
+  DATABASE_IMAGE:
+    image: DATABASE_IMAGE:DATABASE_VERSION
     ports:
-      - "MYSQL_PORT:3306" # sequel用
+      - "DATABASE_PORT:DATABASE_INTERNAL_PORT" # sequel, pgadmin用
     volumes:
-      - "./storage/tmp/local-mysql/data:/var/lib/mysql:cached"
+      - "./storage/tmp/local-DATABASE_IMAGE/data:DATABASE_DIR:cached"
       - ./docker/mysql/default.cnf:/etc/mysql/conf.d/default.cnf:cached
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: laravel
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: root
+      POSTGRES_DB: laravel
 #    privileged: true

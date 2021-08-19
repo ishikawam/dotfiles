@@ -40,8 +40,9 @@ php:
 nginx:
 	docker-compose exec nginx sh
 
-mysql:
-	docker-compose exec mysql bash
+DATABASE_IMAGE:
+	docker-compose exec DATABASE_IMAGE bash
+
 migrate:
 	docker-compose exec php php artisan migrate
 

@@ -16,6 +16,10 @@ create_docker_laravel_project
 * bootstrap
   * admin-lte
 
+## やらないこと
+
+* aws
+
 ## commit
 
 1. install laravel
