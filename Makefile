@@ -32,6 +32,16 @@ defaults:
 defaults-dryrun:
 	php ~/scripts/defaults/defaults.php --dry-run
 
+fetch:
+	git -C ~/ fetch ; git -C ~/ st
+	git -C ~/private fetch ; git -C ~/private st
+	git -C ~/Library fetch ; git -C ~/Library st
+
+pr:
+	git -C ~/ pr ; git -C ~/ st
+	git -C ~/private pr ; git -C ~/private st
+	git -C ~/Library pr ; git -C ~/Library st
+
 updates:
 	sh ~/bin/updates
 	git submodule foreach git pull origin master
