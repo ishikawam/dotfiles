@@ -24,9 +24,21 @@ if [ $? != 0 ]; then
 fi
 
 # 空のディレクトリかチェック
+overwrite="no"
 if [ -n "`ls -A`" ]; then
-    echo "Please select an empty directory."
-    exit
+    while :
+    do
+        read -n1 -p "Please select an empty directory. overwrite OK ? (y/n) : " -a yn
+        echo
+        if [[ "$yn" = [yY] ]]; then
+            overwrite="yes"
+            break
+        elif [[ "$yn" = [nN] ]]; then
+            exit
+            break
+        fi
+    done
+    echo
 fi
 
 abs_dirname() {
@@ -247,11 +259,26 @@ do
     fi
 done
 
+# socialite
+
+while :
+do
+    read -n1 -p "Install Socialite ? (y/n) : " -a yn
+    echo
+    if [[ "$yn" = [yY] ]]; then
+        install_socialite="yes"
+        break
+    elif [[ "$yn" = [nN] ]]; then
+        install_socialite="no"
+        break
+    fi
+done
+
 # admin-lte
 
 while :
 do
-    read -n1 -p "Install AdminLTE & Socialite ? (y/n) : " -a yn
+    read -n1 -p "Install AdminLTE ? (y/n) : " -a yn
     echo
     if [[ "$yn" = [yY] ]]; then
         install_adminlte="yes"
@@ -268,6 +295,8 @@ done
 echo
 echo "-----------------"
 echo "Project name: $project"
+echo "Overwrite: $overwrite"
+echo
 echo "php version: $php_version"
 echo "Database: $database_name"
 echo "Database image: $database_image"
@@ -277,7 +306,8 @@ echo "Database dir: $database_dir"
 echo "Database internal port: $database_internal_port"
 echo "nginx port: $nginx_port"
 echo "Install Auth Package: $install_auth"
-echo "Install AdminLTE & Socialite: $install_adminlte"
+echo "Install Socialite: $install_socialite"
+echo "Install AdminLTE: $install_adminlte"
 echo "-----------------"
 echo
 
@@ -301,7 +331,14 @@ echo
 # create
 
 # laravel
-composer create-project laravel/laravel .
+if [[ $overwrite = "yes" ]]; then
+    composer create-project laravel/laravel tmp
+    mv tmp/{*,.*} ./
+    rm -r tmp
+else
+    composer create-project laravel/laravel .
+fi
+
 git init
 git add -A
 git commit -m "first commit (install laravel)"
@@ -453,10 +490,10 @@ if [ "$install_auth" != 0 ]; then
 fi
 
 
-# adminlte & socialite
-if [[ $install_adminlte = "yes" ]]; then
+# socialite
+if [[ $install_socialite = "yes" ]]; then
     echo
-    echo "Install AdminLTE & Socialite"
+    echo "Install Socialite"
     echo
 
     # socialite
@@ -465,6 +502,16 @@ if [[ $install_adminlte = "yes" ]]; then
 
     # socialite 設定
     HTTP_PORT=$nginx_port php $script_dir/configure_socialite.php
+
+    git add -A
+    git commit -m "auto commit (install socialite)"
+fi
+
+# adminlte
+if [[ $install_adminlte = "yes" ]]; then
+    echo
+    echo "Install AdminLTE"
+    echo
 
     # AdminLTE
     npm install admin-lte --save
@@ -494,7 +541,7 @@ Route::get('/admin', function () {
     npm run dev
 
     git add -A
-    git commit -m "auto commit (install admin-lte & socialite)"
+    git commit -m "auto commit (install admin-lte)"
 fi
 
 

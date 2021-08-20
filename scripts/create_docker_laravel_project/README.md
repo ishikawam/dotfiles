@@ -31,19 +31,19 @@ create_docker_laravel_project
 
 ## このあとにやることは
 
-* .env
-  * なぜかうまくいってない @todo;
-  * 本来はAPP_KEYのみなるはず。
 * Githubへpush
   * master, first, develop
-* Sequel Ace
-* MySQL Workbench
-  * Models > Create EER Model from Database
-  * 必要なテーブルに絞る
+  * mysql
+    * Sequel Ace
+      * MySQL Workbench
+      * Models > Create EER Model from Database
+      * 必要なテーブルに絞る
 * Swagger
   * composer require zircote/swagger-php
   * npm install swagger-ui --save-dev
   * https://www.zu-min.com/archives/1098
+* memcached, CACHE_DRIVER
+* queue
 * サーバ環境構築とCIセットアップ
   * awsの場合はSSL (app/Providers/AppServiceProvider.php に forceScheme()とか)
 * Issue作成
@@ -52,18 +52,22 @@ create_docker_laravel_project
 
 ## todo
 
-* Makefileは一部 CACHE_DRIVER=array でartisan, composer
 * templatesにfacebookが入ってたりして、最小構成で作ったときがおかしい
 * memcachedも選択肢に
-* mysql外す選択肢も
+* sqlite機能しない
 * cliのみに対応。nginx外してcontroller, viewをリセットする選択肢も
 * migrationにsocial_accountsを
 * app/Exceptions/Handler.php 絶対書き換えるのでコメント入れておくとか
 * laravel/slack-notification-channel と Exception通知
-  * キューも必須にしたい。supervisordも
+  * キューqueueも必須にしたい。supervisordも
 * version_hash
 * 外部からのPOST禁止 app/Http/Kernel.php
 * https強制
   * このあたりはコメントアウトで入れておいて、@todo; 入れたい。
 * flash message
 * nodenv入れるべき
+
+
+やるぞ
+nodenv
+facebook選択
