@@ -5,7 +5,7 @@ PROJECT_NAME
 
 ## Requirement
 
-* npm
+* npm node
 * php
 * composer
 * docker
@@ -19,4 +19,7 @@ PROJECT_NAME
 ```
 make setup
 make install
+make up
+make migrate
+make open
 ```

@@ -46,6 +46,7 @@ create_docker_laravel_project
 * queue
 * サーバ環境構築とCIセットアップ
   * awsの場合はSSL (app/Providers/AppServiceProvider.php に forceScheme()とか)
+  * awsはMakefileをしっかり
 * Issue作成
   * @todo; 一覧
   * @todo; Github CLI？
@@ -66,6 +67,20 @@ create_docker_laravel_project
   * このあたりはコメントアウトで入れておいて、@todo; 入れたい。
 * flash message
 * nodenv入れるべき
+* webpack.mix.js
+* test, dusk
+* maintenance.html メンテナンス中ページと表示
+* public/favicon.ico, public/image/apple-touch-icon.png
+* package.json > imagemin, sass, jquery
+* docs/infra.drawio, ER図
+* docker/php/default.ini : php8ならopache JIT, とか。
+* Middlewareとconfigは他の生きてるリポジトリのを大いに参考にする
+* awsやりたいなあ
+
+
+## todo 検討
+
+* app/Console/Command.php
 
 
 やるぞ

@@ -237,6 +237,22 @@ do
 done
 nginx_port=$port
 
+# memcached
+
+while :
+do
+    read -n1 -p "Install memcached ? (y/n) : " -a yn
+    echo
+    if [[ "$yn" = [yY] ]]; then
+        install_memcached="yes"
+        break
+    elif [[ "$yn" = [nN] ]]; then
+        install_memcached="no"
+        break
+    fi
+done
+
+
 # 認証パッケージ
 # jetstream:livewire, jetstream:inertia(vuejs), ui(bootstrap), breeze(simple)
 
@@ -305,6 +321,7 @@ echo "Database port: $database_port"
 echo "Database dir: $database_dir"
 echo "Database internal port: $database_internal_port"
 echo "nginx port: $nginx_port"
+echo "Install memcached: $install_memcached"
 echo "Install Auth Package: $install_auth"
 echo "Install Socialite: $install_socialite"
 echo "Install AdminLTE: $install_adminlte"
@@ -362,13 +379,11 @@ find {docker*,Makefile} -type f -exec gsed -i -e "s|DATABASE_DIR|${database_dir}
 # 差し替え database
 case "$install_database" in
     1)
-        \mv docker/php/Dockerfile-mysql docker/php/Dockerfile
-        rm -rf docker/php/Dockerfile-*
+        cat docker/php/Dockerfile-mysql >> docker/php/Dockerfile
         rm -rf docker/postgres
         ;;
     2)
-        \mv docker/php/Dockerfile-postgres docker/php/Dockerfile
-        rm -rf docker/php/Dockerfile-*
+        cat docker/php/Dockerfile-postgres >> docker/php/Dockerfile
         rm -rf docker/mysql
         ;;
     3)
@@ -376,6 +391,16 @@ case "$install_database" in
         rm -rf docker/postgres
         ;;
 esac
+
+# memcached
+if [[ $install_memcached = "yes" ]]; then
+    cat docker/php/Dockerfile-memcached >> docker/php/Dockerfile
+    cat docker-compose.yml-memcached >> docker-compose.yml
+    is_memcached=1
+fi
+
+rm -rf docker/php/Dockerfile-*
+rm -rf docker-compose.yml-*
 
 git add -A
 git commit -m "auto commit (install templates & docker)"
@@ -429,7 +454,7 @@ git commit -m "auto commit (install others)"
 
 
 # settings 書き換え
-DATABASE_NAME=$database_name PROJECT_NAME=$project php $script_dir/settings.php
+MEMCACHED=$is_memcached DATABASE_NAME=$database_name PROJECT_NAME=$project php $script_dir/settings.php
 git add -A
 git commit -m "auto commit (settings)"
 

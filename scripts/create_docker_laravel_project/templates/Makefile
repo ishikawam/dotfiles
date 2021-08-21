@@ -5,10 +5,11 @@ dummy:
 	@echo PROJECT_NAME Makefile.
 
 setup:
-	@if [ -s .env ]; then echo ; echo Error! .env is exists. ; echo ; exit 1 ; fi
-	make install
-	echo 'APP_KEY=' > .env
-	php artisan key:generate
+	@if [ ! -e /Applications/Docker.app ]; then echo ; echo Error! install docker app. ; echo ; exit 1 ; fi
+	touch .env
+	composer install
+	@if [ ! "`grep '^APP_KEY=' .env`" ]; then php artisan key:generate ; fi
+	sed -i -e "s/^CACHE_DRIVER=.*/CACHE_DRIVER=array/g" .env
 	@echo
 	@echo done.
 
@@ -18,15 +19,17 @@ install:
 	docker-compose build
 	php artisan clear-compiled
 	npm install
+	npm run dev
 
 clear:
 	composer dump-autoload --optimize
 	php artisan clear-compiled
 	php artisan view:clear
 	rm -rf storage/app/*
-	rm -rf storage/logs/*
+#	rm -rf storage/logs/*
 	rm -rf storage/debugbar/*
 	git checkout storage
+	docker-compose exec php php artisan cache:clear
 
 up:
 	docker-compose up -d --build
@@ -49,11 +52,20 @@ migrate:
 migrate-rollback:
 	docker-compose exec php php artisan migrate:rollback
 
+migrate-refresh:
+	docker-compose run php php artisan migrate:refresh
+
 logs:
 	docker-compose logs -f
 
 log:
 	tail -f ./storage/logs/*
+
+watch:
+	npm run watch
+
+dev:
+	npm run dev
 
 open:
 	open http://localhost:NGINX_PORT
@@ -67,3 +79,10 @@ fix-v:
 
 fix:
 	./vendor/bin/php-cs-fixer fix -v
+
+#
+# tasks
+#
+
+sample-inspire:
+	docker-compose exec php php artisan inspire
