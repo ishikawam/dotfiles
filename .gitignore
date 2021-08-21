@@ -35,6 +35,7 @@
 !/.tmux.conf
 !/.config/
 /.config/configstore
+/.config/iterm2
 /.config/filezilla
 !/.config/filezilla/sitemanager.xml
 /.config/Steinberg\ Installation\ Updater
