@@ -1,0 +1,5 @@
+#!/bin/bash
+
+a=$(ioreg -l | grep -o '"\(CurrentCapacity\|MaxCapacity\)".*\([0-9]*\)'  | grep -o '[0-9]\+' | gsed -z 's/\([0-9]\+\)\n\([0-9]\+\)/scale=2; \2\/\1*100 /g' | bc)
+
+echo $a%
