@@ -1,5 +1,9 @@
 #!/bin/bash
 
-a=$(ioreg -l | grep -o '"\(CurrentCapacity\|MaxCapacity\)".*\([0-9]*\)'  | grep -o '[0-9]\+' | gsed -z 's/\([0-9]\+\)\n\([0-9]\+\)/scale=2; \2\/\1*100 /g' | bc)
+a=$(pmset -g batt | gsed -z "s/.\+'\(.\+\)'.\+\([0-9]\+%.*\)/\1; \2/g")
 
-echo $a%
+echo $a
+
+#a=$(ioreg -l | grep -o '"\(CurrentCapacity\|MaxCapacity\)".*\([0-9]*\)'  | grep -o '[0-9]\+' | gsed -z 's/\([0-9]\+\)\n\([0-9]\+\)/scale=2; \2\/\1*100 /g' | bc)
+
+#echo $a%
