@@ -7,9 +7,22 @@ dummy:
 setup:
 	@if [ ! -e /Applications/Docker.app ]; then echo ; echo Error! install docker app. ; echo ; exit 1 ; fi
 	touch .env
-	composer install
-	@if [ ! "`grep '^APP_KEY=' .env`" ]; then php artisan key:generate ; fi
-	sed -i -e "s/^CACHE_DRIVER=.*/CACHE_DRIVER=array/g" .env
+	CACHE_DRIVER=array composer install
+	@if [ "`grep '^CACHE_DRIVER=array' .env`" ]; then \
+			echo ; \
+		elif [ "`grep '^CACHE_DRIVER=' .env`" ]; then \
+			gsed -i -e "s/^CACHE_DRIVER=.*/CACHE_DRIVER=array/g" .env ; \
+		else \
+			echo "CACHE_DRIVER=array" >> .env ; \
+		fi
+	@if [ "`grep '^APP_KEY=.\+' .env`" ]; then \
+			echo ; \
+		elif [ "`grep '^APP_KEY=' .env`" ]; then \
+			php artisan key:generate ; \
+		else \
+			echo "APP_KEY=" >> .env ; \
+			php artisan key:generate ; \
+		fi
 	@echo
 	@echo done.
 
