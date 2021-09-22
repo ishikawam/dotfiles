@@ -76,6 +76,7 @@ create_docker_laravel_project
 * docker/php/default.ini : php8ならopache JIT, とか。
 * Middlewareとconfigは他の生きてるリポジトリのを大いに参考にする
 * awsやりたいなあ
+* .env.example を削除
 
 
 ## todo 検討
