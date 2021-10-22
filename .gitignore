@@ -41,6 +41,8 @@
 /.config/Steinberg\ Installation\ Updater
 /.config/karabiner/automatic_backups/
 /.config/direnv
+/.config/gcloud
+/.config/git/hooks/pre-commit
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc

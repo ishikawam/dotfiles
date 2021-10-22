@@ -36,3 +36,12 @@ PS1="[\[\e[36m\]\u\[\e[0m\]@\[\e[32m\]\h \W\[\e[0m\]] \\$ "
 if type 'direnv' > /dev/null 2>&1; then
     eval "$(direnv hook bash)"
 fi
+
+
+##################################################
+# gcloud
+
+if [ -e /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+fi

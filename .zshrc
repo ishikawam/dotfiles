@@ -223,3 +223,12 @@ unset zle_bracketed_paste
 if type 'direnv' > /dev/null 2>&1; then
     eval "$(direnv hook zsh)"
 fi
+
+
+##################################################
+# gcloud
+
+if [ -e /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk ]; then
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+fi
