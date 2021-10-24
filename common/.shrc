@@ -137,7 +137,8 @@ alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_histo
 ##################################################
 # python
 
-if [ -f ~/.pyenv/bin/pyenv -a ! "`pyenv --version 2>/dev/null`" ]; then
+if [ -f ~/.pyenv/bin/pyenv  ]; then
+#if [ -f ~/.pyenv/bin/pyenv -a ! "`pyenv --version 2>/dev/null`" ]; then
     # use local pyenv
     export PYENV_ROOT="${HOME}/.pyenv"
     if [ -n ${PYENV_ROOT} ]; then
