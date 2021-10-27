@@ -96,6 +96,9 @@
 ;;; zencoding
 (use-package zencoding-mode)
 
+;;; ruby
+(setq ruby-insert-encoding-magic-comment nil)
+
 ;;; その他
 (use-package yaml-mode)
 (use-package coffee-mode)
