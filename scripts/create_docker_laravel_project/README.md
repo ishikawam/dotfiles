@@ -82,6 +82,14 @@ create_docker_laravel_project
 * Log Level Policy
   * 順に emergency、alert、critical、error、warning、notice、info、debug
   * をどうするか
+* 多言語対応
+* パッケージコンポーネントの整理？廃止？
+  * `<x-`から始まるタグ。jetstreamってわけではない。
+  * デフォルトのはなんかじゃま、、なのでなくしてる
+  * なくし方は`<x-`から始まるタグを置換する、`:value=`とかを対応する、
+  * `<x-label`だけはそのままで改修する
+* locale
+  * config/app.php。fallback_localeはenのまま、localeはja。
 
 
 ## todo 検討

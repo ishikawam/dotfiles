@@ -446,6 +446,7 @@ php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 COMPOSER_MEMORY_LIMIT=-1 composer require doctrine/dbal
 
 # 日本語化
+# いや、いまいち。`composer require laravel-lang/lang`使ったほうがいい。
 curl https://readouble.com/laravel/8.x/ja/install-ja-lang-files.php | php
 
 
