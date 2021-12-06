@@ -122,8 +122,22 @@ alias scl='screen -ls'
 alias scr='screen -xR'
 
 # オレが考えた最強locate
-function loc() { locate "$1" | grep -o ".*$1[^/]*" | sort | uniq ; }
-function loci() { locate -i "$1" | grep -oi ".*$1[^/]*" | sort | uniq ; }
+function loc() {
+    {
+        locate "$1" | grep -o ".*$1[^/]*"
+        if [ ! "`mdfind 1>/dev/null`" ]; then
+            mdfind "$1" | grep "$1"
+        fi
+    } | sort | uniq
+}
+function loci() {
+    {
+        locate -i "$1" | grep -oi ".*$1[^/]*"
+        if [ ! "`mdfind 1>/dev/null`" ]; then
+            mdfind "$1" | grep -i "$1"
+        fi
+    } | sort | uniq
+}
 
 
 # emacs daemonを使用
