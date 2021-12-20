@@ -5,7 +5,7 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('bootstrap/cache')
     ->in(__DIR__);
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR2' => true,
         'strict_param' => false, // in_array() の3番目にtrue入れられちゃうのでno
@@ -14,7 +14,6 @@ return PhpCsFixer\Config::create()
         'include' => true,  // include, require, ファイルパスは、単一のスペースで区切る
 
         // phpdoc系
-        'phpdoc_inline_tag' => true,
         'phpdoc_no_access' => true,
         'phpdoc_scalar' => true,
 
