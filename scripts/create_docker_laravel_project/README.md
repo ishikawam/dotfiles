@@ -19,6 +19,8 @@ create_docker_laravel_project
 ## やらないこと
 
 * aws
+  * terraform
+  * optimize
 
 ## commit
 
@@ -50,6 +52,10 @@ create_docker_laravel_project
 * Issue作成
   * @todo; 一覧
   * @todo; Github CLI？
+* API
+  * Kernel.phpでEnsureFrontendRequestsAreStatefulを有効に
+  * /api/内でエラーもjsonで返すためにRequireJson実装
+  * swagger postのためにVerifyCsrfToken でtokensMatch
 
 ## todo
 
