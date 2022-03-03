@@ -53,7 +53,7 @@ sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/Java
 # brew caskは途中でエラーあるとそこで止まるので、どうせ非同期してくれないのでarray()に入れてループで1つずつインストールする
 array=(
     docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-    firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud google-backup-and-sync
+    firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud # google-backup-and-sync
     gyazo chatwork sharemouse
     homebrew/cask-versions/sequel-pro-nightly
     sequel-ace
