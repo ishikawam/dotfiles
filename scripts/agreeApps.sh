@@ -19,13 +19,16 @@ array=(
     "/Applications/Charles.app"
     "/Applications/Clipy.app"
     "/Applications/HandBrake.app"
-    "/Applications/Sequel Pro.app"
+    "/Applications/Sequel Ace.app"
+#    "/Applications/Sequel Pro.app"
     "/Applications/iTerm.app"
     "/Applications/GoogleJapaneseInput.localized/ConfigDialog.app"
-    "/Applications/Backup and Sync.app"
+    "/Applications/Google Drive.app"
+#    "/Applications/Backup and Sync.app"
     "/Applications/Gyazo.app"
     "/Applications/Box Sync.app"
     "/Applications/ShareMouse.app"
+    "/Applications/PhpStorm.app"
 
     # adobe は installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"

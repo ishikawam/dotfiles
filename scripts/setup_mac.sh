@@ -55,13 +55,16 @@ sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/Java
 # brew caskは途中でエラーあるとそこで止まるので、どうせ非同期してくれないのでarray()に入れてループで1つずつインストールする
 array=(
     docker sublime-text macdown alfred dropbox karabiner-elements google-chrome
-    firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud # google-backup-and-sync
+    firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud
+    google-drive
+#    google-backup-and-sync
     gyazo chatwork sharemouse
-    homebrew/cask-versions/sequel-pro-nightly
+#    homebrew/cask-versions/sequel-pro-nightly
     sequel-ace
     box-sync
     drawio
     zoom
+    phpstorm
     # language-switcher  # ダウンロードできない？もう不要になった（OS標準で言語をアプリごとに変えれるようになった）
     # 任意
     # android-studio dnsmasq java
@@ -91,7 +94,7 @@ head "2. mas = mac app store"
 
 # mas = mac app store
 timeout 300 mas upgrade
-mas install 405399194 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 504544917 513610341 539883307 557168941 568494494 592704001 803453959 823766827 880001334 1295203466 896934587 462058435 462054704 462062816
+mas install 405399194 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 504544917 513610341 539883307 557168941 568494494 592704001 803453959 823766827 880001334 1295203466 896934587 462058435 462054704 462062816 937984704
 # 405399194 Kindle
 # 406056744 Evernote (7.7)
 # 408981434 iMovie (10.1.10)
@@ -117,6 +120,7 @@ mas install 405399194 406056744 408981434 409183694 409201541 409203825 41737558
 # 462058435 Microsoft Excel
 # 462054704 Microsoft Word
 # 462062816 Microsoft PowerPoint
+# 937984704 amphetamine
 
 # なくなった
 # 409789998 Twitter (4.3.2)

@@ -480,8 +480,11 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
         'com.apple.keyboard.fnState' => [
             // Use F1, F2, etc. keys as standard function keys.
             // 本当はデフォルトのfalseにしたいけど、karabiner-elementsのoption+numberが対応していないので、、
-            'read' => 1,
-            'write' => '-bool true',
+            // いや、もうそんなことなさそう。
+            'read' => 0,
+            'write' => '-bool false',
+//            'read' => 1,
+//            'write' => '-bool true',
         ],
 
         // Trackpad
