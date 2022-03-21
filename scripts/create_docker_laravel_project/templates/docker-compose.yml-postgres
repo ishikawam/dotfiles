@@ -1,0 +1,11 @@
+
+  postgres:
+    image: postgres:DATABASE_VERSION
+    ports:
+      - "DATABASE_PORT:DATABASE_INTERNAL_PORT"  # pgadmin用
+    volumes:
+      - "./storage/tmp/local-postgres/data:/var/lib/postgresql/data:cached"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: root
+      POSTGRES_DB: laravel

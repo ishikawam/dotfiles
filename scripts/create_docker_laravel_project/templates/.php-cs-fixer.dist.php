@@ -7,18 +7,37 @@ $finder = PhpCsFixer\Finder::create()
 
 return (new PhpCsFixer\Config())
     ->setRules([
-        '@PSR2' => true,
-        'strict_param' => false, // in_array() の3番目にtrue入れられちゃうのでno
-        'array_syntax' => ['syntax' => 'short'],  // array() -> []
-        'function_typehint_space' => true,  // typehintの空白
-        'include' => true,  // include, require, ファイルパスは、単一のスペースで区切る
+        '@PhpCsFixer' => true,
+        // https://mlocati.github.io/php-cs-fixer-configurator/
 
-        // phpdoc系
-        'phpdoc_no_access' => true,
-        'phpdoc_scalar' => true,
+        'php_unit_method_casing' => [
+            'case' => 'snake_case',
+        ],  // testのfunctionのcaseはsnake_case
+        'no_unused_imports' => false,  // laravelであえて置いてあるのもある
+        'single_line_comment_style' => false,  // laravel configがいじられてしまう
+        'new_with_braces' => [
+            'anonymous_class' => false,
+            'named_class' => false,
+        ],  // laravel仕様に
+        'no_empty_comment' => false,  // 空コメントを区切り線にしてるので
+        'multiline_whitespace_before_semicolons' => [
+            'strategy' => 'no_multi_line',
+        ],  // 多分デフォルトが効いていないバグ。
+        'phpdoc_summary' => false,  // 勝手に句読点。絶対やらない
+        'phpdoc_to_comment' => false,  // swaggerあるのでやらない
+        'single_trait_insert_per_statement' => false,  // laravel的にはfalse
+        'phpdoc_types_order' => [
+            'null_adjustment' => 'always_last',
+            'sort_algorithm' => 'none',
+        ],  // laravel仕様に
+        'not_operator_with_successor_space' => true,  // laravel的にはtrue
+        'class_definition' => [
+            'inline_constructor_arguments' => true,
+            'space_before_parenthesis' => true,
+            'single_line' => true,
+        ],  // 厳格に
 
-        'space_after_semicolon' => true,
-        'standardize_not_equals' => true,
+//        'braces' => false,  // /* */コメントアウトを強制インデントされてしまうのはやりたくないが、役に立つので。。有効にして様子見
     ])
     ->setRiskyAllowed(true)
     ->setUsingCache(false)

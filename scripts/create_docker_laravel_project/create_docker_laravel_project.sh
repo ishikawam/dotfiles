@@ -2,7 +2,8 @@
 
 # 前提
 # dockerが動いている
-# docker-compose composer php npm gsed
+# docker-compose npm gsed
+# phpもcomposerもいらない！目指せWindows実行！＞いや、全然無理。でもWindowsで動くパッケージを作れるかも。
 
 # laravel/sailは使わない＞なんか違った。でも参考にしたい。
 # 選択によってはsocialite, debugbar強制。
@@ -12,6 +13,7 @@
 # slack:
 # php artisan make:notification Slack
 # composer require laravel/slack-notification-channel
+# m1に同対応すべきかは悩む。mysql-serverかplatform 86か、とか。seleniumも動かんし。。
 
 
 echo
@@ -214,28 +216,45 @@ if [ "$tags" ]; then
     database_port=$port
 fi
 
-# nginx port
-
-port=`cat $script_dir/storage/latest_port_nginx 2>/dev/null`
-
-if [ -z $port ]; then
-    port=10080
-else
-    port=`expr $port + 1`
-fi
+# nginx
 
 while :
 do
-    read -p "nginx port is (default: $port) : " -a input
+    read -n1 -p "Install nginx ? (y/n) : " -a yn
     echo
-    if [ -z $input ]; then
+    if [[ "$yn" = [yY] ]]; then
+        install_nginx="yes"
         break
-    elif [[ $input =~ ^[0-9]+$ ]]; then
-        port=$input
+    elif [[ "$yn" = [nN] ]]; then
+        install_nginx="no"
         break
     fi
 done
-nginx_port=$port
+
+# nginx port
+
+if [[ $install_nginx = "yes" ]]; then
+    port=`cat $script_dir/storage/latest_port_nginx 2>/dev/null`
+
+    if [ -z $port ]; then
+        port=10080
+    else
+        port=`expr $port + 1`
+    fi
+
+    while :
+    do
+        read -p "nginx port is (default: $port) : " -a input
+        echo
+        if [ -z $input ]; then
+            break
+        elif [[ $input =~ ^[0-9]+$ ]]; then
+            port=$input
+            break
+        fi
+    done
+    nginx_port=$port
+fi
 
 # memcached
 
@@ -256,6 +275,7 @@ done
 # 認証パッケージ
 # jetstream:livewire, jetstream:inertia(vuejs), ui(bootstrap), breeze(simple)
 
+if [[ $install_nginx = "yes" ]]; then
 while :
 do
     echo "Install Auth Package ..."
@@ -304,7 +324,7 @@ do
         break
     fi
 done
-
+fi
 
 # 最終確認
 
@@ -320,6 +340,7 @@ echo "Database version: $database_version"
 echo "Database port: $database_port"
 echo "Database dir: $database_dir"
 echo "Database internal port: $database_internal_port"
+echo "Install nginx: $install_memcached"
 echo "nginx port: $nginx_port"
 echo "Install memcached: $install_memcached"
 echo "Install Auth Package: $install_auth"
@@ -349,11 +370,11 @@ echo
 
 # laravel
 if [[ $overwrite = "yes" ]]; then
-    composer create-project laravel/laravel tmp
+    docker run -v $(pwd):/code -w /code composer create-project laravel/laravel tmp
     mv tmp/{*,.*} ./
     rm -r tmp
 else
-    composer create-project laravel/laravel .
+    docker run -v $(pwd):/code -w /code composer create-project laravel/laravel .
 fi
 
 git init
@@ -364,6 +385,51 @@ git commit -m "first commit (install laravel)"
 \cp -a $script_dir/templates/* ./
 \cp -a $script_dir/templates/.[a-z]* ./
 mkdir -p storage/tmp/local-${database_image}/data
+
+# 差し替え
+
+# 差し替え nginx
+
+if [[ $install_nginx = "yes" ]]; then
+    cat docker-compose.yml-nginx >> docker-compose.yml
+else
+    rm -rf docker/nginx
+    gsed -i -e "/\bAPP_URL\b/d" docker-compose.yml
+    gsed -i -e "/\bnginx\b/d" Makefile
+fi
+
+# 差し替え database
+case "$install_database" in
+    1)
+        cat docker/php/Dockerfile-mysql >> docker/php/Dockerfile
+        cat docker-compose.yml-mysql >> docker-compose.yml
+        rm -rf docker/postgres
+        ;;
+    2)
+        cat docker/php/Dockerfile-postgres >> docker/php/Dockerfile
+        cat docker-compose.yml-postgres >> docker-compose.yml
+        rm -rf docker/mysql
+        ;;
+    3)
+        rm -rf docker/mysql
+        rm -rf docker/postgres
+        gsed -i -e "/ DB_/d" docker-compose.yml
+        gsed -i -e "/DATABASE_IMAGE/d" Makefile
+        ;;
+esac
+
+# 差し替え memcached
+if [[ $install_memcached = "yes" ]]; then
+    cat docker/php/Dockerfile-memcached >> docker/php/Dockerfile
+    cat docker-compose.yml-memcached >> docker-compose.yml
+    is_memcached=1
+else
+    gsed -i -e "/\bmemcached\b/d" docker/php/default.ini
+fi
+
+rm -rf docker/php/Dockerfile-*
+rm -rf docker-compose.yml-*
+
 
 # 書き換え
 find {docker*,Makefile,README.md} -type f -exec gsed -i -e "s/PROJECT_NAME/${project}/g" {} \;
@@ -376,31 +442,6 @@ find {docker*,Makefile} -type f -exec gsed -i -e "s/DATABASE_PORT/${database_por
 find {docker*,Makefile} -type f -exec gsed -i -e "s/DATABASE_INTERNAL_PORT/${database_internal_port}/g" {} \;
 find {docker*,Makefile} -type f -exec gsed -i -e "s|DATABASE_DIR|${database_dir}|g" {} \;
 
-# 差し替え database
-case "$install_database" in
-    1)
-        cat docker/php/Dockerfile-mysql >> docker/php/Dockerfile
-        rm -rf docker/postgres
-        ;;
-    2)
-        cat docker/php/Dockerfile-postgres >> docker/php/Dockerfile
-        rm -rf docker/mysql
-        ;;
-    3)
-        rm -rf docker/mysql
-        rm -rf docker/postgres
-        ;;
-esac
-
-# memcached
-if [[ $install_memcached = "yes" ]]; then
-    cat docker/php/Dockerfile-memcached >> docker/php/Dockerfile
-    cat docker-compose.yml-memcached >> docker-compose.yml
-    is_memcached=1
-fi
-
-rm -rf docker/php/Dockerfile-*
-rm -rf docker-compose.yml-*
 
 git add -A
 git commit -m "auto commit (install templates & docker)"
@@ -431,31 +472,45 @@ esac
 
 # others
 
+# .gitignore
+echo "
+/public/css/
+/public/js/
+" >> .gitignore
+
 # helper
 npm install json
 `npm bin`/json -o json-4 -I -f composer.json -e 'this.autoload.files=["app/Helper/helpers.php"]'
 
 # php-cs-fixer
-composer require --dev friendsofphp/php-cs-fixer
+docker-compose run php composer require --dev friendsofphp/php-cs-fixer
 
 # debugbar
-composer require --dev barryvdh/laravel-debugbar
-php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+if [[ $install_nginx = "yes" ]]; then
+    docker-compose run php composer require --dev barryvdh/laravel-debugbar
+    docker-compose run php php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+fi
 
 # migration カラム変更 メモリ喰うので対応 `PHP Fatal error:  Allowed memory size of 1610612736 bytes exhausted (tried to allocate 4096 bytes)`
-COMPOSER_MEMORY_LIMIT=-1 composer require doctrine/dbal
+docker run -e COMPOSER_MEMORY_LIMIT=-1 -v $(pwd):/code -w /code composer require doctrine/dbal
+#COMPOSER_MEMORY_LIMIT=-1 composer require doctrine/dbal
 
 # 日本語化
-# いや、いまいち。`composer require laravel-lang/lang`使ったほうがいい。
-curl https://readouble.com/laravel/8.x/ja/install-ja-lang-files.php | php
-
+#curl https://readouble.com/laravel/8.x/ja/install-ja-lang-files.php | php
+# いや、いまいち。`laravel-lang/lang`使ったほうがいい。
+# https://publisher.laravel-lang.com/
+# composer require laravel-lang/publisher laravel-lang/lang --dev
+# いったんやめよう。日本語化は含まない。
 
 git add -A
 git commit -m "auto commit (install others)"
 
 
 # settings 書き換え
-MEMCACHED=$is_memcached DATABASE_NAME=$database_name PROJECT_NAME=$project php $script_dir/settings.php
+
+docker run -e MEMCACHED=$is_memcached -e DATABASE_NAME=$database_name -e PROJECT_NAME=$project -v $(pwd):/code -v $script_dir:/cdlp -w /code php:alpine php /cdlp/settings.php
+#MEMCACHED=$is_memcached DATABASE_NAME=$database_name PROJECT_NAME=$project php $script_dir/settings.php
+
 git add -A
 git commit -m "auto commit (settings)"
 
@@ -471,40 +526,40 @@ case "$install_auth" in
     1)
         install_auth_name="jetstream:livewire"
         echo $install_auth_name
-        composer require laravel/jetstream
-        php artisan jetstream:install livewire
+        docker-compose run php composer require laravel/jetstream
+        docker-compose run php php artisan jetstream:install livewire
         # jetstreamのviewsファイルをコピー。これも選択式のほうが良いかも？でもAdminLTEなら必須かと。
-        php artisan vendor:publish --tag=jetstream-views
+        docker-compose run php php artisan vendor:publish --tag=jetstream-views
         ;;
     2)
         install_auth_name="jetstream:inertia(vuejs)"
         echo $install_auth_name
-        composer require laravel/jetstream
-        php artisan jetstream:install inertia
+        docker-compose run php composer require laravel/jetstream
+        docker-compose run php php artisan jetstream:install inertia
         ;;
     3)
         install_auth_name="breeze(simple)"
         echo $install_auth_name
-        composer require laravel/breeze --dev
-        php artisan breeze:install
+        docker-compose run php composer require laravel/breeze --dev
+        docker-compose run php php artisan breeze:install
         ;;
     4)
         install_auth_name="ui(vuejs)"
         echo $install_auth_name
-        composer require laravel/ui
-        php artisan ui vue --auth
+        docker-compose run php composer require laravel/ui
+        docker-compose run php php artisan ui vue --auth
         ;;
     5)
         install_auth_name="ui(bootstrap)"
         echo $install_auth_name
-        composer require laravel/ui
-        php artisan ui bootstrap --auth
+        docker-compose run php composer require laravel/ui
+        docker-compose run php php artisan ui bootstrap --auth
         ;;
     6)
         install_auth_name="ui(react)"
         echo $install_auth_name
-        composer require laravel/ui
-        php artisan ui react --auth
+        docker-compose run php composer require laravel/ui
+        docker-compose run php php artisan ui react --auth
         ;;
 esac
 
@@ -523,11 +578,12 @@ if [[ $install_socialite = "yes" ]]; then
     echo
 
     # socialite
-    composer require laravel/socialite
-    composer require socialiteproviders/facebook
+    docker-compose run php composer require laravel/socialite
+    docker-compose run php composer require socialiteproviders/facebook
 
     # socialite 設定
-    HTTP_PORT=$nginx_port php $script_dir/configure_socialite.php
+    docker run -e HTTP_PORT=$nginx_port -v $(pwd):/code -v $script_dir:/cdlp -w /code php:alpine php /cdlp/configure_socialite.php
+#    HTTP_PORT=$nginx_port php $script_dir/configure_socialite.php
 
     git add -A
     git commit -m "auto commit (install socialite)"
@@ -543,7 +599,8 @@ if [[ $install_adminlte = "yes" ]]; then
     npm install admin-lte --save
 
     # index.blade.php
-    php $script_dir/convert_html_to_blade.php 'node_modules/admin-lte/index.html' 'resources/views/admin/index.blade.php'
+    docker run -v $(pwd):/code -v $script_dir:/cdlp -w /code php:alpine php /cdlp/convert_html_to_blade.php 'node_modules/admin-lte/index.html' 'resources/views/admin/index.blade.php'
+#    php $script_dir/convert_html_to_blade.php 'node_modules/admin-lte/index.html' 'resources/views/admin/index.blade.php'
 
     # v2よりv1のほうがいいかも
     # cp resources/views/auth/login.blade.php resources/views/auth/login_.blade.php
@@ -572,7 +629,15 @@ fi
 
 
 # migrate
-make migrate
+if [ $install_database -ne 3 ]; then
+    make migrate
+fi
+
+
+# run php-cs-fixer
+make fix
+git add -u
+git commit -m "auto commit (run php-cs-fixer)"
 
 
 # ここでブランチ切っておく
@@ -586,8 +651,12 @@ gtags -v 2>/dev/null
 
 
 # save latest port
-echo $nginx_port > $script_dir/storage/latest_port_nginx
-echo $database_port > $script_dir/storage/latest_port_database
+if [ -n $nginx_port ]; then
+    echo $nginx_port > $script_dir/storage/latest_port_nginx
+fi
+if [ -n $database_port ]; then
+    echo $database_port > $script_dir/storage/latest_port_database
+fi
 
 
 echo

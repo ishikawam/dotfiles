@@ -5,7 +5,8 @@ dummy:
 	@echo PROJECT_NAME Makefile.
 
 setup:
-	@if [ ! -e /Applications/Docker.app ]; then echo ; echo Error! install docker app. ; echo ; exit 1 ; fi
+	docker-compose build
+	docker-compose run php composer install
 	touch .env
 	CACHE_DRIVER=array composer install
 	@if [ "`grep '^CACHE_DRIVER=array' .env`" ]; then \
@@ -18,10 +19,10 @@ setup:
 	@if [ "`grep '^APP_KEY=.\+' .env`" ]; then \
 			echo ; \
 		elif [ "`grep '^APP_KEY=' .env`" ]; then \
-			php artisan key:generate ; \
+			docker-compose run php php artisan key:generate ; \
 		else \
 			echo "APP_KEY=" >> .env ; \
-			php artisan key:generate ; \
+			docker-compose run php php artisan key:generate ; \
 		fi
 	@echo
 	@echo done.
@@ -30,19 +31,21 @@ install:
 	git submodule update --init
 	composer install
 	docker-compose build
-	php artisan clear-compiled
+	docker-compose run php composer install
+	docker-compose run php php artisan clear-compiled
 	npm install
 	npm run dev
 
 clear:
-	composer dump-autoload --optimize
-	php artisan clear-compiled
-	php artisan view:clear
+	docker-compose run php sh -c "\
+		composer dump-autoload --optimize ; \
+		php artisan clear-compiled ; \
+		php artisan view:clear"
 	rm -rf storage/app/*
 #	rm -rf storage/logs/*
 	rm -rf storage/debugbar/*
 	git checkout storage
-	docker-compose exec php php artisan cache:clear
+	docker-compose run php php artisan cache:clear
 
 up:
 	docker-compose up -d --build
@@ -85,13 +88,13 @@ open:
 
 # cs-fixer
 fix-diff:
-	./vendor/bin/php-cs-fixer fix --dry-run --diff -v
+	docker-compose run php ./vendor/bin/php-cs-fixer fix --dry-run --diff -v
 
 fix-v:
-	./vendor/bin/php-cs-fixer fix --dry-run -v
+	docker-compose run php ./vendor/bin/php-cs-fixer fix --dry-run -v
 
 fix:
-	./vendor/bin/php-cs-fixer fix -v
+	docker-compose run php ./vendor/bin/php-cs-fixer fix -v
 
 #
 # tasks

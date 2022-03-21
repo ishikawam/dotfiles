@@ -96,6 +96,8 @@ create_docker_laravel_project
   * `<x-label`だけはそのままで改修する
 * locale
   * config/app.php。fallback_localeはenのまま、localeはja。
+* localにphpなくても実行できるようにしたい
+  * php実行は必須なのでdockerでphp実行とかにすればいいのでは。dockerは必須だから。
 
 
 ## todo 検討
@@ -104,5 +106,8 @@ create_docker_laravel_project
 
 
 やるぞ
-nodenv
-facebook選択
+
+* nodenv
+  * いや、ここでは必要ない気もしてきた。勝手にやって。
+* facebook選択
+  * ここまでしなくてもなきがしてきた。

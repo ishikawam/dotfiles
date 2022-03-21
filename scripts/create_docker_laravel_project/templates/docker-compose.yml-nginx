@@ -1,0 +1,21 @@
+
+  nginx:
+    build: docker/nginx
+    ports:
+      - "NGINX_PORT:80"
+    volumes:
+      # - .:/var/www/laravel:cached
+      # `/aws/nginx/Dockerfile`と`/docker-compose.yml`を同期すること
+      - ./vendor:/var/www/laravel/vendor:cached
+      # cdn使わない場合
+      - ./public:/var/www/laravel/public:cached
+      - ./node_modules:/var/www/laravel/node_modules:cached
+      # cdn使う場合
+#      - ./public/.htaccess:/var/www/laravel/public/.htaccess:cached
+#      - ./public/index.php:/var/www/laravel/public/index.php:cached
+#      - ./public/favicon.ico:/var/www/laravel/public/favicon.ico:cached
+#      - ./public/robots.txt:/var/www/laravel/public/robots.txt:cached
+#      - ./public/sitemap.xml:/var/www/laravel/public/sitemap.xml:cached
+    working_dir: /var/www/laravel
+    depends_on:
+      - php

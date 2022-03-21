@@ -18,16 +18,16 @@ $str = preg_replace('/(\'APP_NAME\', )(\'.*?\')/', '\\1\'' . getenv('PROJECT_NAM
 file_put_contents('config/app.php', $str);
 
 // config/database.php
-exec('gsed -i -e "s/\'DB_CONNECTION\', \'.*\'/\'DB_CONNECTION\', \'' . getenv('DATABASE_NAME') . '\'/g" config/database.php');
+exec('sed -i -e "s/\'DB_CONNECTION\', \'.*\'/\'DB_CONNECTION\', \'' . getenv('DATABASE_NAME') . '\'/g" config/database.php');
 
 // config/session.php
-exec('gsed -i -e "s/\'SESSION_DRIVER\', \'.*\'/\'SESSION_DRIVER\', \'' . (getenv('MEMCACHED') ? 'memcached' : 'apc') . '\'/g" config/session.php');
+exec('sed -i -e "s/\'SESSION_DRIVER\', \'.*\'/\'SESSION_DRIVER\', \'' . (getenv('MEMCACHED') ? 'memcached' : 'apc') . '\'/g" config/session.php');
 
 // config/cache.php
-exec('gsed -i -e "s/\'CACHE_DRIVER\', \'.*\'/\'CACHE_DRIVER\', \'' . (getenv('MEMCACHED') ? 'memcached' : 'file') . '\'/g" config/cache.php');
+exec('sed -i -e "s/\'CACHE_DRIVER\', \'.*\'/\'CACHE_DRIVER\', \'' . (getenv('MEMCACHED') ? 'memcached' : 'file') . '\'/g" config/cache.php');
 
 // config/queue.php
-exec('gsed -i -e "s/mysql/' . getenv('DATABASE_NAME') . '/g" config/queue.php');
+exec('sed -i -e "s/mysql/' . getenv('DATABASE_NAME') . '/g" config/queue.php');
 
 // .env
 // APP_KEYのみにする
@@ -41,5 +41,5 @@ echo "\n[finish Settings (config, .env).]\n";
 
 // docker-compose.yml
 if (getenv('MEMCACHED')) {
-    exec('gsed -i -e "s/CACHE_DRIVER=.*/CACHE_DRIVER=memcached  # .envを上書きするため/g" docker-compose.yml');
+    exec('sed -i -e "s/CACHE_DRIVER=.*/CACHE_DRIVER=memcached  # .envを上書きするため/g" docker-compose.yml');
 }

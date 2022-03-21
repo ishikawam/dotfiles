@@ -5,30 +5,8 @@ services:
   php:
     build: docker/php
     volumes:
-      # - .:/var/www/laravel:cached
-      # `/aws/php/Dockerfile`と`/docker-compose.yml`を同期すること
-      - ./.env:/var/www/laravel/.env:cached
-      - ./composer.json:/var/www/laravel/composer.json:cached
-      - ./app:/var/www/laravel/app:cached
-      - ./artisan:/var/www/laravel/artisan:cached
-      - ./bootstrap:/var/www/laravel/bootstrap:cached
-      - ./config:/var/www/laravel/config:cached
-      - ./database:/var/www/laravel/database:cached
-#      - ./node_modules:/var/www/laravel/node_modules:cached
-      - ./public/index.php:/var/www/laravel/public/index.php:cached
-      - ./public/mix-manifest.json:/var/www/laravel/public/mix-manifest.json:cached
-      - ./resources:/var/www/laravel/resources:cached
-      - ./routes:/var/www/laravel/routes:cached
-      - ./storage:/var/www/laravel/storage:cached
-      - ./vendor:/var/www/laravel/vendor:cached
-      - ./phpunit.xml:/var/www/laravel/phpunit.xml:cached
-      - ./tests:/var/www/laravel/tests:cached
+      - .:/var/www/laravel:cached
     working_dir: /var/www/laravel
-#    tty: true
-#    stdin_open: true
-#    privileged: true
-    depends_on:
-      - DATABASE_IMAGE
     environment:
 # Laravelの.envはAPP_KEYのみにして、他はここで指定する
       - APP_NAME=PROJECT_NAME (local)
@@ -37,48 +15,10 @@ services:
       - APP_URL=http://localhost:NGINX_PORT
       - CACHE_DRIVER=file
       - SESSION_LIFETIME=1
-      # @todo; 以降はconfig書き換えに変えたい
+      # @todo; 以降 DB_ はconfig書き換えに変えたい
       - DB_CONNECTION=DATABASE_NAME
       - DB_HOST=DATABASE_IMAGE
       - DB_PORT=DATABASE_INTERNAL_PORT
       - DB_DATABASE=laravel
       - DB_USERNAME=root
       - DB_PASSWORD=password
-
-  nginx:
-    build: docker/nginx
-    ports:
-      - "NGINX_PORT:80"
-    volumes:
-      # - .:/var/www/laravel:cached
-      # `/aws/nginx/Dockerfile`と`/docker-compose.yml`を同期すること
-      - ./vendor:/var/www/laravel/vendor:cached
-      # cdn使わない場合
-      - ./public:/var/www/laravel/public:cached
-      - ./node_modules:/var/www/laravel/node_modules:cached
-      # cdn使う場合
-#      - ./public/.htaccess:/var/www/laravel/public/.htaccess:cached
-#      - ./public/index.php:/var/www/laravel/public/index.php:cached
-#      - ./public/favicon.ico:/var/www/laravel/public/favicon.ico:cached
-#      - ./public/robots.txt:/var/www/laravel/public/robots.txt:cached
-#      - ./public/sitemap.xml:/var/www/laravel/public/sitemap.xml:cached
-    working_dir: /var/www/laravel
-    depends_on:
-      - php
-#    stdin_open: true
-#    privileged: true
-
-  DATABASE_IMAGE:
-    image: DATABASE_IMAGE:DATABASE_VERSION
-    ports:
-      - "DATABASE_PORT:DATABASE_INTERNAL_PORT" # sequel, pgadmin用
-    volumes:
-      - "./storage/tmp/local-DATABASE_IMAGE/data:DATABASE_DIR:cached"
-      - ./docker/mysql/default.cnf:/etc/mysql/conf.d/default.cnf:cached
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: laravel
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: root
-      POSTGRES_DB: laravel
-#    privileged: true
