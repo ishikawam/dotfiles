@@ -33,3 +33,5 @@
 	rebase = false
 [credential]
 	helper = osxkeychain
+[init]
+	defaultBranch = main

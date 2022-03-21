@@ -34,7 +34,7 @@ create_docker_laravel_project
 ## このあとにやることは
 
 * Githubへpush
-  * master, first, develop
+  * main, first, develop
   * mysql
     * Sequel Ace
       * MySQL Workbench

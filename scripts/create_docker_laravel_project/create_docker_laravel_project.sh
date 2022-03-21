@@ -641,9 +641,9 @@ git commit -m "auto commit (run php-cs-fixer)"
 
 
 # ここでブランチ切っておく
-master=`git branch --show-current`
+main=`git branch --show-current`
 git checkout -b first
-git checkout $master
+git checkout $main
 
 
 # gtags
