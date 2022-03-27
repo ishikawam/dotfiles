@@ -83,6 +83,9 @@ watch:
 dev:
 	npm run dev
 
+test:
+	docker-compose exec php php artisan test
+
 open:
 	open http://localhost:NGINX_PORT
 
