@@ -18,6 +18,8 @@
 
 (cond
 ;; 26はcaskが動かないのでstraight.el
+ ((string-match "^28\." emacs-version)
+  (load-file-in-dir preferences-directory "init26.el"))
  ((string-match "^27\." emacs-version)
   (load-file-in-dir preferences-directory "init26.el"))
  ((string-match "^26\." emacs-version)
