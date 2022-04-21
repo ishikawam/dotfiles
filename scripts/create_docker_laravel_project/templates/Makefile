@@ -7,15 +7,7 @@ dummy:
 setup:
 	docker-compose build
 	docker-compose run php composer install
-	touch .env
-	CACHE_DRIVER=array composer install
-	@if [ "`grep '^CACHE_DRIVER=array' .env`" ]; then \
-			echo ; \
-		elif [ "`grep '^CACHE_DRIVER=' .env`" ]; then \
-			gsed -i -e "s/^CACHE_DRIVER=.*/CACHE_DRIVER=array/g" .env ; \
-		else \
-			echo "CACHE_DRIVER=array" >> .env ; \
-		fi
+	test -f .env || cp -n .env.example .env
 	@if [ "`grep '^APP_KEY=.\+' .env`" ]; then \
 			echo ; \
 		elif [ "`grep '^APP_KEY=' .env`" ]; then \
@@ -29,7 +21,6 @@ setup:
 
 install:
 	git submodule update --init
-	composer install
 	docker-compose build
 	docker-compose run php composer install
 	docker-compose run php php artisan clear-compiled

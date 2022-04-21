@@ -44,7 +44,7 @@ create_docker_laravel_project
   * composer require zircote/swagger-php
   * npm install swagger-ui --save-dev
   * https://www.zu-min.com/archives/1098
-* memcached, CACHE_DRIVER
+* memcached
 * queue
 * サーバ環境構築とCIセットアップ
   * awsの場合はSSL (app/Providers/AppServiceProvider.php に forceScheme()とか)
