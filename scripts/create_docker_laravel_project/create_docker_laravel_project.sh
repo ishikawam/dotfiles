@@ -124,12 +124,13 @@ do
     echo "Install Database ..."
     echo
     echo "1: MySQL"
-    echo "2: PostgreSQL"
-    echo "3: SQLite or none"
+    echo "2: MySQL (arm64)"
+    echo "3: PostgreSQL"
+    echo "4: SQLite or none"
     echo
     read -n1 -p "? : " -a install_database
     echo
-    if [[ "$install_database" = [123] ]]; then
+    if [[ "$install_database" = [1234] ]]; then
         break
     fi
 done
@@ -150,6 +151,15 @@ case "$install_database" in
         tags=`curl -s https://registry.hub.docker.com/v1/repositories/mysql/tags | jq -r ".[].name" | grep  "^[0-9]\+\.[0-9]\+$" | sort`
         ;;
     2)
+        database_name=mysql
+        database_image=mysql-server
+        database_internal_port=3306
+        database_dir=/var/lib/mysql
+        echo "(loading versions...)"
+        # バージョン2階層のみ取得
+        tags=`curl -s https://registry.hub.docker.com/v1/repositories/mysql/tags | jq -r ".[].name" | grep  "^[0-9]\+\.[0-9]\+$" | sort`
+        ;;
+    3)
         database_name=pgsql
         database_image=postgres
         database_internal_port=5432
@@ -157,7 +167,7 @@ case "$install_database" in
         echo "(loading versions...)"
         tags=`curl -s https://registry.hub.docker.com/v1/repositories/postgres/tags | jq -r ".[].name" | grep "^[0-9]\+-alpine$" | sort -n`
         ;;
-    3)
+    4)
         database_name=""
         database_image=""
         database_internal_port=""
