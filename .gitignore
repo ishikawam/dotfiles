@@ -43,6 +43,7 @@
 /.config/direnv
 /.config/gcloud
 /.config/git/hooks/pre-commit
+/.config/packer
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
