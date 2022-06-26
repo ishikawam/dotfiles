@@ -416,11 +416,16 @@ case "$install_database" in
         rm -rf docker/postgres
         ;;
     2)
+        cat docker/php/Dockerfile-mysql >> docker/php/Dockerfile
+        cat docker-compose.yml-mysql-server >> docker-compose.yml
+        rm -rf docker/postgres
+        ;;
+    3)
         cat docker/php/Dockerfile-postgres >> docker/php/Dockerfile
         cat docker-compose.yml-postgres >> docker-compose.yml
         rm -rf docker/mysql
         ;;
-    3)
+    4)
         rm -rf docker/mysql
         rm -rf docker/postgres
         gsed -i -e "/ DB_/d" docker-compose.yml
@@ -639,7 +644,7 @@ fi
 
 
 # migrate
-if [ $install_database -ne 3 ]; then
+if [ $install_database -ne 4 ]; then
     make migrate
 fi
 
