@@ -394,7 +394,7 @@ git commit -m "first commit (install laravel)"
 # docker
 \cp -a $script_dir/templates/* ./
 \cp -a $script_dir/templates/.[a-z]* ./
-mkdir -p storage/tmp/local-${database_image}/data
+mkdir -p storage/tmp/local-${database_name}/data
 
 # 差し替え
 
@@ -411,6 +411,7 @@ fi
 # 差し替え database
 case "$install_database" in
     1)
+        gsed -i -e "/\bmysql\b/d" Makefile
         cat docker/php/Dockerfile-mysql >> docker/php/Dockerfile
         cat docker-compose.yml-mysql >> docker-compose.yml
         rm -rf docker/postgres
@@ -421,15 +422,17 @@ case "$install_database" in
         rm -rf docker/postgres
         ;;
     3)
+        gsed -i -e "/\bmysql\b/d" Makefile
         cat docker/php/Dockerfile-postgres >> docker/php/Dockerfile
         cat docker-compose.yml-postgres >> docker-compose.yml
         rm -rf docker/mysql
         ;;
     4)
+        gsed -i -e "/\bmysql\b/d" Makefile
         rm -rf docker/mysql
         rm -rf docker/postgres
         gsed -i -e "/ DB_/d" docker-compose.yml
-        gsed -i -e "/DATABASE_IMAGE/d" Makefile
+        gsed -i -e "/DATABASE_NAME/d" Makefile
         ;;
 esac
 

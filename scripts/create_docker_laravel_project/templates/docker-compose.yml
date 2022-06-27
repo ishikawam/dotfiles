@@ -17,7 +17,7 @@ services:
       - SESSION_LIFETIME=1
       # @todo; 以降 DB_ はconfig書き換えに変えたい
       - DB_CONNECTION=DATABASE_NAME
-      - DB_HOST=DATABASE_IMAGE
+      - DB_HOST=DATABASE_NAME
       - DB_PORT=DATABASE_INTERNAL_PORT
       - DB_DATABASE=laravel
       - DB_USERNAME=root

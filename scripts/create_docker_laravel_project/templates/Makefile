@@ -7,6 +7,7 @@ dummy:
 setup:
 	docker-compose build
 	docker-compose run php composer install
+	docker-compose run --rm mysql bash -c 'MYSQL_PWD=password mysql -uroot -e "DROP USER IF EXISTS root@\"%\"; CREATE USER root@\"%\" IDENTIFIED BY \"password\"; GRANT ALL PRIVILEGES ON *.* TO root@\"%\" WITH GRANT OPTION;"'
 	test -f .env || cp -n .env.example .env
 	@if [ "`grep '^APP_KEY=.\+' .env`" ]; then \
 			echo ; \
@@ -50,8 +51,8 @@ php:
 nginx:
 	docker-compose exec nginx sh
 
-DATABASE_IMAGE:
-	docker-compose exec DATABASE_IMAGE bash
+DATABASE_NAME:
+	docker-compose exec DATABASE_NAME bash
 
 migrate:
 	docker-compose exec php php artisan migrate
