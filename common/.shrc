@@ -72,6 +72,9 @@ else
     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 fi
 
+# poetry
+export PATH=~/.poetry/bin:$PATH
+
 
 ##################################################
 # aliases
