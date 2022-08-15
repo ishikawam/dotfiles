@@ -98,6 +98,7 @@ create_docker_laravel_project
   * config/app.php。fallback_localeはenのまま、localeはja。
 * localにphpなくても実行できるようにしたい
   * php実行は必須なのでdockerでphp実行とかにすればいいのでは。dockerは必須だから。
+* phstorm対応。ide_helperのインストールとかも
 
 
 ## todo 検討
