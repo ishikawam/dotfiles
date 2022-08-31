@@ -36,7 +36,7 @@ defaults-dryrun:
 fetch:
 	git -C ~/ fetch ; git -C ~/ st
 	git -C ~/private fetch ; git -C ~/private st
-	git -C ~/Library fetch ; git -C ~/Library st
+	if [ -d ~/Library ]; then git -C ~/Library fetch ; git -C ~/Library st ; fi
 
 replace:
 	@if [ ! -e /Users/m_ishikawa ]; then sudo mkdir -m 777 /Users/m_ishikawa ; ln -s /Users/masayuki.ishikawa/Dropbox /Users/m_ishikawa/ ; fi
