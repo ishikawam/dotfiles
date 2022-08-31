@@ -47,7 +47,7 @@ replace:
 pr:
 	git -C ~/ pr ; git -C ~/ st
 	git -C ~/private pr ; git -C ~/private st
-	git -C ~/Library pr ; git -C ~/Library st
+	if [ -d ~/Library ]; then git -C ~/Library pr ; git -C ~/Library st ; fi
 
 updates:
 	sh ~/bin/updates
