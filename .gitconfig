@@ -35,5 +35,3 @@
 	helper = osxkeychain
 [init]
 	defaultBranch = main
-[pr-release "git.gree-dev.net"]
-	token = 213a2f1632923b9b201b5775d738cf7cae92d5b9
