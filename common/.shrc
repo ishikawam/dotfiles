@@ -57,11 +57,9 @@ fi
 # dockerの設定
 DOCKER_HOST=tcp://localhost:4243
 
-# go
-if [ -d ~/go ]; then
-    export GOPATH=~/go
-    PATH=$PATH:$GOPATH/bin
-fi
+# go (golang) on goenv on anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
 
 # for mosh, tmux
 if [ `uname` = "Darwin" ]; then

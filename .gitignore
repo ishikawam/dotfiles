@@ -44,6 +44,7 @@
 /.config/gcloud
 /.config/git/hooks/pre-commit
 /.config/packer
+/.config/anyenv
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
