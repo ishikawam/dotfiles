@@ -58,8 +58,10 @@ fi
 DOCKER_HOST=tcp://localhost:4243
 
 # go (golang) on goenv on anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+if [ -e ~/.anyenv  ]; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
 
 # for mosh, tmux
 if [ `uname` = "Darwin" ]; then
