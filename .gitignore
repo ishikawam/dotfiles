@@ -45,6 +45,8 @@
 /.config/git/hooks/pre-commit
 /.config/packer
 /.config/anyenv
+/.config/jgit
+
 !/tmux-powerline
 !/.tmux-powerlinerc
 !/.npmrc
