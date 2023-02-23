@@ -4,7 +4,7 @@
 # @todo; これ見直そう。。caskはemacs24じゃないと、の判定がいる。sudo使うのは分離。実行するかどうかは設定ファイルみて個別で判定したい。npmもやっちゃダメな気がするけどどうかな、-gだといいっていう運用にすればいいかも
 
 # gem
-if [ -x "`which gem 2>/dev/null`" ]; then
+if [ -x "`which gem 2>/dev/null`" -a -x "`which rbenv 2>/dev/null`" ] && [ "`rbenv version | gsed -e 's/ .*//g'`" != "system" ]; then
     echo gem
     sudo gem update --system
     sudo gem update
