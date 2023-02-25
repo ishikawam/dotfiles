@@ -9,7 +9,7 @@
 	url = git@github.com:cask/cask.git
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
-	url = git@github.com:VundleVim/Vundle.vim.git
+	url = git@github.com:ishikawam/Vundle.vim.git
 [submodule ".nvm"]
 	path = .nvm
 	url = git@github.com:creationix/nvm.git
