@@ -26,7 +26,8 @@ term xterm-256color
 #defhstatus "^En:^EH"
 
 # 文字コード
-setenv LANG ja_JP.UTF-8
+setenv LANG C.UTF-8
+#setenv LANG ja_JP.UTF-8
 defencoding utf8
 encoding utf8 utf8
 

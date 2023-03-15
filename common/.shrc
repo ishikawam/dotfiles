@@ -77,6 +77,21 @@ export PATH=~/.poetry/bin:$PATH
 
 
 ##################################################
+# lang
+
+# 言語、デフォルトはC.UTF-8
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8 2>/dev/null
+alias chlang-utf8='export LANG=ja_JP.UTF-8'
+alias chlang-eucjp='export LANG=ja_JP.EUC-JP'
+
+# euc判定
+if [ -f ~/this/.eucjp ]; then
+   export LANG=ja_JP.EUC-JP
+fi
+
+
+##################################################
 # aliases
 
 alias grep="grep --color --binary-files=without-match --exclude-dir='.svn' --exclude-dir='.git' --exclude='*.png' --exclude='*.jpg' --exclude='*.gif' --exclude='*.ico' --exclude-dir='tmp' "
@@ -166,6 +181,7 @@ if [ "`pyenv --version 2>/dev/null`" ]; then
     eval "$(pyenv init -)"
 fi
 
+
 ##################################################
 # ruby, gem
 
@@ -253,21 +269,6 @@ export ANDROID_HOME=~/Library/Android/sdk
 if [ -f /usr/libexec/java_home ]; then
     export JAVA_HOME=`/usr/libexec/java_home`
     export PATH=$JAVA_HOME/bin:$PATH
-fi
-
-
-##################################################
-# lang
-
-# 言語、デフォルトはUTF-8
-export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8 2>/dev/null
-alias chlang-utf8='export LANG=ja_JP.UTF-8'
-alias chlang-eucjp='export LANG=ja_JP.EUC-JP'
-
-# euc判定
-if [ -f ~/this/.eucjp ]; then
-    export LANG=ja_JP.EUC-JP
 fi
 
 
