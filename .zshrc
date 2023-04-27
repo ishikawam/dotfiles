@@ -63,6 +63,13 @@ function precmd_vcs() {
         vcs_info  2> /dev/null
     fi
     RPROMPT=$'%{\e[32m%}%~'${vcs_info_msg_0_}$'%{\e[m%}'
+
+    # add_newline
+    if [[ -z $PS1_NEWLINE_LOGIN ]]; then
+        PS1_NEWLINE_LOGIN=true
+    else
+        printf "\n"
+    fi
 }
 precmd_functions+=(precmd_vcs)
 
