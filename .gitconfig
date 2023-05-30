@@ -14,7 +14,7 @@
 	wd = diff --word-diff
 	bd = diff --name-status
 	lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches
-	pushf = push --force-with-lease
+	pushf = push --force-with-lease --force-if-includes
 	gr = "!git grep $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' ':(exclude)public/css/app.css' ':(exclude)public/js/app.js' ':(exclude)*.svg' ':(exclude)*.tfstate' "
 	gri = "!git grep -i $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' "
 [core]

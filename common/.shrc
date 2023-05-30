@@ -75,6 +75,9 @@ fi
 # poetry
 export PATH=~/.poetry/bin:$PATH
 
+# kubectl krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 
 ##################################################
 # lang
