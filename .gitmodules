@@ -31,3 +31,6 @@
 [submodule "Library"]
 	path = Library
 	url = git@github.com:ishikawam/library_dotfiles.git
+[submodule "scripts/create_docker_laravel_project"]
+	path = scripts/create_docker_laravel_project
+	url = git@github.com:ishikawam/create-docker-laravel-project.git
