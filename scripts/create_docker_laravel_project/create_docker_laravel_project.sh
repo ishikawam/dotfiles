@@ -2,7 +2,7 @@
 
 # 前提
 # dockerが動いている
-# docker-compose npm gsed
+# docker-compose npm gsed koki-develop/tap/docker-tags
 # phpもcomposerもいらない！目指せWindows実行！＞いや、全然無理。でもWindowsで動くパッケージを作れるかも。
 
 # laravel/sailは使わない＞なんか違った。でも参考にしたい。
@@ -89,7 +89,7 @@ fi
 
 echo "(loading versions...)"
 # バージョン2階層でfpm-alpineのみ取得
-tags=`curl -s https://registry.hub.docker.com/v1/repositories/php/tags | jq -r ".[].name" | grep "^[0-9]\+\.[0-9]\+\-fpm\-alpine$" | grep -o "^[0-9\.]\+" | sort`
+tags=`docker-tags php | grep "^[0-9]\+\.[0-9]\+\-fpm\-alpine$" | grep -o "^[0-9\.]\+" | sort`
 echo $tags
 
 # 最新バージョン
@@ -148,7 +148,7 @@ case "$install_database" in
         database_dir=/var/lib/mysql
         echo "(loading versions...)"
         # バージョン2階層のみ取得
-        tags=`curl -s https://registry.hub.docker.com/v1/repositories/mysql/tags | jq -r ".[].name" | grep  "^[0-9]\+\.[0-9]\+$" | sort`
+        tags=`docker-tags mysql | grep  "^[0-9]\+\.[0-9]\+$" | sort`
         ;;
     2)
         database_name=mysql
@@ -157,7 +157,7 @@ case "$install_database" in
         database_dir=/var/lib/mysql
         echo "(loading versions...)"
         # バージョン2階層のみ取得
-        tags=`curl -s https://registry.hub.docker.com/v1/repositories/mysql/tags | jq -r ".[].name" | grep  "^[0-9]\+\.[0-9]\+$" | sort`
+        tags=`docker-tags mysql | grep  "^[0-9]\+\.[0-9]\+$" | sort`
         ;;
     3)
         database_name=pgsql
@@ -165,7 +165,7 @@ case "$install_database" in
         database_internal_port=5432
         database_dir=/var/lib/postgresql/data
         echo "(loading versions...)"
-        tags=`curl -s https://registry.hub.docker.com/v1/repositories/postgres/tags | jq -r ".[].name" | grep "^[0-9]\+-alpine$" | sort -n`
+        tags=`docker-tags postgres | grep "^[0-9]\+-alpine$" | sort -n`
         ;;
     4)
         database_name=""
