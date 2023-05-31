@@ -1,4 +1,0 @@
-
-# postgres
-RUN apk add --update-cache --no-cache postgresql-dev
-RUN docker-php-ext-install pdo_pgsql
