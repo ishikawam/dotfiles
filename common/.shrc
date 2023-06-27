@@ -278,6 +278,14 @@ fi
 
 
 ##################################################
+# pg_dump, psql by pgAdmin postgresql
+
+if [ -d "/Applications/pgAdmin 4.app/Contents/SharedSupport" ]; then
+    PATH="/Applications/pgAdmin 4.app/Contents/SharedSupport/:$PATH"
+fi
+
+
+##################################################
 
 # crontab editor is emacs
 export EDITOR=emacs
