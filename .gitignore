@@ -46,6 +46,7 @@
 /.config/packer
 /.config/anyenv
 /.config/jgit
+/.config/github-copilot
 
 !/tmux-powerline
 !/.tmux-powerlinerc
