@@ -37,3 +37,5 @@
 	defaultBranch = main
 [url "https://"]
 	insteadOf = git://
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com
