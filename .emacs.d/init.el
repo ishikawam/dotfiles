@@ -18,6 +18,8 @@
 
 (cond
 ;; 26はcaskが動かないのでstraight.el
+ ((string-match "^29\." emacs-version)
+  (load-file-in-dir preferences-directory "init26.el"))
  ((string-match "^28\." emacs-version)
   (load-file-in-dir preferences-directory "init26.el"))
  ((string-match "^27\." emacs-version)
@@ -239,3 +241,7 @@
 ;(loop for x in (reverse
 ;;                (split-string (substring (shell-command-to-string "echo $PATH") 0 -1) ":"))
 ;      do (add-to-list 'exec-path x))
+
+;; emacs29対応
+(defvar browse-url-galeon-program nil)
+(defvar browse-url-netscape-program nil)
