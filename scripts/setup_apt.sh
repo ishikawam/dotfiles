@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 
-if ! type 'apt' >/dev/null 2>&1 ;then
+if ! type 'apt-get' >/dev/null 2>&1 ;then
     # aptではない
+    # macに意味不明なaptが入るようになったのでapt-getで判定する
     exit
 fi
 
