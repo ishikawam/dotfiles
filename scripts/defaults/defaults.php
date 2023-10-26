@@ -33,7 +33,7 @@ if (preg_match('/^ishikawa-/', $HOSTNAME) || file_exists($HOME . '/this/.force-d
  */
 
 // config読み込み
-foreach(glob(__DIR__ . '/config/*.config.*') as $file) {
+foreach(glob(__DIR__ . '/config/*.config.php') as $file) {
     if (is_file($file)) {
         $arr = require $file;
         echo "\n" . htmlspecialchars(basename($file)) . "\n";
@@ -758,12 +758,6 @@ defaults write com.twitter.twitter-mac ShowFullNames -bool true
 # Hide the app in the background if it’s not the front-most window
 defaults write com.twitter.twitter-mac HideInBackground -bool true
 
-###############################################################################
-# Tweetbot.app                                                                #
-###############################################################################
-
-# Bypass the annoyingly slow t.co URL shortener
-defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
 ###############################################################################
 # Kill affected applications                                                  #
@@ -788,7 +782,6 @@ for app in "Activity Monitor" \
 	"SystemUIServer" \
 	"Terminal" \
 	"Transmission" \
-	"Tweetbot" \
 	"Twitter" \
 	"iCal"; do
 	killall "${app}" &> /dev/null

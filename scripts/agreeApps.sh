@@ -7,7 +7,7 @@ array=(
     # brew cask
     "/Applications/Docker.app"
     "/Applications/Sublime Text.app"
-    "/Applications/MacDown.app"
+    "/Applications/MacDown.app"   # arm macだとエラーになるので一度右クリックで開く
     "/Applications/Alfred 4.app"
     "/Applications/Dropbox.app"
     "/Applications/Karabiner-Elements.app"
@@ -27,8 +27,9 @@ array=(
 #    "/Applications/Backup and Sync.app"
     "/Applications/Gyazo.app"
     "/Applications/Box Sync.app"
-    "/Applications/ShareMouse.app"
+#    "/Applications/ShareMouse.app"
     "/Applications/PhpStorm.app"
+    "/Applications/Notion.app"
 
     # adobe は installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
@@ -60,7 +61,7 @@ array=(
     "/Applications/QREncoder.app"
     "/Applications/Reeder.app"
     "/Applications/Slack.app"
-    "/Applications/Tweetbot.app"
+#    "/Applications/Tweetbot.app"
     "/Applications/Xcode.app"
     "/Applications/iMovie.app"
 

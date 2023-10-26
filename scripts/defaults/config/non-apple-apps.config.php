@@ -154,6 +154,7 @@ return [
     ],
 
     // Better Snap Tool
+    // 2023 壊れた。TODO
     'com.hegenberg.BetterSnapTool' => [
         'launchOnStartup' => [
             // 自動起動
