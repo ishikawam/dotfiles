@@ -26,10 +26,12 @@ array=(
     "/Applications/Google Drive.app"
 #    "/Applications/Backup and Sync.app"
     "/Applications/Gyazo.app"
-    "/Applications/Box Sync.app"
+    "/Applications/Box.app"
+#    "/Applications/Box Sync.app"
 #    "/Applications/ShareMouse.app"
     "/Applications/PhpStorm.app"
     "/Applications/Notion.app"
+    "/Applications/logioptionsplus.app"
 
     # adobe は installer
     "/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app"
@@ -45,6 +47,7 @@ array=(
     "/System/Applications/Photos.app"
     "/Applications/Safari.app"
     "/System/Applications/VoiceMemos.app"
+    "/System/Applications/Reminders.app"
 
     # mas = mac app store
     "/Applications/Adobe\ Creative\ Cloud/Adobe\ Creative\ Cloud"
@@ -77,7 +80,6 @@ array=(
 # Adobe Photoshop CC 2018/
 # Adobe XD CC/
 # Automator.app/
-# Box Sync.app/
 # FaceTime.app/
 
 
