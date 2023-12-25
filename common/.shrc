@@ -170,6 +170,8 @@ alias e-kill='emacsclient -e "(kill-emacs)"'
 
 alias mysql_delete_danger_history='sed -i -e "/\(drop\|DROP\) /D" ~/.mysql_history'
 
+alias say='say -v Kyoko'
+
 
 ##################################################
 # python
