@@ -51,7 +51,8 @@ pr:
 
 updates:
 	sh ~/bin/updates
-	git submodule foreach git pull origin master
+# pull main or master
+	git submodule foreach 'case $name in scripts/create_docker_laravel_project) git pull origin main ;; *) git pull origin master ;; esac'
 
 ruby-install-latest:
 	rbenv install -s `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
