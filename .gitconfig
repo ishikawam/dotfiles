@@ -4,7 +4,8 @@
 [color]
 	ui = auto
 [alias]
-	co = checkout
+	co = version  # switch, restoreを強制したいので
+	checkout = version  # 効かないけど
 	st = status -sb
 	pr = pull --rebase
 	br = branch
