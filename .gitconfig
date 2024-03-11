@@ -4,8 +4,10 @@
 [color]
 	ui = auto
 [alias]
-	co = version  # switch, restoreを強制したいので
-	checkout = version  # 効かないけど
+	co = FAIL  # switch, restoreを強制したいので
+	checkout = FAIL  # 効かないけど
+        sw = switch
+        re = restore
 	st = status -sb
 	pr = pull --rebase
 	br = branch
