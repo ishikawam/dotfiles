@@ -57,11 +57,8 @@ fi
 # dockerの設定
 DOCKER_HOST=tcp://localhost:4243
 
-# go (golang) on goenv on anyenv
-if [ -e ~/.anyenv  ]; then
-    export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init -)"
-fi
+# asdf
+\. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # for mosh, tmux
 if [ `uname` = "Darwin" ]; then
