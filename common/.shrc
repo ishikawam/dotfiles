@@ -199,6 +199,14 @@ eval "$(rbenv init -)"
 
 
 ##################################################
+# goenv golang
+
+export GOENV_ROOT=$HOME/.goenv
+export PATH=$GOENV_ROOT/bin:$PATH
+eval "$(goenv init -)"
+
+
+##################################################
 # node
 
 # nvmでnodeのバージョン決定
