@@ -57,6 +57,11 @@ fi
 # dockerの設定
 DOCKER_HOST=tcp://localhost:4243
 
+# docker: Rancher Desktop
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+PATH="$HOME/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
 # asdf
 \. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
@@ -70,10 +75,10 @@ else
 fi
 
 # poetry
-export PATH=~/.poetry/bin:$PATH
+PATH=~/.poetry/bin:$PATH
 
 # kubectl krew
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 
 ##################################################
@@ -189,7 +194,7 @@ fi
 ##################################################
 # ruby, gem
 
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+PATH="/usr/local/opt/ruby/bin:$PATH"
 
 if [ -f ~/.rbenv/bin/rbenv -a ! "`rbenv --version 2>/dev/null`" ]; then
     PATH="$PATH:$HOME/.rbenv/bin"
@@ -202,7 +207,7 @@ eval "$(rbenv init -)"
 # goenv golang
 
 export GOENV_ROOT=$HOME/.goenv
-export PATH=$GOENV_ROOT/bin:$PATH
+PATH=$GOENV_ROOT/bin:$PATH
 eval "$(goenv init -)"
 
 
@@ -233,11 +238,11 @@ if [ -f ~/.nvm/nvm.sh ]; then
 fi
 
 # nvmよりnodebrewを優先
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # nodebrewよりnodenvを優先
 if type "nodenv" > /dev/null 2>&1; then
-    export PATH=~/.nodenv/bin:$PATH
+    PATH=~/.nodenv/bin:$PATH
     eval "$(nodenv init -)"
 fi
 
@@ -280,7 +285,7 @@ fi
 export ANDROID_HOME=~/Library/Android/sdk
 if [ -f /usr/libexec/java_home ]; then
     export JAVA_HOME=`/usr/libexec/java_home`
-    export PATH=$JAVA_HOME/bin:$PATH
+    PATH=$JAVA_HOME/bin:$PATH
 fi
 
 
