@@ -298,6 +298,13 @@ fi
 
 
 ##################################################
+# rancher desktop
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/m_ishikawa/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+
+##################################################
 
 # crontab editor is emacs
 export EDITOR=emacs
