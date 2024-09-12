@@ -58,7 +58,8 @@ array=(
     firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud
     google-drive
 #    google-backup-and-sync
-    gyazo chatwork notion
+#    gyazo
+    chatwork notion
 #    sharemouse
 #    homebrew/cask-versions/sequel-pro-nightly
     sequel-ace
