@@ -25,7 +25,7 @@ array=(
     "/Applications/GoogleJapaneseInput.localized/ConfigDialog.app"
     "/Applications/Google Drive.app"
 #    "/Applications/Backup and Sync.app"
-    "/Applications/Gyazo.app"
+#    "/Applications/Gyazo.app"
     "/Applications/Box.app"
 #    "/Applications/Box Sync.app"
 #    "/Applications/ShareMouse.app"

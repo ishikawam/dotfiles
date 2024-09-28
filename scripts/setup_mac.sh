@@ -58,7 +58,8 @@ array=(
     firefox mysqlworkbench google-japanese-ime iterm2 charles clipy handbrake adobe-creative-cloud
     google-drive
 #    google-backup-and-sync
-    gyazo chatwork notion
+#    gyazo
+    chatwork notion notion-calendar
 #    sharemouse
 #    homebrew/cask-versions/sequel-pro-nightly
     sequel-ace
@@ -72,6 +73,8 @@ array=(
     # language-switcher  # ダウンロードできない？もう不要になった（OS標準で言語をアプリごとに変えれるようになった）
     # 任意
     # android-studio dnsmasq java
+    messenger
+    bartender
 )
 brewcaskls=`brew ls`
 #brewcaskls=`brew cask ls`
@@ -109,8 +112,8 @@ head "2. mas = mac app store"
 
 # mas = mac app store
 timeout 300 mas upgrade
-mas install 405399194 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 504544917 513610341 539883307 568494494 592704001 803453959 823766827 880001334 1295203466 896934587 462058435 462054704 462062816 937984704
-# 405399194 Kindle
+mas install 302584613 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 504544917 513610341 539883307 568494494 592704001 803453959 823766827 880001334 1295203466 462058435 462054704 462062816 937984704
+# 302584613  Kindle
 # 406056744 Evernote (7.7)
 # 408981434 iMovie (10.1.10)
 # 409183694 Keynote (8.3)
@@ -130,13 +133,14 @@ mas install 405399194 406056744 408981434 409183694 409201541 409203825 41737558
 # 823766827 OneDrive (18.214.1021)
 # 880001334 Reeder (3.2.1)
 # 1295203466 Microsoft Remote Desktop (10.2.4)
-# 896934587 Soliton SecureBrowser Pro
 # 462058435 Microsoft Excel
 # 462054704 Microsoft Word
 # 462062816 Microsoft PowerPoint
 # 937984704 amphetamine
 
 # なくなった
+# 896934587 Soliton SecureBrowser Pro
+# 405399194 Kindle Classic
 # 409789998 Twitter (4.3.2)
 # 562172072 SongTweeter (2.0)
 # 715768417 Microsoft Remote Desktop (8.0.30030)
