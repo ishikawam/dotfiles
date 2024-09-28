@@ -57,11 +57,6 @@ fi
 # dockerの設定
 DOCKER_HOST=tcp://localhost:4243
 
-# docker: Rancher Desktop
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-PATH="$HOME/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
 # asdf
 \. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
@@ -295,13 +290,6 @@ fi
 if [ -d "/Applications/pgAdmin 4.app/Contents/SharedSupport" ]; then
     PATH="/Applications/pgAdmin 4.app/Contents/SharedSupport/:$PATH"
 fi
-
-
-##################################################
-# rancher desktop
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="~/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 
 ##################################################
