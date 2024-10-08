@@ -59,7 +59,9 @@ array=(
     google-drive
 #    google-backup-and-sync
 #    gyazo
-    chatwork notion notion-calendar
+#    notion
+    notion-calendar
+    chatwork
 #    sharemouse
 #    homebrew/cask-versions/sequel-pro-nightly
     sequel-ace
