@@ -59,7 +59,7 @@ array=(
     google-drive
 #    google-backup-and-sync
 #    gyazo
-#    notion
+    notion
     notion-calendar
     chatwork
 #    sharemouse
