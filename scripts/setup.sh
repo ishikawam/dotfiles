@@ -46,12 +46,6 @@ fi
 
 head "2. symbolic links"
 
-# mlocate for mac
-if [ -f /usr/libexec/locate.updatedb -a ! -f ~/this/bin/updatedb ]; then
-    # エイリアスにしていないのは、sudoで使いたいから
-    echo "set updatedb"
-    ln -s /usr/libexec/locate.updatedb ~/this/bin/updatedb
-fi
 # locateしたいため権限を緩める
 cd ~ ; chmod go+rx Desktop Documents Downloads Movies Music Pictures Dropbox Google\ Drive OneDrive 2>/dev/null ; cd -
 
