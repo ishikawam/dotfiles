@@ -33,7 +33,7 @@ for ($i=1; $i<=3; $i++) {
     }
     $home = implode(',', $home);
 
-    $cmd = 'sudo find {' . $home . '} -maxdepth 1 -mindepth 1 -exec du -sm {} \; | sort -nr | head -50';  // top 50
+    $cmd = 'sudo find {' . $home . '} -maxdepth 1 -mindepth 1 -exec du -sm {} \; | sort -nr | head -20';  // top 20
     echo("\n" . $cmd . "\n");
     $directories = array();
     exec($cmd, $output);
