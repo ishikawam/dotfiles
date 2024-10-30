@@ -1,31 +1,47 @@
 #!/usr/bin/env php
 <?php
 /**
- * ホームディレクトリの容量チェック
+ * ディレクトリの容量チェック
  */
+declare(strict_types=1);
+
+echo "\n### du -sm ~/Library/Caches/ ###\n";
+$output = [];
+exec('du -sm ~/Library/Caches/* | sort -nr | head', $output);
+printDu($output);
+
+echo "\n### du -sm ~/Pictures/Lightroom/Backups/* ###\n";
+$output = [];
+exec('du -sm ~/Pictures/Lightroom/Backups/*', $output);
+printDu($output);
+
+echo "\n### du -sm ~/Pictures/Lightroom/*\ Helper.lrdata ###\n";
+$output = [];
+exec('du -sm ~/Pictures/Lightroom/*\ Helper.lrdata', $output);
+printDu($output);
+
+echo "\n### du -sm ~/Pictures/Lightroom/*\ Previews.lrdata ###\n";
+$output = [];
+exec('du -sm ~/Pictures/Lightroom/*\ Previews.lrdata', $output);
+printDu($output);
+
+echo "\n### du -sm ~/Pictures/Lightroom/Old\ Lightroom\ Catalogs/* ###\n";
+$output = [];
+exec('du -sm ~/Pictures/Lightroom/Old\ Lightroom\ Catalogs/*', $output);
+printDu($output);
+
 
 echo "\n### du -sm ./* ###\n";
-$output = array();
-$directories = array();
+$directories = [];
+$output = [];
 exec('sudo du -sm ./* | sort -nr | head -20', $output);  // top 20
-foreach($output as $val) {
-    $val = explode("\t", $val);
-    if ($val[0] < 100) {  // 100MB以上
-        continue;
-    }
-    $directories[] = $val;
-    if (is_dir($val[1])) {
-        $val[1] .= '/';
-    }
-    echo "{$val[0]}	{$val[1]}\n";
-}
+$directories = printDu($output, 10);
 
 
 for ($i=1; $i<=3; $i++) {
     $directories = array_slice($directories, 0, 20);  // top 20
-    echo "\n### du -sm ." . str_repeat('/*', $i) . " ###\n";
-    $output = array();
-    $home = array();
+    echo "\n### du -sm ." . str_repeat('/*', $i + 1) . " ###\n";
+    $home = [];
     foreach($directories as $val) {
         if (is_dir($val[1])) {
             $home []= "'" . $val[1] . "'";
@@ -35,11 +51,18 @@ for ($i=1; $i<=3; $i++) {
 
     $cmd = 'sudo find {' . $home . '} -maxdepth 1 -mindepth 1 -exec du -sm {} \; | sort -nr | head -20';  // top 20
     echo("\n" . $cmd . "\n");
-    $directories = array();
+    $output = [];
     exec($cmd, $output);
+    $directories = printDu($output, 10);
+}
+
+
+function printDu(array $output, int $min = 0): array {
+    $directories = [];
+
     foreach($output as $val) {
         $val = explode("\t", $val);
-        if ($val[0] < 100) {  // 100MB以上
+        if ($val[0] < $min) {  // $min MB以上
             continue;
         }
         $directories[] = $val;
@@ -48,4 +71,7 @@ for ($i=1; $i<=3; $i++) {
         }
         echo "{$val[0]}	{$val[1]}\n";
     }
+
+    return $directories;
 }
+
