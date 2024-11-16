@@ -19,7 +19,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f1"
+                            "key_code": "f1",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -38,7 +39,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f2"
+                            "key_code": "f2",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -57,7 +59,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f3"
+                            "key_code": "f3",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -76,7 +79,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f4"
+                            "key_code": "f4",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -95,7 +99,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f5"
+                            "key_code": "f5",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -114,7 +119,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f6"
+                            "key_code": "f6",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -133,7 +139,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f7"
+                            "key_code": "f7",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -152,7 +159,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f8"
+                            "key_code": "f8",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -171,7 +179,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f9"
+                            "key_code": "f9",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -190,7 +199,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f10"
+                            "key_code": "f10",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -209,7 +219,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f11"
+                            "key_code": "f11",
+                            "modifiers": ["fn"]
                         }
                     ]
                 },
@@ -228,7 +239,8 @@
                     },
                     "to": [
                         {
-                            "key_code": "f12"
+                            "key_code": "f12",
+                            "modifiers": ["fn"]
                         }
                     ]
                 }
