@@ -84,7 +84,6 @@ for i in "${array[@]}"
 do
     if [ ! `echo $brewcaskls | grep -o "\b$i\b"` ]; then
         brew install --cask $i
-#        brew cask install $i
         # open /Applications/$i  これじゃだめ
     fi
 done
