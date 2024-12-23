@@ -47,6 +47,7 @@
 /.config/anyenv
 /.config/jgit
 /.config/github-copilot
+/.config/flutter/
 
 !/tmux-powerline
 !/.tmux-powerlinerc
