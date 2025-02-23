@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+    echo "Usage: whois_jp <IPアドレス or ドメイン名>"
+    echo
+    exit 1
+fi
+
+TARGET="$1"
+
+echo "### 通常の whois 結果 ###"
+echo
+/usr/bin/whois "$TARGET"
+
+if [[ "$TARGET" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo
+    echo "### whois.nic.ad.jp の結果 (IP) ###"
+    echo
+    /usr/bin/whois -h whois.nic.ad.jp "$TARGET" | iconv -f ISO-2022-JP -t UTF-8
+else
+    echo
+    echo "### whois.jprs.jp の結果 (ドメイン) ###"
+    echo
+    /usr/bin/whois -h whois.jprs.jp "$TARGET" | iconv -f ISO-2022-JP -t UTF-8
+fi
