@@ -16,26 +16,16 @@
 (defun load-file-in-dir (dir file)
   (load (concat dir file)))
 
-(cond
-;; 26はcaskが動かないのでstraight.el
- ((string-match "^29\." emacs-version)
-  (load-file-in-dir preferences-directory "init26.el"))
- ((string-match "^28\." emacs-version)
-  (load-file-in-dir preferences-directory "init26.el"))
- ((string-match "^27\." emacs-version)
-  (load-file-in-dir preferences-directory "init26.el"))
- ((string-match "^26\." emacs-version)
-  (load-file-in-dir preferences-directory "init26.el"))
- ((string-match "^25\." emacs-version)
-  (load-file-in-dir preferences-directory "init26.el"))
-;  (load-file-in-dir preferences-directory "init24.el"))
- ((string-match "^24\." emacs-version)
-  (load-file-in-dir preferences-directory "init24.el"))
- ((string-match "^23\." emacs-version)
-  (load-file-in-dir preferences-directory "init23.el"))
-; ((string-match "^22\." emacs-version)
-;  (load-file-in-dir preferences-directory "init22.el"))
- )
+(if (>= emacs-major-version 25)
+    ;; 26はcaskが動かないのでstraight.el
+    (load-file-in-dir preferences-directory "init26.el")
+  (cond
+   ((= emacs-major-version 24)
+    (load-file-in-dir preferences-directory "init24.el"))
+   ((= emacs-major-version 23)
+    (load-file-in-dir preferences-directory "init23.el"))
+   ;; 必要なら他のバージョンの処理も追加
+   ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
