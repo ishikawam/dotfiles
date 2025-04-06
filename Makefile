@@ -2,7 +2,7 @@
 setup:
 	bash ~/scripts/setup.sh
 	bash ~/scripts/setup_mac.sh
-	make defaults
+#	make defaults  # 長らくメンテされていない
 #	make agree-apps
 	if [ -f ~/private/scripts/setup_private.sh ]; then bash ~/private/scripts/setup_private.sh ; fi
 
