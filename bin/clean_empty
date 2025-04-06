@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# 色付き出力（装飾）
+info()  { echo -e "\033[1;34m$1\033[0m"; }
+warn()  { echo -e "\033[1;33m$1\033[0m"; }
+error() { echo -e "\033[1;31m$1\033[0m"; }
+
+# 引数なしならカレントをデフォルト
+TARGETS=("$@")
+if [ ${#TARGETS[@]} -eq 0 ]; then
+    TARGETS=(.)
+fi
+
+### 1. ファイル系のゴミまとめて確認
+info "🔍 Checking for junk files: .DS_Store, Thumbs.db, .AppleDouble/, __MACOSX/"
+
+JUNK_LIST=()
+for TARGET in "${TARGETS[@]}"; do
+    if [ -d "$TARGET" ]; then
+        JUNK_LIST+=( $(find "$TARGET" \( \
+            -name '.DS_Store' -o \
+            -name 'Thumbs.db' -o \
+            -name '.AppleDouble' -o \
+            -name '__MACOSX' \
+        \) ) )
+    else
+        warn "⚠️ Skipping: '$TARGET' is not a directory"
+    fi
+done
+
+if [ ${#JUNK_LIST[@]} -eq 0 ]; then
+    info "✅ No junk files or folders found."
+else
+    printf "%s\n" "${JUNK_LIST[@]}"
+    warn "Delete all these junk files/directories? [y/N]"
+    read -r junk_ans
+    if [[ "$junk_ans" == "y" ]]; then
+        for TARGET in "${TARGETS[@]}"; do
+            find "$TARGET" -name '.DS_Store'    -type f -delete
+            find "$TARGET" -name 'Thumbs.db'    -type f -delete
+            find "$TARGET" -name '.AppleDouble' -type d -exec rm -r {} +
+            find "$TARGET" -name '__MACOSX'     -type d -exec rm -r {} +
+        done
+        info "🗑️ Junk files/directories deleted."
+    else
+        info "⏩ Skipped junk deletion."
+    fi
+fi
+
+echo
+
+### 2. 空ディレクトリの削除（別確認）
+info "🔍 Checking for empty directories..."
+
+EMPTY_LIST=()
+for TARGET in "${TARGETS[@]}"; do
+    if [ -d "$TARGET" ]; then
+        EMPTY_LIST+=( $(find "$TARGET" -type d -empty) )
+    fi
+done
+
+if [ ${#EMPTY_LIST[@]} -eq 0 ]; then
+    info "✅ No empty directories found."
+else
+    printf "%s\n" "${EMPTY_LIST[@]}"
+    warn "Delete all these empty directories? [y/N]"
+    read -r empty_ans
+    if [[ "$empty_ans" == "y" ]]; then
+        for TARGET in "${TARGETS[@]}"; do
+            find "$TARGET" -type d -empty -delete
+        done
+        info "📁 Empty directories deleted."
+    else
+        info "⏩ Skipped empty directory deletion."
+    fi
+fi
+
+info "🎉 Cleaning finished."
