@@ -17,12 +17,14 @@ info "🔍 Checking for junk files: .DS_Store, Thumbs.db, .AppleDouble/, __MACOS
 JUNK_LIST=()
 for TARGET in "${TARGETS[@]}"; do
     if [ -d "$TARGET" ]; then
-        JUNK_LIST+=( $(find "$TARGET" \( \
+        while IFS= read -r path; do
+            JUNK_LIST+=("$path")
+        done < <(find "$TARGET" \( \
             -name '.DS_Store' -o \
             -name 'Thumbs.db' -o \
             -name '.AppleDouble' -o \
             -name '__MACOSX' \
-        \) ) )
+        \))
     else
         warn "⚠️ Skipping: '$TARGET' is not a directory"
     fi
@@ -38,8 +40,8 @@ else
         for TARGET in "${TARGETS[@]}"; do
             find "$TARGET" -name '.DS_Store'    -type f -delete
             find "$TARGET" -name 'Thumbs.db'    -type f -delete
-            find "$TARGET" -name '.AppleDouble' -type d -exec rm -r {} +
-            find "$TARGET" -name '__MACOSX'     -type d -exec rm -r {} +
+            find "$TARGET" -name '.AppleDouble' -type d -exec rm -rf {} +
+            find "$TARGET" -name '__MACOSX'     -type d -exec rm -rf {} +
         done
         info "🗑️ Junk files/directories deleted."
     else
@@ -55,7 +57,9 @@ info "🔍 Checking for empty directories..."
 EMPTY_LIST=()
 for TARGET in "${TARGETS[@]}"; do
     if [ -d "$TARGET" ]; then
-        EMPTY_LIST+=( $(find "$TARGET" -type d -empty) )
+        while IFS= read -r path; do
+            EMPTY_LIST+=("$path")
+        done < <(find "$TARGET" -type d -empty)
     fi
 done
 
