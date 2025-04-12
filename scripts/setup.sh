@@ -71,19 +71,21 @@ head "3. cask install"
 # emacs cask
 # python2.6以上に依存＞cask
 # pyenv install 2.7.9
-if [ "`cask --version 2>/dev/null`" ]; then
-    # emacsのメジャーバージョンを調べる
-    EMACS_VERSION=`emacs --version | grep -o '^GNU Emacs [0-9]\+' | grep -o '[0-9]\+'`
-    echo "Emacs $EMACS_VERSION."
-    if [ $EMACS_VERSION != 26 ]; then
-        # emacs 26ではcask使わない
-        cd ~/.emacs.d/ ; cask install ; cd -
-    else
-        echo Do nothing.
-    fi
-else
-    echo "No cask."
-fi
+
+# 廃止予定
+# if [ "`cask --version 2>/dev/null`" ]; then
+#     # emacsのメジャーバージョンを調べる
+#     EMACS_VERSION=`emacs --version | grep -o '^GNU Emacs [0-9]\+' | grep -o '[0-9]\+'`
+#     echo "Emacs $EMACS_VERSION."
+#     if [ $EMACS_VERSION != 26 ]; then
+#         # emacs 26ではcask使わない
+#         cd ~/.emacs.d/ ; cask install ; cd -
+#     else
+#         echo Do nothing.
+#     fi
+# else
+#     echo "No cask."
+# fi
 
 
 ######## ssh config ##################################################################
