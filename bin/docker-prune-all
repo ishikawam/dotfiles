@@ -1,0 +1,14 @@
+#!/bin/bash
+
+docker ps
+docker images
+docker volume ls
+docker network ls
+
+docker system prune -a
+docker volume prune -a
+
+docker ps
+docker images
+docker volume ls
+docker network ls
