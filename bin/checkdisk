@@ -30,7 +30,26 @@ $output = [];
 exec('du -sm ~/Pictures/Lightroom/Old\ Lightroom\ Catalogs/*', $output);
 printDu($output);
 
+echo "\n### du -sm ./Library/Containers/com.docker.docker/Data ###\n";
+echo "# docker停止してから削除し、アプリ起動時にエラーでるので再起動。`docker system prune`とともに\n";
+$output = [];
+exec('du -sm ./Library/Containers/com.docker.docker/Data', $output);
+printDu($output);
 
+
+/**
+ * find
+ */
+// .terraform
+echo "\n### find ~/git -name .terraform -exec du -sm {} \; ###\n";
+$output = [];
+exec('find ~/git -name .terraform -exec du -sm {} \;', $output);
+printDu($output);
+
+
+/**
+ * ホームディレクトリ
+ */
 echo "\n### du -sm ./* ###\n";
 $directories = [];
 $output = [];
