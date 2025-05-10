@@ -82,9 +82,10 @@ brewcaskls=`brew ls`
 #brewcaskls=`brew cask ls`
 for i in "${array[@]}"
 do
-    if [ ! `echo $brewcaskls | grep -o "\b$i\b"` ]; then
+    if ! echo "$brewcaskls" | grep -o "\b$i\b"; then
         brew install --cask $i
-        # open /Applications/$i  これじゃだめ
+    else
+        echo "Already installed: $i"
     fi
 done
 # ためしたい adobe-creative-cloud-cleaner-tool
