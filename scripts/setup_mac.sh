@@ -84,8 +84,6 @@ for i in "${array[@]}"
 do
     if ! echo "$brewcaskls" | grep -o "\b$i\b"; then
         brew install --cask $i
-    else
-        echo "Already installed: $i"
     fi
 done
 # ためしたい adobe-creative-cloud-cleaner-tool
