@@ -38,6 +38,13 @@ if [ -e /opt/homebrew/bin/brew ]; then
 #    eval "$(/opt/homebrew/bin/brew shellenv)"  # 優先度低くされるので使わない
 fi
 
+# homebrewは環境でoptの場所が違うので判定しておく
+if [ -d /opt/homebrew/opt ]; then
+    BREW_OPT=/opt/homebrew/opt
+elif [ -d /usr/local/opt ]; then
+    BREW_OPT=/usr/local/opt
+fi
+
 # ~/local/bin/, ~/opt/bin/ に入れた個人使用のツール(optに統一したい
 PATH=~/local/bin:$PATH
 PATH=~/opt/bin:$PATH
@@ -58,8 +65,8 @@ fi
 DOCKER_HOST=tcp://localhost:4243
 
 # asdf
-if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
-    \. /opt/homebrew/opt/asdf/libexec/asdf.sh
+if [ -f ${BREW_OPT}/asdf/libexec/asdf.sh ]; then
+    \. ${BREW_OPT}/asdf/libexec/asdf.sh
 fi
 
 # for mosh, tmux
@@ -78,7 +85,7 @@ PATH=~/.poetry/bin:$PATH
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # mysql-client@8.4
-PATH="/opt/homebrew/opt/mysql-client@8.4/bin:$PATH"
+PATH="${BREW_OPT}/mysql-client@8.4/bin:$PATH"
 
 
 ##################################################
