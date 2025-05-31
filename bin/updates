@@ -7,7 +7,7 @@ has_cmd() {
 }
 
 has_sudo() {
-    ! sudo -n true 2>&1 | grep "Permission denied"
+    ! sudo -n true 2>&1 | grep -q "Permission denied"
 }
 
 if has_cmd gsed; then
@@ -55,14 +55,11 @@ fi
 # emacs straight
 # caskは一旦使用中止してみる
 #rm -rf ~/.emacs.d/straight/ ~/.emacs.d/.cask/
+echo "# emacs straight.el"
 rm -rf ~/.emacs.d/.cask/
 emacs --batch -l ~/.emacs.d/init.el --eval="(progn
              (straight-pull-all)
              (straight-check-all))"
-
-
-#######################################################
-# 以下はやるべきときに
 
 # yum
 if has_sudo && has_cmd yum; then

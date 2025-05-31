@@ -11,6 +11,12 @@
 (when (< emacs-major-version 27)
   (package-initialize))
 
+;;; emacs27以前はstring-replaceがないのでここで対応
+(unless (fboundp 'string-replace)
+  (defun string-replace (from to string)
+    "Replace FROM with TO in STRING."
+    (replace-regexp-in-string (regexp-quote from) to string t t)))
+
 (setq preferences-directory "~/.emacs.d/")
 
 (defun load-file-in-dir (dir file)
