@@ -1,27 +1,48 @@
 #!/bin/sh
 
-# updatesは手動でじぶんのMacと会社のMacとroot@windに入れてる。手動で同期。
 # @todo; これ見直そう。。sudo使うのは分離。実行するかどうかは設定ファイルみて個別で判定したい。npmもやっちゃダメな気がするけどどうかな、-gだといいっていう運用にすればいいかも
 
+has_cmd() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+has_sudo() {
+    ! sudo -n true 2>&1 | grep "Permission denied"
+}
+
+if has_cmd gsed; then
+    alias sed='gsed'
+fi
+
+if has_sudo; then
+    echo sudo権限あり
+else
+    echo sudo権限なし
+fi
+
 # gem
-if [ -x "`which gem 2>/dev/null`" -a -x "`which rbenv 2>/dev/null`" ] && [ "`rbenv version | gsed -e 's/ .*//g'`" != "system" ]; then
-    echo gem
-    sudo gem update --system
-    sudo gem update
-    sudo gem install bundler xcpretty
+if has_sudo && has_cmd gem && has_cmd rbenv; then
+    CURRENT_RUBY_VERSION=$(rbenv version-name)
+    if [ "$CURRENT_RUBY_VERSION" != "system" ]; then
+        echo "# gem"
+        sudo gem update --system
+        sudo gem update
+        sudo gem install bundler xcpretty
+    fi
 fi
 
 # homebrew
 # setup.shでも
-if [ -x "`which  brew 2>/dev/null`" ]; then
-    echo homebrew
+if has_cmd brew; then
+#if [ -x "`which  brew 2>/dev/null`" ]; then
+    echo "# homebrew"
     brew update
     brew upgrade
 fi
 
 # npm
-if [ -x "`which npm 2>/dev/null`" ]; then
-    echo npm
+if has_cmd npm; then
+    echo "# npm"
     npm -g update
 fi
 
@@ -44,14 +65,14 @@ emacs --batch -l ~/.emacs.d/init.el --eval="(progn
 # 以下はやるべきときに
 
 # yum
-if [ -x "`which yum 2>/dev/null`" ]; then
-    echo yum
+if has_sudo && has_cmd yum; then
+    echo "# yum"
     sudo yum update
 fi
 
 # apt
-if [ -x "`which apt-get 2>/dev/null`" ]; then
-    echo apt
+if has_sudo && has_cmd apt-get; then
+    echo "# apt"
     sudo apt-get update
     sudo apt-get upgrade
 fi

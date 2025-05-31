@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 a=$(pmset -g batt | gsed -z "s/.\+'\(.\+\)'.\+\([0-9]\+%.*\)/\1; \2/g")
 
