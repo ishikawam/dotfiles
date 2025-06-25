@@ -212,6 +212,15 @@ if [ ! -d /Applications/Picasa.app/ -a -e ~/Dropbox/【圧縮】/mac/picasamac39
 fi
 
 
+######## other tools ##################################################################
+
+head "7. other tools"
+
+# claude code
+npm install -g @anthropic-ai/claude-code
+
+
 ######## done ##################################################################
+
 
 head "### Setup Mac Finished. ###"
