@@ -218,6 +218,8 @@ head "7. other tools"
 
 # claude code
 npm install -g @anthropic-ai/claude-code
+# gemini cli
+npm install -g @google/gemini-cli
 
 
 ######## done ##################################################################

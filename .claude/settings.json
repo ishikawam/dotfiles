@@ -1,0 +1,8 @@
+{
+  "defaultLanguage": "ja",
+  "systemPrompt": "Please respond in Japanese unless specifically asked to use another language. すべてのやり取りを日本語で行ってください。",
+  "preferences": {
+    "language": "japanese",
+    "locale": "ja-JP"
+  }
+}

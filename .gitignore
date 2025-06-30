@@ -64,6 +64,11 @@
 !/.rbenv-plugins/
 !/tmux/
 !/.globalrc
+!/.claude/
+/.claude/projects
+/.claude/todos
+/.claude/statsig
+/.claude/ide
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
