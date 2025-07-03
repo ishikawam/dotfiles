@@ -69,6 +69,7 @@
 /.claude/todos
 /.claude/statsig
 /.claude/ide
+/.claude/local
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
