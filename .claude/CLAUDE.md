@@ -2,6 +2,13 @@
 
 This file provides global guidance to Claude Code (claude.ai/code) across all projects.
 
+## 言語設定
+
+**日本語での対応**
+- すべてのやり取りを日本語で行ってください
+- Unless specifically asked to use another language, respond in Japanese
+- 技術的な内容も日本語で説明してください
+
 ## � IMPORTANT RULES
 
 **NEVER COMMIT CODE WITHOUT EXPLICIT USER REQUEST**
@@ -11,12 +18,14 @@ This file provides global guidance to Claude Code (claude.ai/code) across all pr
 - The user wants to review changes before they are committed to version control
 - This rule is non-negotiable and must be followed at all times
 
-**GIT COMMIT POLICY**
-- NEVER automatically run `git add` before committing
-- When user says "git commit", only commit files that are already staged (added)
-- Do NOT stage additional files without explicit user instruction
-- Only commit what the user has manually staged with `git add`
+**GIT COMMIT POLICY - CRITICAL RULE**
+- **ABSOLUTELY NEVER run `git add` when user says "git commit"**
+- When user says "git commit", ONLY run `git commit` command
+- Do NOT stage any files automatically - not even relevant files
+- Do NOT run `git add` under any circumstances when user requests commit
+- Only commit files that are already staged by the user
 - If no files are staged, inform the user that there are no staged changes to commit
+- This is a non-negotiable rule that must be followed exactly
 
 **FILE CREATION POLICY**
 - Do what has been asked; nothing more, nothing less
