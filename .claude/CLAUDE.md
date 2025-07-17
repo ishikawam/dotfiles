@@ -9,7 +9,7 @@ This file provides global guidance to Claude Code (claude.ai/code) across all pr
 - Unless specifically asked to use another language, respond in Japanese
 - 技術的な内容も日本語で説明してください
 
-## � IMPORTANT RULES
+## IMPORTANT RULES
 
 **NEVER COMMIT CODE WITHOUT EXPLICIT USER REQUEST**
 - Do NOT run `git commit` unless the user explicitly asks to commit
