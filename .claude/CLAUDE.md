@@ -49,7 +49,14 @@
 - **brewで依存関係をインストールする前に、必ずMakefileを作成する**
 - brewでツールをインストールする必要がある場合は、まず`make install`ターゲットを含むMakefileを作成/更新してください
 - 他の開発者が`make install`で同じ環境を再現できることを確認してください
-- Python依存関係については：pyenvローカル環境を使用し、.python-versionとrequirements.txtを作成してください
+- **絶対にグローバル環境にプログラミング言語パッケージをインストールしない**
+- **すべての言語でローカル環境管理を使用する：**
+  - Python: pyenvローカル環境、.python-versionとrequirements.txt
+  - Node.js: nodenvローカル環境、.node-versionとpackage.json
+  - Ruby: rbenvローカル環境、.ruby-versionとGemfile
+  - Go: goenvローカル環境、.go-versionとgo.mod
+  - Java: jenvローカル環境、.java-version
+  - Rust: rustupローカル環境（rust-toolchain.toml）
 - これは一時的な作業や単発ツールも含む、すべてのセッションに適用されます
 - このルールは絶対に遵守し、常に従わなければなりません
 
