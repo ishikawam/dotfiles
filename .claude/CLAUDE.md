@@ -1,49 +1,58 @@
-# CLAUDE.md - Global Configuration
+# CLAUDE.md - グローバル設定
 
-This file provides global guidance to Claude Code (claude.ai/code) across all projects.
+このファイルはすべてのプロジェクトでClaude Code (claude.ai/code) に対するグローバルなガイダンスを提供します。
 
 ## 言語設定
 
 **日本語での対応**
 - すべてのやり取りを日本語で行ってください
-- Unless specifically asked to use another language, respond in Japanese
+- 特別に他の言語を要求されない限り、日本語で回答してください
 - 技術的な内容も日本語で説明してください
 
-## � IMPORTANT RULES
+## 重要なルール
 
-**NEVER COMMIT CODE WITHOUT EXPLICIT USER REQUEST**
-- Do NOT run `git commit` unless the user explicitly asks to commit
-- Do NOT run `git add` and `git commit` automatically
-- Always ask for confirmation before committing changes
-- The user wants to review changes before they are committed to version control
-- This rule is non-negotiable and must be followed at all times
+**明示的な要求なしにコードをコミットしない**
+- ユーザーが明示的にコミットを要求しない限り、`git commit`を実行しないでください
+- `git add`と`git commit`を自動的に実行しないでください
+- 変更をコミットする前に必ず確認を取ってください
+- ユーザーはバージョン管理にコミットする前に変更を確認したいと考えています
+- このルールは絶対に遵守し、常に従わなければなりません
 
-**GIT COMMIT POLICY - CRITICAL RULE**
-- **ABSOLUTELY NEVER run `git add` when user says "git commit"**
-- When user says "git commit", ONLY run `git commit` command
-- Do NOT stage any files automatically - not even relevant files
-- Do NOT run `git add` under any circumstances when user requests commit
-- Only commit files that are already staged by the user
-- If no files are staged, inform the user that there are no staged changes to commit
-- This is a non-negotiable rule that must be followed exactly
+**GITコミットポリシー - 重要ルール**
+- **ユーザーが「git commit」と言った時、絶対に`git add`を実行しない**
+- ユーザーが「git commit」と言った時は、`git commit`コマンドのみを実行してください
+- 関連ファイルであっても、ファイルを自動的にステージングしないでください
+- ユーザーがコミットを要求した際は、いかなる状況でも`git add`を実行しないでください
+- ユーザーが既にステージングしたファイルのみをコミットしてください
+- ステージングされたファイルがない場合は、コミットする変更がないことをユーザーに伝えてください
+- これは交渉の余地のないルールで、正確に従わなければなりません
 
-**FILE CREATION POLICY**
-- Do what has been asked; nothing more, nothing less
-- NEVER create files unless they're absolutely necessary for achieving your goal
-- ALWAYS prefer editing an existing file to creating a new one
-- NEVER proactively create documentation files (*.md) or README files
-- Only create documentation files if explicitly requested by the User
+**ファイル作成ポリシー**
+- 要求されたことを行う。それ以上でも以下でもない
+- 目的を達成するために絶対に必要でない限り、ファイルを作成しないでください
+- 新しいファイルを作成するより、既存のファイルを編集することを常に優先してください
+- ドキュメントファイル（*.md）やREADMEファイルを積極的に作成しないでください
+- ユーザーが明示的に要求した場合のみ、ドキュメントファイルを作成してください
 
-**SECURITY BEST PRACTICES**
-- Always follow security best practices
-- Never introduce code that exposes or logs secrets and keys
-- Never commit secrets or keys to the repository
+**セキュリティのベストプラクティス**
+- 常にセキュリティのベストプラクティスに従ってください
+- 秘密情報やキーを露出またはログ出力するコードを導入しないでください
+- 秘密情報やキーをリポジトリにコミットしないでください
 
-**CODE STYLE**
-- DO NOT ADD ***ANY*** COMMENTS unless asked
-- When making changes to files, first understand the file's code conventions
-- Mimic code style, use existing libraries and utilities, and follow existing patterns
+**コードスタイル**
+- 要求されない限り、コメントを追加しないでください
+- ファイルを変更する際は、まずそのファイルのコード規約を理解してください
+- コードスタイルを模倣し、既存のライブラリとユーティリティを使用し、既存のパターンに従ってください
+- **ソースコードのコメントはすべて日本語で書く**
 
-**RESTRICTED FILES**
-- NEVER modify or touch ~/.config/git/ignore
-- This file must remain untouched at all times
+**依存関係管理ポリシー - 重要ルール**
+- **brewで依存関係をインストールする前に、必ずMakefileを作成する**
+- brewでツールをインストールする必要がある場合は、まず`make install`ターゲットを含むMakefileを作成/更新してください
+- 他の開発者が`make install`で同じ環境を再現できることを確認してください
+- Python依存関係については：pyenvローカル環境を使用し、.python-versionとrequirements.txtを作成してください
+- これは一時的な作業や単発ツールも含む、すべてのセッションに適用されます
+- このルールは絶対に遵守し、常に従わなければなりません
+
+**制限ファイル**
+- ~/.config/git/ignoreを変更または触らないでください
+- このファイルは常に手を付けずにそのままにしておかなければなりません
