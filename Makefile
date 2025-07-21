@@ -83,3 +83,86 @@ remove-force-defaults:
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 	rm -f ~/this/.force-defaults
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
+
+
+# Claude Code設定改善コマンド（settings.json専用）
+claude-improve-settings:
+	@echo "Claude Codeプロジェクトを検索中..."
+	@source ~/common/.shrc; \
+	projects=$$(loc .claude 2>/dev/null | grep -E '\.claude$$' | head -20); \
+	if [ -z "$$projects" ]; then \
+		echo "Claude Codeプロジェクトが見つかりませんでした"; \
+		exit 1; \
+	fi; \
+	echo "発見されたプロジェクト数: $$(echo "$$projects" | wc -l)"; \
+	echo ""; \
+	echo "=== ~/.claude/settings.json を更新 ==="; \
+	mkdir -p ~/.claude; \
+	echo "$$projects" | while read project; do \
+		if [ -n "$$project" ] && [ -f "$$project/settings.local.json" ]; then \
+			if command -v jq >/dev/null 2>&1; then \
+				cat "$$project/settings.local.json" | jq -r '.permissions.allow[]? // empty' 2>/dev/null; \
+			else \
+				grep '"' "$$project/settings.local.json" | grep -E '(Bash|WebFetch|Task)' | sed 's/.*"//;s/".*//' | grep -v '^$$'; \
+			fi; \
+		fi; \
+	done | sort -u | grep -v '^$$' > /tmp/claude_permissions; \
+	if [ -f ~/.claude/settings.json ]; then \
+		if command -v jq >/dev/null 2>&1; then \
+			cat ~/.claude/settings.json | jq -r '.permissions.allow[]? // empty' 2>/dev/null | sort -u > /tmp/claude_existing; \
+		else \
+			grep '"' ~/.claude/settings.json | grep -E '(Bash|WebFetch|Task)' | sed 's/.*"//;s/".*//' | grep -v '^$$' | sort -u > /tmp/claude_existing; \
+		fi; \
+		cat /tmp/claude_existing /tmp/claude_permissions 2>/dev/null | sort -u | grep -v '^$$' > /tmp/claude_all_permissions; \
+	else \
+		cp /tmp/claude_permissions /tmp/claude_all_permissions; \
+	fi; \
+	echo '{' > ~/.claude/settings.json; \
+	echo '  "permissions": {' >> ~/.claude/settings.json; \
+	echo '    "allow": [' >> ~/.claude/settings.json; \
+	if [ -s /tmp/claude_all_permissions ]; then \
+		cat /tmp/claude_all_permissions | sed 's/^/      "/;s/$$/",/' | sed '$$s/,$$//' >> ~/.claude/settings.json; \
+	fi; \
+	echo '    ],' >> ~/.claude/settings.json; \
+	echo '    "deny": []' >> ~/.claude/settings.json; \
+	echo '  }' >> ~/.claude/settings.json; \
+	echo '}' >> ~/.claude/settings.json; \
+	if [ -s /tmp/claude_all_permissions ]; then \
+		echo "権限数: $$(cat /tmp/claude_all_permissions | wc -l)"; \
+	else \
+		echo "権限数: 0"; \
+	fi; \
+	echo ""; \
+	echo "settings.json の更新完了！"
+
+# Claude Code設定改善コマンド（CLAUDE.md専用）
+claude-improve-doc:
+	@echo "Claude Codeプロジェクトを検索中..."
+	@source ~/common/.shrc; \
+	projects=$$(loc .claude 2>/dev/null | grep -E '\.claude$$' | head -20); \
+	if [ -z "$$projects" ]; then \
+		echo "Claude Codeプロジェクトが見つかりませんでした"; \
+		exit 1; \
+	fi; \
+	echo "発見されたプロジェクト数: $$(echo "$$projects" | wc -l)"; \
+	echo ""; \
+	echo "=== 各プロジェクトでClaude Codeを実行 ==="; \
+	for project in $$projects; do \
+		if [ -n "$$project" ]; then \
+			project_dir="$$(dirname "$$project")"; \
+			claude_md="$$project_dir/CLAUDE.md"; \
+			if [ -f "$$claude_md" ]; then \
+				echo ""; \
+				echo "--- $$project_dir ---"; \
+				echo "CLAUDE.mdが存在します"; \
+				echo "このディレクトリでClaude Codeを実行します..."; \
+				(cd "$$project_dir" && claude -p "このプロジェクトのCLAUDE.mdから、グローバルの設定としても良さそうなものをピックアップしてください。それを ~/.claude/CLAUDE.md に追記反映させてください。") || echo "Claude実行中にエラーが発生しました"; \
+			else \
+				echo ""; \
+				echo "--- $$project_dir ---"; \
+				echo "CLAUDE.mdが存在しません（スキップ）"; \
+			fi; \
+		fi; \
+	done; \
+	echo ""; \
+	echo "全プロジェクトでの実行完了！"

@@ -1,7 +1,34 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git commit:*)"
+      "Bash(asdf current:*)",
+      "Bash(asdf install:*)",
+      "Bash(asdf local:*)",
+      "Bash(cat:*)",
+      "Bash(cp:*)",
+      "Bash(echo $LANG)",
+      "Bash(find:*)",
+      "Bash(gh issue list:*)",
+      "Bash(git commit:*)",
+      "Bash(git grep:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "Bash(git checkout:*)",
+      "Bash(go mod:*)",
+      "Bash(go run:*)",
+      "Bash(grep:*)",
+      "Bash(loc:*)",
+      "Bash(ls:*)",
+      "Bash(make:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(readlink:*)",
+      "Bash(true)",
+      "Edit",
+      "Write",
+      "Read",
+      "WebFetch(domain:)",
+      "WebFetch(domain:docs.anthropic.com)"
     ],
     "deny": []
   }
