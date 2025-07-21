@@ -159,16 +159,16 @@ alias scr='screen -xR'
 function loc() {
     {
         locate "$1" | grep -o ".*$1[^/]*"
-        if [ ! "`mdfind 1>/dev/null`" ]; then
-            mdfind "$1" | grep "$1"
+        if [ ! "`mdfind 1>/dev/null 2>/dev/null`" ]; then
+            mdfind "$1" 2>/dev/null | grep "$1"
         fi
     } | sort | uniq
 }
 function loci() {
     {
         locate -i "$1" | grep -oi ".*$1[^/]*"
-        if [ ! "`mdfind 1>/dev/null`" ]; then
-            mdfind "$1" | grep -i "$1"
+        if [ ! "`mdfind 1>/dev/null 2>/dev/null`" ]; then
+            mdfind "$1" 2>/dev/null | grep -i "$1"
         fi
     } | sort | uniq
 }
