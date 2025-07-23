@@ -36,7 +36,7 @@
 - ユーザーが明示的に要求した場合のみ、ドキュメントファイルを作成してください
 
 **プロジェクト初期化ポリシー**
-- **新しいプロジェクトの開始時またはユーザーが「init」「初期化」「セットアップ」コマンドを実行した時は以下のファイルを必ず生成する：**
+- **新しいプロジェクトの開始時またはユーザーが`init`コマンドを実行した時は以下のファイルを必ず生成する：**
   - .editorconfig（コード書式統一）
   - README.md（プロジェクト説明とセットアップ手順）
   - .gitignore（プロジェクトタイプに応じた適切な除外ルール）
@@ -113,6 +113,31 @@
   - AWS CLIの認証は`make login`コマンドを使用する
   - プロジェクト固有のAWSプロファイルが設定されている場合は、それを尊重する
   - IAM Identity Centerを使用している場合は、適切なSSOログインコマンドを使用する
+- **セキュリティ**
+  - 本番環境への変更は特に慎重に実行し、事前確認を徹底する
+- **環境別設定管理**
+  - 環境ごとに独立したディレクトリ構成を使用する（`env_dev/`, `env_prod/`等）
+  - 共通モジュールは`common/`や`modules/`ディレクトリで管理する
+  - 環境固有の変数は`terraform.tfvars`ファイルで管理する
+  - 各環境は独立して初期化し、相互に影響しないようにする
+
+**プライバシー・セキュリティルールの拡張**
+- **Gitトラッキング状況の必須確認**
+  - ファイルを削除・変更する前に`git ls-files`で追跡状況を確認する
+  - Gitで追跡されていないファイルは絶対に削除・変更しない
+  - 個人の`.env`ファイルは秘密のトークンや認証情報を含むため、明示的に要求されない限り変更しない
+- **プライベートデータとパブリックデータの区別**
+  - 常に以下を区別して扱う：
+    - Git追跡ファイル（オープンソース向けに変更可能）
+    - ユーザーのプライベートファイル（許可なしに絶対に触らない）
+  - 変更前に必ず`git status`と`git ls-files`で追跡状況を理解する
+- **機密情報の保護**
+  - コードや追跡ファイルに個人情報（URL、名前、トークン）をハードコードしない
+  - プライベートデータを含むファイルは特別な注意を払って扱う
+  - テンプレートファイル（`.env.example`、`.sample.md`）のみ変更可能
+- **プライベートディレクトリの保護**
+  - ダウンロードディレクトリやユーザー作成ディレクトリは個人データを含む
+  - これらのディレクトリのファイルは明示的な許可なしに変更しない
 
 **データセキュリティポリシー**
 - **機密データの取り扱い**
@@ -151,6 +176,110 @@
 - **バイナリファイル変換の標準化**: Excelファイルは必ずCSV形式に変換してからAI処理を行う
 - **変換ツールの活用**: 専用の変換ツール（excel-converter等）を使用し、手動変換は避ける
 - **自動化コマンドの実装**: `make convert`のような自動化コマンドで変換作業を効率化する
+
+**Dockerコンテナ管理ポリシー**
+- **標準的なDockerコンテナ管理コマンド**
+  - `make up` - すべてのサービスをdocker-composeで起動
+  - `make down` - すべてのサービスを停止
+  - `make destroy` - コンテナ、ボリューム、ログをクリーンアップ
+  - docker-composeを使用するプロジェクトではMakefileでこれらのコマンドを統一する
+
+**テスト実行ポリシー**
+- **標準的なテストコマンド**
+  - `make test` - APIテストをカバレッジ付きで実行
+  - `make unittest` - ユニットテストを実行
+  - `make coverage` - カバレッジレポートを生成しHTMLレポートを開く
+- **個別テスト実行**
+  - Dockerコンテナ内でのテスト実行も考慮する
+  - `docker-compose exec [service] go test -v ./[package-path]` パターンの使用
+
+**コード品質管理ポリシー**
+- **標準的なコード品質チェックコマンド**
+  - `make lint` - リンティング実行（言語別の標準ツール使用）
+  - `make fmt` - コードフォーマット実行
+  - `make check` - 静的解析実行（staticcheck等）
+- **Go言語での品質管理**
+  - gofmt、goreturns、golint、golangci-lintの活用
+  - Dockerコンテナ内でのリンティングも考慮する
+
+**Go言語開発ポリシー**
+- **標準的なプロジェクト構成パターン**
+  - `cmd/` - 実行可能ファイル（server/、batch/、worker/等）
+  - `handlers/` - HTTPリクエストハンドラ
+  - `models/` - データモデル
+  - `service/` - ビジネスロジック
+  - `middleware/` - HTTPミドルウェア
+  - `routers/` - ルート定義
+  - `pkg/` - 共有パッケージ
+  - `resources/` - 静的アセット、テンプレート
+  - `settings/` - 設定管理
+- **環境設定管理**
+  - 設定ファイルは`env/`ディレクトリで環境別管理
+  - `cp env/local.ini app.ini`パターンでローカル設定をコピー
+  - 本番用とテスト用の設定を分離する
+
+**Laravel/PHP開発ポリシー**
+- **標準的なLaravel開発コマンド**
+  - `make setup` - 初期セットアップ（.env作成、Docker環境構築）
+  - `make install` - 依存関係インストール、環境設定、キャッシュクリア
+  - `make migrate` - データベースマイグレーション実行
+  - `make dev` - 開発環境起動
+  - `make up` - Dockerコンテナ起動
+  - `make down` - Dockerコンテナ停止
+  - `make exec` または `make exec-app` - PHPコンテナにSSH接続
+  - `make log` - Laravel ログを tail する
+- **コード品質管理（Laravel）**
+  - `make fix` - Laravel Pintでコード整形（PSR-12準拠）
+  - `make analyse` - PHPStanで静的解析（レベル5）
+  - `make test-phpstan` - PHPStan静的解析実行
+  - `make generate-phpstan-baseline` - PHPStanベースライン更新
+  - `make test-pint` - Pintコードスタイルチェック
+  - `make fix-pint` - Pintコードスタイル自動修正
+- **Laravel/PHPテスト実行**
+  - `docker compose exec php ./vendor/bin/phpunit` - 全テスト実行
+  - `docker compose exec php ./vendor/bin/phpunit tests/Unit` - 単体テストのみ実行
+  - `docker compose exec php ./vendor/bin/phpunit tests/Feature` - 機能テストのみ実行
+  - `docker compose exec php ./vendor/bin/phpunit tests/Unit/ExampleTest.php` - 特定のテストファイル実行
+  - `docker compose exec php ./vendor/bin/phpunit --filter testExample` - 特定のテストメソッド実行
+- **API文書化管理**
+  - `make create-swagger` - Swagger文書生成
+  - Swagger UIアクセス: `http://localhost:8081/api/documentation`
+- **Laravel開発規約**
+  - Laravel Pint: PSR-12準拠のコード整形ツール。全PHPファイルを自動整形
+  - PHPStan: 静的解析ツール。型安全性とコード品質をチェック
+  - Editorconfig: インデント4スペース、UTF-8、LF改行コードを使用
+- **必須のコンテナ実行**
+  - すべてのLaravel/PHP/Composerコマンドは**必ずDockerコンテナ内**で実行する
+  - 正しい実行方法: `docker compose exec php php artisan migrate`, `docker compose run php composer install`, `make exec`
+  - 絶対に避ける: `php artisan migrate`（ホストのPHPを使用）, `composer install`（ホストのComposerを使用）
+- **ログ確認とデバッグ**
+  - `make log` - リアルタイムログ監視
+  - `docker compose exec php tail -f storage/logs/laravel.log` - 特定ログファイル確認
+  - ログは`storage/logs/`に保存される
+
+**テストポリシーの拡張**
+- **テスト品質管理**
+  - カバレッジレポートを生成し、適切なカバレッジを維持する
+  - ユニットテスト、統合テスト、E2Eテストを適切に分離する
+  - テストデータはテスト専用のものを使用し、本番データを使用しない
+
+**環境設定管理ポリシー**
+- **複数環境対応**
+  - 環境別設定ファイルを適切に分離する（local, develop, staging, production等）
+  - 環境変数は.envファイルで管理し、機密情報は適切に保護する
+  - API エンドポイントは環境に応じて自動切り替えする
+  - 本番環境と開発環境で異なる設定が必要な項目を明確にする
+
+**静的サイト開発ポリシー（AWS S3/CloudFront）**
+- **標準的なAWS静的サイト構成**
+  - S3静的サイトホスティング + CloudFront CDN配信
+  - Route 53ドメイン管理（オプション）
+  - CloudFront経由でのHTTPS自動対応
+
+**Excel/CSV分析処理ポリシー**
+- **バイナリファイルの適切な処理**
+  - Excelファイルは必ずCSV形式に変換してからAI処理を行う
+  - 分析やレポート作成時は個人情報・機密データに特に配慮する
 
 **制限ファイル**
 - ~/.config/git/ignoreを変更または触らないでください
