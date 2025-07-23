@@ -88,8 +88,7 @@ remove-force-defaults:
 # Claude Code設定改善コマンド（settings.json専用）
 claude-improve-settings:
 	@echo "Claude Codeプロジェクトを検索中..."
-	@source ~/common/.shrc; \
-	projects=$$(loc .claude 2>/dev/null | grep -E '\.claude$$' | head -20); \
+	@projects=$$(find ~/git -name .claude 2>/dev/null); \
 	if [ -z "$$projects" ]; then \
 		echo "Claude Codeプロジェクトが見つかりませんでした"; \
 		exit 1; \
@@ -138,8 +137,7 @@ claude-improve-settings:
 # Claude Code設定改善コマンド（CLAUDE.md専用）
 claude-improve-doc:
 	@echo "Claude Codeプロジェクトを検索中..."
-	@source ~/common/.shrc; \
-	projects=$$(loc .claude 2>/dev/null | grep -E '\.claude$$' | head -20); \
+	@projects=$$(find ~/git -name .claude 2>/dev/null); \
 	if [ -z "$$projects" ]; then \
 		echo "Claude Codeプロジェクトが見つかりませんでした"; \
 		exit 1; \
