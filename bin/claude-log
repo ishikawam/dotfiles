@@ -1,0 +1,548 @@
+#!/usr/bin/env python3
+"""
+Claude Code JSONL Log Formatter
+
+Claude CodeのJSONL形式のログファイルを、コンソールでの実際のやり取りと
+同じフォーマットに変換するツール
+
+引数なしで実行すると、利用可能なログファイルの一覧を表示して選択できます。
+"""
+
+import json
+import sys
+import argparse
+import os
+import glob
+import termios
+import tty
+import select
+from datetime import datetime
+from typing import Dict, Any, List, Tuple
+import re
+
+
+class PecoLikeSelector:
+    """pecoライクなインクリメンタル検索付きセレクタ"""
+    
+    def __init__(self):
+        self.colors = {
+            'selected': '\033[7m',   # Reverse
+            'match': '\033[93m',     # Yellow
+            'reset': '\033[0m',      # Reset
+            'dim': '\033[2m',        # Dim
+            'bold': '\033[1m',       # Bold
+        }
+    
+    def colorize(self, text: str, color: str) -> str:
+        """テキストに色を付ける"""
+        if color in self.colors:
+            return f"{self.colors[color]}{text}{self.colors['reset']}"
+        return text
+    
+    def clear_screen(self):
+        """画面をクリア"""
+        print('\033[2J\033[H', end='')
+    
+    def move_cursor(self, line: int, col: int = 0):
+        """カーソル移動"""
+        print(f'\033[{line};{col}H', end='')
+    
+    def save_cursor(self):
+        """カーソル位置を保存"""
+        print('\033[s', end='')
+    
+    def restore_cursor(self):
+        """カーソル位置を復元"""
+        print('\033[u', end='')
+    
+    def hide_cursor(self):
+        """カーソルを非表示"""
+        print('\033[?25l', end='')
+    
+    def show_cursor(self):
+        """カーソルを表示"""
+        print('\033[?25h', end='')
+    
+    def get_terminal_size(self):
+        """ターミナルサイズを取得"""
+        try:
+            rows, cols = os.popen('stty size', 'r').read().split()
+            return int(rows), int(cols)
+        except:
+            return 24, 80
+    
+    def filter_items(self, items: List[Tuple], query: str) -> List[Tuple]:
+        """アイテムをフィルタリング"""
+        if not query:
+            return items
+        
+        filtered = []
+        for item in items:
+            # プロジェクト名と概要で検索
+            project_name = item[1].replace('-Users-m-ishikawa-git-', '').replace('-', '/')
+            summary = item[2] if len(item) > 2 else ""
+            searchable = f"{project_name} {summary}".lower()
+            
+            if query.lower() in searchable:
+                filtered.append(item)
+        
+        return filtered
+    
+    def highlight_match(self, text: str, query: str) -> str:
+        """マッチした部分をハイライト"""
+        if not query:
+            return text
+        
+        # 大文字小文字を無視してマッチ部分を探す
+        import re
+        pattern = re.compile(re.escape(query), re.IGNORECASE)
+        
+        def replacer(match):
+            return self.colorize(match.group(), 'match')
+        
+        return pattern.sub(replacer, text)
+    
+    def format_item(self, item: Tuple, query: str, is_selected: bool) -> str:
+        """アイテムを1行でフォーマット"""
+        file_path, project_name, summary, entry_count = item
+        
+        # プロジェクト名をクリーンアップ
+        clean_project_name = project_name.replace('-Users-m-ishikawa-git-', '').replace('-', '/')
+        
+        # ファイルの最終更新時刻
+        mtime = os.path.getmtime(file_path)
+        formatted_time = datetime.fromtimestamp(mtime).strftime('%m/%d %H:%M')
+        
+        # 概要を短縮
+        display_summary = summary[:40] + "..." if len(summary) > 40 else summary
+        
+        # 1行でフォーマット
+        line = f"{clean_project_name:<30} {formatted_time} ({entry_count:3d}) {display_summary}"
+        
+        # クエリでハイライト
+        line = self.highlight_match(line, query)
+        
+        # 選択中の場合は反転表示
+        if is_selected:
+            line = self.colorize(line, 'selected')
+        
+        return line
+    
+    def select(self, items: List[Tuple], prompt: str = "選択してください") -> int:
+        """pecoライクなセレクタ（フォールバック対応）"""
+        if not items:
+            return -1
+        
+        # ターミナルモードが利用可能かチェック
+        try:
+            old_settings = termios.tcgetattr(sys.stdin)
+            if not sys.stdin.isatty():
+                # 非インタラクティブモードの場合はsimple_selectにフォールバック
+                return self.simple_select(items, prompt)
+        except (termios.error, OSError):
+            # ターミナル制御が使えない場合は簡易モードにフォールバック
+            return self.simple_select(items, prompt)
+        
+        try:
+            # 非標準入力モードに設定
+            tty.setraw(sys.stdin.fileno())
+            
+            query = ""
+            selected_index = 0
+            rows, cols = self.get_terminal_size()
+            max_display = rows - 3  # プロンプト行とクエリ行を除く
+            
+            self.hide_cursor()
+            
+            while True:
+                # 現在のフィルタ結果
+                filtered_items = self.filter_items(items, query)
+                
+                if not filtered_items:
+                    selected_index = 0
+                elif selected_index >= len(filtered_items):
+                    selected_index = len(filtered_items) - 1
+                
+                # 画面をクリア
+                self.clear_screen()
+                
+                # プロンプトとクエリを表示
+                print(f"{self.colorize(prompt, 'bold')}")
+                print(f"Query: {query}_")
+                print()
+                
+                # フィルタされたアイテムを表示
+                start_idx = max(0, selected_index - max_display // 2)
+                end_idx = min(len(filtered_items), start_idx + max_display)
+                
+                for i in range(start_idx, end_idx):
+                    item = filtered_items[i]
+                    is_selected = (i == selected_index)
+                    formatted_line = self.format_item(item, query, is_selected)
+                    print(formatted_line)
+                
+                # 統計情報を表示
+                if filtered_items:
+                    print(f"\n{self.colorize(f'{len(filtered_items)}/{len(items)} items', 'dim')}")
+                else:
+                    print(f"\n{self.colorize('No matches', 'dim')}")
+                
+                sys.stdout.flush()
+                
+                # キー入力を待つ
+                ch = sys.stdin.read(1)
+                
+                if ch == '\x03':  # Ctrl+C
+                    return -1
+                elif ch == '\r' or ch == '\n':  # Enter
+                    if filtered_items:
+                        # 元のリストでのインデックスを返す
+                        selected_item = filtered_items[selected_index]
+                        return items.index(selected_item)
+                    return -1
+                elif ch == '\x1b':  # ESC sequence
+                    next1 = sys.stdin.read(1)
+                    if next1 == '[':
+                        next2 = sys.stdin.read(1)
+                        if next2 == 'A' and selected_index > 0:  # Up arrow
+                            selected_index -= 1
+                        elif next2 == 'B' and selected_index < len(filtered_items) - 1:  # Down arrow
+                            selected_index += 1
+                    else:
+                        # ESC key
+                        return -1
+                elif ch == '\x7f' or ch == '\x08':  # Backspace or Delete
+                    if query:
+                        query = query[:-1]
+                        selected_index = 0
+                elif ch.isprintable():  # 通常の文字
+                    query += ch
+                    selected_index = 0
+        
+        finally:
+            # ターミナル設定を復元
+            termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+            self.show_cursor()
+            self.clear_screen()
+        
+        return -1
+    
+    def simple_select(self, items: List[Tuple], prompt: str) -> int:
+        """シンプルな番号選択モード（フォールバック）"""
+        print(f"{self.colorize(prompt, 'bold')}\n")
+        
+        for i, item in enumerate(items):
+            formatted_line = self.format_item(item, "", False)
+            print(f"{i+1:2d}. {formatted_line}")
+        
+        print()
+        while True:
+            try:
+                choice = input(f"番号を選択してください (1-{len(items)}, q=終了): ")
+                
+                if choice.lower() == 'q':
+                    return -1
+                
+                file_num = int(choice)
+                if 1 <= file_num <= len(items):
+                    return file_num - 1
+                else:
+                    print(f"エラー: 1-{len(items)}の範囲で入力してください")
+                    
+            except ValueError:
+                print("エラー: 数字を入力してください")
+            except KeyboardInterrupt:
+                print("\n終了します")
+                return -1
+
+
+class ClaudeLogFormatter:
+    def __init__(self):
+        self.colors = {
+            'user': '\033[96m',      # Cyan
+            'assistant': '\033[93m', # Yellow
+            'tool': '\033[92m',      # Green
+            'error': '\033[91m',     # Red
+            'reset': '\033[0m',      # Reset
+            'bold': '\033[1m',       # Bold
+            'dim': '\033[2m'         # Dim
+        }
+    
+    def colorize(self, text: str, color: str) -> str:
+        """テキストに色を付ける"""
+        if color in self.colors:
+            return f"{self.colors[color]}{text}{self.colors['reset']}"
+        return text
+    
+    def format_timestamp(self, timestamp: str) -> str:
+        """タイムスタンプをフォーマット"""
+        try:
+            dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+            return dt.strftime('%Y-%m-%d %H:%M:%S')
+        except:
+            return timestamp
+    
+    def format_tool_use(self, tool_use: Dict[str, Any]) -> str:
+        """ツール使用をフォーマット"""
+        tool_name = tool_use.get('name', 'Unknown')
+        tool_input = tool_use.get('input', {})
+        
+        output = f"\n{self.colorize('◯', 'tool')} {self.colorize(f'Tool: {tool_name}', 'bold')}\n"
+        
+        # パラメータの表示
+        for key, value in tool_input.items():
+            if isinstance(value, str) and len(value) > 100:
+                value_preview = value[:100] + "..."
+            elif isinstance(value, (dict, list)):
+                value_preview = json.dumps(value, ensure_ascii=False, indent=2)[:200] + "..."
+            else:
+                value_preview = str(value)
+            
+            output += f"  {self.colorize(key, 'dim')}: {value_preview}\n"
+        
+        return output
+    
+    def format_tool_result(self, result_data: Any) -> str:
+        """ツール結果をフォーマット"""
+        if isinstance(result_data, dict):
+            if result_data.get('is_error'):
+                return f"\n{self.colorize('✗', 'error')} {self.colorize('Error:', 'error')} {result_data.get('content', '')}\n"
+            elif 'stdout' in result_data:
+                output = f"\n{self.colorize('→', 'tool')} {self.colorize('Output:', 'bold')}\n"
+                if result_data['stdout']:
+                    output += f"{result_data['stdout']}\n"
+                if result_data.get('stderr'):
+                    output += f"{self.colorize('stderr:', 'error')} {result_data['stderr']}\n"
+                return output
+            elif 'type' in result_data and result_data['type'] == 'text':
+                file_info = result_data.get('file', {})
+                if file_info:
+                    output = f"\n{self.colorize('→', 'tool')} {self.colorize('File read:', 'bold')} {file_info.get('filePath', '')}\n"
+                    content = file_info.get('content', '')
+                    if len(content) > 500:
+                        content = content[:500] + "\n... (truncated)"
+                    output += f"{content}\n"
+                    return output
+        
+        # その他の結果
+        result_str = json.dumps(result_data, ensure_ascii=False, indent=2) if isinstance(result_data, (dict, list)) else str(result_data)
+        if len(result_str) > 300:
+            result_str = result_str[:300] + "..."
+        
+        return f"\n{self.colorize('→', 'tool')} {self.colorize('Result:', 'bold')}\n{result_str}\n"
+    
+    def format_message_content(self, content: Any) -> str:
+        """メッセージコンテンツをフォーマット"""
+        if isinstance(content, list):
+            output = ""
+            for item in content:
+                if isinstance(item, dict):
+                    if item.get('type') == 'text':
+                        output += item.get('text', '')
+                    elif item.get('type') == 'tool_use':
+                        output += self.format_tool_use(item)
+                    elif item.get('type') == 'tool_result':
+                        output += self.format_tool_result(item.get('content'))
+                else:
+                    output += str(item)
+            return output
+        elif isinstance(content, str):
+            return content
+        else:
+            return json.dumps(content, ensure_ascii=False, indent=2)
+    
+    def format_log_entry(self, entry: Dict[str, Any]) -> str:
+        """ログエントリをフォーマット"""
+        entry_type = entry.get('type', 'unknown')
+        
+        # summaryエントリはスキップ
+        if entry_type == 'summary':
+            return ""
+        
+        timestamp = entry.get('timestamp', '')
+        formatted_time = self.format_timestamp(timestamp)
+        
+        # ユーザーメッセージ
+        if entry_type == 'user':
+            message = entry.get('message', {})
+            content = message.get('content', '')
+            
+            # ツール結果の場合
+            if isinstance(content, list) and len(content) > 0 and content[0].get('type') == 'tool_result':
+                tool_result = content[0]
+                result_content = tool_result.get('content')
+                return self.format_tool_result(result_content)
+            
+            # 通常のユーザーメッセージ
+            formatted_content = self.format_message_content(content)
+            
+            header = f"\n{self.colorize('●', 'user')} {self.colorize('User', 'user')} {self.colorize(f'[{formatted_time}]', 'dim')}"
+            return f"{header}\n{formatted_content}\n"
+        
+        # アシスタントメッセージ
+        elif entry_type == 'assistant':
+            message = entry.get('message', {})
+            content = message.get('content', [])
+            
+            formatted_content = self.format_message_content(content)
+            
+            header = f"\n{self.colorize('●', 'assistant')} {self.colorize('Claude', 'assistant')} {self.colorize(f'[{formatted_time}]', 'dim')}"
+            return f"{header}\n{formatted_content}\n"
+        
+        return ""
+    
+    def get_log_summary(self, file_path: str) -> Tuple[str, str, int]:
+        """ログファイルの概要を取得"""
+        try:
+            summary = ""
+            cwd = ""
+            entry_count = 0
+            
+            with open(file_path, 'r', encoding='utf-8') as f:
+                for line_num, line in enumerate(f, 1):
+                    if line_num > 10:  # 最初の10行のみチェック
+                        break
+                    
+                    line = line.strip()
+                    if not line:
+                        continue
+                    
+                    try:
+                        entry = json.loads(line)
+                        
+                        # summaryを探す
+                        if entry.get('type') == 'summary' and not summary:
+                            summary = entry.get('summary', '')
+                        
+                        # cwdを探す
+                        if 'cwd' in entry and not cwd:
+                            cwd = entry.get('cwd', '')
+                        
+                        entry_count += 1
+                        
+                    except json.JSONDecodeError:
+                        continue
+            
+            # 全体のエントリ数をカウント
+            with open(file_path, 'r', encoding='utf-8') as f:
+                total_entries = sum(1 for line in f if line.strip())
+            
+            return summary, cwd, total_entries
+            
+        except Exception as e:
+            return f"Error reading file: {e}", "", 0
+    
+    def list_log_files(self) -> List[Tuple[str, str, str, int]]:
+        """利用可能なログファイルの一覧を取得"""
+        claude_dir = os.path.expanduser("~/.claude/projects")
+        
+        if not os.path.exists(claude_dir):
+            return []
+        
+        log_files = []
+        pattern = os.path.join(claude_dir, "**/*.jsonl")
+        
+        for file_path in glob.glob(pattern, recursive=True):
+            summary, cwd, entry_count = self.get_log_summary(file_path)
+            
+            # プロジェクト名を抽出
+            rel_path = os.path.relpath(file_path, claude_dir)
+            project_name = rel_path.split('/')[0] if '/' in rel_path else rel_path
+            
+            log_files.append((file_path, project_name, summary, entry_count))
+        
+        # 最新のファイルを最初にソート
+        log_files.sort(key=lambda x: os.path.getmtime(x[0]), reverse=True)
+        
+        return log_files
+    
+    def select_file_interactive(self, log_files: List[Tuple[str, str, str, int]]) -> str:
+        """pecoライクなファイル選択"""
+        if not log_files:
+            print(f"{self.colorize('エラー:', 'error')} ログファイルが見つかりません")
+            return ""
+        
+        selector = PecoLikeSelector()
+        selected_index = selector.select(log_files, "Claude Code ログファイルを選択")
+        
+        if selected_index >= 0:
+            return log_files[selected_index][0]
+        else:
+            return ""
+    
+    def format_jsonl_file(self, file_path: str, limit: int = None) -> str:
+        """JSONLファイルをフォーマット"""
+        output = ""
+        count = 0
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    if limit and count >= limit:
+                        break
+                    
+                    line = line.strip()
+                    if not line:
+                        continue
+                    
+                    try:
+                        entry = json.loads(line)
+                        formatted_entry = self.format_log_entry(entry)
+                        if formatted_entry:
+                            output += formatted_entry
+                            count += 1
+                    except json.JSONDecodeError as e:
+                        output += f"\n{self.colorize('✗', 'error')} JSON parse error: {e}\n"
+                        continue
+        
+        except FileNotFoundError:
+            return f"{self.colorize('✗', 'error')} File not found: {file_path}"
+        except Exception as e:
+            return f"{self.colorize('✗', 'error')} Error reading file: {e}"
+        
+        return output
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Claude Code JSONL ログファイルをコンソール形式でフォーマット",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+使用例:
+  %(prog)s                    # ファイル一覧から選択
+  %(prog)s log.jsonl          # 指定ファイルを表示
+  %(prog)s log.jsonl -l 10    # 最初の10エントリのみ表示
+  %(prog)s log.jsonl --no-color > output.txt  # カラーなしでファイル出力
+        """
+    )
+    
+    parser.add_argument('file', nargs='?', help='フォーマットするJSONLファイル（省略可）')
+    parser.add_argument('--limit', '-l', type=int, help='表示するエントリ数の制限')
+    parser.add_argument('--no-color', action='store_true', help='カラー出力を無効にする')
+    
+    args = parser.parse_args()
+    
+    formatter = ClaudeLogFormatter()
+    
+    # カラー出力の無効化
+    if args.no_color:
+        formatter.colors = {key: '' for key in formatter.colors}
+    
+    # ファイルが指定されていない場合は一覧から選択
+    if not args.file:
+        log_files = formatter.list_log_files()
+        selected_file = formatter.select_file_interactive(log_files)
+        
+        if not selected_file:
+            sys.exit(0)
+        
+        args.file = selected_file
+    
+    # ファイルをフォーマット
+    formatted_output = formatter.format_jsonl_file(args.file, args.limit)
+    
+    print(formatted_output)
+
+
+if __name__ == '__main__':
+    main()
