@@ -72,5 +72,9 @@
       "Write"
     ],
     "deny": []
-  }
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754085807364
+  },
+  "$schema": "https://json.schemastore.org/claude-code-settings.json"
 }
