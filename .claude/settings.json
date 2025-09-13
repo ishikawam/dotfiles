@@ -23,11 +23,8 @@
       "Bash(gh pr view:*)",
       "Bash(gh pr:*)",
       "Bash(git --version)",
-      "Bash(git checkout:*)",
       "Bash(git commit:*)",
       "Bash(git grep:*)",
-      "Bash(git reset:*)",
-      "Bash(git restore:*)",
       "Bash(go build:*)",
       "Bash(go env:*)",
       "Bash(go get:*)",
@@ -73,7 +70,10 @@
       "Write"
     ],
     "deny": [
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)"
     ]
   },
   "feedbackSurveyState": {
