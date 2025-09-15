@@ -9,7 +9,6 @@
       "Bash(brew install:*)",
       "Bash(cat:*)",
       "Bash(cp:*)",
-      "Bash(docker compose:*)",
       "Bash(done)",
       "Bash(echo $LANG)",
       "Bash(echo:*)",
