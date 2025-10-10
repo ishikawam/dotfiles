@@ -1,0 +1,150 @@
+# .rsyncignore
+# 移行に不要なもの。todo; 移行に必要なものだけを転送するように変えたい
+
+# Trash
+/.Trash/
+/.Trashes/
+
+# dotfiles管理
+/.cask/
+/.claude/
+/.config/
+/.emacs.d/
+/.nodebrew/
+/.nvm/
+/.pyenv/
+/.pyenv-virtualenv/
+/.rbenv/
+/.vim/
+/.zsh-completions/
+/.zsh-syntax-highlighting/
+/bin/
+/common/
+/private/
+/scripts/
+/this/
+/tmp/
+/tmux-powerline/
+/tmux/
+/.bash_profile
+/.bashrc
+/.gitconfig
+/.gitignore
+/.gitignore_checker
+/.gitignore_global
+/.gitmodules
+/.globalrc
+/.inputrc
+/.lv
+/.npmrc
+/.screenrc
+/.tigrc
+/.tmux-powerlinerc
+/.tmux.conf
+/.vimrc
+/.zshrc
+/Makefile
+/README.md
+
+# バージョン管理ツール
+/.asdf/
+/.CocosCreator/
+/.Cocos/
+/.npm/
+/.git/
+/.goenv/
+/.nodenv/
+/.cocoapods/
+/.rbenv-plugins/
+
+# 不要アプリ、キャッシュ、セッション、等
+/Library/Application Support/CrashReporter/
+/Library/Saved Application State/
+/Library/Application Support/Notion/
+/Library/Application Support/Google/Chrome/Default/Sessions/
+/Library/Application Support/Google/Chrome/Default/Cache/
+/Library/Application Support/Firefox/Profiles/*/sessionstore*
+/Library/Application Support/Firefox/Profiles/*/cache*/
+/Library/Application Support/Slack/Cache/
+/Library/Application Support/Slack/Code Cache/
+/Library/Application Support/Code/Cache/
+/Library/Application Support/Code/CachedData/
+
+# Library
+/Library/Mail/V*/MailData/Envelope Index*
+/Library/Developer/Xcode/DerivedData/
+/Library/Developer/Xcode/Archives/
+/Library/Developer/CoreSimulator/Caches/
+/Library/Application Support/com.clipy-app.Clipy/
+/Library/Containers/
+/Library/Group Containers/
+
+# その他
+/.dartServer/
+/.pub-cache/
+/.vscode/
+/.kube/cache/
+/.docker/
+/.dropbox/
+/.android/
+/.gemini/
+/.npm-global/
+/.rd/
+/.Box_*
+
+# クラウドストレージ
+/Documents/
+/Desktop/
+/Library/CloudStorage/
+/Dropbox/
+/Google Drive/
+/OneDrive/
+/iCloud Drive/
+/Pictures/Photos Library.photoslibrary/
+/Library/Mobile Documents/
+
+##########
+
+# キャッシュ
+/Library/Caches/
+.cache/
+Cache/
+caches/
+CacheStorage/
+.bundle/cache/
+node_modules/.cache/
+# npm/nodeキャッシュ
+.node-gyp/
+# Python キャッシュ
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.tox/
+#
+
+# 一時ファイル
+.tmp/
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ログファイル
+*.log
+Library/Logs/
+logs/
+
+# Spotlightインデックス
+.Spotlight-V100/
+.fseventsd/
+
+# macOS固有のメタデータ
+.DS_Store
+.localized
+.DocumentRevisions-V100/
+.TemporaryItems/
+
+# Time Machine
+.MobileBackups/
+

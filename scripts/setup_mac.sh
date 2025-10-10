@@ -47,7 +47,7 @@ brew doctor
 brew update
 brew upgrade
 brew upgrade --cask
-brew install tmux gnu-sed mysql-client@8.4 tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash coreutils direnv composer java nodenv google-cloud-sdk asdf goenv
+brew install tmux gnu-sed mysql-client@8.4 tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash coreutils direnv composer java nodenv google-cloud-sdk asdf goenv rsync
 # for java
 sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 # homebrew cask

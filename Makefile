@@ -1,92 +1,89 @@
+.DEFAULT_GOAL := help
 
-setup:
+.PHONY: help
+help: ## ヘルプを表示
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+
+setup: ## 初回セットアップ（Mac環境）
 	bash ~/scripts/setup.sh
 	bash ~/scripts/setup_mac.sh
 #	make defaults  # 長らくメンテされていない
 #	make agree-apps
 	if [ -f ~/private/scripts/setup_private.sh ]; then bash ~/private/scripts/setup_private.sh ; fi
 
-setup-private:
-# installedを保存するくらい
+setup-private: ## プライベート設定のセットアップ
 	bash ~/private/scripts/setup_private.sh
 
-install:
+install: ## setupのエイリアス
 	make setup
 
-gitignore_checker:
+gitignore_checker: ## gitignoreをチェッカーモードに切り替え
 	ln -sf ~/.gitignore_checker ~/.gitignore
 
-mas-list:
+mas-list: ## Mac App Storeインストール済みアプリ一覧
 	cat ~/private/installedtools/*/*/mas | sort -n | uniq
 
-agree-apps:
+agree-apps: ## アプリの利用規約に同意
 	yes | bash ~/scripts/agreeApps.sh
 
-record-installed-tools:
+record-installed-tools: ## インストール済みツールを記録
 	bash ~/private/scripts/recordInstalledTools.sh
 
-defaults:
+defaults: ## macOSのデフォルト設定を適用
 	php ~/scripts/defaults/defaults.php
 	-php ~/scripts/defaults/ini.php
 
-defaults-dryrun:
+defaults-dryrun: ## デフォルト設定をドライラン
 	php ~/scripts/defaults/defaults.php --dry-run
 
-# privatee ,Libraryが直書きなの @todo;
-fetch:
+fetch: ## 全リポジトリ（~/、~/private、~/Library）をフェッチ
 	git -C ~/ fetch ; git -C ~/ st
 	git -C ~/private fetch ; git -C ~/private st
 	if [ -d ~/Library ]; then git -C ~/Library fetch ; git -C ~/Library st ; fi
 
-replace:
+replace: ## Sequel Ace設定のパスを短縮形に置換
 	@if [ ! -e /Users/m_ishikawa ]; then sudo mkdir -m 777 /Users/m_ishikawa ; ln -s /Users/masayuki.ishikawa/Dropbox /Users/m_ishikawa/ ; fi
 	@gsed -i -e "s/\/Users\/masayuki\.ishikawa\//\/Users\/m_ishikawa\//g" \
 		~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
 	git -C ~/Library diff
 
-pr:
+pr: ## 全リポジトリをpull rebase
 	git -C ~/ pr ; git -C ~/ st
 	git -C ~/private pr ; git -C ~/private st
 	if [ -d ~/Library ]; then git -C ~/Library pr ; git -C ~/Library st ; fi
 
-updates:
+updates: ## 全リポジトリを更新＆サブモジュール更新
 	sh ~/bin/updates
-# pull main or master
 	git submodule foreach 'case $$name in scripts/create_docker_laravel_project) git pull origin main ;; *) git pull origin master ;; esac'
 
-ruby-install-latest:
+ruby-install-latest: ## 最新のRubyをインストール
 	rbenv install -s `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
 	rbenv global `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
 	sudo gem update --system
 	sudo gem update
 
-# private/installedtoolsに全部置く場合
-set-ignore-sparse:
+set-ignore-sparse: ## private/installedtoolsを全て含めるモードに設定
 	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 	touch ~/this/.ignore-sparse
 	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 
-# private/installedtoolsに自分のしか置かない場合 (デフォルト)
-remove-ignore-sparse:
+remove-ignore-sparse: ## private/installedtoolsを自分のみ含めるモードに設定（デフォルト）
 	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 	rm -f ~/this/.ignore-sparse
 	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 
-# defaultsを実行 & アップデート する場合
-set-force-defaults:
+set-force-defaults: ## defaultsを実行＆アップデートするモードに設定
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 	touch ~/this/.force-defaults
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 
-# defaultsを実行 & アップデート しない場合 (デフォルト)
-remove-force-defaults:
+remove-force-defaults: ## defaultsを実行＆アップデートしないモードに設定（デフォルト）
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 	rm -f ~/this/.force-defaults
 	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
 
-
-# Claude Code設定改善コマンド（settings.json専用）
-claude-improve-settings:
+claude-improve-settings: ## 全プロジェクトからClaude Code権限を収集し~/.claude/settings.jsonを更新
 	@echo "Claude Codeプロジェクトを検索中..."
 	@projects=$$(find ~/git -name .claude 2>/dev/null); \
 	if [ -z "$$projects" ]; then \
@@ -134,8 +131,7 @@ claude-improve-settings:
 	echo ""; \
 	echo "settings.json の更新完了！"
 
-# Claude Code設定改善コマンド（CLAUDE.md専用）
-claude-improve-doc:
+claude-improve-doc: ## 全プロジェクトのCLAUDE.mdからグローバル設定候補を抽出
 	@echo "Claude Codeプロジェクトを検索中..."
 	@projects=$$(find ~/git -name .claude 2>/dev/null); \
 	if [ -z "$$projects" ]; then \
@@ -164,3 +160,6 @@ claude-improve-doc:
 	done; \
 	echo ""; \
 	echo "全プロジェクトでの実行完了！"
+
+migrate-data: ## 対話式データ移行ツール（旧Mac→新Mac）
+	bash ~/scripts/migrate_data.sh
