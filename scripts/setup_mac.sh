@@ -47,7 +47,17 @@ brew doctor
 brew update
 brew upgrade
 brew upgrade --cask
-brew install tmux gnu-sed mysql-client@8.4 tig wget emacs git colordiff global peco imagemagick telnet jq npm mas carthage git-lfs swiftlint ruby rbenv ruby-build awscli amazon-ecs-cli tree trash coreutils direnv composer java nodenv google-cloud-sdk asdf goenv rsync
+brew install \
+    tmux git tig git-lfs colordiff \
+    emacs gnu-sed global \
+    mysql-client@8.4 \
+    wget jq tree trash coreutils peco imagemagick telnet rsync \
+    ruby rbenv ruby-build composer \
+    nodenv npm \
+    java \
+    awscli amazon-ecs-cli google-cloud-sdk \
+    asdf direnv \
+    mas swiftlint
 # for java
 sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 # homebrew cask
@@ -116,33 +126,32 @@ echo mas upgrade
 timeout 300 mas upgrade
 
 echo mas install
-mas install 302584613 406056744 408981434 409183694 409201541 409203825 417375580 421131143 425424353 425955336 452695239 504544917 513610341 539883307 568494494 592704001 803453959 823766827 880001334 1295203466 462058435 462054704 462062816 937984704 1429033973 1168254295
-# 302584613 Kindle
-# 406056744 Evernote (7.7)
-# 408981434 iMovie (10.1.10)
-# 409183694 Keynote (8.3)
-# 409201541 Pages (7.3)
-# 409203825 Numbers (5.3)
-# 417375580 BetterSnapTool (1.9)
-# 421131143 MPlayerX (1.0.14)
-# 425424353 The Unarchiver (4.0.0)
-# 425955336 Skitch (2.8.2)
-# 452695239 QREncoder (1.5)
-# 504544917 Clear (1.1.7)
-# 513610341 Integrity (8.1.19)  QAリンクチェッカー
-# 539883307 LINE (5.12.0)
-# 568494494 Pocket (1.8.1)
-# 592704001 Photos Duplicate Cleaner
-# 803453959 Slack (3.3.3)
-# 823766827 OneDrive (18.214.1021)
-# 880001334 Reeder (3.2.1)
-# 1295203466 Microsoft Remote Desktop (10.2.4)
-# 462058435 Microsoft Excel
-# 462054704 Microsoft Word
-# 462062816 Microsoft PowerPoint
-# 937984704 amphetamine
-# 1429033973  RunCat                    (11.4)
-# 1168254295  AmorphousDiskMark  (4.0.1)
+mas install 302584613  # Kindle
+mas install 406056744  # Evernote (7.7)
+mas install 408981434  # iMovie (10.1.10)
+mas install 409183694  # Keynote (8.3)
+mas install 409201541  # Pages (7.3)
+mas install 409203825  # Numbers (5.3)
+mas install 417375580  # BetterSnapTool (1.9)
+mas install 421131143  # MPlayerX (1.0.14)
+mas install 425424353  # The Unarchiver (4.0.0)
+mas install 425955336  # Skitch (2.8.2)
+mas install 452695239  # QREncoder (1.5)
+mas install 504544917  # Clear (1.1.7)
+mas install 513610341  # Integrity (8.1.19)  QAリンクチェッカー
+mas install 539883307  # LINE (5.12.0)
+mas install 568494494  # Pocket (1.8.1)
+mas install 592704001  # Photos Duplicate Cleaner
+mas install 803453959  # Slack (3.3.3)
+mas install 823766827  # OneDrive (18.214.1021)
+mas install 880001334  # Reeder (3.2.1)
+mas install 1295203466  # Microsoft Remote Desktop (10.2.4)
+mas install 462058435  # Microsoft Excel
+mas install 462054704  # Microsoft Word
+mas install 462062816  # Microsoft PowerPoint
+mas install 937984704  # amphetamine
+mas install 1429033973  # RunCat (11.4)
+mas install 1168254295  # AmorphousDiskMark (4.0.1)
 
 # なくなった
 # 896934587 Soliton SecureBrowser Pro

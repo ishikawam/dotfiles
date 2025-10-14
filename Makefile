@@ -163,3 +163,17 @@ claude-improve-doc: ## 全プロジェクトのCLAUDE.mdからグローバル設
 
 migrate-data: ## 対話式データ移行ツール（旧Mac→新Mac）
 	bash ~/scripts/migrate_data.sh
+
+alfred-import-custom-search: ## Alfredにカスタムサーチをインポート
+	@echo "Alfredにカスタムサーチをインポート中..."
+	open "alfred://customsearch/alc/alc/ascii/nospace/http%3A%2F%2Feow.alc.co.jp%2Fsearch%3Fq%3D%7Bquery%7D"
+	open "alfred://customsearch/Confluence%20Search/confl/ascii/nospace/https%3A%2F%2Fconfluence.gree-office.net%2Fdosearchsite.action%3FqueryString%3D%7Bquery%7D"
+	open "alfred://customsearch/Google%20Drive%20Search/dri/ascii/nospace/https%3A%2F%2Fdrive.google.com%2Fa%2Fgree.co.jp%2F%23search%2F%7Bquery%7D"
+	open "alfred://customsearch/Evernote%20Search/ever/ascii/nospace/evernote%3A%2F%2Fsearch%2F%7Bquery%7D"
+	open "alfred://customsearch/emp/emp/utf8/nospace/https%3A%2F%2Femp-gree-office.appspot.com%2Femp"
+	open "alfred://customsearch/mis/mis/utf8/nospace/https%3A%2F%2Frefactoring.gree-dev.net%2Femployee%2Fsearch%3Fq%3D%7Bquery%7D"
+	open "alfred://customsearch/mis_old/mis_old/ascii/nospace/https%3A%2F%2Fworkflow.gree-office.net%2Fimart%2Fgree%2Femployee%2FemployeeSearch%2F%3FemployeeId%3D%26mailAddress%3D%26faceImage%3Dyes%26name%3D%7Bquery%7D%26search%3DSearch"
+	open "alfred://customsearch/Portal%20Search/po/utf8/nospace/https%3A%2F%2Fgreeoffice.sharepoint.com%2F_layouts%2F15%2Fsearch.aspx%2Fsiteall%3Fq%3D%7Bquery%7D"
+	open "alfred://customsearch/Portal/por/utf8/nospace/https%3A%2F%2Fgreeoffice.sharepoint.com%2F"
+	open "alfred://customsearch/%E7%BF%BB%E8%A8%B3/trans/utf8/nospace/http%3A%2F%2Ftranslate.google.co.jp%2F%23en%2Fja%2F%7Bquery%7D"
+	@echo "完了しました"

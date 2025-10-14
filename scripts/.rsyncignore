@@ -91,6 +91,7 @@
 /.npm-global/
 /.rd/
 /.Box_*
+/go/
 
 # クラウドストレージ
 /Documents/
