@@ -177,3 +177,142 @@ alfred-import-custom-search: ## Alfredにカスタムサーチをインポート
 	open "alfred://customsearch/Portal/por/utf8/nospace/https%3A%2F%2Fgreeoffice.sharepoint.com%2F"
 	open "alfred://customsearch/%E7%BF%BB%E8%A8%B3/trans/utf8/nospace/http%3A%2F%2Ftranslate.google.co.jp%2F%23en%2Fja%2F%7Bquery%7D"
 	@echo "完了しました"
+
+chrome-install-extensions: ## Chrome拡張機能のインストール
+	@echo "Chrome拡張機能のセットアップを行います"
+	@echo ""
+	@echo "以下の順で進行します："
+	@echo "  1. Chrome拡張機能をインストール"
+	@echo "  2. 各拡張機能の基本設定"
+	@echo "  3. 拡張機能の詳細設定"
+	@echo ""
+	@read -p "拡張機能のインストールページをブラウザで開きますか？ (y/N): " answer; \
+	if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+		echo ""; \
+		echo "1/8: Session Buddy"; \
+		open "https://chrome.google.com/webstore/detail/session-buddy/edacconmaakjimmfgnblocblbcdcpbko?hl=ja"; \
+		echo "2/8: Google Translate"; \
+		open "https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb"; \
+		echo "3/8: GoFullPage"; \
+		open "https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl"; \
+		echo "4/8: JSONView"; \
+		open "https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc"; \
+		echo "5/8: Quick Tabs"; \
+		open "https://chrome.google.com/webstore/detail/quick-tabs/jnjfeinjfmenlddahdjdmgpbokiacbbb"; \
+		echo "6/8: One Tab"; \
+		open "https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall"; \
+		echo "7/8: The Marvellous Suspender"; \
+		open "https://chrome.google.com/webstore/detail/the-marvellous-suspender/noogafoofpebimajpfpamcfhoaifemoa"; \
+		echo "8/8: Tampermonkey"; \
+		open "https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo"; \
+		echo ""; \
+		echo "全ての拡張機能のインストールページを開きました"; \
+		echo ""; \
+		echo "========================================="; \
+		read -p "ブラウザで全ての拡張機能のインストールが完了したらEnterキーを押してください..." dummy2; \
+	else \
+		echo "インストールをスキップしました"; \
+	fi
+	@echo ""
+	@read -p "次に各拡張機能の基本設定ページを開きますか？ (y/N): " answer; \
+	if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+		echo ""; \
+		echo "========================================"; \
+		echo "【各拡張機能の基本設定】chrome://extensions での設定"; \
+		echo "========================================"; \
+		echo ""; \
+		echo "以下の設定を行ってください："; \
+		echo ""; \
+		echo "■ Session Buddy"; \
+		echo "  - Allow in Incognito"; \
+		echo "  - Allow access to file URLs"; \
+		echo ""; \
+		echo "■ Google Translate"; \
+		echo "  - Allow in Incognito"; \
+		echo ""; \
+		echo "■ GoFullPage"; \
+		echo "  - Allow in Incognito"; \
+		echo ""; \
+		echo "■ JSONView"; \
+		echo "  - Allow in Incognito"; \
+		echo ""; \
+		echo "■ Quick Tabs"; \
+		echo "  - Allow in Incognito"; \
+		echo ""; \
+		echo "設定ページを開きます..."; \
+		echo ""; \
+		open -a "Google Chrome" "chrome://extensions/?id=edacconmaakjimmfgnblocblbcdcpbko"; \
+		open -a "Google Chrome" "chrome://extensions/?id=aapbdbdomjkkjkaonfhkkikfgjllcleb"; \
+		open -a "Google Chrome" "chrome://extensions/?id=fdpohaocaechififmbbbbbknoalclacl"; \
+		open -a "Google Chrome" "chrome://extensions/?id=chklaanhfefbnpoihckbnefhakgolnmc"; \
+		open -a "Google Chrome" "chrome://extensions/?id=jnjfeinjfmenlddahdjdmgpbokiacbbb"; \
+		echo ""; \
+		read -p "基本設定が完了したらEnterキーを押してください..." dummy3; \
+	else \
+		echo "基本設定をスキップしました"; \
+	fi
+	@echo ""
+	@read -p "次に拡張機能の詳細設定ページを開きますか？ (y/N): " answer; \
+	if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+		echo ""; \
+		echo "========================================"; \
+		echo "【拡張機能の詳細設定】"; \
+		echo "========================================"; \
+		echo ""; \
+		echo "以下の設定を行ってください："; \
+		echo ""; \
+		echo "■ Google Translate"; \
+		echo "  - 日本語に設定"; \
+		echo ""; \
+		echo "■ GoFullPage"; \
+		echo "  - Directory: ~/Downloads/GoFullPage/"; \
+		echo "  - Auto-download files をチェック (で、タブを移動させない"; \
+		echo ""; \
+		echo "■ Quick Tabs"; \
+		echo "  - Perform RegEx Search"; \
+		echo "  - Always search URLs をオン"; \
+		echo "  - Automatically include bookmarks in search をオフ"; \
+		echo "  - Apply changes"; \
+		echo ""; \
+		echo "■ One Tab"; \
+		echo "  - URL display:"; \
+		echo "      Abbreviated"; \
+		echo "  - Automatic action when clicking to open a tab:"; \
+		echo "      Open the tab, and move it to trash"; \
+		echo "  - Automatic action when clicking to open a group of tabs:"; \
+		echo "      Open the tabs, and move the group to trash"; \
+		echo "  - Right-click inside a web page to access the OneTab context menu:"; \
+		echo "      Disabled"; \
+		echo ""; \
+		echo "■ The Marvellous Suspender"; \
+		echo "  - Automatic tab suspension"; \
+		echo "      Automatically suspend tabs after: 1 hour"; \
+		echo "      Never suspend pinned tabs (チェック)"; \
+		echo "      Never suspend tabs that contain unsaved form inputs (チェック)"; \
+		echo "      Never suspend tabs that are playing audio (チェック)"; \
+		echo "      Never suspend active tab in each window: オフ"; \
+		echo "  - Suspended tabs"; \
+		echo "      Automatically unsuspend tab when it is viewed (チェック)"; \
+		echo "      Apply Chrome's built-in memory-saving when suspending (チェック)"; \
+		echo "      Screen capturing: Capture top of screen only"; \
+		echo "  - Other"; \
+		echo "      Add The Marvellous Suspender to right-click context menu: オフ"; \
+		echo "      Sync settings with your Chrome profile: on"; \
+		echo ""; \
+		echo "■ Tampermonkey"; \
+		echo "  - Config mode: Advanced"; \
+		echo "  - Userscript Sync: Dropboxを有効化"; \
+		echo ""; \
+		echo "設定ページを開きます..."; \
+		echo ""; \
+		open -a "Google Chrome" "chrome-extension://aapbdbdomjkkjkaonfhkkikfgjllcleb/options.html"; \
+		open -a "Google Chrome" "chrome-extension://fdpohaocaechififmbbbbbknoalclacl/options.html"; \
+		open -a "Google Chrome" "chrome-extension://jnjfeinjfmenlddahdjdmgpbokiacbbb/options.html"; \
+		open -a "Google Chrome" "chrome-extension://chphlpgkkbolifaimnlloiipkdnihall/options.html"; \
+		open -a "Google Chrome" "chrome-extension://noogafoofpebimajpfpamcfhoaifemoa/options.html"; \
+		open -a "Google Chrome" "chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=settings"; \
+		echo ""; \
+		echo "全ての設定ページを開きました"; \
+	else \
+		echo "詳細設定をスキップしました"; \
+	fi
