@@ -75,6 +75,7 @@
 /.claude/history.jsonl
 /.claude/.update.lock
 /.claude/debug/
+/.claude/plugins/
 
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
