@@ -10,6 +10,7 @@ setup: ## 初回セットアップ（Mac環境）
 	bash ~/scripts/setup_mac.sh
 #	make defaults  # 長らくメンテされていない
 #	make agree-apps
+	make setup-gh-hosts
 	if [ -f ~/private/scripts/setup_private.sh ]; then bash ~/private/scripts/setup_private.sh ; fi
 
 setup-private: ## プライベート設定のセットアップ
@@ -20,6 +21,23 @@ install: ## setupのエイリアス
 
 gitignore_checker: ## gitignoreをチェッカーモードに切り替え
 	ln -sf ~/.gitignore_checker ~/.gitignore
+
+setup-gh-hosts: ## GitHub CLI hosts.ymlをホスト名に応じて切り替え
+	@echo "Setting up GitHub CLI hosts.yml based on hostname..."
+	@hostname=$$(hostname); \
+	if [[ $$hostname =~ ^ishikawa- ]]; then \
+		echo "Hostname starts with 'ishikawa-': Using hosts.yml.ishikawam"; \
+		cd ~/.config/gh && \
+		rm -f hosts.yml && \
+		ln -s hosts.yml.ishikawam hosts.yml; \
+	else \
+		echo "Hostname does not start with 'ishikawa-': Using hosts.yml.masayuk-ishikaw"; \
+		cd ~/.config/gh && \
+		rm -f hosts.yml && \
+		ln -s hosts.yml.masayuk-ishikaw hosts.yml; \
+	fi
+	@echo "Current hosts.yml symlink:"
+	@ls -l ~/.config/gh/hosts.yml
 
 mas-list: ## Mac App Storeインストール済みアプリ一覧
 	cat ~/private/installedtools/*/*/mas | sort -n | uniq
