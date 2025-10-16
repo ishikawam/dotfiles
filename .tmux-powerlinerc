@@ -12,9 +12,9 @@
 # M.Ishikawa
 	export TMUX_POWERLINE_THEME="mytheme"
 #	export TMUX_POWERLINE_THEME="default"
-	# Overlay dirctory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
+	# Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_THEMES=""
-	# Overlay dirctory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
+	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_SEGMENTS=""
 # }
 
@@ -32,6 +32,7 @@
 
 # earthquake.sh {
 	# The data provider to use. Currently only "goo" is supported.
+	# NOTE: This provider may no longer be available. Check if the service is still active.
 	export TMUX_POWERLINE_SEG_EARTHQUAKE_DATA_PROVIDER="goo"
 	# How often to update the earthquake data in seconds.
 	# Note: This is not an early warning detector, use this
@@ -59,7 +60,7 @@
 	## Gmail
 	# Enter your Gmail username here WITH OUT @gmail.com.( OR @domain)
 	export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_USERNAME=""
-	# Google password. Recomenned to use application specific password (https://accounts.google.com/b/0/IssuedAuthSubTokens) Leave this empty to get password from OS X keychain.
+	# Google password. Recommended to use application specific password (https://accounts.google.com/b/0/IssuedAuthSubTokens) Leave this empty to get password from OS X keychain.
 	# For OSX users : MAKE SURE that you add a key to the keychain in the format as follows
 	# Keychain Item name : http://<value-you-fill-in-server-variable-below>
 	# Account name : <username-below>@<server-below>
@@ -73,15 +74,15 @@
 	
 	## Maildir
 	# Path to the maildir to check.
-	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILDIR_INBOX="/home/masayuki-ishikawa/.mail/inbox/new"
+	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILDIR_INBOX="${HOME}/.mail/inbox/new"
 	
 	## mbox
 	# Path to the mbox to check.
-	export TMUX_POWERLINE_SEG_MAILCOUNT_MBOX_INBOX="/var/mail/masayuki-ishikawa"
+	export TMUX_POWERLINE_SEG_MAILCOUNT_MBOX_INBOX="/var/mail/${USER}"
 	
 	## mailcheck
 	# Optional path to mailcheckrc
-	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILCHECKRC="/home/masayuki-ishikawa/.mailcheckrc"
+	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILCHECKRC="${HOME}/.mailcheckrc"
 # }
 
 # now_playing.sh {
@@ -121,6 +122,8 @@
 
 # weather.sh {
 	# The data provider to use. Currently only "yahoo" is supported.
+	# WARNING: Yahoo Weather API was discontinued in 2019. This may no longer work.
+	# Consider using OpenWeatherMap or other alternatives.
 	export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="yahoo"
 	# What unit to use. Can be any of {c,f,k}.
 	export TMUX_POWERLINE_SEG_WEATHER_UNIT="c"
