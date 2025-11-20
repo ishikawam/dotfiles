@@ -334,3 +334,41 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	else \
 		echo "詳細設定をスキップしました"; \
 	fi
+
+disk-usage: ## ディスク使用状況を表示
+	@echo "=== ディスク使用状況 ==="
+	df -h /
+
+clean-cache: ## 全てのキャッシュをクリーンアップ
+	@echo "=== 全てのキャッシュをクリーンアップします ==="
+	@echo ""
+	@echo "Homebrewキャッシュをクリーンアップ中..."
+	-brew cleanup -s
+	@echo ""
+	@echo "npmキャッシュをクリーンアップ中..."
+	-npm cache clean --force
+	@echo "yarnキャッシュをクリーンアップ中..."
+	-yarn cache clean
+	@echo ""
+	@echo "pipキャッシュをクリーンアップ中..."
+	-pip cache purge
+	-pip3 cache purge
+	@echo ""
+	@echo "Composerキャッシュをクリーンアップ中..."
+	-composer clear-cache
+	@echo ""
+	@echo "Ruby gemキャッシュをクリーンアップ中..."
+	-gem cleanup
+	@echo ""
+	@echo "Dockerキャッシュをクリーンアップ中..."
+	-docker system prune -af --volumes
+	@echo ""
+	@echo "Xcodeキャッシュをクリーンアップ中..."
+	-rm -rf ~/Library/Developer/Xcode/DerivedData/*
+	@echo ""
+	@echo "macOSシステムキャッシュをクリーンアップ中..."
+	-find ~/Library/Caches -type f -atime +30 -delete
+	@echo ""
+	@echo "=== クリーンアップ完了 ==="
+	@echo ""
+	@make disk-usage
