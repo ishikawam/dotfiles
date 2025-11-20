@@ -358,7 +358,7 @@ clean-cache: ## 全てのキャッシュをクリーンアップ
 	-composer clear-cache
 	@echo ""
 	@echo "Ruby gemキャッシュをクリーンアップ中..."
-	-gem cleanup
+	-sudo gem cleanup
 	@echo ""
 	@echo "Dockerキャッシュをクリーンアップ中..."
 	-docker system prune -af --volumes
