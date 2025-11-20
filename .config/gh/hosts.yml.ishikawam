@@ -1,5 +1,5 @@
 github.com:
     user: ishikawam
-    git_protocol: ssh
+    git_protocol: https
     users:
         ishikawam:
