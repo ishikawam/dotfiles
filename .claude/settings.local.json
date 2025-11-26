@@ -3,7 +3,8 @@
     "allow": [
       "Bash(python3:*)",
       "Bash(./bin/claude-log:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(ssh-add:*)"
     ],
     "deny": []
   }
