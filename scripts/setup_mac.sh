@@ -113,8 +113,8 @@ head "1.1. asdf"
 # asdf plugin list all
 # nodenv, rbenv, pyenv, と共存する。> .node-versionとかを見てくれないので
 
-asdf plugin add golang nodejs
-
+asdf plugin add golang
+asdf plugin add nodejs
 
 
 ######## mas ##################################################################
@@ -123,35 +123,38 @@ head "2. mas = mac app store"
 
 # mas = mac app store
 echo mas upgrade
-timeout 300 mas upgrade
+mas upgrade
 
 echo mas install
-mas install 302584613  # Kindle
-mas install 406056744  # Evernote (7.7)
-mas install 408981434  # iMovie (10.1.10)
-mas install 409183694  # Keynote (8.3)
-mas install 409201541  # Pages (7.3)
-mas install 409203825  # Numbers (5.3)
-mas install 417375580  # BetterSnapTool (1.9)
-mas install 421131143  # MPlayerX (1.0.14)
-mas install 425424353  # The Unarchiver (4.0.0)
-mas install 425955336  # Skitch (2.8.2)
-mas install 452695239  # QREncoder (1.5)
-mas install 504544917  # Clear (1.1.7)
-mas install 513610341  # Integrity (8.1.19)  QAリンクチェッカー
-mas install 539883307  # LINE (5.12.0)
-mas install 568494494  # Pocket (1.8.1)
-mas install 592704001  # Photos Duplicate Cleaner
-mas install 803453959  # Slack (3.3.3)
-mas install 823766827  # OneDrive (18.214.1021)
-mas install 880001334  # Reeder (3.2.1)
-mas install 1295203466  # Microsoft Remote Desktop (10.2.4)
-mas install 462058435  # Microsoft Excel
-mas install 462054704  # Microsoft Word
-mas install 462062816  # Microsoft PowerPoint
-mas install 937984704  # amphetamine
-mas install 1429033973  # RunCat (11.4)
-mas install 1168254295  # AmorphousDiskMark (4.0.1)
+mas_apps=(
+    302584613   # Kindle
+    406056744   # Evernote (7.7)
+    408981434   # iMovie (10.1.10)
+    409183694   # Keynote (8.3)
+    409201541   # Pages (7.3)
+    409203825   # Numbers (5.3)
+    417375580   # BetterSnapTool (1.9)
+    421131143   # MPlayerX (1.0.14)
+    425424353   # The Unarchiver (4.0.0)
+    425955336   # Skitch (2.8.2)
+    452695239   # QREncoder (1.5)
+    504544917   # Clear (1.1.7)
+    513610341   # Integrity (8.1.19)  QAリンクチェッカー
+    539883307   # LINE (5.12.0)
+    568494494   # Pocket (1.8.1)
+    592704001   # Photos Duplicate Cleaner
+    803453959   # Slack (3.3.3)
+    823766827   # OneDrive (18.214.1021)
+    880001334   # Reeder (3.2.1)
+    1295203466  # Microsoft Remote Desktop (10.2.4)
+    462058435   # Microsoft Excel
+    462054704   # Microsoft Word
+    462062816   # Microsoft PowerPoint
+    937984704   # amphetamine
+    1429033973  # RunCat (11.4)
+    1168254295  # AmorphousDiskMark (4.0.1)
+)
+mas install "${mas_apps[@]}"
 
 # なくなった
 # 896934587 Soliton SecureBrowser Pro
