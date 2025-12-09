@@ -372,3 +372,35 @@ clean-cache: ## 全てのキャッシュをクリーンアップ
 	@echo "=== クリーンアップ完了 ==="
 	@echo ""
 	@make disk-usage
+
+path: ## $PATHを見やすく表示
+	@echo "$$PATH" | tr ':' '\n' | awk -F/ ' \
+		{ \
+			if ($$1 == ".") { \
+				prefix = "./"; \
+			} else { \
+				prefix = "/" $$2 "/"; \
+			} \
+			items[prefix, ++count[prefix]] = $$0; \
+			if (!seen[prefix]++) order[++n] = prefix; \
+		} \
+		END { \
+			print "=== PATH ===\n"; \
+			for (i=1; i<=n; i++) { \
+				p = order[i]; \
+				printf "\033[36m%s\033[0m\n", p; \
+				for (j=1; j<=count[p]; j++) { \
+					for (k=j+1; k<=count[p]; k++) { \
+						if (items[p,j] > items[p,k]) { \
+							tmp = items[p,j]; \
+							items[p,j] = items[p,k]; \
+							items[p,k] = tmp; \
+						} \
+					} \
+				} \
+				for (j=1; j<=count[p]; j++) { \
+					printf "  %s\n", items[p,j]; \
+				} \
+				print ""; \
+			} \
+		}'

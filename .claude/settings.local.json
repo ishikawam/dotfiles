@@ -5,7 +5,17 @@
       "Bash(./bin/claude-log:*)",
       "Bash(timeout:*)",
       "Bash(ssh-add:*)",
-      "Bash(comm:*)"
+      "Bash(comm:*)",
+      "Bash(system_profiler:*)",
+      "Bash(brew list:*)",
+      "Bash(displayplacer:*)",
+      "Bash(betterdisplaycli:*)",
+      "Bash(open:*)",
+      "Bash(brew search:*)",
+      "Bash(xattr:*)",
+      "WebFetch(domain:dev.classmethod.jp)",
+      "Bash(ioreg:*)",
+      "Bash(xxd:*)"
     ],
     "deny": []
   }
