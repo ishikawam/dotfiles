@@ -283,10 +283,12 @@ fi
 
 # Xcode821.app とか複数バージョン入れている場合にはそのなかで最新のを見に行く
 xcode=`ls /Applications/ 2>/dev/null | grep "Xcode[0-9]" | tail -1`
-if [ -n "$xcode" ]; then
+if [ -n "$xcode" -a -d "/Applications/$xcode" ]; then
     export DEVELOPER_DIR=/Applications/$xcode/Contents/Developer
 elif [ -d /Applications/Xcode.app ]; then
     export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+elif [ -d /Library/Developer/CommandLineTools ]; then
+    export DEVELOPER_DIR=/Library/Developer/CommandLineTools
 fi
 
 

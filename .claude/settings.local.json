@@ -32,7 +32,8 @@
       "Bash(source ~/common/.shrc)",
       "Bash(bash -c:*)",
       "Bash(goenv rehash:*)",
-      "Bash(goenv --version:*)"
+      "Bash(goenv --version:*)",
+      "Bash(xcode-select:*)"
     ],
     "deny": []
   }
