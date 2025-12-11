@@ -15,7 +15,24 @@
       "Bash(xattr:*)",
       "WebFetch(domain:dev.classmethod.jp)",
       "Bash(ioreg:*)",
-      "Bash(xxd:*)"
+      "Bash(xxd:*)",
+      "Bash(goenv root:*)",
+      "Bash(zsh:*)",
+      "Bash(goenv versions:*)",
+      "Bash(asdf plugin list:*)",
+      "Bash(go version:*)",
+      "Bash(asdf list:*)",
+      "Bash(brew list:*)",
+      "Bash(command goenv root:*)",
+      "Bash(command -v:*)",
+      "Bash(/opt/homebrew/bin/goenv:*)",
+      "Bash(/usr/local/bin/goenv:*)",
+      "Bash(goenv install:*)",
+      "Bash(goenv init:*)",
+      "Bash(source ~/common/.shrc)",
+      "Bash(bash -c:*)",
+      "Bash(goenv rehash:*)",
+      "Bash(goenv --version:*)"
     ],
     "deny": []
   }

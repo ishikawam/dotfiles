@@ -64,6 +64,15 @@ fi
 # dockerの設定
 DOCKER_HOST=tcp://localhost:4243
 
+##################################################
+# golang
+# goenvとasdfを共存
+
+export GOENV_ROOT=$HOME/.goenv
+if [ -d $GOENV_ROOT ]; then
+    PATH=$GOENV_ROOT/shims:$GOENV_ROOT/bin:$PATH
+fi
+
 # asdf
 if [ -f ${BREW_OPT}/asdf/libexec/asdf.sh ]; then
     \. ${BREW_OPT}/asdf/libexec/asdf.sh
@@ -211,15 +220,6 @@ fi
 
 eval "$(rbenv init -)"
 
-
-##################################################
-# goenv golang
-
-export GOENV_ROOT=$HOME/.goenv
-PATH=$GOENV_ROOT/bin:$PATH
-if [ "`goenv --version 2>/dev/null`" ]; then
-    eval "$(goenv init -)"
-fi
 
 ##################################################
 # node
