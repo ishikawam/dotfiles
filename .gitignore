@@ -48,6 +48,7 @@
 /.config/jgit
 /.config/github-copilot
 /.config/flutter/
+/.config/cagent/
 
 !/tmux-powerline
 !/.tmux-powerlinerc
@@ -77,6 +78,7 @@
 /.claude/debug/
 /.claude/plugins/
 /.claude/stats-cache.json
+/.claude/plans/
 
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。

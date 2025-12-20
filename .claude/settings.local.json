@@ -33,7 +33,8 @@
       "Bash(bash -c:*)",
       "Bash(goenv rehash:*)",
       "Bash(goenv --version:*)",
-      "Bash(xcode-select:*)"
+      "Bash(xcode-select:*)",
+      "Bash(brew update:*)"
     ],
     "deny": []
   }
