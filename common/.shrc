@@ -338,6 +338,8 @@ WATCHFMT="%(a:${fg[blue]}Hello %n [%m] [%t]:${fg[red]}Bye %n [%m] [%t])"
 ##################################################
 # private shell
 
+ssh-add
+
 if [ -f ~/private/.shrc ]; then
     source ~/private/.shrc
 fi
@@ -345,8 +347,6 @@ fi
 if [ -f ~/this/.shrc ]; then
     source ~/this/.shrc
 fi
-
-ssh-add
 
 # tmuxでssh-agentが切れる問題対処
 agent="$HOME/.ssh/agent"
