@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# @todo; これ見直そう。。sudo使うのは分離。実行するかどうかは設定ファイルみて個別で判定したい。npmもやっちゃダメな気がするけどどうかな、-gだといいっていう運用にすればいいかも
+# @todo; これ見直そう。。sudo使うのは分離。実行するかどうかは設定ファイルみて個別で判定したい。
 
 has_cmd() {
     command -v "$1" >/dev/null 2>&1
@@ -41,10 +41,27 @@ if has_cmd brew; then
     brew upgrade --cask
 fi
 
+# nodenv
+if has_cmd nodenv; then
+    echo "# nodenv"
+    NODE_VERSION=$(nodenv install -L | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | awk -F. '$1 % 2 == 0' | sort -V | tail -1)
+    CURRENT_GLOBAL=$(nodenv global)
+    if [ "$NODE_VERSION" != "$CURRENT_GLOBAL" ]; then
+        echo "Installing Node.js $NODE_VERSION..."
+        nodenv install "$NODE_VERSION"
+        nodenv global "$NODE_VERSION"
+        nodenv rehash
+        echo "Node.js $NODE_VERSION has been installed and set as global"
+    else
+        echo "Node.js $NODE_VERSION is already global"
+    fi
+fi
+
 # npm
 if has_cmd npm; then
     echo "# npm"
-    npm -g update
+    NODENV_VERSION=$(nodenv global) npm update -g
+    nodenv rehash
 fi
 
 # # emacs cask

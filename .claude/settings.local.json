@@ -34,7 +34,11 @@
       "Bash(goenv rehash:*)",
       "Bash(goenv --version:*)",
       "Bash(xcode-select:*)",
-      "Bash(brew update:*)"
+      "Bash(brew update:*)",
+      "Bash(diskutil apfs list:*)",
+      "Bash(diskutil info:*)",
+      "Bash(npm help:*)",
+      "Bash(du -sh:*)"
     ],
     "deny": []
   }

@@ -24,7 +24,7 @@ head "### Setup Mac ###"
 
 ######## mac xcode ##################################################################
 
-head "0. xcode"
+head "0. xcode-select"
 
 if [ ! "$SSH_CLIENT" ]; then
     # mac端末上なら実行
@@ -59,7 +59,9 @@ brew install \
     asdf direnv \
     mas swiftlint
 # for java
-sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+if [ -d "$(brew --prefix)/opt/openjdk/libexec/openjdk.jdk" ]; then
+    sudo ln -sfn "$(brew --prefix)/opt/openjdk/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk.jdk
+fi
 # homebrew cask
 # brew caskはなくなった。2021
 #brew cask upgrade
@@ -86,7 +88,7 @@ array=(
     # language-switcher  # ダウンロードできない？もう不要になった（OS標準で言語をアプリごとに変えれるようになった）
     # 任意
     # android-studio dnsmasq java
-    messenger
+    # messenger  2025/12 アプリ版終了
     bartender
 )
 brewcaskls=`brew ls`
@@ -134,18 +136,13 @@ mas_apps=(
     409201541   # Pages (7.3)
     409203825   # Numbers (5.3)
     417375580   # BetterSnapTool (1.9)
-    421131143   # MPlayerX (1.0.14)
     425424353   # The Unarchiver (4.0.0)
     425955336   # Skitch (2.8.2)
-    452695239   # QREncoder (1.5)
-    504544917   # Clear (1.1.7)
     513610341   # Integrity (8.1.19)  QAリンクチェッカー
     539883307   # LINE (5.12.0)
-    568494494   # Pocket (1.8.1)
     592704001   # Photos Duplicate Cleaner
     803453959   # Slack (3.3.3)
     823766827   # OneDrive (18.214.1021)
-    880001334   # Reeder (3.2.1)
     1295203466  # Microsoft Remote Desktop (10.2.4)
     462058435   # Microsoft Excel
     462054704   # Microsoft Word
@@ -163,6 +160,11 @@ mas install "${mas_apps[@]}"
 # 562172072 SongTweeter (2.0)
 # 715768417 Microsoft Remote Desktop (8.0.30030)
 # 557168941 Tweetbot (2.5.8)
+# 421131143 MPlayerX (1.0.14)
+# 452695239 QREncoder (1.5)
+# 504544917 Clear (1.1.7)
+# 568494494 Pocket (1.8.1)
+# 880001334 Reeder (3.2.1)
 
 # 必須ではない
 # 414030210 LimeChat (2.43)
@@ -175,12 +177,6 @@ mas install "${mas_apps[@]}"
 # 497799835 Xcode 自分で管理
 
 #    sudo xcodebuild -license
-
-# xcode
-# @todo; もっと早く入れたい
-if [ ! -e /Applications/Xcode* ]; then
-    mas install 497799835
-fi
 
 ######## hostname mac ##################################################################
 
@@ -228,10 +224,10 @@ fi
 
 head "7. other tools"
 
-# claude code
+# claude code, gemini cli, ccusage
 npm install -g @anthropic-ai/claude-code
-# gemini cli
 npm install -g @google/gemini-cli
+npm install -g ccusage
 
 
 ######## done ##################################################################

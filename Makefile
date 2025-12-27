@@ -81,6 +81,105 @@ ruby-install-latest: ## 最新のRubyをインストール
 	sudo gem update --system
 	sudo gem update
 
+clean: ## キャッシュと未使用Node.jsを削除
+	$(MAKE) clean-cache
+	$(MAKE) clean-unused-node
+
+clean-cache: ## 全てのキャッシュをクリーンアップ
+	@echo "=== 全てのキャッシュをクリーンアップします ==="
+	@echo ""
+	@echo "Homebrewキャッシュをクリーンアップ中..."
+	-brew cleanup -s
+	@echo ""
+	@echo "npmキャッシュをクリーンアップ中..."
+	-npm cache clean --force
+	@echo "yarnキャッシュをクリーンアップ中..."
+	-yarn cache clean
+	@echo ""
+	@echo "pipキャッシュをクリーンアップ中..."
+	-pip cache purge
+	-pip3 cache purge
+	@echo ""
+	@echo "Composerキャッシュをクリーンアップ中..."
+	-composer clear-cache
+	@echo ""
+	@echo "Ruby gemキャッシュをクリーンアップ中..."
+	-sudo gem cleanup
+	@echo ""
+	@echo "Dockerキャッシュをクリーンアップ中..."
+	-docker system prune -af --volumes
+	@echo ""
+	@echo "Xcodeキャッシュをクリーンアップ中..."
+	-rm -rf ~/Library/Developer/Xcode/DerivedData/*
+	@echo ""
+	@echo "macOSシステムキャッシュをクリーンアップ中..."
+	-find ~/Library/Caches -type f -atime +30 -delete
+	@echo ""
+	@echo "=== クリーンアップ完了 ==="
+	@echo ""
+	@make disk-usage
+
+clean-unused-node: ## 未使用のNode.jsバージョンを削除
+	@echo "=== 使用中のバージョン ===" && \
+	GLOBAL_VER=$$(nodenv global) && \
+	echo "global: $$GLOBAL_VER" && \
+	echo "projects:" && \
+	USED_VERS="" && \
+	INVALID_FILES="" && \
+	SEEN_VERS="" && \
+	for f in $$(find ~/git -name ".node-version" 2>/dev/null | sort); do \
+		content=$$(cat "$$f" | tr -d '\n\r') && \
+		path=$$(dirname "$$f" | sed "s|$$HOME/git/||")/ && \
+		if echo "$$content" | grep -qE '^v?[0-9]+\.[0-9]+\.[0-9]+$$'; then \
+			ver=$$(echo "$$content" | sed 's/^v//') && \
+			if ! echo "$$SEEN_VERS" | grep -qw "$$ver"; then \
+				echo "  $$ver  \033[90m$$path\033[0m" && \
+				SEEN_VERS="$$SEEN_VERS $$ver"; \
+			fi && \
+			USED_VERS="$$USED_VERS $$ver"; \
+		elif echo "$$content" | grep -qE '^v?[0-9]+$$'; then \
+			if ! echo "$$SEEN_VERS" | grep -qw "$$content"; then \
+				echo "  $$content  \033[90m$$path\033[0m" && \
+				SEEN_VERS="$$SEEN_VERS $$content"; \
+			fi && \
+			USED_VERS="$$USED_VERS $$content"; \
+		else \
+			INVALID_FILES="$$INVALID_FILES\n  \033[31m$$content\033[0m  \033[90m$$path\033[0m"; \
+		fi; \
+	done && \
+	if [ -n "$$INVALID_FILES" ]; then \
+		echo "" && \
+		echo "=== 不正な.node-version ===" && \
+		printf "$$INVALID_FILES\n"; \
+	fi && \
+	echo "" && \
+	echo "=== 削除対象 ===" && \
+	UNUSED="" && \
+	for ver in $$(ls ~/.nodenv/versions 2>/dev/null); do \
+		if [ "$$ver" != "$$GLOBAL_VER" ] && ! echo "$$USED_VERS" | grep -qw "$$ver"; then \
+			size=$$(du -sh ~/.nodenv/versions/$$ver | cut -f1) && \
+			echo "  $$ver ($$size)" && \
+			UNUSED="$$UNUSED $$ver"; \
+		fi; \
+	done && \
+	if [ -z "$$UNUSED" ]; then \
+		echo "  なし" && \
+		echo "" && \
+		echo "削除対象がありません"; \
+	else \
+		echo "" && \
+		read -p "これらを削除しますか？ (y/N): " answer && \
+		if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+			for ver in $$UNUSED; do \
+				echo "Removing $$ver..." && \
+				rm -rf ~/.nodenv/versions/$$ver; \
+			done && \
+			echo "Done."; \
+		else \
+			echo "キャンセルしました"; \
+		fi; \
+	fi
+
 set-ignore-sparse: ## private/installedtoolsを全て含めるモードに設定
 	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
 	touch ~/this/.ignore-sparse
@@ -337,41 +436,46 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 
 disk-usage: ## ディスク使用状況を表示
 	@echo "=== ディスク使用状況 ==="
-	df -h /
-
-clean-cache: ## 全てのキャッシュをクリーンアップ
-	@echo "=== 全てのキャッシュをクリーンアップします ==="
 	@echo ""
-	@echo "Homebrewキャッシュをクリーンアップ中..."
-	-brew cleanup -s
-	@echo ""
-	@echo "npmキャッシュをクリーンアップ中..."
-	-npm cache clean --force
-	@echo "yarnキャッシュをクリーンアップ中..."
-	-yarn cache clean
-	@echo ""
-	@echo "pipキャッシュをクリーンアップ中..."
-	-pip cache purge
-	-pip3 cache purge
-	@echo ""
-	@echo "Composerキャッシュをクリーンアップ中..."
-	-composer clear-cache
-	@echo ""
-	@echo "Ruby gemキャッシュをクリーンアップ中..."
-	-sudo gem cleanup
-	@echo ""
-	@echo "Dockerキャッシュをクリーンアップ中..."
-	-docker system prune -af --volumes
-	@echo ""
-	@echo "Xcodeキャッシュをクリーンアップ中..."
-	-rm -rf ~/Library/Developer/Xcode/DerivedData/*
-	@echo ""
-	@echo "macOSシステムキャッシュをクリーンアップ中..."
-	-find ~/Library/Caches -type f -atime +30 -delete
-	@echo ""
-	@echo "=== クリーンアップ完了 ==="
-	@echo ""
-	@make disk-usage
+	@CONTAINER=$$(diskutil info / | awk '/APFS Container:/ {print $$3}') && \
+	diskutil apfs list $$CONTAINER | awk ' \
+		/Size \(Capacity Ceiling\):/ { total = $$4 / 1024 / 1024 / 1024 } \
+		/Capacity In Use By Volumes:/ { \
+			used = $$6 / 1024 / 1024 / 1024; \
+			match($$0, /\([0-9.]+% used\)/); \
+			used_pct = substr($$0, RSTART+1, RLENGTH-2); \
+		} \
+		/Capacity Not Allocated:/ { \
+			free = $$4 / 1024 / 1024 / 1024; \
+			match($$0, /\([0-9.]+% free\)/); \
+			free_pct = substr($$0, RSTART+1, RLENGTH-2); \
+		} \
+		END { \
+			printf "総容量:   %6.1f GB\n", total; \
+			printf "使用中:   %6.1f GB  (%s)\n", used, used_pct; \
+			printf "空き:     %6.1f GB  (%s)\n", free, free_pct; \
+			print ""; \
+			bar_width = 40; \
+			used_blocks = int(used / total * bar_width); \
+			printf "["; \
+			for (i = 0; i < used_blocks; i++) printf "█"; \
+			for (i = used_blocks; i < bar_width; i++) printf "░"; \
+			printf "]\n"; \
+		}' && \
+	echo "" && \
+	echo "--- ボリューム別 ---" && \
+	diskutil apfs list $$CONTAINER | awk ' \
+		/Name:/ { \
+			match($$0, /Name:[[:space:]]+[^(]+/); \
+			name = substr($$0, RSTART+5, RLENGTH-5); \
+			gsub(/^[[:space:]]+|[[:space:]]+$$/, "", name); \
+		} \
+		/Capacity Consumed:/ { \
+			match($$0, /[0-9]+ B/); \
+			bytes = substr($$0, RSTART, RLENGTH-2); \
+			size_gb = bytes / 1024 / 1024 / 1024; \
+			printf "  %-14s %6.1f GB\n", name, size_gb; \
+		}'
 
 path: ## $PATHを見やすく表示
 	@echo "$$PATH" | tr ':' '\n' | awk -F/ ' \

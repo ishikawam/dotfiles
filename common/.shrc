@@ -264,6 +264,11 @@ PATH=./node_modules/.bin:$PATH
 alias npmls='npm ls | grep -v "^ \|│" | sed -e "s/^.* //g"'
 alias npmgls='npm ls -g | grep -v "^ \|│" | sed -e "s/^.* //g"'
 
+# nodenv globalでインストールしたCLIツールを、.node-versionのあるディレクトリでも使う
+alias claude='NODENV_VERSION=$(nodenv global) claude'
+alias gemini='NODENV_VERSION=$(nodenv global) gemini'
+alias ccusage='NODENV_VERSION=$(nodenv global) ccusage'
+
 
 ##################################################
 # php composer
