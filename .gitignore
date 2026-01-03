@@ -79,6 +79,7 @@
 /.claude/plugins/
 /.claude/stats-cache.json
 /.claude/plans/
+/.claude/telemetry/
 
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
