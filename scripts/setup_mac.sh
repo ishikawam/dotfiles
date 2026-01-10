@@ -36,12 +36,30 @@ fi
 
 head "1. homebrew"
 
-if ! type brew >/dev/null ; then
+if ! type brew >/dev/null 2>&1 ; then
     # http://brew.sh/index_ja.html
     echo Install Homebrew.
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    echo re-run this.
-    exit
+
+    # インストール直後にPATHを設定
+    if [ -f /opt/homebrew/bin/brew ]; then
+        echo "Apple Silicon用のHomebrewをPATHに追加"
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [ -f /usr/local/bin/brew ]; then
+        echo "Intel用のHomebrewをPATHに追加"
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+
+    # 確認
+    if ! type brew >/dev/null 2>&1 ; then
+        echo "エラー: Homebrewのインストールに失敗しました"
+        echo "手動で以下を実行してください:"
+        echo "  source ~/.zshrc"
+        echo "  make setup"
+        exit 1
+    fi
+
+    echo "Homebrewのインストールが完了しました"
 fi
 brew doctor
 brew update

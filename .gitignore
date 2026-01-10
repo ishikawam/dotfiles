@@ -80,6 +80,7 @@
 /.claude/stats-cache.json
 /.claude/plans/
 /.claude/telemetry/
+/.claude/cache/
 
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
