@@ -93,7 +93,11 @@ brew install \
     java \
     awscli amazon-ecs-cli google-cloud-sdk \
     asdf direnv \
-    mas swiftlint
+    mas
+
+# swiftlint (Xcode.appが必要、エラーでも継続)
+brew install swiftlint 2>/dev/null || echo "⚠️  swiftlintのインストールをスキップ（Xcode.appが必要です）"
+
 # for java
 if [ -d "$(brew --prefix)/opt/openjdk/libexec/openjdk.jdk" ]; then
     sudo ln -sfn "$(brew --prefix)/opt/openjdk/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk.jdk
@@ -127,11 +131,13 @@ array=(
     # messenger  2025/12 アプリ版終了
     bartender
 )
-brewcaskls=`brew ls`
-#brewcaskls=`brew cask ls`
+brewcaskls=`brew list --cask 2>/dev/null`
 for i in "${array[@]}"
 do
-    if ! echo "$brewcaskls" | grep -o "\b$i\b"; then
+    if echo "$brewcaskls" | grep -q "^$i$"; then
+        echo "✓ $i はインストール済み"
+    else
+        echo "→ $i をインストール中..."
         brew install --cask $i
     fi
 done
