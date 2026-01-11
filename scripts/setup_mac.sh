@@ -32,6 +32,23 @@ if [ ! "$SSH_CLIENT" ]; then
     xcode-select --install 2>/dev/null
 fi
 
+######## mac rosetta 2 ##################################################################
+
+head "0.1. rosetta 2"
+
+# google japanese inputで必要
+# Apple SiliconならRosetta 2をインストール
+if [ "$(uname -m)" = "arm64" ]; then
+    if ! /usr/bin/pgrep oahd >/dev/null 2>&1; then
+        echo "Rosetta 2をインストールします"
+        sudo softwareupdate --install-rosetta --agree-to-license
+    else
+        echo "Rosetta 2はインストール済みです"
+    fi
+else
+    echo "Intel Macのため、Rosetta 2は不要です"
+fi
+
 ######## mac homebrew ##################################################################
 
 head "1. homebrew"
