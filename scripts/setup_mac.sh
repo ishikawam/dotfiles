@@ -6,17 +6,18 @@ head () {
 
 # mac only
 if [ "`uname`" != "Darwin" ]; then
-    echo "Do nothing."
+    echo "Mac以外では実行されません。"
     exit
 fi
 
 hostname=`hostname`
 
-if [[ $hostname =~ ^ishikawa- || -e ~/this/.force-defaults ]]; then
-    # 自分の所有、か、~/this/.force-defaults があったら実行。
+if [[ -e ~/this/.force-defaults ]]; then
+    # ~/this/.force-defaults があったら実行
     echo
 else
-    echo "exit."
+    echo "このホスト ($hostname) では実行されません。"
+    echo "実行するには以下を実行してください: make set-force-defaults"
     exit
 fi
 
@@ -55,7 +56,7 @@ head "1. homebrew"
 
 if ! type brew >/dev/null 2>&1 ; then
     # http://brew.sh/index_ja.html
-    echo Install Homebrew.
+    echo "Homebrewをインストールします。"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
     # インストール直後にPATHを設定
