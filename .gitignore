@@ -92,6 +92,9 @@
 # 共通
 !/common/
 
+# 開発用
+!/dev/
+
 # submodules
 !/private/
 

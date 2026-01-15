@@ -205,6 +205,16 @@ clean-unused-node: ## 未使用のNode.jsバージョンを削除
 	fi
 
 ##@ フラグ管理
+set-dev: ## 開発用CLAUDE.mdシンボリックリンクを作成
+	@test -L CLAUDE.md && echo "exists." || echo "not exists."
+	ln -s dev/CLAUDE.md CLAUDE.md
+	@test -L CLAUDE.md && echo "exists." || echo "not exists."
+
+remove-dev: ## 開発用CLAUDE.mdシンボリックリンクを削除
+	@test -L CLAUDE.md && echo "exists." || echo "not exists."
+	rm -f CLAUDE.md
+	@test -L CLAUDE.md && echo "exists." || echo "not exists."
+
 set-ignore-sparse: ## private/installedtoolsを全て含めるモードに設定
 	$(call toggle_flag,~/this/.ignore-sparse,touch)
 
