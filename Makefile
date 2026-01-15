@@ -1,10 +1,31 @@
+SHELL := /bin/bash
+
 .DEFAULT_GOAL := help
 
-.PHONY: help
-help: ## ヘルプを表示
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+# ヘルプ表示用マクロ
+define print_help
+	@echo ""
+	@echo "Usage: make [target]"
+	@echo ""
+	@awk 'BEGIN {FS = ":.*?## "} \
+		/^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } \
+		/^[a-zA-Z_-]+:.*?## / { printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
+	@echo ""
+endef
 
+.PHONY: help
+##@ ヘルプ
+help: ## ヘルプを表示
+	$(call print_help)
+
+# フラグ管理用マクロ
+define toggle_flag
+	@test -f $(1) && echo "exists." || echo "not exists."
+	$(2) $(1)
+	@test -f $(1) && echo "exists." || echo "not exists."
+endef
+
+##@ セットアップ
 setup: ## 初回セットアップ（Mac環境）
 	bash ~/scripts/setup.sh
 	bash ~/scripts/setup_mac.sh
@@ -16,8 +37,7 @@ setup: ## 初回セットアップ（Mac環境）
 setup-private: ## プライベート設定のセットアップ
 	bash ~/private/scripts/setup_private.sh
 
-install: ## setupのエイリアス
-	make setup
+install: setup ## setupのエイリアス
 
 gitignore_checker: ## gitignoreをチェッカーモードに切り替え
 	ln -sf ~/.gitignore_checker ~/.gitignore
@@ -39,6 +59,7 @@ setup-gh-hosts: ## GitHub CLI hosts.ymlをホスト名に応じて切り替え
 	@echo "Current hosts.yml symlink:"
 	@ls -l ~/.config/gh/hosts.yml
 
+##@ macOS設定
 mas-list: ## Mac App Storeインストール済みアプリ一覧
 	cat ~/private/installedtools/*/*/mas | sort -n | uniq
 
@@ -55,7 +76,8 @@ defaults: ## macOSのデフォルト設定を適用
 defaults-dryrun: ## デフォルト設定をドライラン
 	php ~/scripts/defaults/defaults.php --dry-run
 
-fetch: ## 全リポジトリ（~/、~/private、~/Library）をフェッチ
+##@ Git操作
+fetch: ## 全リポジトリをフェッチ
 	git -C ~/ fetch ; git -C ~/ st
 	git -C ~/private fetch ; git -C ~/private st
 	if [ -d ~/Library ]; then git -C ~/Library fetch ; git -C ~/Library st ; fi
@@ -75,12 +97,14 @@ updates: ## 全リポジトリを更新＆サブモジュール更新
 	sh ~/bin/updates
 	git submodule foreach 'case $$name in scripts/create_docker_laravel_project) git pull origin main ;; *) git pull origin master ;; esac'
 
+##@ 言語環境
 ruby-install-latest: ## 最新のRubyをインストール
 	rbenv install -s `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
 	rbenv global `rbenv install --list | grep "^ *[0-9.]*$$" | tail -1`
 	sudo gem update --system
 	sudo gem update
 
+##@ クリーンアップ
 clean: ## キャッシュと未使用Node.jsを削除
 	$(MAKE) clean-cache
 	$(MAKE) clean-unused-node
@@ -180,27 +204,21 @@ clean-unused-node: ## 未使用のNode.jsバージョンを削除
 		fi; \
 	fi
 
+##@ フラグ管理
 set-ignore-sparse: ## private/installedtoolsを全て含めるモードに設定
-	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
-	touch ~/this/.ignore-sparse
-	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
+	$(call toggle_flag,~/this/.ignore-sparse,touch)
 
-remove-ignore-sparse: ## private/installedtoolsを自分のみ含めるモードに設定（デフォルト）
-	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
-	rm -f ~/this/.ignore-sparse
-	@test -f ~/this/.ignore-sparse && echo "exits." || echo "not exists."
+remove-ignore-sparse: ## private/installedtoolsを自分のみ含めるモードに設定
+	$(call toggle_flag,~/this/.ignore-sparse,rm -f)
 
 set-force-defaults: ## defaultsを実行＆アップデートするモードに設定
-	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
-	touch ~/this/.force-defaults
-	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
+	$(call toggle_flag,~/this/.force-defaults,touch)
 
-remove-force-defaults: ## defaultsを実行＆アップデートしないモードに設定（デフォルト）
-	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
-	rm -f ~/this/.force-defaults
-	@test -f ~/this/.force-defaults && echo "exits." || echo "not exists."
+remove-force-defaults: ## defaultsを実行＆アップデートしないモードに設定
+	$(call toggle_flag,~/this/.force-defaults,rm -f)
 
-claude-improve-settings: ## 全プロジェクトからClaude Code権限を収集し~/.claude/settings.jsonを更新
+##@ Claude Code
+claude-improve-settings: ## 全プロジェクトから権限を収集しsettings.jsonを更新
 	@echo "Claude Codeプロジェクトを検索中..."
 	@projects=$$(find ~/git -name .claude 2>/dev/null); \
 	if [ -z "$$projects" ]; then \
@@ -278,9 +296,11 @@ claude-improve-doc: ## 全プロジェクトのCLAUDE.mdからグローバル設
 	echo ""; \
 	echo "全プロジェクトでの実行完了！"
 
-migrate-data: ## 対話式データ移行ツール（旧Mac→新Mac）
+##@ ユーティリティ
+migrate-data: ## 対話式データ移行ツール
 	bash ~/scripts/migrate_data.sh
 
+##@ アプリ設定
 alfred-import-custom-search: ## Alfredにカスタムサーチをインポート
 	@echo "Alfredにカスタムサーチをインポート中..."
 	open "alfred://customsearch/alc/alc/ascii/nospace/http%3A%2F%2Feow.alc.co.jp%2Fsearch%3Fq%3D%7Bquery%7D"
@@ -434,6 +454,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		echo "詳細設定をスキップしました"; \
 	fi
 
+##@ システム情報
 disk-usage: ## ディスク使用状況を表示
 	@echo "=== ディスク使用状況 ==="
 	@echo ""
