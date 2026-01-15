@@ -8,8 +8,8 @@ help: ## ヘルプを表示
 setup: ## 初回セットアップ（Mac環境）
 	bash ~/scripts/setup.sh
 	bash ~/scripts/setup_mac.sh
-#	make defaults  # 長らくメンテされていない
-#	make agree-apps
+#	make defaults  # 手動で
+#	make agree-apps  # 手動で
 	make setup-gh-hosts
 	if [ -f ~/private/scripts/setup_private.sh ]; then bash ~/private/scripts/setup_private.sh ; fi
 
