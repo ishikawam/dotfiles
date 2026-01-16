@@ -64,17 +64,17 @@ mas-list: ## Mac App Storeインストール済みアプリ一覧
 	cat ~/private/installedtools/*/*/mas | sort -n | uniq
 
 agree-apps: ## アプリの利用規約に同意
-	yes | bash ~/scripts/agreeApps.sh
+	yes | bash scripts/agreeApps.sh
 
 record-installed-tools: ## インストール済みツールを記録
 	bash ~/private/scripts/recordInstalledTools.sh
 
 defaults: ## macOSのデフォルト設定を適用
-	php ~/scripts/defaults/defaults.php
-	-php ~/scripts/defaults/ini.php
+	php scripts/defaults/defaults.php
+	-php scripts/defaults/ini.php
 
 defaults-dryrun: ## デフォルト設定をドライラン
-	php ~/scripts/defaults/defaults.php --dry-run
+	php scripts/defaults/defaults.php --dry-run
 
 ##@ Git操作
 fetch: ## 全リポジトリをフェッチ
@@ -308,7 +308,7 @@ claude-improve-doc: ## 全プロジェクトのCLAUDE.mdからグローバル設
 
 ##@ ユーティリティ
 migrate-data: ## 対話式データ移行ツール
-	bash ~/scripts/migrate_data.sh
+	bash scripts/migrate_data.sh
 
 ##@ アプリ設定
 alfred-import-custom-search: ## Alfredにカスタムサーチをインポート

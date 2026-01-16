@@ -71,6 +71,38 @@ env HOME=$HOME/home/masayuki-ishikawa zsh
 
 ## フラグファイル
 
-- `~/this/.force-defaults` - setup_mac.shを実行するフラグ
+- `~/this/.force-defaults` - make defaultsとsetup_mac.shを実行するフラグ
 - `~/this/.ignore-sparse` - private/installedtoolsを全て含めるモード
 - `~/this/.eucjp` - EUC-JP環境フラグ
+
+## make defaults
+
+macOSのシステム設定やアプリ設定を自動適用する機能。
+
+### 仕組み
+
+- `scripts/defaults/defaults.php` - `defaults`コマンドと`PlistBuddy`で設定を適用
+- `scripts/defaults/ini.php` - アプリのiniファイルを正規表現で置換
+
+### 設定ファイル構成
+
+`scripts/defaults/config/`ディレクトリ:
+- `general.config.php` - Dock、Finder、キーボード、トラックパッド、カレンダー、Spotlight等
+- `apple-apps.config.php` - Terminal、Safari、Xcode
+- `non-apple-apps.config.php` - Sequel Pro、iTerm、Evernote、Clipy、BetterSnapTool等
+
+### 設定ファイルの形式
+
+```php
+'com.apple.dock' => [
+    'autohide' => [
+        'read' => 1,           // 期待する現在値
+        'write' => '-bool true', // 書き込むdefaultsコマンド引数
+        'sudo' => false,       // sudo実行（オプション）
+    ],
+],
+```
+
+- `read`が現在値と一致すればスキップ
+- `read`が`null`の場合は削除操作
+- PlistBuddyを使う場合はキーに`:`を含める

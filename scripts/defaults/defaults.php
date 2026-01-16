@@ -5,8 +5,6 @@
  * https://qiita.com/djmonta/items/17531dde1e82d9786816
  */
 
-echo "\n\n### defaults.php ###\n\n";
-
 if (exec('which defaults 2>/dev/null') == '') {
     echo "No `defaults`. Do nothing.\n\n";
     return;
@@ -17,7 +15,8 @@ $HOME = exec('echo $HOME');
 if (file_exists($HOME . '/this/.force-defaults')) {
     echo "run.\n\n";
 } else {
-    echo "not run.\n\n";
+    echo "not run.\n";
+    echo "実行するには: make set-force-defaults\n\n";
     return;
 }
 

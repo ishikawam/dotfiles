@@ -13,8 +13,6 @@ evernoteの "NSOutlineView Items ENExpandedLeftNavItems.*" を
 にしたい。慎重に。
  */
 
-echo "\n\n### ini.php ###\n\n";
-
 $HOME = exec('echo $HOME');
 
 if (! file_exists($HOME . '/Library/')) {
@@ -25,7 +23,8 @@ if (! file_exists($HOME . '/Library/')) {
 if (file_exists($HOME . '/this/.force-defaults')) {
     echo "run.\n\n";
 } else {
-    echo "not run.\n\n";
+    echo "not run.\n";
+    echo "実行するには: make set-force-defaults\n\n";
     return;
 }
 
