@@ -419,7 +419,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo ""
 	@echo "■ The Marvellous Suspender"
 	@echo "  - Automatic tab suspension"
-	@echo "      Automatically suspend tabs after:（任意、デフォルト3 days）"
+	@echo "      Automatically suspend tabs after:（任意、1 hour 〜 3 days）"
 	@echo "      Never suspend active tab in each window: オフ"
 	@echo "  - Suspended tabs"
 	@echo "      Automatically unsuspend tab when it is viewed (チェック)"
@@ -431,7 +431,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo ""
 	@echo "■ Tampermonkey"
 	@echo "  - Config mode: Advanced"
-	@echo "  - Userscript Sync: Dropboxを有効化"
+	@echo "  - Userscript Sync: Enable Userscript Sync, Dropbox, 'Run now', Save"
 	@echo ""
 	@read -p "設定ページを開きますか？ (y/N): " answer; \
 	if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
