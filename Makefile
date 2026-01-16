@@ -350,7 +350,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		open "https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall"; \
 		echo "7/8: The Marvellous Suspender"; \
 		open "https://chrome.google.com/webstore/detail/the-marvellous-suspender/noogafoofpebimajpfpamcfhoaifemoa"; \
-		echo "8/8: Tampermonkey"; \
+		echo "8/8: Tampermonkey（任意）"; \
 		open "https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo"; \
 		echo ""; \
 		echo "全ての拡張機能のインストールページを開きました"; \
@@ -361,33 +361,30 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		echo "インストールをスキップしました"; \
 	fi
 	@echo ""
-	@read -p "次に各拡張機能の基本設定ページを開きますか？ (y/N): " answer; \
+	@echo "========================================"
+	@echo "【各拡張機能の基本設定】chrome://extensions での設定"
+	@echo "========================================"
+	@echo ""
+	@echo "以下の設定を行ってください："
+	@echo ""
+	@echo "■ Session Buddy"
+	@echo "  - Allow in Incognito"
+	@echo "  - Allow access to file URLs"
+	@echo ""
+	@echo "■ Google Translate"
+	@echo "  - Allow in Incognito"
+	@echo ""
+	@echo "■ GoFullPage"
+	@echo "  - Allow in Incognito"
+	@echo ""
+	@echo "■ JSONView"
+	@echo "  - Allow in Incognito"
+	@echo ""
+	@echo "■ Quick Tabs"
+	@echo "  - Allow in Incognito"
+	@echo ""
+	@read -p "設定ページを開きますか？ (y/N): " answer; \
 	if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
-		echo ""; \
-		echo "========================================"; \
-		echo "【各拡張機能の基本設定】chrome://extensions での設定"; \
-		echo "========================================"; \
-		echo ""; \
-		echo "以下の設定を行ってください："; \
-		echo ""; \
-		echo "■ Session Buddy"; \
-		echo "  - Allow in Incognito"; \
-		echo "  - Allow access to file URLs"; \
-		echo ""; \
-		echo "■ Google Translate"; \
-		echo "  - Allow in Incognito"; \
-		echo ""; \
-		echo "■ GoFullPage"; \
-		echo "  - Allow in Incognito"; \
-		echo ""; \
-		echo "■ JSONView"; \
-		echo "  - Allow in Incognito"; \
-		echo ""; \
-		echo "■ Quick Tabs"; \
-		echo "  - Allow in Incognito"; \
-		echo ""; \
-		echo "設定ページを開きます..."; \
-		echo ""; \
 		open -a "Google Chrome" "chrome://extensions/?id=edacconmaakjimmfgnblocblbcdcpbko"; \
 		open -a "Google Chrome" "chrome://extensions/?id=aapbdbdomjkkjkaonfhkkikfgjllcleb"; \
 		open -a "Google Chrome" "chrome://extensions/?id=fdpohaocaechififmbbbbbknoalclacl"; \
@@ -395,63 +392,49 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		open -a "Google Chrome" "chrome://extensions/?id=jnjfeinjfmenlddahdjdmgpbokiacbbb"; \
 		echo ""; \
 		read -p "基本設定が完了したらEnterキーを押してください..." dummy3; \
-	else \
-		echo "基本設定をスキップしました"; \
 	fi
 	@echo ""
-	@read -p "次に拡張機能の詳細設定ページを開きますか？ (y/N): " answer; \
+	@echo "========================================"
+	@echo "【拡張機能の詳細設定】"
+	@echo "========================================"
+	@echo ""
+	@echo "以下の設定を行ってください："
+	@echo ""
+	@echo "■ Google Translate"
+	@echo "  - 日本語に設定"
+	@echo ""
+	@echo "■ GoFullPage"
+	@echo "  - Directory: ~/Downloads/GoFullPage/（任意）"
+	@echo "  - Auto-download files をチェック（任意）"
+	@echo ""
+	@echo "■ Quick Tabs"
+	@echo "  - Perform RegEx Search"
+	@echo "  - Always search URLs をオン"
+	@echo "  - Automatically include bookmarks in search をオフ"
+	@echo "  - Apply changes"
+	@echo ""
+	@echo "■ One Tab"
+	@echo "  - URL display: Abbreviated（短縮表示）"
+	@echo "  - Right-click inside a web page to access the OneTab context menu: Disabled（右クリックメニュー無効）"
+	@echo ""
+	@echo "■ The Marvellous Suspender"
+	@echo "  - Automatic tab suspension"
+	@echo "      Automatically suspend tabs after:（任意、デフォルト3 days）"
+	@echo "      Never suspend active tab in each window: オフ"
+	@echo "  - Suspended tabs"
+	@echo "      Automatically unsuspend tab when it is viewed (チェック)"
+	@echo "      Apply Chrome's built-in memory-saving when suspending (チェック)"
+	@echo "      Screen capturing: Capture top of screen only"
+	@echo "  - Other"
+	@echo "      Add The Marvellous Suspender to right-click context menu: オフ"
+	@echo "      Sync settings with your Chrome profile: on"
+	@echo ""
+	@echo "■ Tampermonkey"
+	@echo "  - Config mode: Advanced"
+	@echo "  - Userscript Sync: Dropboxを有効化"
+	@echo ""
+	@read -p "設定ページを開きますか？ (y/N): " answer; \
 	if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
-		echo ""; \
-		echo "========================================"; \
-		echo "【拡張機能の詳細設定】"; \
-		echo "========================================"; \
-		echo ""; \
-		echo "以下の設定を行ってください："; \
-		echo ""; \
-		echo "■ Google Translate"; \
-		echo "  - 日本語に設定"; \
-		echo ""; \
-		echo "■ GoFullPage"; \
-		echo "  - Directory: ~/Downloads/GoFullPage/"; \
-		echo "  - Auto-download files をチェック (で、タブを移動させない"; \
-		echo ""; \
-		echo "■ Quick Tabs"; \
-		echo "  - Perform RegEx Search"; \
-		echo "  - Always search URLs をオン"; \
-		echo "  - Automatically include bookmarks in search をオフ"; \
-		echo "  - Apply changes"; \
-		echo ""; \
-		echo "■ One Tab"; \
-		echo "  - URL display:"; \
-		echo "      Abbreviated"; \
-		echo "  - Automatic action when clicking to open a tab:"; \
-		echo "      Open the tab, and move it to trash"; \
-		echo "  - Automatic action when clicking to open a group of tabs:"; \
-		echo "      Open the tabs, and move the group to trash"; \
-		echo "  - Right-click inside a web page to access the OneTab context menu:"; \
-		echo "      Disabled"; \
-		echo ""; \
-		echo "■ The Marvellous Suspender"; \
-		echo "  - Automatic tab suspension"; \
-		echo "      Automatically suspend tabs after: 1 hour"; \
-		echo "      Never suspend pinned tabs (チェック)"; \
-		echo "      Never suspend tabs that contain unsaved form inputs (チェック)"; \
-		echo "      Never suspend tabs that are playing audio (チェック)"; \
-		echo "      Never suspend active tab in each window: オフ"; \
-		echo "  - Suspended tabs"; \
-		echo "      Automatically unsuspend tab when it is viewed (チェック)"; \
-		echo "      Apply Chrome's built-in memory-saving when suspending (チェック)"; \
-		echo "      Screen capturing: Capture top of screen only"; \
-		echo "  - Other"; \
-		echo "      Add The Marvellous Suspender to right-click context menu: オフ"; \
-		echo "      Sync settings with your Chrome profile: on"; \
-		echo ""; \
-		echo "■ Tampermonkey"; \
-		echo "  - Config mode: Advanced"; \
-		echo "  - Userscript Sync: Dropboxを有効化"; \
-		echo ""; \
-		echo "設定ページを開きます..."; \
-		echo ""; \
 		open -a "Google Chrome" "chrome-extension://aapbdbdomjkkjkaonfhkkikfgjllcleb/options.html"; \
 		open -a "Google Chrome" "chrome-extension://fdpohaocaechififmbbbbbknoalclacl/options.html"; \
 		open -a "Google Chrome" "chrome-extension://jnjfeinjfmenlddahdjdmgpbokiacbbb/options.html"; \
@@ -460,8 +443,6 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		open -a "Google Chrome" "chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=settings"; \
 		echo ""; \
 		echo "全ての設定ページを開きました"; \
-	else \
-		echo "詳細設定をスキップしました"; \
 	fi
 
 ##@ システム情報
