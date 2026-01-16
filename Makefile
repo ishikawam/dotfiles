@@ -404,7 +404,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo "  - 日本語に設定"
 	@echo ""
 	@echo "■ GoFullPage"
-	@echo "  - Directory: ~/Downloads/GoFullPage/（任意）"
+	@echo "  - Directory: GoFullPage（任意）"
 	@echo "  - Auto-download files をチェック（任意）"
 	@echo ""
 	@echo "■ Quick Tabs"
