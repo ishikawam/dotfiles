@@ -63,8 +63,8 @@ setup-gh-hosts: ## GitHub CLI hosts.ymlをホスト名に応じて切り替え
 mas-list: ## Mac App Storeインストール済みアプリ一覧
 	cat ~/private/installedtools/*/*/mas | sort -n | uniq
 
-agree-apps: ## アプリの利用規約に同意
-	yes | bash scripts/agreeApps.sh
+agree-apps: ## アプリを起動して初期設定・権限ダイアログを済ませる
+	bash scripts/agreeApps.sh
 
 record-installed-tools: ## インストール済みツールを記録
 	bash ~/private/scripts/recordInstalledTools.sh
