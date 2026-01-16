@@ -391,7 +391,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		open -a "Google Chrome" "chrome://extensions/?id=chklaanhfefbnpoihckbnefhakgolnmc"; \
 		open -a "Google Chrome" "chrome://extensions/?id=jnjfeinjfmenlddahdjdmgpbokiacbbb"; \
 		echo ""; \
-		read -p "基本設定が完了したらEnterキーを押してください..." dummy3; \
+		read -p "基本設定画面を閉じてEnterキーを押してください..." dummy3; \
 	fi
 	@echo ""
 	@echo "========================================"
@@ -444,6 +444,128 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		echo ""; \
 		echo "全ての設定ページを開きました"; \
 	fi
+
+macos-manual-settings: ## macOSの手動設定をガイド
+	@echo "========================================"
+	@echo "【macOS 手動設定ガイド】"
+	@echo "========================================"
+	@echo ""
+	@echo "make defaults で設定できない項目を順番に設定します"
+	@echo ""
+	@read -p "開始するにはEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Touch ID & Password"
+	@echo "----------------------------------------"
+	@echo "  - Touch IDを設定する"
+	@echo "  - Apple Watch = オフ"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Touch-ID-Settings"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Language & Region"
+	@echo "----------------------------------------"
+	@echo "  - First day of week = Monday"
+	@echo "  - 英語をPrimaryに、日本語も追加"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Localization-Settings.extension"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Keyboard > Keyboard Shortcuts > Mission Control"
+	@echo "----------------------------------------"
+	@echo "  ※ 左のリストから Mission Control を選択"
+	@echo "  - Mission Control = F5"
+	@echo "  - Application windows = F4"
+	@echo "  - Show Desktop = F3"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Keyboard-Settings.extension?Shortcuts"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Keyboard > Keyboard Shortcuts > Spotlight"
+	@echo "----------------------------------------"
+	@echo "  ※ 左のリストから Spotlight を選択"
+	@echo "  - Show Apps = F2"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Keyboard-Settings.extension?Shortcuts"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Menu Bar"
+	@echo "----------------------------------------"
+	@echo "  - Sound = オン"
+	@echo "  - Spotlight = オフ"
+	@echo "  - Time Machine = オン"
+	@echo "  - Allow in the Menu Bar > LINE = オフ"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.ControlCenter-Settings"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Trackpad > Point & Click"
+	@echo "----------------------------------------"
+	@echo "  - Tap to click = オン"
+	@echo ""
+	@echo "■ Trackpad > More Gestures"
+	@echo "  - Mission Control = Swipe Up with Four Fingers"
+	@echo "  - App Exposé = Swipe Down with Four Fingers"
+	@echo "  - Swipe between full-screen apps = Swipe Left or Right with Four Fingers"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Trackpad-Settings"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Privacy & Security > Privacy > Full Disk Access"
+	@echo "----------------------------------------"
+	@echo "  - iTerm を追加"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Desktop & Dock > Windows"
+	@echo "----------------------------------------"
+	@echo "  - Tiled windows have margins = オフ"
+	@echo "  - 不要なアプリをDockから削除"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Desktop-Settings"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Notifications"
+	@echo "----------------------------------------"
+	@echo "  - Allow notifications when the screen is locked = オフ"
+	@echo "  - Allow notifications from iPhone = オフ"
+	@echo "  - アプリ別: Show previews = Never"
+	@echo "    - LINE, Reminders等"
+	@echo "  - Music = 通知オフ"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Notifications-Settings"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ Accessibility > Pointer Control > Trackpad Options"
+	@echo "----------------------------------------"
+	@echo "  ※ Trackpad Options... ボタンをクリック"
+	@echo "  - Use trackpad for dragging = オン"
+	@echo "  - Dragging style = Without Drag Lock"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Accessibility-Settings.extension?PointerControl"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "----------------------------------------"
+	@echo "■ General > Sharing"
+	@echo "----------------------------------------"
+	@echo "  - コンピュータ名を設定"
+	@echo ""
+	@open "x-apple.systempreferences:com.apple.Sharing-Settings.extension"
+	@read -p "設定画面を閉じてEnterキーを押してください..." dummy
+	@echo ""
+	@echo "========================================"
+	@echo "全ての手動設定が完了しました"
+	@echo "========================================"
 
 ##@ システム情報
 disk-usage: ## ディスク使用状況を表示

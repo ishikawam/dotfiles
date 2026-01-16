@@ -44,7 +44,8 @@
       "Bash(sw_vers:*)",
       "Bash(defaults read:*)",
       "Bash(/usr/libexec/PlistBuddy:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(mdfind:*)"
     ],
     "deny": []
   }

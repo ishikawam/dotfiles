@@ -61,6 +61,7 @@ return [
     ],
 
     // Evernote
+    // v10以降のElectronベースでは設定が効かない可能性あり
     'com.evernote.Evernote' => [
         'WebAutomaticSpellingCorrectionEnabled' => [
             // 自動校正しない
