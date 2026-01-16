@@ -38,7 +38,13 @@
       "Bash(diskutil apfs list:*)",
       "Bash(diskutil info:*)",
       "Bash(npm help:*)",
-      "Bash(du -sh:*)"
+      "Bash(du -sh:*)",
+      "Bash(php scripts/defaults/defaults.php:*)",
+      "Bash(php scripts/defaults/ini.php:*)",
+      "Bash(sw_vers:*)",
+      "Bash(defaults read:*)",
+      "Bash(/usr/libexec/PlistBuddy:*)",
+      "WebSearch"
     ],
     "deny": []
   }

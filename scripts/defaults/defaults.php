@@ -6,104 +6,174 @@
  */
 
 if (exec('which defaults 2>/dev/null') == '') {
-    echo "No `defaults`. Do nothing.\n\n";
+    echo "macOS以外の環境です。スキップします。\n\n";
     return;
 }
 
 $HOME = exec('echo $HOME');
 
 if (file_exists($HOME . '/this/.force-defaults')) {
-    echo "run.\n\n";
+    echo "=== macOSデフォルト設定を適用 ===\n\n";
 } else {
-    echo "not run.\n";
+    echo "スキップ: ~/this/.force-defaults が存在しません\n";
     echo "実行するには: make set-force-defaults\n\n";
     return;
 }
 
-
 /**
  * 強引なとこある。PlistBuddyとdefaultsを両方使っているため。PlistBuddyに統一したい。
- * 
+ *
  * read		必須
  * write	必須
  * sudo		任意 bool sudoで実行
- * 
+ *
  */
+
+// カウンタ
+$counts = ['skip' => 0, 'update' => 0, 'error' => 0];
+
+echo ". = 変更なし, ✓ = 更新, ✗ = エラー\n\n";
+
+// 設定ファイル名の日本語マッピング
+$fileNames = [
+    'general.config.php' => '一般設定',
+    'apple-apps.config.php' => 'Appleアプリ',
+    'non-apple-apps.config.php' => 'サードパーティアプリ',
+];
 
 // config読み込み
 foreach(glob(__DIR__ . '/config/*.config.php') as $file) {
     if (is_file($file)) {
         $arr = require $file;
-        echo "\n" . htmlspecialchars(basename($file)) . "\n";
+        $basename = basename($file);
+        $displayName = isset($fileNames[$basename]) ? $fileNames[$basename] : $basename;
+        echo "\n【{$displayName}】\n";
         foreach ($arr as $com => $tmp) {
             foreach ($tmp as $attr => $val) {
-                defaults($com, $attr, $val);
+                defaults($com, $attr, $val, $counts);
             }
         }
+        echo "\n";
     }
 }
 
-echo "\n\nDONE. plaese restart mac.\n\n";
+echo "\n=== 完了 ===\n";
+echo "変更なし: {$counts['skip']}, 更新: {$counts['update']}, エラー: {$counts['error']}\n";
+if ($counts['update'] > 0) {
+    echo "\n設定を反映するにはmacを再起動してください。\n";
+}
+echo "\n";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-function defaults($com, $attr, $val)
+// エラー時のヘルプメッセージ
+function getErrorHelp($com, $attr)
 {
+    $helps = [
+        '/Library/Preferences/com.apple.loginwindow:LoginwindowText' => 'ログイン画面メッセージ: sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "メッセージ"',
+        'com.apple.finder:ComputerViewSettings' => 'Finder → 移動 → コンピュータ を一度開く',
+        'com.apple.symbolichotkeys:AppleSymbolicHotKeys:64' => 'macOS Tahoe以降は廃止されたキーID',
+        'com.apple.symbolichotkeys:AppleSymbolicHotKeys:65' => 'macOS Tahoe以降は廃止されたキーID',
+        'com.apple.symbolichotkeys:AppleSymbolicHotKeys:27' => 'macOS Tahoe以降は廃止されたキーID',
+        'com.apple.symbolichotkeys:AppleSymbolicHotKeys:160' => 'macOS Tahoe以降は廃止されたキーID',
+        'com.apple.universalaccess:closeViewScrollWheelToggle' => 'システム設定 → アクセシビリティ → ズーム機能 → スクロールジェスチャ',
+    ];
+
+    // 完全一致を試す
+    $key = $com . ':' . $attr;
+    if (isset($helps[$key])) {
+        return $helps[$key];
+    }
+
+    // 部分一致を試す
+    foreach ($helps as $pattern => $help) {
+        if (strpos($key, $pattern) === 0) {
+            return $help;
+        }
+    }
+
+    return null;
+}
+
+function defaults($com, $attr, $val, &$counts)
+{
+        global $argv;
         $sudo = isset($val['sudo']) ? $val['sudo'] : false;
         $sudoCommand = $sudo ? 'sudo ' : '';
         $out = null;
         $val['read'] = isset($val['read']) ? $val['read'] : null;
+
+        // 表示用の短縮キー名
+        $shortAttr = strlen($attr) > 60 ? substr($attr, 0, 57) . '...' : $attr;
+
+        // 現在値を読み取り
         if (strpos($attr, ':')) {
-            exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
+            exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null', $out);
         } else {
-            exec($sudoCommand . 'defaults read ' . $com . ' "' . $attr . '"' . ($val['read'] === null ? ' 2>/dev/null' : '') , $out);
+            exec($sudoCommand . 'defaults read ' . $com . ' "' . $attr . '" 2>/dev/null', $out);
         }
         $read = implode("\n", $out);
+
+        // 設定が存在しない場合のエラー処理
         if ($read == '' && $val['read'] !== null) {
-            echo "\n\033[31mError. $com $attr\033[0m\n";
+            echo "  \033[33m✗ {$com} {$shortAttr}\033[0m\n";
+            echo "    設定が存在しません / 期待値: {$val['read']}\n";
+            $help = getErrorHelp($com, $attr);
+            if ($help) {
+                echo "    → {$help}\n";
+            }
+            $counts['error']++;
+            return;
         }
 
+        // 削除操作
         if ($val['read'] === null) {
-            // delete
             if ($read == '') {
-                // skip delete
-//                echo "skip deleting... $com $attr : $read\n";
                 echo '.';
+                $counts['skip']++;
                 return;
             }
         } else {
+            // 値が既に期待通りならスキップ
             if (! isset($val['write']) || $read === (string)$val['read']) {
-//                echo "skip... $com $attr : $read\n";
                 echo '.';
+                $counts['skip']++;
                 return;
             }
         }
 
+        // 書き込み実行
         $out = null;
-        if ((isset($argv[1]) ? $argv[1] : null) != '--dry-run') {
+        $isDryRun = (isset($argv[1]) ? $argv[1] : null) == '--dry-run';
+
+        if (!$isDryRun) {
             if (strpos($attr, ':')) {
-                // setかaddで。ちゃんと判定したい。@todo;
-                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist');
-                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist', $out);
+                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null');
+                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null');
+                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null', $out);
             } else {
                 if ($val['read'] === null) {
-                    // $val['read'] = null は削除
-                    exec($sudoCommand . 'defaults delete ' . $com . ' "' . $attr . '"');
+                    exec($sudoCommand . 'defaults delete ' . $com . ' "' . $attr . '" 2>/dev/null');
+                    echo "  \033[32m✓ {$com} {$shortAttr}\033[0m\n";
+                    echo "    削除しました\n";
+                    $counts['update']++;
+                    return;
                 } else {
-                    exec($sudoCommand . 'defaults write ' . $com . ' "' . $attr . '" ' . $val['write']);
-                    exec($sudoCommand . 'defaults read ' . $com . ' "' . $attr . '"', $out);
+                    exec($sudoCommand . 'defaults write ' . $com . ' "' . $attr . '" ' . $val['write'] . ' 2>/dev/null');
+                    exec($sudoCommand . 'defaults read ' . $com . ' "' . $attr . '" 2>/dev/null', $out);
                 }
             }
-        } else {
-            echo "\n\033[32m(dry-run)\033[0m";
-        }
-
-        if ($val['read'] === null) {
-            echo "\n$com $attr : \033[32mDeleted.\033[0m\n";
-        } else {
             $readAfter = implode("\n", $out);
-            echo "\n$com $attr : \033[32m$read -> $readAfter\033[0m\n";
+            $shortRead = strlen($read) > 30 ? substr($read, 0, 27) . '...' : $read;
+            $shortAfter = strlen($readAfter) > 30 ? substr($readAfter, 0, 27) . '...' : $readAfter;
+            echo "  \033[32m✓ {$com} {$shortAttr}\033[0m\n";
+            echo "    {$shortRead} → {$shortAfter}\n";
+            $counts['update']++;
+        } else {
+            $shortRead = strlen($read) > 30 ? substr($read, 0, 27) . '...' : $read;
+            echo "  \033[36m? {$com} {$shortAttr}\033[0m (dry-run)\n";
+            echo "    現在値: {$shortRead} → 期待値: {$val['read']}\n";
+            $counts['skip']++;
         }
 }
 
