@@ -240,14 +240,24 @@ fi
 
 head "5. install font"
 
-if [ ! -f ~/Library/Fonts/SourceCodePro-Regular-Powerline.otf -a -f ~/Dropbox/Fonts/SourceCodePro-Regular-Powerline.otf ]; then
-    cp -n ~/Dropbox/Fonts/SourceCodePro-Regular-Powerline.otf ~/Library/Fonts/
+ICLOUD_FONTS=~/Library/Mobile\ Documents/com~apple~CloudDocs/Fonts
+
+if [ ! -f ~/Library/Fonts/SourceCodePro-Regular-Powerline.otf ]; then
+    if [ -f "$ICLOUD_FONTS/SourceCodePro-Regular-Powerline.otf" ]; then
+        cp -n "$ICLOUD_FONTS/SourceCodePro-Regular-Powerline.otf" ~/Library/Fonts/
+    else
+        echo "⚠️  フォントが見つかりません: $ICLOUD_FONTS/SourceCodePro-Regular-Powerline.otf"
+    fi
 fi
-if [ -d ~/Dropbox/Fonts/Microsoft ]; then
-    cp -n ~/Dropbox/Fonts/Microsoft/*.ttf ~/Library/Fonts/
+if [ -d "$ICLOUD_FONTS/Microsoft" ]; then
+    cp -n "$ICLOUD_FONTS/Microsoft/"*.ttf ~/Library/Fonts/
+else
+    echo "⚠️  フォントフォルダが見つかりません: $ICLOUD_FONTS/Microsoft"
 fi
-if [ -d ~/Dropbox/Fonts/kawaii手書き文字 ]; then
-    cp -n ~/Dropbox/Fonts/kawaii手書き文字/*.ttf ~/Library/Fonts/
+if [ -d "$ICLOUD_FONTS/kawaii手書き文字" ]; then
+    cp -n "$ICLOUD_FONTS/kawaii手書き文字/"*.ttf ~/Library/Fonts/
+else
+    echo "⚠️  フォントフォルダが見つかりません: $ICLOUD_FONTS/kawaii手書き文字"
 fi
 
 
