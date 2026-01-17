@@ -93,7 +93,8 @@ brew install \
     java \
     awscli amazon-ecs-cli google-cloud-sdk \
     asdf direnv \
-    mas
+    mas \
+    dannystewart/apps/volumehud
 
 # swiftlint (Xcode.appが必要、エラーでも継続)
 brew install swiftlint 2>/dev/null || echo "⚠️  swiftlintのインストールをスキップ（Xcode.appが必要です）"
