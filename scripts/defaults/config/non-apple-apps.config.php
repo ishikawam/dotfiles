@@ -264,6 +264,14 @@ return [
             'write' => 'integer 2304',
         ],
     ],
+
+    // volumeHUD
+    'com.dannystewart.volumehud' => [
+        'brightnessEnabled' => [
+            'read' => 1,
+            'write' => '-bool true',
+        ],
+    ],
 ];
 
 /*

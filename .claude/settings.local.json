@@ -45,7 +45,10 @@
       "Bash(defaults read:*)",
       "Bash(/usr/libexec/PlistBuddy:*)",
       "WebSearch",
-      "Bash(mdfind:*)"
+      "Bash(mdfind:*)",
+      "Bash(defaults read-type:*)",
+      "Bash(/dev/null ls ~/Library/Preferences/)",
+      "Bash(osascript:*)"
     ],
     "deny": []
   }

@@ -43,6 +43,8 @@ brew_cask_apps=(
     "/Applications/Logi Options+.app"
     "/Applications/Bartender 4.app"
     "/Applications/Bartender 5.app"
+    "/Applications/Bartender 6.app"
+    "/Applications/volumeHUD.app"
 )
 
 # masでインストールしたアプリ
