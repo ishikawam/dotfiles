@@ -155,69 +155,25 @@ return [
     ],
 
     // Better Snap Tool
-    // 2023 壊れた。TODO
     'com.hegenberg.BetterSnapTool' => [
         'launchOnStartup' => [
-            // 自動起動
             'read' => 1,
             'write' => '-bool true',
         ],
         'showMenubarIcon' => [
-            // メニューアイコンは非表示
             'read' => 0,
             'write' => '-bool false',
         ],
         'previewAnimationDuration' => [
-            // メニューアイコンは非表示
             'read' => 0.1,
             'write' => '-float 0.1',
         ],
-        // ショートカットキー
-        'registeredHotkeys' => [
-            'read' => '{
-    0 =     {
-        keyCode = 35;
-        modifiers = 2304;
-    };
-    10 =     {
-        keyCode = 45;
-        modifiers = 2304;
-    };
-    105 =     {
-        keyCode = 41;
-        modifiers = 2304;
-    };
-    106 =     {
-        keyCode = 39;
-        modifiers = 2304;
-    };
-    13 =     {
-        keyCode = 47;
-        modifiers = 2304;
-    };
-    14 =     {
-        keyCode = 44;
-        modifiers = 2304;
-    };
-    17 =     {
-        keyCode = 123;
-        modifiers = 8390912;
-    };
-    2 =     {
-        keyCode = 33;
-        modifiers = 2304;
-    };
-    4 =     {
-        keyCode = 30;
-        modifiers = 2304;
-    };
-    8 =     {
-        keyCode = 124;
-        modifiers = 8390912;
-    };
-}',
-            'write' => '-dict',
+        'nextMonitorMoveWarningShowed' => [
+            'read' => 1,
+            'write' => '-bool true',
         ],
+        // ショートカットキー: keyCodeとmodifiersのみ設定
+        // 0: 画面最大化 (⌥P)
         'registeredHotkeys:0:keyCode' => [
             'read' => 35,
             'write' => 'integer 35',
@@ -226,6 +182,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        // 2: 左半分 (⌥[)
         'registeredHotkeys:2:keyCode' => [
             'read' => 33,
             'write' => 'integer 33',
@@ -234,6 +191,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        // 4: 右半分 (⌥])
         'registeredHotkeys:4:keyCode' => [
             'read' => 30,
             'write' => 'integer 30',
@@ -242,6 +200,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        // 8: 次のモニタへ移動 (⌃⌥⌘→)
         'registeredHotkeys:8:keyCode' => [
             'read' => 124,
             'write' => 'integer 124',
@@ -250,6 +209,7 @@ return [
             'read' => 8390912,
             'write' => 'integer 8390912',
         ],
+        // 10: 上半分 (⌥N)
         'registeredHotkeys:10:keyCode' => [
             'read' => 45,
             'write' => 'integer 45',
@@ -258,6 +218,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        // 13: 下半分 (⌥.)
         'registeredHotkeys:13:keyCode' => [
             'read' => 47,
             'write' => 'integer 47',
@@ -266,6 +227,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        // 14: センター (⌥/)
         'registeredHotkeys:14:keyCode' => [
             'read' => 44,
             'write' => 'integer 44',
@@ -274,6 +236,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        // 17: 前のモニタへ移動 (⌃⌥⌘←)
         'registeredHotkeys:17:keyCode' => [
             'read' => 123,
             'write' => 'integer 123',
@@ -282,6 +245,7 @@ return [
             'read' => 8390912,
             'write' => 'integer 8390912',
         ],
+        // 105: 左上 (⌥;)
         'registeredHotkeys:105:keyCode' => [
             'read' => 41,
             'write' => 'integer 41',
@@ -290,6 +254,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
+        // 106: 右上 (⌥')
         'registeredHotkeys:106:keyCode' => [
             'read' => 39,
             'write' => 'integer 39',
@@ -297,12 +262,6 @@ return [
         'registeredHotkeys:106:modifiers' => [
             'read' => 2304,
             'write' => 'integer 2304',
-        ],
-        //
-        'nextMonitorMoveWarningShowed' => [
-            // next monitor move の警告を出さない
-            'read' => 1,
-            'write' => '-bool true',
         ],
     ],
 ];

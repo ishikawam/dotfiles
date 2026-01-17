@@ -148,7 +148,9 @@ function defaults($com, $attr, $val, &$counts)
 
         if (!$isDryRun) {
             if (strpos($attr, ':')) {
-                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null');
+                // setコマンドでは型名を除去
+                $setVal = preg_replace('/^(integer|string|bool|real|dict|array)\s+/i', '', $val['write']);
+                exec($sudoCommand . '/usr/libexec/PlistBuddy -c "set :' . $attr . ' ' . $setVal . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null');
                 exec($sudoCommand . '/usr/libexec/PlistBuddy -c "add :' . $attr . ' ' . $val['write'] . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null');
                 exec($sudoCommand . '/usr/libexec/PlistBuddy -c "print :' . $attr . '" ~/Library/Preferences/' . $com . '.plist 2>/dev/null', $out);
             } else {
