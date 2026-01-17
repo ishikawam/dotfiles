@@ -266,9 +266,15 @@ fi
 
 head "6. install picasa"
 
-if [ ! -d /Applications/Picasa.app/ -a -e ~/Dropbox/【圧縮】/mac/picasamac39.dmg ]; then
-    open ~/Dropbox/【圧縮】/mac/picasamac39.dmg
-    open /Applications/Picasa.app
+ONEDRIVE=~/Library/CloudStorage/OneDrive-Personal
+
+if [ ! -d /Applications/Picasa.app/ ]; then
+    if [ -e "$ONEDRIVE/【圧縮】/mac/picasamac39.dmg" ]; then
+        open "$ONEDRIVE/【圧縮】/mac/picasamac39.dmg"
+        open /Applications/Picasa.app
+    else
+        echo "⚠️  Picasaインストーラが見つかりません: $ONEDRIVE/【圧縮】/mac/picasamac39.dmg"
+    fi
 fi
 
 

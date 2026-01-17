@@ -103,8 +103,8 @@ function defaults($com, $attr, $val, &$counts)
         $out = null;
         $val['read'] = isset($val['read']) ? $val['read'] : null;
 
-        // 表示用の短縮キー名
-        $shortAttr = strlen($attr) > 60 ? substr($attr, 0, 57) . '...' : $attr;
+        // 表示用のキー名
+        $shortAttr = $attr;
 
         // 現在値を読み取り
         if (strpos($attr, ':')) {
@@ -164,13 +164,13 @@ function defaults($com, $attr, $val, &$counts)
                 }
             }
             $readAfter = implode("\n", $out);
-            $shortRead = strlen($read) > 30 ? substr($read, 0, 27) . '...' : $read;
-            $shortAfter = strlen($readAfter) > 30 ? substr($readAfter, 0, 27) . '...' : $readAfter;
+            $shortRead = $read;
+            $shortAfter = $readAfter;
             echo "  \033[32m✓ {$com} {$shortAttr}\033[0m\n";
             echo "    {$shortRead} → {$shortAfter}\n";
             $counts['update']++;
         } else {
-            $shortRead = strlen($read) > 30 ? substr($read, 0, 27) . '...' : $read;
+            $shortRead = $read;
             echo "  \033[36m? {$com} {$shortAttr}\033[0m (dry-run)\n";
             echo "    現在値: {$shortRead} → 期待値: {$val['read']}\n";
             $counts['skip']++;

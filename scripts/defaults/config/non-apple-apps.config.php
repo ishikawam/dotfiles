@@ -54,9 +54,9 @@ return [
     // iterm
     'com.googlecode.iterm2' => [
         'PrefsCustomFolder' => [
-            // automatic update check.
-            'read' => '~/Dropbox/settings/iterm_for_karabinerelements',
-            'write' => '-string "~/Dropbox/settings/iterm_for_karabinerelements"',
+            // 設定フォルダ
+            'read' => '~/Library/Mobile Documents/com~apple~CloudDocs/settings',
+            'write' => '-string "~/Library/Mobile Documents/com~apple~CloudDocs/settings"',
         ],
     ],
 
