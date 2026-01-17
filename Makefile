@@ -468,6 +468,7 @@ macos-manual-settings: ## macOSの手動設定をガイド
 	@echo "----------------------------------------"
 	@echo "  - First day of week = Monday"
 	@echo "  - 英語をPrimaryに、日本語も追加"
+	@echo "  - Applications: Kindleを追加して日本語に設定"
 	@echo ""
 	@open "x-apple.systempreferences:com.apple.Localization-Settings.extension"
 	@read -p "設定画面を閉じてEnterキーを押してください..." dummy

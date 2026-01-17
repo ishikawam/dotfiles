@@ -142,6 +142,10 @@ do
         brew install --cask $i
     fi
 done
+
+# Gatekeeper隔離属性を削除
+xattr -d com.apple.quarantine /Applications/MacDown.app 2>/dev/null
+
 # ためしたい adobe-creative-cloud-cleaner-tool
 # skitch evernote はapp store版で。
 # 必須ではない
