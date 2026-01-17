@@ -57,6 +57,10 @@ foreach(glob(__DIR__ . '/config/*.config.php') as $file) {
     }
 }
 
+// システムコマンド（pmset, sysadminctl等）
+echo "\n【電源・ロック設定】\n";
+systemCommands($counts, $argv);
+
 echo "\n=== 完了 ===\n";
 echo "変更なし: {$counts['skip']}, 更新: {$counts['update']}, エラー: {$counts['error']}\n";
 if ($counts['update'] > 0) {
@@ -177,6 +181,59 @@ function defaults($com, $attr, $val, &$counts)
             echo "    現在値: {$shortRead} → 期待値: {$val['read']}\n";
             $counts['skip']++;
         }
+}
+
+/**
+ * システムコマンド（pmset, sysadminctl等）
+ */
+function systemCommands(&$counts, $argv)
+{
+    $dryRun = !in_array('-y', $argv);
+
+    $commands = [
+        [
+            'name' => 'バッテリー時のディスプレイオフ',
+            'read' => 'pmset -g custom | grep -A20 "Battery Power" | grep displaysleep | awk \'{print $2}\'',
+            'expected' => '10',
+            'write' => 'sudo pmset -b displaysleep 10',
+        ],
+        [
+            'name' => '電源接続時のディスプレイオフ',
+            'read' => 'pmset -g custom | grep -A20 "AC Power" | grep displaysleep | awk \'{print $2}\'',
+            'expected' => '60',
+            'write' => 'sudo pmset -c displaysleep 60',
+        ],
+        [
+            'name' => 'パスワード要求までの時間',
+            'read' => 'sysadminctl -screenLock status 2>&1 | grep -oE "delay is [0-9]+" | grep -oE "[0-9]+"',
+            'expected' => '900',
+            'write' => 'sysadminctl -screenLock 900 -password -',
+        ],
+    ];
+
+    foreach ($commands as $cmd) {
+        $current = trim(exec($cmd['read']));
+
+        if ($current === $cmd['expected']) {
+            echo ".";
+            $counts['skip']++;
+        } elseif ($dryRun) {
+            echo "  \033[36m? {$cmd['name']}\033[0m (dry-run)\n";
+            echo "    現在値: {$current} → 期待値: {$cmd['expected']}\n";
+            $counts['skip']++;
+        } else {
+            exec($cmd['write'], $out, $ret);
+            if ($ret === 0) {
+                echo "  \033[32m✓ {$cmd['name']}\033[0m\n";
+                echo "    {$current} → {$cmd['expected']}\n";
+                $counts['update']++;
+            } else {
+                echo "  \033[31m✗ {$cmd['name']}\033[0m\n";
+                $counts['error']++;
+            }
+        }
+    }
+    echo "\n";
 }
 
 /*
