@@ -50,7 +50,11 @@
       "Bash(/dev/null ls ~/Library/Preferences/)",
       "Bash(osascript:*)",
       "Bash(security find-generic-password:*)",
-      "Bash(security dump-keychain:*)"
+      "Bash(security dump-keychain:*)",
+      "Bash(git -C ~ status)",
+      "Bash(git -C ~ diff --cached)",
+      "Bash(git -C ~ log:*)",
+      "Bash(git -C ~ commit -m \"$\\(cat <<''EOF''\nsetup-privateをprivate/Makefileに委譲、ghを追加\n\n- setup-privateを$\\(MAKE\\) -C ~/private setup-privateに変更\n- record-installed-toolsを削除（private/Makefileに存在）\n- brew installにghを追加\n\n🤖 Generated with [Claude Code]\\(https://claude.ai/code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "deny": []
   }
