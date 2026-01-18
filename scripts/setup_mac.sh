@@ -84,7 +84,7 @@ brew update
 brew upgrade
 brew upgrade --cask
 brew install \
-    tmux git tig git-lfs colordiff \
+    tmux git tig git-lfs gh colordiff \
     emacs gnu-sed global \
     mysql-client@8.4 \
     wget jq tree trash coreutils peco imagemagick telnet rsync \

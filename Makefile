@@ -32,10 +32,10 @@ setup: ## 初回セットアップ（Mac環境）
 #	make defaults  # 手動で
 #	make agree-apps  # 手動で
 	make setup-gh-hosts
-	if [ -f ~/private/scripts/setup_private.sh ]; then bash ~/private/scripts/setup_private.sh ; fi
+	if [ -d ~/private ]; then $(MAKE) -C ~/private setup-private; fi
 
 setup-private: ## プライベート設定のセットアップ
-	bash ~/private/scripts/setup_private.sh
+	$(MAKE) -C ~/private setup-private
 
 install: setup ## setupのエイリアス
 
@@ -65,9 +65,6 @@ mas-list: ## Mac App Storeインストール済みアプリ一覧
 
 agree-apps: ## アプリを起動して初期設定・権限ダイアログを済ませる
 	bash scripts/agreeApps.sh
-
-record-installed-tools: ## インストール済みツールを記録
-	bash ~/private/scripts/recordInstalledTools.sh
 
 defaults: ## macOSのデフォルト設定を適用
 	php scripts/defaults/defaults.php
