@@ -18,13 +18,6 @@ endef
 help: ## ヘルプを表示
 	$(call print_help)
 
-# フラグ管理用マクロ
-define toggle_flag
-	@test -f $(1) && echo "exists." || echo "not exists."
-	$(2) $(1)
-	@test -f $(1) && echo "exists." || echo "not exists."
-endef
-
 ##@ セットアップ
 setup: ## 初回セットアップ（Mac環境）
 	bash ~/scripts/setup.sh
@@ -202,27 +195,49 @@ clean-unused-node: ## 未使用のNode.jsバージョンを削除
 	fi
 
 ##@ フラグ管理
-set-dev: ## 開発用CLAUDE.mdシンボリックリンクを作成
-	@test -L CLAUDE.md && echo "exists." || echo "not exists."
-	ln -s dev/CLAUDE.md CLAUDE.md
-	@test -L CLAUDE.md && echo "exists." || echo "not exists."
-
-remove-dev: ## 開発用CLAUDE.mdシンボリックリンクを削除
-	@test -L CLAUDE.md && echo "exists." || echo "not exists."
-	rm -f CLAUDE.md
-	@test -L CLAUDE.md && echo "exists." || echo "not exists."
-
-set-ignore-sparse: ## private/installedtoolsを全て含めるモードに設定
-	$(call toggle_flag,~/this/.ignore-sparse,touch)
-
-remove-ignore-sparse: ## private/installedtoolsを自分のみ含めるモードに設定
-	$(call toggle_flag,~/this/.ignore-sparse,rm -f)
-
-set-force-defaults: ## defaultsを実行＆アップデートするモードに設定
-	$(call toggle_flag,~/this/.force-defaults,touch)
-
-remove-force-defaults: ## defaultsを実行＆アップデートしないモードに設定
-	$(call toggle_flag,~/this/.force-defaults,rm -f)
+flag: ## dev, ignore-sparse, force-defaultsのフラグ管理
+	@echo "=== フラグ状態 ==="
+	@echo ""
+	@printf "  1) dev            : "; test -L CLAUDE.md && printf "\033[32mON\033[0m\n" || printf "\033[90mOFF\033[0m\n"
+	@echo "     開発用CLAUDE.mdシンボリックリンク"
+	@printf "  2) ignore-sparse  : "; test -f ~/this/.ignore-sparse && printf "\033[32mON\033[0m\n" || printf "\033[90mOFF\033[0m\n"
+	@echo "     private/installedtoolsを全ホスト含める"
+	@printf "  3) force-defaults : "; test -f ~/this/.force-defaults && printf "\033[32mON\033[0m\n" || printf "\033[90mOFF\033[0m\n"
+	@echo "     defaultsを実行＆アップデートする"
+	@echo ""
+	@read -p "番号を選択 (1-3): " num; \
+	case $$num in \
+		1) flag_name="dev"; flag_file="CLAUDE.md"; is_symlink=1 ;; \
+		2) flag_name="ignore-sparse"; flag_file="$$HOME/this/.ignore-sparse"; is_symlink=0 ;; \
+		3) flag_name="force-defaults"; flag_file="$$HOME/this/.force-defaults"; is_symlink=0 ;; \
+		*) echo "無効な選択です"; exit 1 ;; \
+	esac; \
+	echo ""; \
+	if [ $$is_symlink -eq 1 ]; then \
+		current=$$(test -L $$flag_file && echo "ON" || echo "OFF"); \
+	else \
+		current=$$(test -f $$flag_file && echo "ON" || echo "OFF"); \
+	fi; \
+	echo "$$flag_name: 現在 $$current"; \
+	echo ""; \
+	echo "  s) ON にする"; \
+	echo "  r) OFF にする"; \
+	echo "  q) キャンセル"; \
+	echo ""; \
+	read -p "操作を選択 (s/r/q): " action; \
+	case $$action in \
+		s) \
+			if [ $$is_symlink -eq 1 ]; then \
+				ln -sf dev/CLAUDE.md CLAUDE.md; \
+			else \
+				touch $$flag_file; \
+			fi; \
+			echo "$$flag_name を ON に設定しました" ;; \
+		r) \
+			rm -f $$flag_file; \
+			echo "$$flag_name を OFF に設定しました" ;; \
+		*) echo "キャンセルしました" ;; \
+	esac
 
 ##@ Claude Code
 claude-improve-settings: ## 全プロジェクトから権限を収集しsettings.jsonを更新
