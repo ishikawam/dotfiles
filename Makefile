@@ -333,22 +333,24 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@read -p "拡張機能のインストールページをブラウザで開きますか？ (y/N): " answer; \
 	if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
 		echo ""; \
-		echo "1/8: Session Buddy"; \
-		open "https://chrome.google.com/webstore/detail/session-buddy/edacconmaakjimmfgnblocblbcdcpbko?hl=ja"; \
-		echo "2/8: Google Translate"; \
-		open "https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb"; \
-		echo "3/8: GoFullPage"; \
-		open "https://chrome.google.com/webstore/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl"; \
-		echo "4/8: JSONView"; \
-		open "https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc"; \
-		echo "5/8: Quick Tabs"; \
-		open "https://chrome.google.com/webstore/detail/quick-tabs/jnjfeinjfmenlddahdjdmgpbokiacbbb"; \
-		echo "6/8: One Tab"; \
-		open "https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall"; \
-		echo "7/8: The Marvellous Suspender"; \
-		open "https://chrome.google.com/webstore/detail/the-marvellous-suspender/noogafoofpebimajpfpamcfhoaifemoa"; \
-		echo "8/8: Tampermonkey（任意）"; \
-		open "https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo"; \
+		echo "1/9: Session Buddy"; \
+		open "https://chromewebstore.google.com/detail/session-buddy-tab-bookmar/edacconmaakjimmfgnblocblbcdcpbko"; \
+		echo "2/9: Google Translate"; \
+		open "https://chromewebstore.google.com/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb"; \
+		echo "3/9: GoFullPage"; \
+		open "https://chromewebstore.google.com/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl"; \
+		echo "4/9: JSONVue"; \
+		open "https://chromewebstore.google.com/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc"; \
+		echo "5/9: Quick Tabs"; \
+		open "https://chromewebstore.google.com/detail/quick-tabs/jnjfeinjfmenlddahdjdmgpbokiacbbb"; \
+		echo "6/9: OneTab"; \
+		open "https://chromewebstore.google.com/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall"; \
+		echo "7/9: The Marvellous Suspender"; \
+		open "https://chromewebstore.google.com/detail/the-marvellous-suspender/noogafoofpebimajpfpamcfhoaifemoa"; \
+		echo "8/9: Tab Deduper"; \
+		open "https://chromewebstore.google.com/detail/tab-deduper/fpcohiaaphpfoneofdlabjnpipbnkplj"; \
+		echo "9/9: Tampermonkey"; \
+		open "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo"; \
 		echo ""; \
 		echo "全ての拡張機能のインストールページを開きました"; \
 		echo ""; \
@@ -374,7 +376,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo "■ GoFullPage"
 	@echo "  - Allow in Incognito"
 	@echo ""
-	@echo "■ JSONView"
+	@echo "■ JSONVue"
 	@echo "  - Allow in Incognito"
 	@echo ""
 	@echo "■ Quick Tabs"
@@ -399,6 +401,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo ""
 	@echo "■ Google Translate"
 	@echo "  - 日本語に設定"
+	@echo "  - Save ボタンを押す"
 	@echo ""
 	@echo "■ GoFullPage"
 	@echo "  - Directory: GoFullPage（任意）"
@@ -410,7 +413,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo "  - Automatically include bookmarks in search をオフ"
 	@echo "  - Apply changes"
 	@echo ""
-	@echo "■ One Tab"
+	@echo "■ OneTab"
 	@echo "  - URL display: Abbreviated（短縮表示）"
 	@echo "  - Right-click inside a web page to access the OneTab context menu: Disabled（右クリックメニュー無効）"
 	@echo ""
@@ -426,6 +429,12 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo "      Add The Marvellous Suspender to right-click context menu: オフ"
 	@echo "      Sync settings with your Chrome profile: on"
 	@echo ""
+	@echo "■ Tab Deduper"
+	@echo "  - Dedupe tabs across all windows: オフ"
+	@echo "  - Also check tab title when comparing tabs for duplicates: オフ"
+	@echo "  - Ignore URL fragments: オフ"
+	@echo "  - Save ボタンを押す"
+	@echo ""
 	@echo "■ Tampermonkey"
 	@echo "  - Config mode: Advanced"
 	@echo "  - Userscript Sync: Enable Userscript Sync, Dropbox, 'Run now', Save"
@@ -437,6 +446,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 		open -a "Google Chrome" "chrome-extension://jnjfeinjfmenlddahdjdmgpbokiacbbb/options.html"; \
 		open -a "Google Chrome" "chrome-extension://chphlpgkkbolifaimnlloiipkdnihall/options.html"; \
 		open -a "Google Chrome" "chrome-extension://noogafoofpebimajpfpamcfhoaifemoa/options.html"; \
+		open -a "Google Chrome" "chrome-extension://fpcohiaaphpfoneofdlabjnpipbnkplj/options.html"; \
 		open -a "Google Chrome" "chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=settings"; \
 		echo ""; \
 		echo "全ての設定ページを開きました"; \
