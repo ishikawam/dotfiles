@@ -171,8 +171,9 @@ asdf plugin add nodejs
 head "2. mas = mac app store"
 
 # mas = mac app store
+# 5分でタイムアウト
 echo mas upgrade
-mas upgrade
+gtimeout 300 mas upgrade || echo "⚠️  mas upgradeがタイムアウトまたはエラー"
 
 echo mas install
 mas_apps=(
@@ -198,7 +199,7 @@ mas_apps=(
     1429033973  # RunCat (11.4)
     1168254295  # AmorphousDiskMark (4.0.1)
 )
-mas install "${mas_apps[@]}"
+gtimeout 300 mas install "${mas_apps[@]}" || echo "⚠️  mas installがタイムアウトまたはエラー"
 
 # なくなった
 # 896934587 Soliton SecureBrowser Pro
