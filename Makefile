@@ -447,7 +447,7 @@ chrome-install-extensions: ## Chrome拡張機能のインストール
 	@echo "■ Tab Deduper"
 	@echo "  - Dedupe tabs across all windows: オフ"
 	@echo "  - Also check tab title when comparing tabs for duplicates: オフ"
-	@echo "  - Ignore URL fragments: オフ"
+	@echo "  - URL Exemptions: \`noogafoofpebimajpfpamcfhoaifemoa/suspended.html\`"
 	@echo "  - Save ボタンを押す"
 	@echo ""
 	@echo "■ Tampermonkey"
