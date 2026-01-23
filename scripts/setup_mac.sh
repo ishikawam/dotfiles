@@ -97,7 +97,7 @@ brew install \
     dannystewart/apps/volumehud
 
 # swiftlint (Xcode.appが必要、エラーでも継続)
-brew install swiftlint 2>/dev/null || echo "⚠️  swiftlintのインストールをスキップ（Xcode.appが必要です）"
+brew install swiftlint 2>/dev/null || echo "swiftlintのインストールをスキップ（Xcode.appが必要です）"
 
 # for java
 if [ -d "$(brew --prefix)/opt/openjdk/libexec/openjdk.jdk" ]; then
@@ -173,7 +173,7 @@ head "2. mas = mac app store"
 # mas = mac app store
 # 5分でタイムアウト
 echo mas upgrade
-gtimeout 300 mas upgrade || echo "⚠️  mas upgradeがタイムアウトまたはエラー"
+gtimeout --foreground 300 mas upgrade || echo "mas upgradeがタイムアウトまたはエラー"
 
 echo mas install
 mas_apps=(
@@ -199,7 +199,7 @@ mas_apps=(
     1429033973  # RunCat (11.4)
     1168254295  # AmorphousDiskMark (4.0.1)
 )
-gtimeout 300 mas install "${mas_apps[@]}" || echo "⚠️  mas installがタイムアウトまたはエラー"
+gtimeout --foreground 300 mas install "${mas_apps[@]}" || echo "mas installがタイムアウトまたはエラー"
 
 # なくなった
 # 896934587 Soliton SecureBrowser Pro
@@ -252,18 +252,18 @@ if [ ! -f ~/Library/Fonts/SourceCodePro-Regular-Powerline.otf ]; then
     if [ -f "$ICLOUD_FONTS/SourceCodePro-Regular-Powerline.otf" ]; then
         cp -n "$ICLOUD_FONTS/SourceCodePro-Regular-Powerline.otf" ~/Library/Fonts/
     else
-        echo "⚠️  フォントが見つかりません: $ICLOUD_FONTS/SourceCodePro-Regular-Powerline.otf"
+        echo "フォントが見つかりません: $ICLOUD_FONTS/SourceCodePro-Regular-Powerline.otf"
     fi
 fi
 if [ -d "$ICLOUD_FONTS/Microsoft" ]; then
     cp -n "$ICLOUD_FONTS/Microsoft/"*.ttf ~/Library/Fonts/
 else
-    echo "⚠️  フォントフォルダが見つかりません: $ICLOUD_FONTS/Microsoft"
+    echo "フォントフォルダが見つかりません: $ICLOUD_FONTS/Microsoft"
 fi
 if [ -d "$ICLOUD_FONTS/kawaii手書き文字" ]; then
     cp -n "$ICLOUD_FONTS/kawaii手書き文字/"*.ttf ~/Library/Fonts/
 else
-    echo "⚠️  フォントフォルダが見つかりません: $ICLOUD_FONTS/kawaii手書き文字"
+    echo "フォントフォルダが見つかりません: $ICLOUD_FONTS/kawaii手書き文字"
 fi
 
 
@@ -279,7 +279,7 @@ if [ ! -d /Applications/Picasa.app/ ]; then
         open "$ONEDRIVE/【圧縮】/mac/picasamac39.dmg"
         open /Applications/Picasa.app
     else
-        echo "⚠️  Picasaインストーラが見つかりません: $ONEDRIVE/【圧縮】/mac/picasamac39.dmg"
+        echo "Picasaインストーラが見つかりません: $ONEDRIVE/【圧縮】/mac/picasamac39.dmg"
     fi
 fi
 

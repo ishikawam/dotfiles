@@ -26,7 +26,7 @@ for TARGET in "${TARGETS[@]}"; do
             -name '__MACOSX' \
         \))
     else
-        warn "⚠️ Skipping: '$TARGET' is not a directory"
+        warn "Skipping: '$TARGET' is not a directory"
     fi
 done
 
