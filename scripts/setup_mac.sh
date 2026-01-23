@@ -131,6 +131,7 @@ array=(
     # android-studio dnsmasq java
     # messenger  2025/12 アプリ版終了
     bartender
+    claude-code
 )
 brewcaskls=`brew list --cask 2>/dev/null`
 for i in "${array[@]}"
@@ -288,8 +289,7 @@ fi
 
 head "7. other tools"
 
-# claude code, gemini cli, ccusage
-npm install -g @anthropic-ai/claude-code
+# gemini cli, ccusage
 npm install -g @google/gemini-cli
 npm install -g ccusage
 
