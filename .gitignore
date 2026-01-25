@@ -82,6 +82,7 @@
 /.claude/telemetry/
 /.claude/cache/
 /.claude/paste-cache/
+.claude/tasks/
 
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
