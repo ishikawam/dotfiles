@@ -14,6 +14,11 @@ if [[ "$yn" != [yY] ]]; then
     exit
 fi
 
+# locale設定
+sudo locale-gen en_US.UTF-8
+sudo locale-gen ja_JP.UTF-8
+sudo update-locale
+
 sudo apt install -y make emacs zsh php php-mbstring tig
 
 # 入れないもの

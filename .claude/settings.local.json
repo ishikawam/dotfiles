@@ -55,7 +55,8 @@
       "Bash(git -C ~ diff --cached)",
       "Bash(git -C ~ log:*)",
       "Bash(brew info claude-code)",
-      "Bash(alias:*)"
+      "Bash(alias:*)",
+      "Bash(locate:*)"
     ],
     "deny": []
   }

@@ -165,6 +165,7 @@ alias scl='screen -ls'
 alias scr='screen -xR'
 
 # オレが考えた最強locate
+# macだとsudo updatedbしてもnobodyでのファイル探索になるので、`chmod +a "nobody allow read,execute" ~` をしないとちゃんと見てくれない。すべてのPCでやるべきかどうかは検討。 TODO
 function loc() {
     {
         locate "$1" | grep -o ".*$1[^/]*"
