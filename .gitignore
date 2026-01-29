@@ -49,6 +49,7 @@
 /.config/github-copilot
 /.config/flutter/
 /.config/cagent/
+/.config/google-drive-mcp/tokens.json
 
 !/tmux-powerline
 !/.tmux-powerlinerc
@@ -83,7 +84,6 @@
 /.claude/cache/
 /.claude/paste-cache/
 .claude/tasks/
-
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
