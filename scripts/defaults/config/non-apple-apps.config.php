@@ -209,7 +209,7 @@ return [
             'read' => 8390912,
             'write' => 'integer 8390912',
         ],
-        // 10: 上半分 (⌥N)
+        // 10: restore old window position (⌥N)
         'registeredHotkeys:10:keyCode' => [
             'read' => 45,
             'write' => 'integer 45',
@@ -218,7 +218,25 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
-        // 13: 下半分 (⌥.)
+        // 11: 左上 top left quarter (⌘F11)
+        'registeredHotkeys:11:keyCode' => [
+            'read' => 103,
+            'write' => 'integer 103',
+        ],
+        'registeredHotkeys:11:modifiers' => [
+            'read' => 1048576,
+            'write' => 'integer 1048576',
+        ],
+        // 12: 右上 top right quarter (⌘F12)
+        'registeredHotkeys:12:keyCode' => [
+            'read' => 111,
+            'write' => 'integer 111',
+        ],
+        'registeredHotkeys:12:modifiers' => [
+            'read' => 1048576,
+            'write' => 'integer 1048576',
+        ],
+        // 13: 左下 bottom left quarter (⌥.)
         'registeredHotkeys:13:keyCode' => [
             'read' => 47,
             'write' => 'integer 47',
@@ -227,7 +245,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
-        // 14: センター (⌥/)
+        // 14: 右下 bottom right quarter (⌥/)
         'registeredHotkeys:14:keyCode' => [
             'read' => 44,
             'write' => 'integer 44',
@@ -236,7 +254,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
-        // 17: 前のモニタへ移動 (⌃⌥⌘←)
+        // 17: 中央 center (⌃⌥⌘←)
         'registeredHotkeys:17:keyCode' => [
             'read' => 123,
             'write' => 'integer 123',
@@ -245,7 +263,7 @@ return [
             'read' => 8390912,
             'write' => 'integer 8390912',
         ],
-        // 105: 左上 (⌥;)
+        // 105: 左2/3 left two thirds (⌥;)
         'registeredHotkeys:105:keyCode' => [
             'read' => 41,
             'write' => 'integer 41',
@@ -254,7 +272,7 @@ return [
             'read' => 2304,
             'write' => 'integer 2304',
         ],
-        // 106: 右上 (⌥')
+        // 106: 右2/3 right two thirds (⌥')
         'registeredHotkeys:106:keyCode' => [
             'read' => 39,
             'write' => 'integer 39',
