@@ -69,14 +69,16 @@
       "Write"
     ],
     "deny": [
-      "Bash(git add:*)",
       "Bash(git checkout:*)",
       "Bash(git reset:*)",
       "Bash(git restore:*)"
     ]
   },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754085807364
-  },
-  "alwaysThinkingEnabled": true
+  }
 }
