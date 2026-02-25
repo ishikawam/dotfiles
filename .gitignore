@@ -84,7 +84,9 @@
 /.claude/telemetry/
 /.claude/cache/
 /.claude/paste-cache/
-.claude/tasks/
+/.claude/tasks/
+/.claude/backups/
+/.claude/mcp-needs-auth-cache.json
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
