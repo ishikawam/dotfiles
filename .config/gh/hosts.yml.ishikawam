@@ -1,5 +1,5 @@
 github.com:
-    user: ishikawam
-    git_protocol: https
     users:
-        ishikawam:
+        ishikawam: {}
+    git_protocol: https
+    user: ishikawam
