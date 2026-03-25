@@ -50,6 +50,7 @@
 /.config/flutter/
 /.config/cagent/
 /.config/google-drive-mcp/tokens.json
+/.config/tfenv/
 
 !/tmux-powerline
 !/.tmux-powerlinerc
