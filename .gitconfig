@@ -11,8 +11,9 @@
 	st = status -sb
 	pr = pull --rebase
 	br = branch
-	fo = fetch origin
-	ro = rebase origin
+	fetch-develop = fetch origin develop:develop
+	fetch-main = fetch origin main:main
+        pushup = push --set-upstream origin HEAD
 	rc = rebase --continue
 	wd = diff --word-diff
 	bd = diff --name-status
