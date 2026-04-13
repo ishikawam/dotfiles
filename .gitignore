@@ -89,6 +89,7 @@
 /.claude/backups/
 /.claude/mcp-needs-auth-cache.json
 /.claude/sessions/
+/.claude/chrome/
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
