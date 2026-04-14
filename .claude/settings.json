@@ -142,5 +142,6 @@
   "skipAutoPermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754085807364
-  }
+  },
+  "model": "opus"
 }
