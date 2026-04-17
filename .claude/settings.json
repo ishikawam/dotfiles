@@ -134,14 +134,17 @@
   },
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
-  "voiceEnabled": true,
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
   "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754085807364
   },
-  "model": "opus"
+  "model": "opus",
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  }
 }
