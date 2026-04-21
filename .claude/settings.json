@@ -157,6 +157,16 @@
           }
         ]
       }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '[.cwd // \"\", .message // \"\"] | @tsv' | { IFS=$'\\t' read -r cwd message; name=$(basename \"${cwd:-Claude Code}\"); osascript -e \"display notification \\\"${message:-入力待ちです}\\\" with title \\\"Claude Code: $name\\\"\"; } 2>/dev/null || true"
+          }
+        ]
+      }
     ]
   }
 }
