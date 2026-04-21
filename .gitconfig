@@ -22,6 +22,7 @@
 	gr = "!git grep $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' ':(exclude)public/css/app.css' ':(exclude)public/js/app.js' ':(exclude)*.svg' ':(exclude)*.tfstate' "
 	gri = "!git grep -i $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' "
 	diffc = diff --cached
+	diffa = diff HEAD
 [core]
 	editor = emacs
 	quotepath = false
