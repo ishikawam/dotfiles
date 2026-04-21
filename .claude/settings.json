@@ -146,5 +146,17 @@
   "model": "opus",
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.cwd // \"\"' | { read -r cwd; name=$(basename \"${cwd:-Claude Code}\"); afplay /System/Library/Sounds/Ping.aiff & osascript -e \"display notification \\\"作業が完了しました\\\" with title \\\"Claude Code: $name\\\"\"; } 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
   }
 }
