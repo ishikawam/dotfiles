@@ -74,6 +74,16 @@
   - 必ず `git diff --cached` でステージングされた変更の詳細内容を確認する。
   - ブランチ名やファイル名からの推測ではなく、実際の変更内容に基づいてメッセージを作成する。
   - ステージングされていない変更内容や、実際の変更と一致しないメッセージを作成しない。
+- **コミットメッセージの署名 - 必須**:
+  - `git commit` で作成するすべてのコミットメッセージ本文末尾に、空行を挟んで以下の 2 行を必ず含める。例外なし。対象は `git commit` 全般（`-m` / `-F` / HEREDOC / エディタ経由）。
+    ```
+    🤖 Generated with [Claude Code](https://claude.ai/code)
+
+    Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+    ```
+  - 実装は HEREDOC 必須。`-m "subject" -m "body"` の並列指定は禁止（署名忘れの構造的原因）。
+  - Co-Authored-By のモデル名は当該セッションのモデル ID に合わせる（例: `Claude Opus 4.7`, `Claude Sonnet 4.6`, `Claude Haiku 4.5`）。環境情報の "You are powered by the model named ..." を参照する。
+  - `git commit` 実行前に `git log -1 --format=%B` で直近メッセージ形式を確認し、既存履歴の署名と揃っているかも併せてチェックする。
 
 **GitHub PR/Issueポリシー - 必須ルール**
 - PR / Issue / コメントの作成・編集時は本文末尾に必ず以下の署名を含める。例外なし。
@@ -82,6 +92,7 @@
   ```
 - 対象コマンド: `gh pr create` / `gh pr edit` / `gh issue create` / `gh issue edit` / `gh pr comment` / `gh issue comment`。
 - 目的: AI アシスタントが作成したコンテンツであることを明確にする。
+- `git commit` は本ポリシーの対象外。commit 本体の署名は「GITコミットポリシー」節の「コミットメッセージの署名 - 必須」を参照（PR/Issue とは別ルールだが commit にも署名必須）。
 
 **ファイル作成ポリシー**
 - 要求されたことを行う。それ以上でも以下でもない。
