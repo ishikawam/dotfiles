@@ -123,29 +123,27 @@
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:github.com)",
       "WebSearch",
-      "Write"
+      "Write",
+      "mcp__backlog__get_issues",
+      "mcp__backlog__get_issue",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__notion__API-query-data-source",
+      "mcp__notion__API-post-search",
+      "mcp__notion__API-get-self",
+      "mcp__claude-in-chrome__read_network_requests",
+      "mcp__claude-in-chrome__read_console_messages",
+      "mcp__claude-in-chrome__read_page",
+      "mcp__claude-in-chrome__get_page_text",
+      "mcp__claude-in-chrome__find",
+      "mcp__claude-in-chrome__tabs_context_mcp"
     ],
     "deny": [
-      "Bash(git add:*)",
       "Bash(git checkout:*)",
       "Bash(git reset:*)",
       "Bash(git restore:*)"
-    ]
-  },
-  "language": "Japanese",
-  "alwaysThinkingEnabled": true,
-  "voice": {
-    "enabled": true,
-    "mode": "hold"
-  },
-  "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "feedbackSurveyState": {
-    "lastShownTime": 1754085807364
-  },
-  "model": "opus",
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true
+    ],
+    "defaultMode": "auto"
   },
   "hooks": {
     "Stop": [
@@ -168,5 +166,18 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  },
+  "language": "Japanese",
+  "alwaysThinkingEnabled": false,
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }
