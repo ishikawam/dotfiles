@@ -67,6 +67,7 @@
 !/.rbenv-plugins/
 !/tmux/
 !/.globalrc
+!/.dropbox_uploader
 !/.claude/
 /.claude/settings.local.json
 /.claude/projects
@@ -90,6 +91,7 @@
 /.claude/mcp-needs-auth-cache.json
 /.claude/sessions/
 /.claude/chrome/
+/.claude/.last-cleanup
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
