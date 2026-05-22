@@ -289,6 +289,9 @@ fi
 
 head "7. create local apps"
 
+# ResetCoreAudio はsudoが必要なのでAutomatorで管理
+# (iCloud Drive: ~/Library/Mobile Documents/com~apple~Automator/Documents/ResetCoreAudio.app)
+
 # 通知を一斉に消すアプリ（Alfred/Spotlightから呼び出す用）
 KILL_NOTIFICATION_APP="$HOME/Applications/kill notification.app"
 if [ ! -d "$KILL_NOTIFICATION_APP" ]; then
