@@ -57,6 +57,9 @@ REPORTTIME=3
 # prompt
 PROMPT=$'%{\e[1;30m%}[%{\e[m%}%{\e[0;36m%}%n%{\e[m%}%{\e[0;37m%}@%{\e[m%}%{\e[0;32m%}%U%M%u %.%{\e[m%}%{\e[1;30m%}]%{\e[m%} %# '
 
+# TTY設定を凍結。子プロセスの異常終了で壊れたら自動復元
+ttyctl -f
+
 # pre cmd
 function precmd_vcs() {
     if [[ $ZSH_VERSION == (<5->|4.<4->|4.3.<10->)* ]]; then
