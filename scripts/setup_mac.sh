@@ -285,9 +285,24 @@ if [ ! -d /Applications/Picasa.app/ ]; then
 fi
 
 
+######## create local apps ##################################################################
+
+head "7. create local apps"
+
+# 通知を一斉に消すアプリ（Alfred/Spotlightから呼び出す用）
+KILL_NOTIFICATION_APP="$HOME/Applications/kill notification.app"
+if [ ! -d "$KILL_NOTIFICATION_APP" ]; then
+    mkdir -p "$HOME/Applications"
+    osacompile -o "$KILL_NOTIFICATION_APP" -e 'do shell script "killall NotificationCenter"'
+    echo "作成: $KILL_NOTIFICATION_APP"
+else
+    echo "✓ kill notification.app はインストール済み"
+fi
+
+
 ######## other tools ##################################################################
 
-head "7. other tools"
+head "8. other tools"
 
 # gemini cli, ccusage
 npm install -g @google/gemini-cli
