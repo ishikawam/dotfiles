@@ -95,9 +95,107 @@ ruby-install-latest: ## 最新のRubyをインストール
 	sudo gem update
 
 ##@ クリーンアップ
-clean: ## キャッシュと未使用Node.jsを削除
+clean: ## キャッシュ・未使用Node.js・ローカルスナップショット・Lightroomバックアップを削除
 	$(MAKE) clean-cache
 	$(MAKE) clean-unused-node
+	$(MAKE) clean-local-snapshot
+	$(MAKE) clean-lightroom-backup
+
+LIGHTROOM_BACKUP_DIR := $(HOME)/Pictures/Lightroom/Backups
+
+clean-lightroom-backup: ## Lightroomバックアップを対話削除
+	@echo "=== Lightroomバックアップ ($(LIGHTROOM_BACKUP_DIR)) ==="
+	@if [ ! -d "$(LIGHTROOM_BACKUP_DIR)" ]; then \
+		echo "ディレクトリがありません"; \
+		exit 0; \
+	fi; \
+	BACKUPS=$$(find "$(LIGHTROOM_BACKUP_DIR)" -mindepth 1 -maxdepth 1 -type d | sort); \
+	if [ -z "$$BACKUPS" ]; then \
+		echo "バックアップはありません"; \
+		exit 0; \
+	fi; \
+	echo "$$BACKUPS" | while read d; do \
+		printf "  %s  %s\n" "$$(du -sh "$$d" 2>/dev/null | awk '{print $$1}')" "$$(basename "$$d")"; \
+	done; \
+	echo ""; \
+	echo "削除方法を選んでください:"; \
+	echo "  1) 全件削除"; \
+	echo "  2) 最新1件だけ残して他を削除"; \
+	echo "  q) キャンセル"; \
+	printf "選択 [1/2/q]: "; \
+	read CHOICE; \
+	case "$$CHOICE" in \
+		1) \
+			TARGETS="$$BACKUPS"; \
+			;; \
+		2) \
+			TARGETS=$$(echo "$$BACKUPS" | sed '$$d'); \
+			if [ -z "$$TARGETS" ]; then \
+				echo "削除対象なし（バックアップが1件しかありません）"; \
+				exit 0; \
+			fi; \
+			;; \
+		q|Q|"") \
+			echo "キャンセル"; \
+			exit 0; \
+			;; \
+		*) \
+			echo "無効な選択"; \
+			exit 1; \
+			;; \
+	esac; \
+	echo ""; \
+	echo "$$TARGETS" | while read d; do \
+		echo "削除: $$(basename "$$d")"; \
+		rm -rf "$$d"; \
+	done; \
+	echo ""; \
+	echo "=== 残ったバックアップ ==="; \
+	ls -1 "$(LIGHTROOM_BACKUP_DIR)" 2>/dev/null | grep -v '^\.' || echo "(なし)"
+
+clean-local-snapshot: ## Time Machineローカルスナップショットを対話削除
+	@echo "=== Time Machineローカルスナップショット ==="
+	@SNAPS=$$(tmutil listlocalsnapshots / 2>/dev/null | grep '^com.apple.TimeMachine' | sort); \
+	if [ -z "$$SNAPS" ]; then \
+		echo "スナップショットはありません"; \
+		exit 0; \
+	fi; \
+	echo "$$SNAPS" | nl -ba; \
+	echo ""; \
+	echo "削除方法を選んでください:"; \
+	echo "  1) 全件削除"; \
+	echo "  2) 最新1件だけ残して他を削除"; \
+	echo "  q) キャンセル"; \
+	printf "選択 [1/2/q]: "; \
+	read CHOICE; \
+	case "$$CHOICE" in \
+		1) \
+			TARGETS=$$(echo "$$SNAPS" | sed 's/^com.apple.TimeMachine.//; s/.local$$//'); \
+			;; \
+		2) \
+			TARGETS=$$(echo "$$SNAPS" | sed '$$d' | sed 's/^com.apple.TimeMachine.//; s/.local$$//'); \
+			if [ -z "$$TARGETS" ]; then \
+				echo "削除対象なし（スナップショットが1件しかありません）"; \
+				exit 0; \
+			fi; \
+			;; \
+		q|Q|"") \
+			echo "キャンセル"; \
+			exit 0; \
+			;; \
+		*) \
+			echo "無効な選択"; \
+			exit 1; \
+			;; \
+	esac; \
+	echo ""; \
+	echo "$$TARGETS" | while read TS; do \
+		echo "削除: $$TS"; \
+		sudo tmutil deletelocalsnapshots "$$TS"; \
+	done; \
+	echo ""; \
+	echo "=== 残ったスナップショット ==="; \
+	tmutil listlocalsnapshots / 2>&1
 
 clean-cache: ## 全てのキャッシュをクリーンアップ
 	@echo "=== 全てのキャッシュをクリーンアップします ==="
