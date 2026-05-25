@@ -315,11 +315,12 @@ head "7. create local apps"
 # (iCloud Drive: ~/Library/Mobile Documents/com~apple~Automator/Documents/ResetCoreAudio.app)
 
 # 通知を一斉にクリアするアプリ（Alfred/Spotlightから呼び出す用）
-# usernoted DBの未読(presented=0)を既読化し、delivered/displayedテーブルもクリア。
-# usernoted稼働中はDBロックでUPDATE/DELETEに失敗するため先にkillし、
-# DB操作後に再度killして起動時にDBを読み直させる必要がある。
+# usernoted DBの全通知履歴(record/delivered/displayed/requests)をDELETE。
+# presented=1への更新だけでは数秒後にusernotedが再配信して通知が復活するため、
+# recordごと削除する必要がある。
+# usernoted稼働中はDBロックされるので先にkill、DB操作後に再killしてUI再読込。
 KILL_NOTIFICATION_APP="$HOME/Applications/kill notification.app"
-KILL_NOTIFICATION_SCRIPT='do shell script "killall usernoted NotificationCenter 2>/dev/null; sleep 0.5; sqlite3 ~/Library/Group\\ Containers/group.com.apple.usernoted/db2/db \"UPDATE record SET presented = 1 WHERE presented = 0 OR presented IS NULL; DELETE FROM delivered; DELETE FROM displayed;\"; killall usernoted NotificationCenter 2>/dev/null; true"'
+KILL_NOTIFICATION_SCRIPT='do shell script "killall usernoted NotificationCenter 2>/dev/null; sleep 0.5; sqlite3 ~/Library/Group\\ Containers/group.com.apple.usernoted/db2/db \"DELETE FROM record; DELETE FROM delivered; DELETE FROM displayed; DELETE FROM requests;\"; killall usernoted NotificationCenter 2>/dev/null; true"'
 KILL_NOTIFICATION_HASH=$(echo "$KILL_NOTIFICATION_SCRIPT" | md5)
 KILL_NOTIFICATION_HASH_FILE="$HOME/Applications/kill notification.app.md5"
 mkdir -p "$HOME/Applications"
