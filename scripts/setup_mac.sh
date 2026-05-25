@@ -292,13 +292,14 @@ head "7. create local apps"
 # ResetCoreAudio はsudoが必要なのでAutomatorで管理
 # (iCloud Drive: ~/Library/Mobile Documents/com~apple~Automator/Documents/ResetCoreAudio.app)
 
-# 通知を一斉に既読化するアプリ（Alfred/Spotlightから呼び出す用）
-# usernoted DBのrecord.presentedを1に更新してから NotificationCenter を再起動。
-# killallだけでは再起動でDBから未読通知が復活してしまうため、DBを直接更新する。
+# 通知を一斉にクリアするアプリ（Alfred/Spotlightから呼び出す用）
+# usernoted DBの未読(presented=0)を既読化し、delivered/displayedテーブルもクリア。
+# usernoted稼働中はDBロックでUPDATE/DELETEに失敗するため先にkillし、
+# DB操作後に再度killして起動時にDBを読み直させる必要がある。
 KILL_NOTIFICATION_APP="$HOME/Applications/kill notification.app"
 if [ ! -d "$KILL_NOTIFICATION_APP" ]; then
     mkdir -p "$HOME/Applications"
-    osacompile -o "$KILL_NOTIFICATION_APP" -e 'do shell script "sqlite3 ~/Library/Group\\ Containers/group.com.apple.usernoted/db2/db \"UPDATE record SET presented = 1 WHERE presented = 0 OR presented IS NULL\" && killall NotificationCenter usernoted 2>/dev/null; true"'
+    osacompile -o "$KILL_NOTIFICATION_APP" -e 'do shell script "killall usernoted NotificationCenter 2>/dev/null; sleep 0.5; sqlite3 ~/Library/Group\\ Containers/group.com.apple.usernoted/db2/db \"UPDATE record SET presented = 1 WHERE presented = 0 OR presented IS NULL; DELETE FROM delivered; DELETE FROM displayed;\"; killall usernoted NotificationCenter 2>/dev/null; true"'
     echo "作成: $KILL_NOTIFICATION_APP"
 else
     echo "✓ kill notification.app はインストール済み"
