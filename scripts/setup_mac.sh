@@ -292,14 +292,46 @@ head "7. create local apps"
 # ResetCoreAudio はsudoが必要なのでAutomatorで管理
 # (iCloud Drive: ~/Library/Mobile Documents/com~apple~Automator/Documents/ResetCoreAudio.app)
 
-# 通知を一斉に消すアプリ（Alfred/Spotlightから呼び出す用）
+# 通知を一斉に既読化するアプリ（Alfred/Spotlightから呼び出す用）
+# usernoted DBのrecord.presentedを1に更新してから NotificationCenter を再起動。
+# killallだけでは再起動でDBから未読通知が復活してしまうため、DBを直接更新する。
 KILL_NOTIFICATION_APP="$HOME/Applications/kill notification.app"
 if [ ! -d "$KILL_NOTIFICATION_APP" ]; then
     mkdir -p "$HOME/Applications"
-    osacompile -o "$KILL_NOTIFICATION_APP" -e 'do shell script "killall NotificationCenter"'
+    osacompile -o "$KILL_NOTIFICATION_APP" -e 'do shell script "sqlite3 ~/Library/Group\\ Containers/group.com.apple.usernoted/db2/db \"UPDATE record SET presented = 1 WHERE presented = 0 OR presented IS NULL\" && killall NotificationCenter usernoted 2>/dev/null; true"'
     echo "作成: $KILL_NOTIFICATION_APP"
 else
     echo "✓ kill notification.app はインストール済み"
+fi
+
+# 外付けボリュームを一括イジェクトするアプリ（USB-C引き抜き前にAlfred等から起動）
+EJECT_ALL_APP="$HOME/Applications/eject all.app"
+if [ ! -d "$EJECT_ALL_APP" ]; then
+    mkdir -p "$HOME/Applications"
+    osacompile -o "$EJECT_ALL_APP" -e '
+set failedList to {}
+set externalVolumes to paragraphs of (do shell script "ls /Volumes 2>/dev/null")
+repeat with volName in externalVolumes
+    set v to volName as string
+    if v is not "" and v is not "Macintosh HD" then
+        try
+            do shell script "diskutil eject " & quoted form of ("/Volumes/" & v)
+        on error
+            set end of failedList to v
+        end try
+    end if
+end repeat
+
+if failedList is not {} then
+    set AppleScript'"'"'s text item delimiters to ", "
+    set msg to failedList as string
+    set AppleScript'"'"'s text item delimiters to ""
+    display notification msg with title "イジェクト失敗" subtitle "次のボリュームを取り外せませんでした"
+end if
+'
+    echo "作成: $EJECT_ALL_APP"
+else
+    echo "✓ eject all.app はインストール済み"
 fi
 
 
