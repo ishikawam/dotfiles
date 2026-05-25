@@ -30,6 +30,39 @@ setup: ## 初回セットアップ（Mac環境）
 setup-private: ## プライベート設定のセットアップ
 	$(MAKE) -C ~/private setup-private
 
+setup-mac: ## setup_mac.sh を全セクション実行
+	bash ~/scripts/setup_mac.sh all
+
+setup-mac-xcode-select: ## setup_mac.sh xcode-selectセクションのみ
+	bash ~/scripts/setup_mac.sh xcode-select
+
+setup-mac-rosetta: ## setup_mac.sh rosettaセクションのみ
+	bash ~/scripts/setup_mac.sh rosetta
+
+setup-mac-homebrew: ## setup_mac.sh homebrewセクションのみ
+	bash ~/scripts/setup_mac.sh homebrew
+
+setup-mac-asdf: ## setup_mac.sh asdfセクションのみ
+	bash ~/scripts/setup_mac.sh asdf
+
+setup-mac-mas: ## setup_mac.sh masセクションのみ
+	bash ~/scripts/setup_mac.sh mas
+
+setup-mac-hostname: ## setup_mac.sh hostnameセクションのみ
+	bash ~/scripts/setup_mac.sh hostname
+
+setup-mac-font: ## setup_mac.sh fontセクションのみ
+	bash ~/scripts/setup_mac.sh font
+
+setup-mac-picasa: ## setup_mac.sh picasaセクションのみ
+	bash ~/scripts/setup_mac.sh picasa
+
+setup-mac-create-local-apps: ## setup_mac.sh create-local-appsセクションのみ
+	bash ~/scripts/setup_mac.sh create-local-apps
+
+setup-mac-other-tools: ## setup_mac.sh other-toolsセクションのみ
+	bash ~/scripts/setup_mac.sh other-tools
+
 install: setup ## setupのエイリアス
 
 gitignore_checker: ## gitignoreをチェッカーモードに切り替え
