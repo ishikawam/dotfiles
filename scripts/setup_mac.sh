@@ -132,6 +132,7 @@ array=(
     # messenger  2025/12 アプリ版終了
     bartender
     claude-code
+    onedrive  # App Store版は起動不可の事例があり、Microsoft公式pkg版に切替
 )
 brewcaskls=`brew list --cask 2>/dev/null`
 for i in "${array[@]}"
@@ -191,7 +192,7 @@ mas_apps=(
     539883307   # LINE (5.12.0)
     592704001   # Photos Duplicate Cleaner
     803453959   # Slack (3.3.3)
-    823766827   # OneDrive (18.214.1021)
+    # 823766827 # OneDrive はMicrosoft公式pkg版(brew cask onedrive)に切替済み
     1295203466  # Microsoft Remote Desktop (10.2.4)
     462058435   # Microsoft Excel
     462054704   # Microsoft Word
