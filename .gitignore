@@ -93,6 +93,7 @@
 /.claude/chrome/
 /.claude/.last-cleanup
 /.claude/image-cache/
+/.claude/worktrees/
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
