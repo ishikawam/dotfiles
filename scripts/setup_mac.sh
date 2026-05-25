@@ -81,9 +81,9 @@ if ! type brew >/dev/null 2>&1 ; then
 fi
 brew doctor
 brew update
-brew upgrade
-brew upgrade --cask
-brew install \
+brew upgrade --quiet
+brew upgrade --cask --quiet
+brew install --quiet \
     tmux git tig git-lfs gh colordiff \
     emacs gnu-sed global \
     mysql-client@8.4 \
@@ -97,7 +97,7 @@ brew install \
     dannystewart/apps/volumehud
 
 # swiftlint (Xcode.appが必要、エラーでも継続)
-brew install swiftlint 2>/dev/null || echo "swiftlintのインストールをスキップ（Xcode.appが必要です）"
+brew install --quiet swiftlint 2>/dev/null || echo "swiftlintのインストールをスキップ（Xcode.appが必要です）"
 
 # for java
 if [ -d "$(brew --prefix)/opt/openjdk/libexec/openjdk.jdk" ]; then
@@ -134,14 +134,20 @@ array=(
     claude-code
     onedrive  # App Store版は起動不可の事例があり、Microsoft公式pkg版に切替
 )
-brewcaskls=`brew list --cask 2>/dev/null`
 for i in "${array[@]}"
 do
-    if echo "$brewcaskls" | grep -q "^$i$"; then
-        echo "✓ $i はインストール済み"
+    cask_info=$(brew info --cask "$i" 2>&1)
+    if echo "$cask_info" | grep -q "^Installed"; then
+        outdated=$(brew outdated --cask "$i" 2>/dev/null)
+        if [ -n "$outdated" ]; then
+            echo "↑ $i をアップデート中..."
+            brew upgrade --cask "$i"
+        else
+            echo "✓ $i はインストール済み（最新）"
+        fi
     else
         echo "→ $i をインストール中..."
-        brew install --cask $i
+        brew install --cask "$i"
     fi
 done
 
@@ -174,34 +180,49 @@ head "2. mas = mac app store"
 
 # mas = mac app store
 # 5分でタイムアウト
-echo mas upgrade
-gtimeout --foreground 300 mas upgrade || echo "mas upgradeがタイムアウトまたはエラー"
+echo "mas upgrade"
+gtimeout --foreground 300 mas upgrade || echo "mas upgrade がタイムアウトまたはエラー"
 
-echo mas install
-mas_apps=(
-    302584613   # Kindle
-    406056744   # Evernote (7.7)
-    408981434   # iMovie (10.1.10)
-    409183694   # Keynote (8.3)
-    409201541   # Pages (7.3)
-    409203825   # Numbers (5.3)
-    417375580   # BetterSnapTool (1.9)
-    425424353   # The Unarchiver (4.0.0)
-    425955336   # Skitch (2.8.2)
-    513610341   # Integrity (8.1.19)  QAリンクチェッカー
-    539883307   # LINE (5.12.0)
-    592704001   # Photos Duplicate Cleaner
-    803453959   # Slack (3.3.3)
-    # 823766827 # OneDrive はMicrosoft公式pkg版(brew cask onedrive)に切替済み
-    1295203466  # Microsoft Remote Desktop (10.2.4)
-    462058435   # Microsoft Excel
-    462054704   # Microsoft Word
-    462062816   # Microsoft PowerPoint
-    937984704   # amphetamine
-    1429033973  # RunCat (11.4)
-    1168254295  # AmorphousDiskMark (4.0.1)
+echo "mas install"
+declare -A mas_apps=(
+    [302584613]="Kindle"
+    [406056744]="Evernote"
+    [408981434]="iMovie"
+    [361285480]="Keynote"   # 旧ID 409183694 は廃止
+    [361309726]="Pages"     # 旧ID 409201541 は廃止
+    [361304891]="Numbers"   # 旧ID 409203825 は廃止
+    [417375580]="BetterSnapTool"
+    [425424353]="The Unarchiver"
+    [425955336]="Skitch"
+    [513610341]="Integrity"
+    [539883307]="LINE"
+    [592704001]="Photos Duplicate Cleaner"
+    [803453959]="Slack"
+    # 823766827 OneDrive はMicrosoft公式pkg版(brew cask onedrive)に切替済み
+    [1295203466]="Windows App"
+    [462058435]="Microsoft Excel"
+    [462054704]="Microsoft Word"
+    [462062816]="Microsoft PowerPoint"
+    [937984704]="Amphetamine"
+    [1429033973]="RunCat"
+    [1168254295]="AmorphousDiskMark"
 )
-gtimeout --foreground 300 mas install "${mas_apps[@]}" || echo "mas installがタイムアウトまたはエラー"
+for adam_id in "${!mas_apps[@]}"; do
+    app_name="${mas_apps[$adam_id]}"
+    result=$(gtimeout 30 mas install "$adam_id" 2>&1)
+    exit_code=$?
+    if [ $exit_code -eq 124 ]; then
+        echo "⚠ $app_name ($adam_id): タイムアウト"
+    elif echo "$result" | grep -q "Already installed"; then
+        echo "✓ $app_name はインストール済み"
+    elif echo "$result" | grep -q "No apps found"; then
+        echo "✗ $app_name ($adam_id): App Store で見つかりません"
+    elif [ $exit_code -ne 0 ]; then
+        echo "✗ $app_name ($adam_id): エラー - $result"
+    else
+        echo "✓ $app_name をインストールしました"
+    fi
+done
 
 # なくなった
 # 896934587 Soliton SecureBrowser Pro
@@ -298,20 +319,21 @@ head "7. create local apps"
 # usernoted稼働中はDBロックでUPDATE/DELETEに失敗するため先にkillし、
 # DB操作後に再度killして起動時にDBを読み直させる必要がある。
 KILL_NOTIFICATION_APP="$HOME/Applications/kill notification.app"
-if [ ! -d "$KILL_NOTIFICATION_APP" ]; then
-    mkdir -p "$HOME/Applications"
-    osacompile -o "$KILL_NOTIFICATION_APP" -e 'do shell script "killall usernoted NotificationCenter 2>/dev/null; sleep 0.5; sqlite3 ~/Library/Group\\ Containers/group.com.apple.usernoted/db2/db \"UPDATE record SET presented = 1 WHERE presented = 0 OR presented IS NULL; DELETE FROM delivered; DELETE FROM displayed;\"; killall usernoted NotificationCenter 2>/dev/null; true"'
-    echo "作成: $KILL_NOTIFICATION_APP"
+KILL_NOTIFICATION_SCRIPT='do shell script "killall usernoted NotificationCenter 2>/dev/null; sleep 0.5; sqlite3 ~/Library/Group\\ Containers/group.com.apple.usernoted/db2/db \"UPDATE record SET presented = 1 WHERE presented = 0 OR presented IS NULL; DELETE FROM delivered; DELETE FROM displayed;\"; killall usernoted NotificationCenter 2>/dev/null; true"'
+KILL_NOTIFICATION_HASH=$(echo "$KILL_NOTIFICATION_SCRIPT" | md5)
+KILL_NOTIFICATION_HASH_FILE="$HOME/Applications/kill notification.app.md5"
+mkdir -p "$HOME/Applications"
+if [ ! -d "$KILL_NOTIFICATION_APP" ] || [ "$(cat "$KILL_NOTIFICATION_HASH_FILE" 2>/dev/null)" != "$KILL_NOTIFICATION_HASH" ]; then
+    osacompile -o "$KILL_NOTIFICATION_APP" -e "$KILL_NOTIFICATION_SCRIPT"
+    echo "$KILL_NOTIFICATION_HASH" > "$KILL_NOTIFICATION_HASH_FILE"
+    echo "作成/更新: $KILL_NOTIFICATION_APP"
 else
-    echo "✓ kill notification.app はインストール済み"
+    echo "✓ kill notification.app はインストール済み（最新）"
 fi
 
 # 外付けボリュームを一括イジェクトするアプリ（USB-C引き抜き前にAlfred等から起動）
 EJECT_ALL_APP="$HOME/Applications/eject all.app"
-if [ ! -d "$EJECT_ALL_APP" ]; then
-    mkdir -p "$HOME/Applications"
-    osacompile -o "$EJECT_ALL_APP" -e '
-set failedList to {}
+EJECT_ALL_SCRIPT='set failedList to {}
 set externalVolumes to paragraphs of (do shell script "ls /Volumes 2>/dev/null")
 repeat with volName in externalVolumes
     set v to volName as string
@@ -329,11 +351,15 @@ if failedList is not {} then
     set msg to failedList as string
     set AppleScript'"'"'s text item delimiters to ""
     display notification msg with title "イジェクト失敗" subtitle "次のボリュームを取り外せませんでした"
-end if
-'
-    echo "作成: $EJECT_ALL_APP"
+end if'
+EJECT_ALL_HASH=$(echo "$EJECT_ALL_SCRIPT" | md5)
+EJECT_ALL_HASH_FILE="$HOME/Applications/eject all.app.md5"
+if [ ! -d "$EJECT_ALL_APP" ] || [ "$(cat "$EJECT_ALL_HASH_FILE" 2>/dev/null)" != "$EJECT_ALL_HASH" ]; then
+    osacompile -o "$EJECT_ALL_APP" -e "$EJECT_ALL_SCRIPT"
+    echo "$EJECT_ALL_HASH" > "$EJECT_ALL_HASH_FILE"
+    echo "作成/更新: $EJECT_ALL_APP"
 else
-    echo "✓ eject all.app はインストール済み"
+    echo "✓ eject all.app はインストール済み（最新）"
 fi
 
 
