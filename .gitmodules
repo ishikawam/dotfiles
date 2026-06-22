@@ -34,3 +34,6 @@
 [submodule "scripts/create_docker_laravel_project"]
 	path = scripts/create_docker_laravel_project
 	url = git@github.com:ishikawam/create-docker-laravel-project.git
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git

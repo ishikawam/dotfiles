@@ -33,6 +33,9 @@
 !/.zsh-completions
 !/.zsh-syntax-highlighting
 !/.tmux.conf
+!/.tmux/
+!/.tmux/plugins/
+!/.tmux/plugins/tpm
 !/.config/
 /.config/configstore
 /.config/iterm2
