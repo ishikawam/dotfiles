@@ -93,7 +93,7 @@ homebrew() {
         mysql-client@8.4 \
         wget jq tree trash coreutils peco imagemagick telnet rsync \
         ruby rbenv ruby-build composer \
-        nodenv npm \
+        nodenv node-build npm \
         java \
         awscli amazon-ecs-cli google-cloud-sdk \
         asdf direnv \
