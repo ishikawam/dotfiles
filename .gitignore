@@ -99,6 +99,9 @@
 /.claude/worktrees/
 /.claude/.last-update-result.json
 /.claude/teams/
+/.claude/policy-limits.json
+/.claude/remote-settings.json
+
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 

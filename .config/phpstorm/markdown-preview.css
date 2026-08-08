@@ -1,0 +1,48 @@
+/* PhpStorm Markdown プレビュー用 light テーマ
+ * このファイルは ~/.config/phpstorm/markdown-preview.css に置く正本。
+ * Settings > Languages & Frameworks > Markdown > Custom CSS の
+ * 「Add CSS rules」にこの中身を貼り付ける。
+ * 「Load from」でのファイル読み込みは不可（PhpStorm はプロジェクト外の
+ * スタイルシートを読み込まないため）。変更したら貼り直す。
+ * IDE 全体が dark テーマでもプレビューだけ light にする。
+ */
+
+html, body {
+  background-color: #fdfdfd !important;
+  color: #3a3f44 !important;
+  line-height: 1.7 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #1f2328 !important;
+}
+
+p, li, td, th {
+  color: #3a3f44 !important;
+}
+
+a {
+  color: #0969da !important;
+}
+
+code, pre, pre code {
+  color: #1f2328 !important;
+  background-color: #f6f8fa !important;
+}
+
+blockquote {
+  color: #656d76 !important;
+  border-left: 4px solid #d0d7de !important;
+}
+
+table th {
+  background-color: #f6f8fa !important;
+}
+
+table th, table td {
+  border: 1px solid #d0d7de !important;
+}
+
+hr {
+  background-color: #d8dee4 !important;
+}
