@@ -5,24 +5,26 @@
 	ui = auto
 [alias]
 	co = FAIL  # switch, restoreを強制したいので
-	checkout = FAIL  # 効かないけど
-        sw = switch
-        re = restore
+	checkout = FAIL	 # 効かないけど
+	sw = switch
+	re = restore
 	st = status -sb
 	pr = pull --rebase
 	br = branch
 	fetch-develop = fetch origin develop:develop
 	fetch-main = fetch origin main:main
-        pushup = push --set-upstream origin HEAD
+	fetch-master = fetch origin master:master
+	pushup = push --set-upstream origin HEAD
 	rc = rebase --continue
 	wd = diff --word-diff
 	bd = diff --name-status
-	lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches
+	lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches  # 全ブランチのコミットをグラフで1行表示
 	pushf = push --force-with-lease --force-if-includes
-	gr = "!git grep $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' ':(exclude)public/css/app.css' ':(exclude)public/js/app.js' ':(exclude)*.svg' ':(exclude)*.tfstate' "
-	gri = "!git grep -i $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' "
+	gr = "!git grep $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' ':(exclude)public/css/app.css' ':(exclude)public/js/app.js' ':(exclude)*.svg' ':(exclude)*.tfstate' "  # ビルド生成物を除外してgrep
+	gri = "!git grep -i $1 -- './*' ':(exclude)*.min.js' ':(exclude)*.min.css' ':(exclude)*.map' "  # grの大文字小文字を無視版
 	diffc = diff --cached
-	diffa = diff HEAD
+	diffa = diff HEAD  # 両方含めたdiff
+	ls = "!git ls-files --others | awk -F/ \"{n=NF>2?2:NF; s=\\$1; for(i=2;i<=n;i++) s=s\\\"/\\\"\\$i; print s (NF>2?\\\"/...\\\":\\\"\\\")}\" | sort -u"  # 未追跡ファイルを2階層に集約して表示
 [core]
 	editor = emacs
 	quotepath = false

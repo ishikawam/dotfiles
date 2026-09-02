@@ -1,0 +1,5 @@
+# ホーム直下の設定ファイル用。
+# root = true は書かない。各プロジェクトの .editorconfig を優先させるため。
+
+[.gitconfig]
+indent_style = tab
