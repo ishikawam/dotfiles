@@ -351,6 +351,14 @@ WATCHFMT="%(a:${fg[blue]}Hello %n [%m] [%t]:${fg[red]}Bye %n [%m] [%t])"
 
 ssh-add
 
+# ~/.ssh/keys.dに置いた鍵をagentへ登録する
+# zshは空ディレクトリのglobでエラーになるためfindで列挙する
+mkdir -p ~/.ssh/keys.d
+chmod 700 ~/.ssh/keys.d
+find ~/.ssh/keys.d -type f ! -name '.*' ! -name '*.pub' -print | while read -r key; do
+    ssh-add "$key" 2>/dev/null
+done
+
 if [ -f ~/private/.shrc ]; then
     source ~/private/.shrc
 fi
