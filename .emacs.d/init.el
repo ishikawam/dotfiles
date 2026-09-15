@@ -1,3 +1,4 @@
+;;; .emacs.d/init.el -*- lexical-binding: t; -*-
 ;;; .emacs 改め .emacs.d/init.el
 ;;; version 26, 25, 24, 23, が共存している環境 = cask出し分け
 ;;; emacs24はこのままではエラー。。caskのバージョン上げたらうまく動かなくなった。
@@ -17,7 +18,7 @@
     "Replace FROM with TO in STRING."
     (replace-regexp-in-string (regexp-quote from) to string t t)))
 
-(setq preferences-directory "~/.emacs.d/")
+(defvar preferences-directory "~/.emacs.d/")
 
 (defun load-file-in-dir (dir file)
   (load (concat dir file)))

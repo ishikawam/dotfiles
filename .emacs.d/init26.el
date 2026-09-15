@@ -1,4 +1,4 @@
-;;; init26.el for emacs 26
+;;; init26.el for emacs 26 -*- lexical-binding: t; -*-
 ;;; caskをやめてstraight.elに。
 
 ;;; straight.el自身のインストールと初期設定
