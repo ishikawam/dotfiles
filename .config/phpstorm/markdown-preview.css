@@ -2,47 +2,124 @@
  * このファイルは ~/.config/phpstorm/markdown-preview.css に置く正本。
  * Settings > Languages & Frameworks > Markdown > Custom CSS の
  * 「Add CSS rules」にこの中身を貼り付ける。
- * 「Load from」でのファイル読み込みは不可（PhpStorm はプロジェクト外の
- * スタイルシートを読み込まないため）。変更したら貼り直す。
+ * 「Load from」でのファイル指定も可能だが、指定先が
+ * ProjectFileIndex.isInProjectOrExcluded を満たす必要があるため
+ * プロジェクト配下にファイルを置く場合に限る。プロジェクト外を
+ * 指すと警告が出て無視される。貼り付け方式なら制約を受けない。
  * IDE 全体が dark テーマでもプレビューだけ light にする。
+ *
+ * 配色は GitHub light (Primer) のトークンに準拠。
  */
 
 html, body {
-  background-color: #fdfdfd !important;
-  color: #3a3f44 !important;
-  line-height: 1.7 !important;
+  background-color: #ffffff !important;
+  color: #1f2328 !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
+body {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  padding: 24px 32px !important;
+}
+
+/* 見出しと本文は同色。差は太さとサイズで付ける */
 h1, h2, h3, h4, h5, h6 {
   color: #1f2328 !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  margin-top: 24px !important;
+  margin-bottom: 16px !important;
+}
+
+h1 { font-size: 2em !important; }
+h2 { font-size: 1.5em !important; }
+h3 { font-size: 1.25em !important; }
+h4 { font-size: 1em !important; }
+h5 { font-size: 0.875em !important; }
+h6 { font-size: 0.85em !important; color: #59636e !important; }
+
+/* h1/h2 下の区切り線 */
+h1, h2 {
+  padding-bottom: 0.3em !important;
+  border-bottom: 1px solid #d1d9e0 !important;
 }
 
 p, li, td, th {
-  color: #3a3f44 !important;
+  color: #1f2328 !important;
+}
+
+p {
+  margin-top: 0 !important;
+  margin-bottom: 16px !important;
 }
 
 a {
   color: #0969da !important;
+  text-decoration: none !important;
 }
 
-code, pre, pre code {
+a:hover {
+  text-decoration: underline !important;
+}
+
+/* インラインコード */
+code {
   color: #1f2328 !important;
+  background-color: #818b981f !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 6px !important;
+  font-size: 85% !important;
+}
+
+/* コードブロック */
+pre {
   background-color: #f6f8fa !important;
+  padding: 16px !important;
+  border-radius: 6px !important;
+  line-height: 1.45 !important;
+  overflow: auto !important;
+}
+
+pre code {
+  color: #1f2328 !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: 100% !important;
 }
 
 blockquote {
-  color: #656d76 !important;
-  border-left: 4px solid #d0d7de !important;
+  color: #59636e !important;
+  border-left: 0.25em solid #d1d9e0 !important;
+  padding: 0 1em !important;
+  margin-left: 0 !important;
+}
+
+table {
+  border-collapse: collapse !important;
+  margin-bottom: 16px !important;
 }
 
 table th {
-  background-color: #f6f8fa !important;
+  background-color: transparent !important;
+  font-weight: 600 !important;
 }
 
 table th, table td {
-  border: 1px solid #d0d7de !important;
+  border: 1px solid #d1d9e0 !important;
+  padding: 6px 13px !important;
+}
+
+/* 偶数行のゼブラ */
+table tr:nth-child(2n) {
+  background-color: #f6f8fa !important;
 }
 
 hr {
-  background-color: #d8dee4 !important;
+  height: 0.25em !important;
+  border: 0 !important;
+  background-color: #d1d9e0 !important;
+  margin: 24px 0 !important;
 }
