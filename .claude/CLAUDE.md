@@ -103,6 +103,8 @@
 - ユーザーが明示的に「push」「pull」と発話するか、その意図が明確な指示を出した場合**以外は絶対に `git push` / `git pull` / `git fetch && merge` / `git pull --rebase` 等を実行しない**。
 - 「git commit」「コミット」だけの発話は commit 本体の指示であり、push / pull の許可は含まない。
 - push が rejected されたり、リモートと divergence していても、勝手に pull しない。状況を報告し、ユーザーの判断を待つ。
+- **push はユーザーが行う作業であり、push の状況に口出ししない**。コミット後の報告や残件の一覧で「push していない」「origin より N コミット先」等に触れない。
+- どうしても push の状況に触れる場合は、必ず事前に `git ls-remote` でリモートのコミットを確認し、ローカルと比較した事実のみを述べる。ローカルの `git status` の ahead 表示だけで判断しない。
 - **例外**: `/commit` 等の skill が手順として push / pull を含む場合、それは skill 固有の明示的な手順であり本ルールの対象外。skill 内の手順はそのまま実行する。
 - 例外は上記の skill のみ。それ以外は交渉の余地なし。
 

@@ -137,7 +137,8 @@
       "mcp__claude-in-chrome__read_page",
       "mcp__claude-in-chrome__get_page_text",
       "mcp__claude-in-chrome__find",
-      "mcp__claude-in-chrome__tabs_context_mcp"
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "Bash(aws ecs execute-command:*)"
     ],
     "deny": [
       "Bash(git checkout:*)",
@@ -179,6 +180,7 @@
     "enabled": true,
     "mode": "hold"
   },
+  "switchModelsOnFlag": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,

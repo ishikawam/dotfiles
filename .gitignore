@@ -102,6 +102,14 @@
 /.claude/teams/
 /.claude/policy-limits.json
 /.claude/remote-settings.json
+/.claude/.credentials.json
+/.claude/daemon.log
+/.claude/daemon/
+/.claude/feedback/
+/.claude/gh-pr-status-cache.json
+/.claude/jobs/
+/.claude/state/
+/.claude/skills/synced/
 
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
