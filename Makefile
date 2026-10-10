@@ -748,6 +748,9 @@ macos-manual-settings: ## macOSの手動設定をガイド
 	@echo "全ての手動設定が完了しました"
 	@echo "========================================"
 
+jetbrains-markdown-css: ## JetBrains IDEのMarkdownプレビューCSSを全プロジェクトと新規プロジェクト既定値に適用
+	php scripts/jetbrains_markdown_css.php
+
 ##@ システム情報
 disk-usage: ## ディスク使用状況を表示
 	@echo "=== ディスク使用状況 ==="

@@ -1,11 +1,12 @@
-/* PhpStorm Markdown プレビュー用 light テーマ
- * このファイルは ~/.config/phpstorm/markdown-preview.css に置く正本。
+/* JetBrains IDE Markdown プレビュー用 light テーマ
+ * このファイルは ~/.config/jetbrains/markdown-preview.css に置く正本。
+ * make jetbrains-markdown-css で各プロジェクトと新規プロジェクト既定値の
  * Settings > Languages & Frameworks > Markdown > Custom CSS の
- * 「Add CSS rules」にこの中身を貼り付ける。
- * 「Load from」でのファイル指定も可能だが、指定先が
+ * 「Add CSS rules」に書き込む。
+ * 「Load from」でのファイル指定は、指定先が
  * ProjectFileIndex.isInProjectOrExcluded を満たす必要があるため
  * プロジェクト配下にファイルを置く場合に限る。プロジェクト外を
- * 指すと警告が出て無視される。貼り付け方式なら制約を受けない。
+ * 指すと警告が出て無視される。「Add CSS rules」なら制約を受けない。
  * IDE 全体が dark テーマでもプレビューだけ light にする。
  *
  * 配色は GitHub light (Primer) のトークンに準拠。
