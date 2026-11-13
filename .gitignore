@@ -113,7 +113,7 @@
 /.claude/jobs/
 /.claude/state/
 /.claude/skills/synced/
-
+/.claude/skills/dotfiles/SKILL.md
 
 # Chromeの.gitignoreは登録できない。> .gitあるから。
 
