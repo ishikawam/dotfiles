@@ -24,6 +24,7 @@
 !/.bashrc
 !/.bash_profile
 !/.zshrc
+!/.zshenv
 !/.screenrc
 !/.lv
 !/.emacs
