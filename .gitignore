@@ -30,6 +30,7 @@
 !/.emacs
 !/.emacs.d/
 /.emacs.d/async-bytecomp.log
+/.emacs.d/eln-cache/
 !/.inputrc
 !/.tigrc
 !/.zsh-completions
